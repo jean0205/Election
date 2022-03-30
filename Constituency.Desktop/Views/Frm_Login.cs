@@ -1,8 +1,7 @@
-﻿
-
-using Constituency.Desktop.Components;
+﻿using Constituency.Desktop.Components;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
+using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 
 namespace Constituency.Desktop.Views
@@ -93,13 +92,13 @@ namespace Constituency.Desktop.Views
                
                 TokenResponse tokenResponse = (TokenResponse)response.Result;
                 //TODO LLAMAR AL FORMULARIO PRINCIPAL DESDE AQUI
-                //Main main = new Main(tokenResponse);
-                //Analytics.TrackEvent("Login  " + tokenResponse.User.FullName);
-                //this.Hide();
-                //main.ShowDialog();
-                //this.Show();
-                //txtUserName.Clear();
-                //mtxtPassword.Clear();
+                Main main = new Main(tokenResponse);
+                Analytics.TrackEvent("Login  " + tokenResponse.User.FullName);
+                this.Hide();
+                main.ShowDialog();
+                this.Show();
+                txtUserName.Clear();
+                mtxtPassword.Clear();
             }
             catch (Exception ex)
             {

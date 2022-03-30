@@ -97,8 +97,6 @@ namespace Constituency.Desktop.Helpers
                     Message = ex.Message
                 };
             }
-
-
         }
 
         //recover password
@@ -760,7 +758,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
+                        Message = !string.IsNullOrEmpty(result)?JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault():"Controller not found"
                     };
                 }
                 User item = JsonConvert.DeserializeObject<User>(result);
