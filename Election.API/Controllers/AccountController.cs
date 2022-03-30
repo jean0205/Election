@@ -1,7 +1,6 @@
 ﻿using Election.API.Data.Entities;
 using Election.API.Helpers;
 using Election.API.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -21,7 +20,7 @@ namespace Election.API.Controllers
         {
             _userHelper = userHelper;
             _configuration = configuration;
-           
+
         }
 
         [HttpPost]
@@ -66,18 +65,18 @@ namespace Election.API.Controllers
                         }
                         else
                         {
-                            ModelState.AddModelError(string.Empty, "Username and password do not match.");
+                            ModelState.AddModelError("Error", "Username and password do not match.");
                         }
                     }
 
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "The user was De-Activated, Please contact your System Administrator.");
+                        ModelState.AddModelError("Error", "The user was De-Activated, Please contact your System Administrator.");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "The user was not found.");
+                    ModelState.AddModelError("Error", "The user was not found.");
                 }
             }
             return BadRequest(ModelState);
@@ -86,5 +85,5 @@ namespace Election.API.Controllers
 
     }
 
-    
+
 }

@@ -35,11 +35,11 @@ namespace Constituency.Desktop.Views
             this.label2 = new System.Windows.Forms.Label();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.mtxtPassword = new System.Windows.Forms.MaskedTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.iconButton2 = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,17 +112,6 @@ namespace Constituency.Desktop.Views
             this.mtxtPassword.Size = new System.Drawing.Size(231, 32);
             this.mtxtPassword.TabIndex = 1;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Gray;
-            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(219, 276);
-            this.panel1.TabIndex = 6;
-            // 
             // iconButton2
             // 
             this.iconButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -190,6 +179,16 @@ namespace Constituency.Desktop.Views
             this.lblVersion.Size = new System.Drawing.Size(0, 21);
             this.lblVersion.TabIndex = 5;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Gray;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(219, 276);
+            this.panel1.TabIndex = 6;
+            // 
             // Frm_Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -222,10 +221,10 @@ namespace Constituency.Desktop.Views
         private System.Windows.Forms.Label label2;
         private FontAwesome.Sharp.IconButton iconButton1;
         private System.Windows.Forms.MaskedTextBox mtxtPassword;
-        private System.Windows.Forms.Panel panel1;
         private FontAwesome.Sharp.IconButton iconButton2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblVersion;
+        private Panel panel1;
     }
 }

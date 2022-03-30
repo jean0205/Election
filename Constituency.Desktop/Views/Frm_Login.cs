@@ -2,6 +2,8 @@
 
 using Constituency.Desktop.Components;
 using Constituency.Desktop.Helpers;
+using Constituency.Desktop.Models;
+using Microsoft.AppCenter.Crashes;
 
 namespace Constituency.Desktop.Views
 {
@@ -90,17 +92,19 @@ namespace Constituency.Desktop.Views
                 }
                
                 TokenResponse tokenResponse = (TokenResponse)response.Result;
-                Main main = new Main(tokenResponse);
-                Analytics.TrackEvent("Login  " + tokenResponse.User.FullName);
-                this.Hide();
-                main.ShowDialog();
-                this.Show();
-                txtUserName.Clear();
-                mtxtPassword.Clear();
+                //TODO LLAMAR AL FORMULARIO PRINCIPAL DESDE AQUI
+                //Main main = new Main(tokenResponse);
+                //Analytics.TrackEvent("Login  " + tokenResponse.User.FullName);
+                //this.Hide();
+                //main.ShowDialog();
+                //this.Show();
+                //txtUserName.Clear();
+                //mtxtPassword.Clear();
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                 Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
                 return;
             }
         }

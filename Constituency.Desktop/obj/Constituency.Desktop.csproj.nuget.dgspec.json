@@ -50,6 +50,22 @@
             "FontAwesome.Sharp": {
               "target": "Package",
               "version": "[5.15.4, )"
+            },
+            "Microsoft.AppCenter.Analytics": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "Microsoft.AppCenter.Crashes": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [

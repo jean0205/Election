@@ -1,12 +1,8 @@
-﻿using Loans.Desktop.Models;
-using LoansGDB.Models;
+﻿using Constituency.Desktop.Entities;
+using Constituency.Desktop.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Constituency.Desktop.Helpers
@@ -37,7 +33,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault()
                     };
                 }
                 TokenResponse tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(result);
@@ -46,7 +42,10 @@ namespace Constituency.Desktop.Helpers
                     IsSuccess = true,
                     Result = tokenResponse,
                 };
+
             }
+
+
             catch (Exception ex)
             {
                 return new Response
@@ -78,7 +77,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault()
                     };
                 }
                 List<T> list = JsonConvert.DeserializeObject<List<T>>(result);
@@ -127,14 +126,14 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 //T item = JsonConvert.DeserializeObject<T>(result);
                 return new Response
                 {
                     IsSuccess = true,
-                    Message = result,
+                    Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                 };
 
             }
@@ -173,7 +172,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 T item = JsonConvert.DeserializeObject<T>(result);
@@ -214,7 +213,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
 
@@ -254,7 +253,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 List<T> list = JsonConvert.DeserializeObject<List<T>>(result);
@@ -290,10 +289,10 @@ namespace Constituency.Desktop.Helpers
                 HttpClient client = new HttpClient(handler)
                 {
                     BaseAddress = new Uri(url)
-                    
-                    
+
+
                 };
-                
+
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
                 HttpResponseMessage response = await client.GetAsync($"api/{controller}/{statuses}");
                 string result = await response.Content.ReadAsStringAsync();
@@ -302,7 +301,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 List<T> list = JsonConvert.DeserializeObject<List<T>>(result);
@@ -350,7 +349,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 T item = JsonConvert.DeserializeObject<T>(result);
@@ -395,7 +394,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 T item = JsonConvert.DeserializeObject<T>(result);
@@ -437,7 +436,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
 
@@ -478,7 +477,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
 
@@ -512,10 +511,10 @@ namespace Constituency.Desktop.Helpers
                     BaseAddress = new Uri(url)
                 };
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
-                string address;                
-               
+                string address;
+
                 address = $"api/{controller}/{id}";
-               
+
                 HttpResponseMessage response = await client.GetAsync(address);
                 string result = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
@@ -531,7 +530,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 var element = JsonConvert.DeserializeObject<T>(result);
@@ -578,7 +577,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 T item = JsonConvert.DeserializeObject<T>(result);
@@ -597,7 +596,7 @@ namespace Constituency.Desktop.Helpers
                 };
             }
         }
-        public static async Task<Response> GetListAsyncReports<T>(string controller, string fromD,string toD,string indicator, string token)
+        public static async Task<Response> GetListAsyncReports<T>(string controller, string fromD, string toD, string indicator, string token)
         {
             try
             {
@@ -622,7 +621,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 List<T> list = JsonConvert.DeserializeObject<List<T>>(result);
@@ -670,7 +669,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 List<string> list = JsonConvert.DeserializeObject<List<string>>(result);
@@ -717,7 +716,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
                 T item = JsonConvert.DeserializeObject<T>(result);
@@ -761,10 +760,10 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
-               User item = JsonConvert.DeserializeObject<User>(result);
+                User item = JsonConvert.DeserializeObject<User>(result);
                 return new Response
                 {
                     IsSuccess = true,
@@ -784,7 +783,7 @@ namespace Constituency.Desktop.Helpers
         public static async Task<Response> ResendEmail(string controller, string username, string token)
         {
             try
-            { 
+            {
                 HttpClientHandler handler = new HttpClientHandler()
                 {
                     ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
@@ -802,13 +801,13 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
-                }               
+                }
                 return new Response
                 {
                     IsSuccess = true,
-                     Message = result,
+                    Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                 };
 
             }
@@ -843,7 +842,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
 
@@ -887,10 +886,10 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
                     };
                 }
-               // T item = JsonConvert.DeserializeObject<T>(result);
+                // T item = JsonConvert.DeserializeObject<T>(result);
                 return new Response
                 {
                     IsSuccess = true,
@@ -908,50 +907,50 @@ namespace Constituency.Desktop.Helpers
                 };
             }
         }
-        public static async Task<Response> GetListAsyncMasterFile<T>(string controller, string token)
-        {
-            try
-            {
-                HttpClientHandler handler = new HttpClientHandler()
-                {
-                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-                };
+        //public static async Task<Response> GetListAsyncMasterFile<T>(string controller, string token)
+        //{
+        //    try
+        //    {
+        //        HttpClientHandler handler = new HttpClientHandler()
+        //        {
+        //            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        //        };
 
-                string url = Settings.GetApiUrl();
-                HttpClient client = new HttpClient(handler)
-                {
-                    BaseAddress = new Uri(url)
-                };
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
-                HttpResponseMessage response = await client.GetAsync($"api/{controller}");
-                string result = await response.Content.ReadAsStringAsync();
-                if (!response.IsSuccessStatusCode)
-                {
-                    return new Response
-                    {
-                        IsSuccess = false,
-                        Message = result,
-                    };
-                }
-                List<MasterFile> list = JsonConvert.DeserializeObject<List<MasterFile>>(result);
-                return new Response
-                {
-                    IsSuccess = true,
-                    Result = list,
-                };
+        //        string url = Settings.GetApiUrl();
+        //        HttpClient client = new HttpClient(handler)
+        //        {
+        //            BaseAddress = new Uri(url)
+        //        };
+        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+        //        HttpResponseMessage response = await client.GetAsync($"api/{controller}");
+        //        string result = await response.Content.ReadAsStringAsync();
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            return new Response
+        //            {
+        //                IsSuccess = false,
+        //                Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
+        //            };
+        //        }
+        //        List<MasterFile> list = JsonConvert.DeserializeObject<List<MasterFile>>(result);
+        //        return new Response
+        //        {
+        //            IsSuccess = true,
+        //            Result = list,
+        //        };
 
-            }
-            catch (Exception ex)
-            {
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                return new Response
-                {
-                    IsSuccess = false,
-                    Message = ex.Message
-                };
-            }
+        //        return new Response
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message
+        //        };
+        //    }
 
 
-        }
+        //}
     }
 }
