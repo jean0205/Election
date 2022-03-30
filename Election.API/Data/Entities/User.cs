@@ -31,8 +31,8 @@ namespace Election.API.Data.Entities
         //    ? $"https://loansgdbapi2.azurewebsites.net/images/noimage.jpg"
         //    : $"https://sbdfstorage.blob.core.windows.net/usersimages/{ImageId}";
 
-        //public bool Online { get; set; }
-        //public DateTime LogInTime { get; set; }
-        //public DateTime LogOutTime { get; set; }
+        public bool Online { get; set; }
+        public DateTime LogInTime { get; set; }
+        public DateTime LogOutTime { get; set; }
     }
 }

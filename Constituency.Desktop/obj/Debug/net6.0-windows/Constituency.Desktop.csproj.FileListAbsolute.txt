@@ -1,0 +1,9 @@
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.csproj.AssemblyReference.cache
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Form1.resources
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Loans.Desktop.Views.Frm_Login.resources
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.csproj.GenerateResource.cache
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.AssemblyInfoInputs.cache
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.AssemblyInfo.cs
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.csproj.CoreCompileInputs.cache
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Components.WaitForm.resources

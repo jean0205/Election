@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "tpXbknALt/rGZnSwRVUa3qgQKCWu/3wZkbnSsnms5XAuZXVL3MmecCDxUmITLoHXqVBO6K3UzLKjkOPelkNzsg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jcsoto\\source\\repos\\Election\\Constituency.Desktop\\Constituency.Desktop.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jcsoto\\.nuget\\packages\\fontawesome.sharp\\5.15.4\\fontawesome.sharp.5.15.4.nupkg.sha512"
+  ],
+  "logs": []
+}
