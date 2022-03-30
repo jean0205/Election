@@ -54,7 +54,8 @@ namespace Election.API.Data.Entities
         [EmailAddress]
         public string? Email { get; set; }
 
-        public ICollection<PollingDivision>? PollingDivisions { get; set; }
+        public PollingDivision? PollingDivision { get; set; }
+        public House? House { get; set; }
 
         public ICollection<Interview>? Interviews { get; set; }
 

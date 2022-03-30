@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "57d17f13-06af-4be4-be22-7ce856672986": {
+      "ProjectGuid": "57d17f13-06af-4be4-be22-7ce856672986",
+      "DisplayName": "Election.API",
+      "ColorIndex": 0
+    },
+    "0dba0630-d494-4e24-a8c2-58bc428da198": {
+      "ProjectGuid": "0dba0630-d494-4e24-a8c2-58bc428da198",
+      "DisplayName": "Constituency.Desktop",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

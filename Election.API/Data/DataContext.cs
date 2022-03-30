@@ -19,6 +19,7 @@ namespace Election.API.Data
         public DbSet<Interviewer> Interviewers { get; set; }
         public DbSet<Party> Parties { get; set; }
         public DbSet<PollingDivision> PollingDivisions { get; set; }
+        public DbSet<House> Houses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

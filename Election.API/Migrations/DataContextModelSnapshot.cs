@@ -106,6 +106,19 @@ namespace Election.API.Migrations
                     b.ToTable("Constituencies");
                 });
 
+            modelBuilder.Entity("Election.API.Data.Entities.House", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("House");
+                });
+
             modelBuilder.Entity("Election.API.Data.Entities.Interview", b =>
                 {
                     b.Property<int>("Id")
@@ -247,16 +260,11 @@ namespace Election.API.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("VoterId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ConstituencyId");
 
                     b.HasIndex("Name");
-
-                    b.HasIndex("VoterId");
 
                     b.ToTable("PollingDivisions");
                 });
@@ -378,6 +386,9 @@ namespace Election.API.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
+                    b.Property<int?>("HouseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Mobile1")
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
@@ -389,6 +400,9 @@ namespace Election.API.Migrations
                     b.Property<string>("Occupation")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("PollingDivisionId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Reg")
                         .HasMaxLength(20)
@@ -409,6 +423,10 @@ namespace Election.API.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HouseId");
+
+                    b.HasIndex("PollingDivisionId");
 
                     b.HasIndex("Reg");
 
@@ -600,11 +618,22 @@ namespace Election.API.Migrations
                         .WithMany("PollingDivisions")
                         .HasForeignKey("ConstituencyId");
 
-                    b.HasOne("Election.API.Data.Entities.Voter", null)
-                        .WithMany("PollingDivisions")
-                        .HasForeignKey("VoterId");
-
                     b.Navigation("Constituency");
+                });
+
+            modelBuilder.Entity("Election.API.Data.Entities.Voter", b =>
+                {
+                    b.HasOne("Election.API.Data.Entities.House", "House")
+                        .WithMany("Voters")
+                        .HasForeignKey("HouseId");
+
+                    b.HasOne("Election.API.Data.Entities.PollingDivision", "PollingDivision")
+                        .WithMany()
+                        .HasForeignKey("PollingDivisionId");
+
+                    b.Navigation("House");
+
+                    b.Navigation("PollingDivision");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -668,6 +697,11 @@ namespace Election.API.Migrations
                     b.Navigation("PollingDivisions");
                 });
 
+            modelBuilder.Entity("Election.API.Data.Entities.House", b =>
+                {
+                    b.Navigation("Voters");
+                });
+
             modelBuilder.Entity("Election.API.Data.Entities.Interviewer", b =>
                 {
                     b.Navigation("Interviews");
@@ -676,8 +710,6 @@ namespace Election.API.Migrations
             modelBuilder.Entity("Election.API.Data.Entities.Voter", b =>
                 {
                     b.Navigation("Interviews");
-
-                    b.Navigation("PollingDivisions");
                 });
 #pragma warning restore 612, 618
         }
