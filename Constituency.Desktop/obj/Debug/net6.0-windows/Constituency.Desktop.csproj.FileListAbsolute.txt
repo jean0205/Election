@@ -108,3 +108,4 @@ C:\Users\jeanc\Source\Repos\Election\Constituency.Desktop\obj\Debug\net6.0-windo
 C:\Users\jeanc\Source\Repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.pdb
 C:\Users\jeanc\Source\Repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.genruntimeconfig.cache
 C:\Users\jeanc\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\refint\Constituency.Desktop.dll
+C:\Users\jcsoto\Source\Repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_App_Maintenance.resources

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Constituency.Desktop.Components;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -8,6 +9,17 @@ namespace Constituency.Desktop.Helpers
 {
     public static class UtilRecurrent
     {
+        public static void LockForm(WaitFormFunc waitForm,Form frm)
+        {           
+            waitForm.Show(frm);
+            frm.Enabled=false;
+        }
+        public static void UnlockForm(WaitFormFunc waitForm,Form frm)
+        {            
+            waitForm.Close();
+            frm.Enabled = true;
+        }
+
         #region Messages
         public static bool yesOrNot(string message, string title)
         {

@@ -26,7 +26,7 @@ namespace Election.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Constituency>>> GetConstituencies()
         {
-            return await _context.Constituencies.ToListAsync();
+            return await _context.Constituencies.Include(c=>c.PollingDivisions).ToListAsync();
         }
 
         // GET: api/Constituencies/5
