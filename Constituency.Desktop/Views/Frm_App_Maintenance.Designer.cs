@@ -46,19 +46,17 @@ namespace Constituency.Desktop.Views
             this.txtSGSE = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.rjActive = new Constituency.Desktop.Controls.RJToggleButton();
+            this.lvPolling = new System.Windows.Forms.ListView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.tViewPolling = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblAppTypes = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.ibtnSaveType = new FontAwesome.Sharp.IconButton();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtTypeName = new System.Windows.Forms.TextBox();
-            this.txtTypeDescription = new System.Windows.Forms.RichTextBox();
+            this.txtPName = new System.Windows.Forms.TextBox();
+            this.rjToggleButton1 = new Constituency.Desktop.Controls.RJToggleButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
@@ -143,6 +141,7 @@ namespace Constituency.Desktop.Views
             this.imgListTreeView.TransparentColor = System.Drawing.Color.Transparent;
             this.imgListTreeView.Images.SetKeyName(0, "application.png");
             this.imgListTreeView.Images.SetKeyName(1, "openFile.png");
+            this.imgListTreeView.Images.SetKeyName(2, "constituency.png");
             // 
             // tableLayoutPanel2
             // 
@@ -157,6 +156,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel2.Controls.Add(this.txtSGSE, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtName, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.rjActive, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lvPolling, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(353, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -272,13 +272,21 @@ namespace Constituency.Desktop.Views
             this.rjActive.TabIndex = 42;
             this.rjActive.UseVisualStyleBackColor = true;
             // 
+            // lvPolling
+            // 
+            this.lvPolling.Location = new System.Drawing.Point(178, 160);
+            this.lvPolling.Name = "lvPolling";
+            this.lvPolling.Size = new System.Drawing.Size(663, 519);
+            this.lvPolling.TabIndex = 43;
+            this.lvPolling.UseCompatibleStateImageBehavior = false;
+            // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(56)))));
             this.tabPage3.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 27);
+            this.tabPage3.Location = new System.Drawing.Point(4, 33);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1206, 751);
+            this.tabPage3.Size = new System.Drawing.Size(1206, 745);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Polling Divisions";
             // 
@@ -294,45 +302,42 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1206, 751);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1206, 745);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.treeView1);
+            this.groupBox2.Controls.Add(this.tViewPolling);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(344, 745);
+            this.groupBox2.Size = new System.Drawing.Size(344, 739);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "ApplicationTypeList";
+            this.groupBox2.Text = "Polling Divisions List:";
             // 
-            // treeView1
+            // tViewPolling
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imgListTreeView;
-            this.treeView1.Location = new System.Drawing.Point(3, 25);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(338, 717);
-            this.treeView1.TabIndex = 2;
+            this.tViewPolling.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tViewPolling.ImageIndex = 0;
+            this.tViewPolling.ImageList = this.imgListTreeView;
+            this.tViewPolling.Location = new System.Drawing.Point(3, 25);
+            this.tViewPolling.Name = "tViewPolling";
+            this.tViewPolling.SelectedImageIndex = 0;
+            this.tViewPolling.Size = new System.Drawing.Size(338, 711);
+            this.tViewPolling.TabIndex = 2;
             // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.lblAppTypes, 1, 3);
             this.tableLayoutPanel4.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.ibtnSaveType, 1, 4);
             this.tableLayoutPanel4.Controls.Add(this.label6, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label7, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.label8, 0, 3);
-            this.tableLayoutPanel4.Controls.Add(this.txtTypeName, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.txtTypeDescription, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.txtPName, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.rjToggleButton1, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(353, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -342,19 +347,8 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.08055F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.34066F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 345F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(850, 745);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(850, 739);
             this.tableLayoutPanel4.TabIndex = 4;
-            // 
-            // lblAppTypes
-            // 
-            this.lblAppTypes.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblAppTypes.AutoSize = true;
-            this.lblAppTypes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblAppTypes.Location = new System.Drawing.Point(178, 353);
-            this.lblAppTypes.Name = "lblAppTypes";
-            this.lblAppTypes.Size = new System.Drawing.Size(31, 21);
-            this.lblAppTypes.TabIndex = 42;
-            this.lblAppTypes.Text = "___";
             // 
             // label5
             // 
@@ -382,7 +376,7 @@ namespace Constituency.Desktop.Views
             this.ibtnSaveType.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnSaveType.IconSize = 40;
             this.ibtnSaveType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSaveType.Location = new System.Drawing.Point(686, 694);
+            this.ibtnSaveType.Location = new System.Drawing.Point(686, 688);
             this.ibtnSaveType.Name = "ibtnSaveType";
             this.ibtnSaveType.Size = new System.Drawing.Size(161, 48);
             this.ibtnSaveType.TabIndex = 4;
@@ -390,60 +384,42 @@ namespace Constituency.Desktop.Views
             this.ibtnSaveType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ibtnSaveType.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnSaveType.UseVisualStyleBackColor = false;
+            this.ibtnSaveType.Click += new System.EventHandler(this.ibtnSaveType_Click);
             // 
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(81, 52);
+            this.label6.Location = new System.Drawing.Point(6, 52);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(91, 21);
+            this.label6.Size = new System.Drawing.Size(166, 21);
             this.label6.TabIndex = 36;
-            this.label6.Text = "Type Name:";
+            this.label6.Text = "Polling Division Name:";
             // 
-            // label7
+            // txtPName
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(44, 85);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 21);
-            this.label7.TabIndex = 37;
-            this.label7.Text = "Type Description:";
+            this.txtPName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPName.Location = new System.Drawing.Point(178, 48);
+            this.txtPName.Name = "txtPName";
+            this.txtPName.Size = new System.Drawing.Size(669, 29);
+            this.txtPName.TabIndex = 40;
+            this.txtPName.Tag = "1";
             // 
-            // label8
+            // rjToggleButton1
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(21, 353);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(151, 21);
-            this.label8.TabIndex = 38;
-            this.label8.Text = "Applications in Type:";
-            // 
-            // txtTypeName
-            // 
-            this.txtTypeName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTypeName.Location = new System.Drawing.Point(178, 48);
-            this.txtTypeName.Name = "txtTypeName";
-            this.txtTypeName.Size = new System.Drawing.Size(669, 29);
-            this.txtTypeName.TabIndex = 40;
-            this.txtTypeName.Tag = "1";
-            // 
-            // txtTypeDescription
-            // 
-            this.txtTypeDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTypeDescription.Location = new System.Drawing.Point(178, 88);
-            this.txtTypeDescription.Name = "txtTypeDescription";
-            this.txtTypeDescription.Size = new System.Drawing.Size(669, 238);
-            this.txtTypeDescription.TabIndex = 41;
-            this.txtTypeDescription.Tag = "1";
-            this.txtTypeDescription.Text = "";
+            this.rjToggleButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rjToggleButton1.AutoSize = true;
+            this.rjToggleButton1.Location = new System.Drawing.Point(178, 8);
+            this.rjToggleButton1.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjToggleButton1.Name = "rjToggleButton1";
+            this.rjToggleButton1.OffBackColor = System.Drawing.Color.Gray;
+            this.rjToggleButton1.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjToggleButton1.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.rjToggleButton1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjToggleButton1.Size = new System.Drawing.Size(50, 25);
+            this.rjToggleButton1.TabIndex = 43;
+            this.rjToggleButton1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -518,17 +494,15 @@ namespace Constituency.Desktop.Views
         private System.Windows.Forms.GroupBox groupBox2;
     
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.Label lblAppTypes;
         private System.Windows.Forms.Label label5;
         private FontAwesome.Sharp.IconButton ibtnSaveType;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private Controls.RJToggleButton rjActiveType;
-        private System.Windows.Forms.TextBox txtTypeName;
-        private System.Windows.Forms.RichTextBox txtTypeDescription;
+        
+        private System.Windows.Forms.TextBox txtPName;
         private System.Windows.Forms.TreeView tView1;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView tViewPolling;
         private TextBox txtName;
+        private ListView lvPolling;
+        private Controls.RJToggleButton rjToggleButton1;
     }
 }

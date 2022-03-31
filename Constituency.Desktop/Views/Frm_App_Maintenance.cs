@@ -35,7 +35,7 @@ namespace Constituency.Desktop.Views
 
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1")).ToList().ForEach(x => toolTip1.SetToolTip(x, "Mandatory Field"));
         }
-        private bool PaintRequiredFilds()
+        private bool PaintRequiredFildsConstituency()
         {
             bool missing = false;
             //todos en blanco antes de comprobar
@@ -49,6 +49,7 @@ namespace Constituency.Desktop.Views
             }
             return missing;
         }
+
         private void cleanScreen()
         {
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
@@ -79,7 +80,8 @@ namespace Constituency.Desktop.Views
             ConstituenciesList = new ObservableCollection<ConstituencyC>((List<ConstituencyC>)response.Result);
             if (ConstituenciesList.Any())
             {
-                RefreshTreeView(ConstituenciesList.ToList());
+                RefreshTreeViewConstituency(ConstituenciesList.ToList());
+                RefreshTreeViewPolling(ConstituenciesList.ToList());
                 //tView1.SelectedNode = tView1.Nodes[0];
             }
             else
@@ -88,7 +90,7 @@ namespace Constituency.Desktop.Views
                 tView1.Nodes.Clear();
             }
         }
-        private void RefreshTreeView(List<ConstituencyC> constituencies)
+        private void RefreshTreeViewConstituency(List<ConstituencyC> constituencies)
         {
             try
             {
@@ -99,11 +101,11 @@ namespace Constituency.Desktop.Views
 
                 foreach (ConstituencyC consttuency in constituencies)
                 {
-                    childNodes.Add(new TreeNode(consttuency.Name, 0, 1));
+                    childNodes.Add(new TreeNode(consttuency.Name, 2, 1));
                     childNodes[childNodes.Count - 1].Tag = consttuency.Id;
                     addContextMenu(childNodes[childNodes.Count - 1], "Delete Constituency");
                 }
-                treeNodes.Add(new TreeNode("Sectors", 0, 1, childNodes.ToArray()));
+                treeNodes.Add(new TreeNode("Constituencies", 0, 0, childNodes.ToArray()));
                 treeNodes[treeNodes.Count - 1].Tag = 0;
                 childNodes = new List<TreeNode>();
 
@@ -154,7 +156,7 @@ namespace Constituency.Desktop.Views
         }
         private async void ibtnSave_Click(object sender, EventArgs e)
         {
-            if (PaintRequiredFilds())
+            if (PaintRequiredFildsConstituency())
             {
                 UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                 return;
@@ -258,6 +260,125 @@ namespace Constituency.Desktop.Views
         }
         #endregion
 
+        #region Polling Divisions
+
+        private void RefreshTreeViewPolling(List<ConstituencyC> constituencies)
+        {
+            try
+            {
+                tViewPolling.Nodes.Clear();
+                List<TreeNode> treeNodes = new List<TreeNode>();
+                List<TreeNode> childNodes = new List<TreeNode>();
+
+                foreach (ConstituencyC consty in constituencies)
+                {
+                    foreach (PollingDivision polling in consty.PollingDivisions)
+                    {
+                        childNodes.Add(new TreeNode(polling.Name, 2, 1));
+                        childNodes[childNodes.Count - 1].Tag = polling.Id;
+                        addContextMenu(childNodes[childNodes.Count - 1], "Delete Polling");
+                    }
+                    treeNodes.Add(new TreeNode(consty.Name, 0, 0, childNodes.ToArray()));
+                    treeNodes[treeNodes.Count - 1].Tag = 0;
+                    childNodes = new List<TreeNode>();
+                }
+
+                tViewPolling.Nodes.AddRange(treeNodes.ToArray());
+                tViewPolling.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async void ibtnSaveType_Click(object sender, EventArgs e)
+        {
+            if (txtPName.TextLength==0)
+            {
+                UtilRecurrent.ErrorMessage("Polling name is a required field.");
+                return;
+            }
+            try
+            {
+                if (tViewPolling.SelectedNode == null || (tViewPolling.SelectedNode != null && (int)tViewPolling.SelectedNode.Tag == 0))
+                {
+                    if (await SavePolling())
+                    {
+                        await LoadConstituencies();
+                    }
+                }
+                else
+                {
+                    await UpdatePolling((int)tView1.SelectedNode.Tag);
+                    await LoadConstituencies();
+                }
+                if (constituency.Id > 0)
+                {
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == constituency.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+
+        }
+        private async Task<bool> SavePolling()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("PollingDivisions", BuildPolling(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+
+                constituency = (ConstituencyC)response.Result;
+                UtilRecurrent.InformationMessage("Polling Division sucessfully saved", "Polling Division Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+
+        }
+        private async Task UpdatePolling(int id)
+        {
+            try
+            {
+                var consty = BuildPolling();
+                consty.Id = id;
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("PollingDivisions", consty, consty.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private PollingDivision BuildPolling()
+        {
+            return new PollingDivision()
+            {
+                Active = rjActive.Checked,                
+                Name = txtName.Text.ToUpper(),
+                Constituency= 
+            };
+        }
+        #endregion
+
         #region Others
         public void addContextMenu(TreeNode tvw, string item)
         {
@@ -314,8 +435,9 @@ namespace Constituency.Desktop.Views
             if (node_here == null) return;
         }
 
+
         #endregion
 
-        
+      
     }
 }
