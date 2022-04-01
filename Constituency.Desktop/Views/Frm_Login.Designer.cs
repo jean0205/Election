@@ -55,6 +55,7 @@ namespace Constituency.Desktop.Views
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(230, 32);
             this.txtUserName.TabIndex = 0;
+            this.txtUserName.Text = "jean0205";
             // 
             // label1
             // 
@@ -111,6 +112,7 @@ namespace Constituency.Desktop.Views
             this.mtxtPassword.PasswordChar = '*';
             this.mtxtPassword.Size = new System.Drawing.Size(231, 32);
             this.mtxtPassword.TabIndex = 1;
+            this.mtxtPassword.Text = "123456";
             // 
             // iconButton2
             // 

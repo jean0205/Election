@@ -52,11 +52,13 @@ namespace Constituency.Desktop.Views
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tViewPolling = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.ibtnSaveType = new FontAwesome.Sharp.IconButton();
             this.label6 = new System.Windows.Forms.Label();
+            this.ibtnSavePolling = new FontAwesome.Sharp.IconButton();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtPName = new System.Windows.Forms.TextBox();
-            this.rjToggleButton1 = new Constituency.Desktop.Controls.RJToggleButton();
+            this.rjPActive = new Constituency.Desktop.Controls.RJToggleButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbConstituency = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
@@ -82,6 +84,7 @@ namespace Constituency.Desktop.Views
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1214, 782);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -327,99 +330,121 @@ namespace Constituency.Desktop.Views
             this.tViewPolling.SelectedImageIndex = 0;
             this.tViewPolling.Size = new System.Drawing.Size(338, 711);
             this.tViewPolling.TabIndex = 2;
+            this.tViewPolling.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tViewPolling_AfterSelect);
             // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.ibtnSaveType, 1, 4);
-            this.tableLayoutPanel4.Controls.Add(this.label6, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.txtPName, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.rjToggleButton1, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label6, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.ibtnSavePolling, 1, 3);
+            this.tableLayoutPanel4.Controls.Add(this.label5, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.txtPName, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.rjPActive, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.cmbConstituency, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(353, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 5;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.44903F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.12977F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.08055F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.34066F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 345F));
+            this.tableLayoutPanel4.RowCount = 4;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(850, 739);
             this.tableLayoutPanel4.TabIndex = 4;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(117, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 21);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Active:";
-            // 
-            // ibtnSaveType
-            // 
-            this.ibtnSaveType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ibtnSaveType.AutoSize = true;
-            this.ibtnSaveType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnSaveType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
-            this.ibtnSaveType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ibtnSaveType.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
-            this.ibtnSaveType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ibtnSaveType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.ibtnSaveType.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
-            this.ibtnSaveType.IconColor = System.Drawing.Color.Black;
-            this.ibtnSaveType.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.ibtnSaveType.IconSize = 40;
-            this.ibtnSaveType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSaveType.Location = new System.Drawing.Point(686, 688);
-            this.ibtnSaveType.Name = "ibtnSaveType";
-            this.ibtnSaveType.Size = new System.Drawing.Size(161, 48);
-            this.ibtnSaveType.TabIndex = 4;
-            this.ibtnSaveType.Text = "Save/Update";
-            this.ibtnSaveType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSaveType.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.ibtnSaveType.UseVisualStyleBackColor = false;
-            this.ibtnSaveType.Click += new System.EventHandler(this.ibtnSaveType_Click);
             // 
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(6, 52);
+            this.label6.Location = new System.Drawing.Point(6, 133);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(166, 21);
             this.label6.TabIndex = 36;
             this.label6.Text = "Polling Division Name:";
             // 
+            // ibtnSavePolling
+            // 
+            this.ibtnSavePolling.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ibtnSavePolling.AutoSize = true;
+            this.ibtnSavePolling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnSavePolling.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnSavePolling.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnSavePolling.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.ibtnSavePolling.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnSavePolling.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnSavePolling.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.ibtnSavePolling.IconColor = System.Drawing.Color.Black;
+            this.ibtnSavePolling.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnSavePolling.IconSize = 40;
+            this.ibtnSavePolling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnSavePolling.Location = new System.Drawing.Point(686, 688);
+            this.ibtnSavePolling.Name = "ibtnSavePolling";
+            this.ibtnSavePolling.Size = new System.Drawing.Size(161, 48);
+            this.ibtnSavePolling.TabIndex = 4;
+            this.ibtnSavePolling.Text = "Save/Update";
+            this.ibtnSavePolling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnSavePolling.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnSavePolling.UseVisualStyleBackColor = false;
+            this.ibtnSavePolling.Click += new System.EventHandler(this.ibtnSaveType_Click);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(117, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 21);
+            this.label5.TabIndex = 35;
+            this.label5.Text = "Active:";
+            // 
             // txtPName
             // 
             this.txtPName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPName.Location = new System.Drawing.Point(178, 48);
+            this.txtPName.Location = new System.Drawing.Point(178, 129);
             this.txtPName.Name = "txtPName";
             this.txtPName.Size = new System.Drawing.Size(669, 29);
             this.txtPName.TabIndex = 40;
             this.txtPName.Tag = "1";
             // 
-            // rjToggleButton1
+            // rjPActive
             // 
-            this.rjToggleButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.rjToggleButton1.AutoSize = true;
-            this.rjToggleButton1.Location = new System.Drawing.Point(178, 8);
-            this.rjToggleButton1.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjToggleButton1.Name = "rjToggleButton1";
-            this.rjToggleButton1.OffBackColor = System.Drawing.Color.Gray;
-            this.rjToggleButton1.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjToggleButton1.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.rjToggleButton1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjToggleButton1.Size = new System.Drawing.Size(50, 25);
-            this.rjToggleButton1.TabIndex = 43;
-            this.rjToggleButton1.UseVisualStyleBackColor = true;
+            this.rjPActive.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rjPActive.AutoSize = true;
+            this.rjPActive.Location = new System.Drawing.Point(178, 71);
+            this.rjPActive.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjPActive.Name = "rjPActive";
+            this.rjPActive.OffBackColor = System.Drawing.Color.Gray;
+            this.rjPActive.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjPActive.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.rjPActive.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjPActive.Size = new System.Drawing.Size(50, 25);
+            this.rjPActive.TabIndex = 43;
+            this.rjPActive.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(69, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(103, 21);
+            this.label4.TabIndex = 44;
+            this.label4.Text = "Constituency:";
+            // 
+            // cmbConstituency
+            // 
+            this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbConstituency.FormattingEnabled = true;
+            this.cmbConstituency.Location = new System.Drawing.Point(178, 15);
+            this.cmbConstituency.Name = "cmbConstituency";
+            this.cmbConstituency.Size = new System.Drawing.Size(669, 29);
+            this.cmbConstituency.TabIndex = 45;
             // 
             // tabPage2
             // 
@@ -495,7 +520,7 @@ namespace Constituency.Desktop.Views
     
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label5;
-        private FontAwesome.Sharp.IconButton ibtnSaveType;
+        private FontAwesome.Sharp.IconButton ibtnSavePolling;
         private System.Windows.Forms.Label label6;
         
         private System.Windows.Forms.TextBox txtPName;
@@ -503,6 +528,8 @@ namespace Constituency.Desktop.Views
         private System.Windows.Forms.TreeView tViewPolling;
         private TextBox txtName;
         private ListView lvPolling;
-        private Controls.RJToggleButton rjToggleButton1;
+        private Controls.RJToggleButton rjPActive;
+        private Label label4;
+        private ComboBox cmbConstituency;
     }
 }

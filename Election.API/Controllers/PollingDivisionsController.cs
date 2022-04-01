@@ -77,6 +77,8 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<PollingDivision>> PostPollingDivision(PollingDivision pollingDivision)
         {
+            var consty= await _context.Constituencies.FirstOrDefaultAsync(c=>c.Id==pollingDivision.Constituency.Id);
+            pollingDivision.Constituency = consty;
             _context.PollingDivisions.Add(pollingDivision);
             await _context.SaveChangesAsync();
 
