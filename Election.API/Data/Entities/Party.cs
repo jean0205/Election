@@ -6,6 +6,10 @@ namespace Election.API.Data.Entities
     {
         public int Id { get; set; }
 
+
+        [Required(ErrorMessage = "{0} is a required field.")]
+        public bool Active { get; set; }
+        
         [Required(ErrorMessage = "{0} is a required field.")]
         public int Code { get; set; }
 

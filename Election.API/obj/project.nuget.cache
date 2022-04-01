@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IVKKzVXBa/FxkcAVIYjtC0DxiatOUSPjZWfsSF/bfjy999M+T4csxtzgP0qZsgOChT+mqXKdkkU5RYjrCs5DbQ==",
+  "dgSpecHash": "5i+gUuaeI9jic764+cFKLu3ZW1qJcJ0jnkK55UgBgShotjbKfkXzdlKz1ctC7gfbuKQCndR7HsuAg0e52NXp4w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jcsoto\\Source\\Repos\\Election\\Election.API\\Election.API.csproj",
+  "projectFilePath": "C:\\Users\\jcsoto\\source\\repos\\Election\\Election.API\\Election.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jcsoto\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jcsoto\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

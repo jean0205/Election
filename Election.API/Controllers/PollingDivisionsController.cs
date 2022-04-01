@@ -50,7 +50,8 @@ namespace Election.API.Controllers
             {
                 return BadRequest();
             }
-
+            var consty = await _context.Constituencies.FirstOrDefaultAsync(c => c.Id == pollingDivision.Constituency.Id);
+            pollingDivision.Constituency = consty;
             _context.Entry(pollingDivision).State = EntityState.Modified;
 
             try

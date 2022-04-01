@@ -26,6 +26,7 @@ namespace Constituency.Desktop.Views
         {
             MandatoriesFildsSectorsTypes();
             await LoadConstituencies();
+            await LoadParties();
 
 
         }
@@ -64,6 +65,9 @@ namespace Constituency.Desktop.Views
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel4, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
 
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel4, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel6, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
+
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel6, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
             cmbConstituency.SelectedItem = null;
 
         }
@@ -164,6 +168,11 @@ namespace Constituency.Desktop.Views
                 txtSGSE.Text = consty.SGSE;
                 txtName.Text = consty.Name;
                 rjActive.Checked = consty.Active;
+                txtPollings.Clear();
+                var pd = consty.PollingDivisions.Select(p => p.Name).ToList();
+                pd.ForEach(p => txtPollings.Text +=  p.ToString()+ "\r\n");
+
+
             }
             catch (Exception ex)
             {
@@ -192,7 +201,7 @@ namespace Constituency.Desktop.Views
                     await UpdateConstituency((int)tView1.SelectedNode.Tag);
                     await LoadConstituencies();
                 }
-                if (constituency.Id > 0)
+                if (constituency != null && constituency.Id > 0)
                 {
                     tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == constituency.Id);
                 }
@@ -276,7 +285,7 @@ namespace Constituency.Desktop.Views
 
         }
         #endregion
-
+        
         #region Polling Divisions
 
         private void RefreshTreeViewPolling(List<ConstituencyC> constituencies)
@@ -317,13 +326,13 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                int nodeTag= (int)node.Tag;
+                int nodeTag = (int)node.Tag;
                 if (nodeTag > 0)
                 {
-                    pollingDivision = ConstituenciesList.SelectMany(c=>c.PollingDivisions).Where(p => p.Id == nodeTag).FirstOrDefault();
+                    pollingDivision = ConstituenciesList.SelectMany(c => c.PollingDivisions).Where(p => p.Id == nodeTag).FirstOrDefault();
 
 
-                   pollingDivision.Constituency= ConstituenciesList.Where(c=>c.PollingDivisions.Contains(pollingDivision)).FirstOrDefault();
+                    pollingDivision.Constituency = ConstituenciesList.Where(c => c.PollingDivisions.Contains(pollingDivision)).FirstOrDefault();
 
                     showPollingInfo(pollingDivision);
                 }
@@ -340,10 +349,10 @@ namespace Constituency.Desktop.Views
         private void showPollingInfo(PollingDivision polling)
         {
             try
-            {               
+            {
                 txtPName.Text = polling.Name;
                 rjPActive.Checked = polling.Active;
-                cmbConstituency.SelectedValue=polling.Constituency.Id;
+                cmbConstituency.SelectedValue = polling.Constituency.Id;
             }
             catch (Exception ex)
             {
@@ -369,10 +378,10 @@ namespace Constituency.Desktop.Views
                 }
                 else
                 {
-                    await UpdatePolling((int)tView1.SelectedNode.Tag);
+                    await UpdatePolling((int)tViewPolling.SelectedNode.Tag);
                     await LoadConstituencies();
                 }
-                if (pollingDivision.Id > 0)
+                if (pollingDivision!=null && pollingDivision.Id > 0)
                 {
                     tViewPolling.SelectedNode = CollectAllNodes(tViewPolling.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == pollingDivision.Id);
                 }
@@ -439,6 +448,187 @@ namespace Constituency.Desktop.Views
         }
         #endregion
 
+        #region Parties
+        private ObservableCollection<Party> PartiesList;
+        Party party;
+
+        private async Task LoadParties()
+        {
+            UtilRecurrent.LockForm(waitForm, this);
+            Response response = await ApiServices.GetListAsync<Party>("Parties", token);
+            UtilRecurrent.UnlockForm(waitForm, this);
+
+            waitForm.Close();
+            Cursor.Show();
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return;
+            }
+            PartiesList = new ObservableCollection<Party>((List<Party>)response.Result);
+            if (PartiesList.Any())
+            {
+                RefreshTreeViewParties(PartiesList.ToList());                
+                //tView1.SelectedNode = tView1.Nodes[0];
+            }
+            else
+            {
+                cleanScreen();
+                tvParties.Nodes.Clear();
+            }
+        }
+        private void RefreshTreeViewParties(List<Party> parties)
+        {
+            try
+            {
+                tvParties.Nodes.Clear();
+                List<TreeNode> treeNodes = new List<TreeNode>();
+                List<TreeNode> childNodes = new List<TreeNode>();
+                foreach (Party party in parties)
+                {
+                    childNodes.Add(new TreeNode(party.Name, 2, 1));
+                    childNodes[childNodes.Count - 1].Tag = party.Id;
+                    addContextMenu(childNodes[childNodes.Count - 1], "Delete Party");
+                }
+                treeNodes.Add(new TreeNode("Parties", 0, 0, childNodes.ToArray()));
+                treeNodes[treeNodes.Count - 1].Tag = 0;
+                childNodes = new List<TreeNode>();
+                tvParties.Nodes.AddRange(treeNodes.ToArray());
+                tvParties.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void tvParties_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            AfterSelectNodeTVParties(e.Node);
+        }
+        private void AfterSelectNodeTVParties(TreeNode node)
+        {
+            try
+            {
+                int nodeTag = (int)node.Tag;
+                if (nodeTag > 0)
+                {
+                    party = PartiesList.Where(p => p.Id == nodeTag).FirstOrDefault();
+                    showPartyInfo(party);
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void showPartyInfo(Party party)
+        {
+            try
+            {
+                txtPpname.Text = party.Name;
+                rjParty.Checked = party.Active;
+                txtPCode.Text = party.Code.ToString();
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        
+        
+        private async void ibtnSaveParty_Click(object sender, EventArgs e)
+        {
+            if (txtPpname.TextLength == 0 || txtPCode.TextLength == 0)
+            {
+                UtilRecurrent.ErrorMessage("Code and Name are required fields.");
+                return;
+            }            
+            try
+            {
+                if (tvParties.SelectedNode == null || (tvParties.SelectedNode != null && (int)tvParties.SelectedNode.Tag == 0))
+                {
+                    if (await SaveParty())
+                    {
+                        await LoadParties();
+                    }
+                }
+                else
+                {
+                    await UpdateParty((int)tvParties.SelectedNode.Tag);
+                    await LoadParties();
+                }
+                if (party!= null && party.Id > 0)
+                {
+                    tvParties.SelectedNode = CollectAllNodes(tvParties.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == party.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> SaveParty()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Parties", BuildParty(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+
+                party = (Party)response.Result;
+                UtilRecurrent.InformationMessage("Party sucessfully saved", "Party Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+
+        }
+        private async Task UpdateParty(int id)
+        {
+            try
+            {
+                var polling = BuildParty();
+                polling.Id = id;
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("Parties", polling, polling.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private Party BuildParty()
+        {
+            return new Party()
+            {
+                Active = rjParty.Checked,
+                Name = txtPpname.Text.ToUpper(),
+                Code = int.Parse(txtPCode.Text.ToUpper())
+            };
+        }
+
+        #endregion
+
         #region Others
         public void addContextMenu(TreeNode tvw, string item)
         {
@@ -495,10 +685,10 @@ namespace Constituency.Desktop.Views
             if (node_here == null) return;
         }
 
-
+        
     }
 
-        #endregion
+    #endregion
 
-       
+
 }
