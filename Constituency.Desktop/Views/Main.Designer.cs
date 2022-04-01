@@ -131,7 +131,7 @@ namespace Constituency.Desktop.Views
             this.ibtnApplicants.Size = new System.Drawing.Size(237, 51);
             this.ibtnApplicants.TabIndex = 4;
             this.ibtnApplicants.Tag = "Applicants";
-            this.ibtnApplicants.Text = "Applicants";
+            this.ibtnApplicants.Text = "Voters";
             this.ibtnApplicants.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ibtnApplicants.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnApplicants.UseVisualStyleBackColor = false;

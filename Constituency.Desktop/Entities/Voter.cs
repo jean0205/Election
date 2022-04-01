@@ -9,6 +9,7 @@
         public string SurName { get; set; }
 
         public string GivenNames { get; set; }
+        public string FullName => $"{SurName} {GivenNames}";
 
         public string Sex { get; set; }
         public DateTime DOB { get; set; }

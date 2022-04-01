@@ -85,8 +85,7 @@ namespace Constituency.Desktop.Views
             Response response = await ApiServices.GetListAsync<ConstituencyC>("Constituencies", token);
             UtilRecurrent.UnlockForm(waitForm, this);
 
-            waitForm.Close();
-            Cursor.Show();
+           
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
@@ -456,10 +455,7 @@ namespace Constituency.Desktop.Views
         {
             UtilRecurrent.LockForm(waitForm, this);
             Response response = await ApiServices.GetListAsync<Party>("Parties", token);
-            UtilRecurrent.UnlockForm(waitForm, this);
-
-            waitForm.Close();
-            Cursor.Show();
+            UtilRecurrent.UnlockForm(waitForm, this);           
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);

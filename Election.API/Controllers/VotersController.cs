@@ -1,12 +1,15 @@
 ﻿#nullable disable
 using Election.API.Data;
 using Election.API.Data.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Election.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class VotersController : ControllerBase
     {
@@ -21,7 +24,10 @@ namespace Election.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Voter>>> GetVoters()
         {
-            return await _context.Voters.ToListAsync();
+            return await _context.Voters
+                .Include(v=>v.PollingDivision)
+                .ThenInclude(v=>v.Constituency)
+                .ToListAsync();
         }
 
         // GET: api/Voters/5
