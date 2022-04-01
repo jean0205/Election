@@ -3,6 +3,7 @@
     public class Interview
     {
         public int Id { get; set; }
+        public bool Active { get; set; }
         public DateTime Date { get; set; }
 
         public Voter Voter { get; set; }

@@ -3,6 +3,7 @@
     public class Voter
     {
         public int Id { get; set; }
+        public bool Active { get; set; }
         public int Reg { get; set; }
 
         public string SurName { get; set; }
