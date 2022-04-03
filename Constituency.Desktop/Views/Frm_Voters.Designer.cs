@@ -275,6 +275,7 @@
             this.ibtnRefresh.Text = "          Refresh";
             this.ibtnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnRefresh.UseVisualStyleBackColor = false;
+            this.ibtnRefresh.Click += new System.EventHandler(this.ibtnRefresh_Click);
             // 
             // lblFiltering
             // 

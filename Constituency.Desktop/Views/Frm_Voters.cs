@@ -169,8 +169,8 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        
-       
+
+
         private TreeNode FindNode(TreeView tvw, string voterId)
         {
             try
@@ -183,12 +183,12 @@ namespace Constituency.Desktop.Views
                         {
                             return childNode.Nodes.Cast<TreeNode>().FirstOrDefault(x => x.Tag.ToString() == voterId);
                         }
-                    }                   
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); 
+                Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
             return null;
@@ -286,7 +286,7 @@ namespace Constituency.Desktop.Views
             VoterFieldsWhite();
             try
             {
-                if (nodeTag > 0 )
+                if (nodeTag > 0)
                 {
                     Voter = new Voter();
                     Voter = VoterList.FirstOrDefault(v => v.Id == nodeTag);
@@ -509,7 +509,7 @@ namespace Constituency.Desktop.Views
         private Voter BuildUpdateVoter()
         {
             try
-            {               
+            {
                 List<PropertyInfo> properties = Voter.GetType().GetProperties().ToList();
                 List<TextBox> voterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
                 foreach (PropertyInfo prop in properties)
@@ -532,7 +532,20 @@ namespace Constituency.Desktop.Views
                 return null;
             }
         }
+        private async void ibtnRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await LoadVoters();
+                tView1.SelectedNode = tView1.Nodes[0];
+                lblFiltering.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
 
+        }
         #endregion
 
         #region Events
@@ -559,7 +572,7 @@ namespace Constituency.Desktop.Views
             while ((node = node.Parent) != null) level++;
             return level;
         }
-        
+
         private void rjCollapseAll_MouseClick(object sender, MouseEventArgs e)
         {
             try
@@ -584,8 +597,9 @@ namespace Constituency.Desktop.Views
             }
         }
 
+
         #endregion
 
-
+       
     }
 }
