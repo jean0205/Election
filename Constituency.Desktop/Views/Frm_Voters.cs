@@ -36,7 +36,7 @@ namespace Constituency.Desktop.Views
         {
             await LoadConstituencies();
             await LoadVoters();
-            
+
         }
 
         #region Tab1
@@ -116,33 +116,39 @@ namespace Constituency.Desktop.Views
                 List<TreeNode> childNodes = new List<TreeNode>();
                 List<TreeNode> childNodes2 = new List<TreeNode>();
 
-                foreach (ConstituencyC contituency in Voters.Select(v => v.PollingDivision.Constituency).Distinct())
+                foreach (ConstituencyC contituency in ConstituenciesList)
                 {
                     int cant2 = VoterList.Where(v => v.PollingDivision.Constituency.Id == contituency.Id).Count();
-                    contituency.PollingDivisions= ConstituenciesList.FirstOrDefault(c => c.Id == contituency.Id).PollingDivisions;
                     
-                    foreach (PollingDivision division in  contituency.PollingDivisions.Distinct())
+                    foreach (PollingDivision division in contituency.PollingDivisions.Distinct())
                     {
                         int cant = VoterList.Where(v => v.PollingDivision.Id == division.Id).Count();
-                        foreach (Voter voter in VoterList.Where(v => v.PollingDivision.Id == division.Id))
+                        if (VoterList.Where(v => v.PollingDivision.Id == division.Id).Any())
                         {
-                            TreeNode node2 = new TreeNode(voter.FullName, 2, 3);
-                            node2.Tag = voter.Id;
-                            childNodes2.Add(node2);
-                        }
-                        childNodes.Add(new TreeNode(division.Name + " [" + cant + "]", 0, 1, childNodes2.ToArray()));
-                        childNodes[childNodes.Count - 1].Tag = division.Id;
-                        childNodes2 = new List<TreeNode>();
-                    }                   
+                            foreach (Voter voter in VoterList.Where(v => v.PollingDivision.Id == division.Id))
+                            {
+                                TreeNode node2 = new TreeNode(voter.FullName, 2, 3);
+                                node2.Tag = voter.Id;
+                                childNodes2.Add(node2);
+                            }
+                            if (childNodes2.Any())
+                            {
+                                childNodes.Add(new TreeNode(division.Name + " [" + cant + "]", 0, 1, childNodes2.ToArray()));
+                                childNodes[childNodes.Count - 1].Tag = division.Id;
+                                childNodes2 = new List<TreeNode>();
+                            }
+                        }                        
+                    }
                     treeNodes.Add(new TreeNode(contituency.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
                     treeNodes[treeNodes.Count - 1].Tag = contituency.Id;
+                    childNodes = new List<TreeNode>();
                 }
                 tView1.Nodes.AddRange(treeNodes.ToArray());
                 tView1.ExpandAll();
                 rjCollapseAll.Checked = true;
                 lblExpand.Text = "Collapse All";
                 tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-                groupBox1.Text = "Voters List ( " + Voters.Count + " )";
+                groupBox1.Text = "Voters List ( " + Voters.Count.ToString("N") + " )";
 
             }
             catch (Exception ex)
@@ -268,10 +274,10 @@ namespace Constituency.Desktop.Views
                     {
                         cmbDivision.DataSource = null;
                         PollingDivisionsList = new List<PollingDivision>();
-                        PollingDivisionsList= ConstituenciesList.Where(p => p.Id == (int)cmbConstituency.SelectedValue).SelectMany(p => p.PollingDivisions).ToList();
+                        PollingDivisionsList = ConstituenciesList.Where(p => p.Id == (int)cmbConstituency.SelectedValue).SelectMany(p => p.PollingDivisions).ToList();
                         cmbDivision.DataSource = PollingDivisionsList;
                         cmbDivision.ValueMember = "Id";
-                        cmbDivision.DisplayMember = "Name";                      
+                        cmbDivision.DisplayMember = "Name";
                         cmbDivision.SelectedIndex = -1;
                     }
                 }
