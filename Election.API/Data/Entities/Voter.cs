@@ -52,8 +52,7 @@ namespace Election.API.Data.Entities
         [MaxLength(11)]
         public string? WorkPhone { get; set; }
 
-        [MaxLength(100)]
-        [EmailAddress]
+        [MaxLength(100)]      
         public string? Email { get; set; }
 
         public PollingDivision? PollingDivision { get; set; }

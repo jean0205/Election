@@ -34,7 +34,10 @@ namespace Election.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Voter>> GetVoter(int id)
         {
-            var voter = await _context.Voters.FindAsync(id);
+            var voter = await _context.Voters.
+                Include(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency).
+                FirstOrDefaultAsync(v=>v.Id==id);
 
             if (voter == null)
             {

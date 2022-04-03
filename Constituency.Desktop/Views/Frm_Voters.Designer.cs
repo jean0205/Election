@@ -28,25 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Voters));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tView1 = new System.Windows.Forms.TreeView();
+            this.imgListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblExpand = new System.Windows.Forms.Label();
             this.rjCollapseAll = new Constituency.Desktop.Controls.RJToggleButton();
+            this.lblExpand = new System.Windows.Forms.Label();
             this.ibtnRefresh = new FontAwesome.Sharp.IconButton();
             this.lblFiltering = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
+            this.ibtnSaveVoter = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.label39 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label41 = new System.Windows.Forms.Label();
-            this.rjToggleButton2 = new Constituency.Desktop.Controls.RJToggleButton();
+            this.rjToggleButton1 = new Constituency.Desktop.Controls.RJToggleButton();
             this.tpanelVoter = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.label14 = new System.Windows.Forms.Label();
@@ -92,6 +96,7 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -184,18 +189,36 @@
             // 
             this.tView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tView1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tView1.ImageIndex = 0;
+            this.tView1.ImageList = this.imgListTreeView;
             this.tView1.Location = new System.Drawing.Point(3, 46);
             this.tView1.Name = "tView1";
+            this.tView1.SelectedImageIndex = 0;
             this.tView1.Size = new System.Drawing.Size(252, 587);
             this.tView1.TabIndex = 0;
+            this.tView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tView1_AfterSelect);
+            // 
+            // imgListTreeView
+            // 
+            this.imgListTreeView.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imgListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTreeView.ImageStream")));
+            this.imgListTreeView.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgListTreeView.Images.SetKeyName(0, "customers-icon-35908.jpg");
+            this.imgListTreeView.Images.SetKeyName(1, "customers-icon-35912 (1).png");
+            this.imgListTreeView.Images.SetKeyName(2, "person-icon-1680.png");
+            this.imgListTreeView.Images.SetKeyName(3, "human-icon-png-1906.png");
+            this.imgListTreeView.Images.SetKeyName(4, "bank-icon-5969 (1).png");
+            this.imgListTreeView.Images.SetKeyName(5, "credit-card-icon-png-4424.png");
+            this.imgListTreeView.Images.SetKeyName(6, "Applicants.png");
+            this.imgListTreeView.Images.SetKeyName(7, "applicantsSelected.png");
             // 
             // tableLayoutPanel49
             // 
             this.tableLayoutPanel49.ColumnCount = 2;
             this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.55665F));
             this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.44335F));
-            this.tableLayoutPanel49.Controls.Add(this.lblExpand, 1, 0);
             this.tableLayoutPanel49.Controls.Add(this.rjCollapseAll, 0, 0);
+            this.tableLayoutPanel49.Controls.Add(this.lblExpand, 1, 0);
             this.tableLayoutPanel49.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel49.Location = new System.Drawing.Point(3, 633);
             this.tableLayoutPanel49.Name = "tableLayoutPanel49";
@@ -203,6 +226,20 @@
             this.tableLayoutPanel49.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel49.Size = new System.Drawing.Size(252, 33);
             this.tableLayoutPanel49.TabIndex = 5;
+            // 
+            // rjCollapseAll
+            // 
+            this.rjCollapseAll.AutoSize = true;
+            this.rjCollapseAll.Location = new System.Drawing.Point(3, 3);
+            this.rjCollapseAll.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjCollapseAll.Name = "rjCollapseAll";
+            this.rjCollapseAll.OffBackColor = System.Drawing.Color.Gray;
+            this.rjCollapseAll.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjCollapseAll.OnBackColor = System.Drawing.Color.MediumSlateBlue;
+            this.rjCollapseAll.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjCollapseAll.Size = new System.Drawing.Size(50, 25);
+            this.rjCollapseAll.TabIndex = 53;
+            this.rjCollapseAll.UseVisualStyleBackColor = true;
             // 
             // lblExpand
             // 
@@ -214,22 +251,6 @@
             this.lblExpand.Size = new System.Drawing.Size(91, 21);
             this.lblExpand.TabIndex = 52;
             this.lblExpand.Text = "Collapse All";
-            // 
-            // rjCollapseAll
-            // 
-            this.rjCollapseAll.AutoSize = true;
-            this.rjCollapseAll.Checked = true;
-            this.rjCollapseAll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.rjCollapseAll.Location = new System.Drawing.Point(3, 3);
-            this.rjCollapseAll.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjCollapseAll.Name = "rjCollapseAll";
-            this.rjCollapseAll.OffBackColor = System.Drawing.Color.Gray;
-            this.rjCollapseAll.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjCollapseAll.OnBackColor = System.Drawing.Color.DodgerBlue;
-            this.rjCollapseAll.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjCollapseAll.Size = new System.Drawing.Size(50, 25);
-            this.rjCollapseAll.TabIndex = 2;
-            this.rjCollapseAll.UseVisualStyleBackColor = true;
             // 
             // ibtnRefresh
             // 
@@ -269,42 +290,68 @@
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.iconButton1, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.ibtnUpdate, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.ibtnSaveVoter, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel25, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.tpanelVoter, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(267, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowCount = 4;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.49897F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.50103F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 142F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(894, 709);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
-            // iconButton1
+            // ibtnUpdate
             // 
-            this.iconButton1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.iconButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
-            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
-            this.iconButton1.FlatAppearance.BorderSize = 2;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
-            this.iconButton1.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 33;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(736, 617);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(155, 40);
-            this.iconButton1.TabIndex = 4;
-            this.iconButton1.Text = "Save";
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = false;
-            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            this.ibtnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.ibtnUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ibtnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnUpdate.FlatAppearance.BorderSize = 2;
+            this.ibtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnUpdate.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnUpdate.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.ibtnUpdate.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnUpdate.IconSize = 33;
+            this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnUpdate.Location = new System.Drawing.Point(736, 660);
+            this.ibtnUpdate.Name = "ibtnUpdate";
+            this.ibtnUpdate.Size = new System.Drawing.Size(155, 40);
+            this.ibtnUpdate.TabIndex = 5;
+            this.ibtnUpdate.Text = "Update";
+            this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnUpdate.UseVisualStyleBackColor = false;
+            this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
+            // 
+            // ibtnSaveVoter
+            // 
+            this.ibtnSaveVoter.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.ibtnSaveVoter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnSaveVoter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnSaveVoter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnSaveVoter.FlatAppearance.BorderSize = 2;
+            this.ibtnSaveVoter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnSaveVoter.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnSaveVoter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnSaveVoter.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.ibtnSaveVoter.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnSaveVoter.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnSaveVoter.IconSize = 33;
+            this.ibtnSaveVoter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnSaveVoter.Location = new System.Drawing.Point(736, 600);
+            this.ibtnSaveVoter.Name = "ibtnSaveVoter";
+            this.ibtnSaveVoter.Size = new System.Drawing.Size(155, 40);
+            this.ibtnSaveVoter.TabIndex = 4;
+            this.ibtnSaveVoter.Text = "Save";
+            this.ibtnSaveVoter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnSaveVoter.UseVisualStyleBackColor = false;
+            this.ibtnSaveVoter.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // tableLayoutPanel25
             // 
@@ -321,7 +368,7 @@
             this.tableLayoutPanel25.Name = "tableLayoutPanel25";
             this.tableLayoutPanel25.RowCount = 1;
             this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel25.Size = new System.Drawing.Size(888, 59);
+            this.tableLayoutPanel25.Size = new System.Drawing.Size(888, 61);
             this.tableLayoutPanel25.TabIndex = 2;
             // 
             // label39
@@ -351,7 +398,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.99313F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.00687F));
             this.tableLayoutPanel4.Controls.Add(this.label41, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.rjToggleButton2, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.rjToggleButton1, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(594, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -370,22 +417,20 @@
             this.label41.TabIndex = 47;
             this.label41.Text = "Reset Filter";
             // 
-            // rjToggleButton2
+            // rjToggleButton1
             // 
-            this.rjToggleButton2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.rjToggleButton2.AutoSize = true;
-            this.rjToggleButton2.Checked = true;
-            this.rjToggleButton2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.rjToggleButton2.Location = new System.Drawing.Point(11, 18);
-            this.rjToggleButton2.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjToggleButton2.Name = "rjToggleButton2";
-            this.rjToggleButton2.OffBackColor = System.Drawing.Color.Gray;
-            this.rjToggleButton2.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjToggleButton2.OnBackColor = System.Drawing.Color.DodgerBlue;
-            this.rjToggleButton2.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjToggleButton2.Size = new System.Drawing.Size(50, 25);
-            this.rjToggleButton2.TabIndex = 53;
-            this.rjToggleButton2.UseVisualStyleBackColor = true;
+            this.rjToggleButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rjToggleButton1.AutoSize = true;
+            this.rjToggleButton1.Location = new System.Drawing.Point(3, 18);
+            this.rjToggleButton1.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjToggleButton1.Name = "rjToggleButton1";
+            this.rjToggleButton1.OffBackColor = System.Drawing.Color.Gray;
+            this.rjToggleButton1.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjToggleButton1.OnBackColor = System.Drawing.Color.MediumSlateBlue;
+            this.rjToggleButton1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjToggleButton1.Size = new System.Drawing.Size(50, 25);
+            this.rjToggleButton1.TabIndex = 48;
+            this.rjToggleButton1.UseVisualStyleBackColor = true;
             // 
             // tpanelVoter
             // 
@@ -401,7 +446,7 @@
             this.tpanelVoter.Controls.Add(this.tableLayoutPanel6, 0, 0);
             this.tpanelVoter.Controls.Add(this.tableLayoutPanel14, 0, 6);
             this.tpanelVoter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tpanelVoter.Location = new System.Drawing.Point(3, 68);
+            this.tpanelVoter.Location = new System.Drawing.Point(3, 70);
             this.tpanelVoter.Name = "tpanelVoter";
             this.tpanelVoter.RowCount = 9;
             this.tpanelVoter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
@@ -413,7 +458,7 @@
             this.tpanelVoter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tpanelVoter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tpanelVoter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tpanelVoter.Size = new System.Drawing.Size(888, 495);
+            this.tpanelVoter.Size = new System.Drawing.Size(888, 515);
             this.tpanelVoter.TabIndex = 3;
             // 
             // tableLayoutPanel16
@@ -466,6 +511,7 @@
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(313, 29);
             this.cmbDivision.TabIndex = 34;
+            this.cmbDivision.Tag = "1";
             // 
             // cmbConstituency
             // 
@@ -475,6 +521,7 @@
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(309, 29);
             this.cmbConstituency.TabIndex = 33;
+            this.cmbConstituency.Tag = "1";
             this.cmbConstituency.SelectionChangeCommitted += new System.EventHandler(this.cmbConstituency_SelectionChangeCommitted);
             // 
             // tableLayoutPanel15
@@ -711,6 +758,7 @@
             this.dtpDOB.Name = "dtpDOB";
             this.dtpDOB.Size = new System.Drawing.Size(155, 29);
             this.dtpDOB.TabIndex = 31;
+            this.dtpDOB.Tag = "1";
             // 
             // label4
             // 
@@ -762,7 +810,7 @@
             this.txtSurName.Name = "txtSurName";
             this.txtSurName.Size = new System.Drawing.Size(339, 29);
             this.txtSurName.TabIndex = 23;
-            this.txtSurName.Tag = "2,4";
+            this.txtSurName.Tag = "1";
             // 
             // label2
             // 
@@ -783,7 +831,7 @@
             this.txtGivenNames.Name = "txtGivenNames";
             this.txtGivenNames.Size = new System.Drawing.Size(322, 29);
             this.txtGivenNames.TabIndex = 24;
-            this.txtGivenNames.Tag = "2,4";
+            this.txtGivenNames.Tag = "1";
             // 
             // tableLayoutPanel6
             // 
@@ -821,7 +869,7 @@
             this.txtReg.Name = "txtReg";
             this.txtReg.Size = new System.Drawing.Size(268, 29);
             this.txtReg.TabIndex = 17;
-            this.txtReg.Tag = "2,4";
+            this.txtReg.Tag = "1";
             // 
             // tableLayoutPanel14
             // 
@@ -1041,9 +1089,9 @@
         private FontAwesome.Sharp.IconButton ibtnRefresh;
         private Label lblFiltering;
         private TabPage tabPage2;
-        private Controls.RJToggleButton rjCollapseAll;
+        
         private TableLayoutPanel tableLayoutPanel3;
-        private Controls.RJToggleButton rjToggleButton2;
+        private Controls.RJToggleButton rjExtendSearch;
         private Label label41;
         private TableLayoutPanel tableLayoutPanel25;
         private Label label39;
@@ -1091,8 +1139,14 @@
         private TableLayoutPanel tableLayoutPanel16;
         private Label label14;
         private Label label15;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton ibtnSaveVoter;
         private ComboBox cmbConstituency;
         private ComboBox cmbDivision;
+        private ToolTip toolTip1;
+        private FontAwesome.Sharp.IconButton ibtnUpdate;
+        private ImageList imgListTreeView;
+        private Controls.RJToggleButton rjCollapseAll;
+        private Controls.RJToggleButton rjFilter;
+        private Controls.RJToggleButton rjToggleButton1;
     }
 }
