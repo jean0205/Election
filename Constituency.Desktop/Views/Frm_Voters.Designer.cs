@@ -240,6 +240,7 @@
             this.rjCollapseAll.Size = new System.Drawing.Size(50, 25);
             this.rjCollapseAll.TabIndex = 53;
             this.rjCollapseAll.UseVisualStyleBackColor = true;
+            this.rjCollapseAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rjCollapseAll_MouseClick);
             // 
             // lblExpand
             // 
@@ -602,7 +603,7 @@
             this.txtMobile1.Name = "txtMobile1";
             this.txtMobile1.Size = new System.Drawing.Size(297, 29);
             this.txtMobile1.TabIndex = 23;
-            this.txtMobile1.Tag = "2,4";
+            this.txtMobile1.Tag = "2";
             // 
             // label10
             // 
@@ -623,7 +624,7 @@
             this.txtMobile2.Name = "txtMobile2";
             this.txtMobile2.Size = new System.Drawing.Size(306, 29);
             this.txtMobile2.TabIndex = 24;
-            this.txtMobile2.Tag = "2,4";
+            this.txtMobile2.Tag = "2";
             // 
             // tableLayoutPanel12
             // 
@@ -661,7 +662,7 @@
             this.txtOccupation.Name = "txtOccupation";
             this.txtOccupation.Size = new System.Drawing.Size(772, 29);
             this.txtOccupation.TabIndex = 17;
-            this.txtOccupation.Tag = "2,4";
+            this.txtOccupation.Tag = "";
             // 
             // tableLayoutPanel10
             // 
@@ -699,7 +700,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(772, 29);
             this.txtAddress.TabIndex = 17;
-            this.txtAddress.Tag = "2,4";
+            this.txtAddress.Tag = "";
             // 
             // tableLayoutPanel9
             // 
@@ -810,7 +811,7 @@
             this.txtSurName.Name = "txtSurName";
             this.txtSurName.Size = new System.Drawing.Size(339, 29);
             this.txtSurName.TabIndex = 23;
-            this.txtSurName.Tag = "1";
+            this.txtSurName.Tag = "1,3";
             // 
             // label2
             // 
@@ -831,7 +832,7 @@
             this.txtGivenNames.Name = "txtGivenNames";
             this.txtGivenNames.Size = new System.Drawing.Size(322, 29);
             this.txtGivenNames.TabIndex = 24;
-            this.txtGivenNames.Tag = "1";
+            this.txtGivenNames.Tag = "1,3";
             // 
             // tableLayoutPanel6
             // 
@@ -869,7 +870,7 @@
             this.txtReg.Name = "txtReg";
             this.txtReg.Size = new System.Drawing.Size(268, 29);
             this.txtReg.TabIndex = 17;
-            this.txtReg.Tag = "1";
+            this.txtReg.Tag = "1,2";
             // 
             // tableLayoutPanel14
             // 
@@ -911,7 +912,7 @@
             this.txtHomePhone.Name = "txtHomePhone";
             this.txtHomePhone.Size = new System.Drawing.Size(297, 29);
             this.txtHomePhone.TabIndex = 23;
-            this.txtHomePhone.Tag = "2,4";
+            this.txtHomePhone.Tag = "2";
             // 
             // label12
             // 
@@ -932,7 +933,7 @@
             this.txtWorkPhone.Name = "txtWorkPhone";
             this.txtWorkPhone.Size = new System.Drawing.Size(306, 29);
             this.txtWorkPhone.TabIndex = 24;
-            this.txtWorkPhone.Tag = "2,4";
+            this.txtWorkPhone.Tag = "2";
             // 
             // tabPage2
             // 

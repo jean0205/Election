@@ -1,4 +1,5 @@
 ﻿using Constituency.Desktop.Components;
+using Constituency.Desktop.Controls;
 using Constituency.Desktop.Entities;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
@@ -34,6 +35,7 @@ namespace Constituency.Desktop.Views
 
         private async void Frm_Voters_Load(object sender, EventArgs e)
         {
+            FildsValidations();
             MandatoriesFilds();
             await LoadConstituencies();
             await LoadVoters();
@@ -42,6 +44,21 @@ namespace Constituency.Desktop.Views
 
         #region Tab1
 
+        private void FildsValidations()
+        {
+            try
+            {
+                //tag=2 para only numbers
+                UtilRecurrent.FindAllControlsIterative(this, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("2")).ToList().ForEach(x => x.KeyPress += UtilRecurrent.txtOnlyIntegersNumber_KeyPress);
+
+                //tag=3 para only letters
+                UtilRecurrent.FindAllControlsIterative(this, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("3")).ToList().ForEach(x => x.KeyPress += UtilRecurrent.txtOnlyLetters_KeyPress);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
         private void MandatoriesFilds()
         {//tag= 1 para campos obligados
 
@@ -542,10 +559,33 @@ namespace Constituency.Desktop.Views
             while ((node = node.Parent) != null) level++;
             return level;
         }
-
+        
+        private void rjCollapseAll_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (((RJToggleButton)sender).Checked)
+                {
+                    tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+                    tView1.ExpandAll();
+                    lblExpand.Text = "Collapse All";
+                }
+                else
+                {
+                    tView1.CollapseAll();
+                    tView1.Font = new Font("Courier New", 12, FontStyle.Regular);
+                    tView1.SelectedNode = tView1.Nodes[0];
+                    lblExpand.Text = "Expand All";
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
 
         #endregion
 
-       
+
     }
 }
