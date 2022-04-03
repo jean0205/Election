@@ -4,6 +4,7 @@ using Election.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Election.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220403150803_voter")]
+    partial class voter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -416,6 +418,7 @@ namespace Election.API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -425,6 +428,7 @@ namespace Election.API.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("HomePhone")
+                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
@@ -432,10 +436,12 @@ namespace Election.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Mobile1")
+                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("Mobile2")
+                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
@@ -446,10 +452,9 @@ namespace Election.API.Migrations
                     b.Property<int?>("PollingDivisionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Reg")
-                        .IsRequired()
+                    b.Property<int>("Reg")
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Sex")
                         .IsRequired()
@@ -462,6 +467,7 @@ namespace Election.API.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("WorkPhone")
+                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 

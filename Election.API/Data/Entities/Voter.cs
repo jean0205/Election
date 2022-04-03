@@ -11,7 +11,7 @@ namespace Election.API.Data.Entities
         [Required(ErrorMessage = "{0} is a required field.")]
         [Display(Name = "Registration Number")]
         [MaxLength(20)]
-        public int Reg { get; set; }
+        public string Reg { get; set; }
 
 
         [Required(ErrorMessage = "{0} is a required field.")]

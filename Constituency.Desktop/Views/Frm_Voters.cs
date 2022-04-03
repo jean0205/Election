@@ -34,8 +34,9 @@ namespace Constituency.Desktop.Views
 
         private async void Frm_Voters_Load(object sender, EventArgs e)
         {
-            await LoadVoters();
             await LoadConstituencies();
+            await LoadVoters();
+            
         }
 
         #region Tab1
@@ -118,7 +119,9 @@ namespace Constituency.Desktop.Views
                 foreach (ConstituencyC contituency in Voters.Select(v => v.PollingDivision.Constituency).Distinct())
                 {
                     int cant2 = VoterList.Where(v => v.PollingDivision.Constituency.Id == contituency.Id).Count();
-                    foreach (PollingDivision division in contituency.PollingDivisions.Distinct())
+                    contituency.PollingDivisions= ConstituenciesList.FirstOrDefault(c => c.Id == contituency.Id).PollingDivisions;
+                    
+                    foreach (PollingDivision division in  contituency.PollingDivisions.Distinct())
                     {
                         int cant = VoterList.Where(v => v.PollingDivision.Id == division.Id).Count();
                         foreach (Voter voter in VoterList.Where(v => v.PollingDivision.Id == division.Id))
@@ -128,11 +131,11 @@ namespace Constituency.Desktop.Views
                             childNodes2.Add(node2);
                         }
                         childNodes.Add(new TreeNode(division.Name + " [" + cant + "]", 0, 1, childNodes2.ToArray()));
+                        childNodes[childNodes.Count - 1].Tag = division.Id;
                         childNodes2 = new List<TreeNode>();
-                    }
-                    TreeNode node = new TreeNode(contituency.Name + " [" + cant2 + "]", 0, 1);
-                    node.Tag = contituency.Id;
-                    treeNodes.Add(node);
+                    }                   
+                    treeNodes.Add(new TreeNode(contituency.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
+                    treeNodes[treeNodes.Count - 1].Tag = contituency.Id;
                 }
                 tView1.Nodes.AddRange(treeNodes.ToArray());
                 tView1.ExpandAll();
@@ -204,6 +207,7 @@ namespace Constituency.Desktop.Views
             try
             {
                 var voter = BuildVoter();
+                voter.Active = true;
                 UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PostAsync("Voters", voter, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
