@@ -6,6 +6,7 @@
         public bool Active { get; set; }
         public string SurName { get; set; }
         public string GivenNames { get; set; }
+        public string FullName => $"{SurName} {GivenNames}";
         public string? Sex { get; set; }
         public DateTime? DOB { get; set; }
         public string? Address { get; set; }

@@ -126,7 +126,7 @@ namespace Constituency.Desktop.Views
             this.label25 = new System.Windows.Forms.Label();
             this.txtGivenNames = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-            this.rjToggleButton1 = new Constituency.Desktop.Controls.RJToggleButton();
+            this.rjInterviewer = new Constituency.Desktop.Controls.RJToggleButton();
             this.label22 = new System.Windows.Forms.Label();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
             this.label30 = new System.Windows.Forms.Label();
@@ -141,14 +141,14 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
             this.label34 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.ibtnInterviewerSave = new FontAwesome.Sharp.IconButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.rjToggleButton2 = new Constituency.Desktop.Controls.RJToggleButton();
             this.label23 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -184,8 +184,8 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel20.SuspendLayout();
             this.tableLayoutPanel21.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            this.tableLayoutPanel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tableLayoutPanel14.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -565,7 +565,7 @@ namespace Constituency.Desktop.Views
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(178, 18);
+            this.cmbConstituency.Location = new System.Drawing.Point(178, 15);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(669, 29);
             this.cmbConstituency.TabIndex = 45;
@@ -1061,7 +1061,7 @@ namespace Constituency.Desktop.Views
             // 
             this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(178, 15);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(178, 18);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(669, 29);
             this.cmbCanvasTypes.TabIndex = 45;
@@ -1227,6 +1227,7 @@ namespace Constituency.Desktop.Views
             this.TVInterviewers.SelectedImageIndex = 0;
             this.TVInterviewers.Size = new System.Drawing.Size(338, 711);
             this.TVInterviewers.TabIndex = 2;
+            this.TVInterviewers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVInterviewers_AfterSelect);
             // 
             // tableLayoutPanel12
             // 
@@ -1240,7 +1241,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel19, 0, 5);
             this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel20, 0, 6);
             this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel21, 0, 7);
-            this.tableLayoutPanel12.Controls.Add(this.iconButton1, 0, 9);
+            this.tableLayoutPanel12.Controls.Add(this.ibtnInterviewerSave, 0, 9);
             this.tableLayoutPanel12.Controls.Add(this.groupBox7, 0, 8);
             this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel12.Location = new System.Drawing.Point(353, 3);
@@ -1377,7 +1378,7 @@ namespace Constituency.Desktop.Views
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(119, 10);
+            this.cmbSex.Location = new System.Drawing.Point(119, 7);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -1473,7 +1474,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel13.ColumnCount = 2;
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 696F));
-            this.tableLayoutPanel13.Controls.Add(this.rjToggleButton1, 1, 0);
+            this.tableLayoutPanel13.Controls.Add(this.rjInterviewer, 1, 0);
             this.tableLayoutPanel13.Controls.Add(this.label22, 0, 0);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 3);
@@ -1484,20 +1485,20 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel13.Size = new System.Drawing.Size(844, 44);
             this.tableLayoutPanel13.TabIndex = 44;
             // 
-            // rjToggleButton1
+            // rjInterviewer
             // 
-            this.rjToggleButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.rjToggleButton1.AutoSize = true;
-            this.rjToggleButton1.Location = new System.Drawing.Point(150, 9);
-            this.rjToggleButton1.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjToggleButton1.Name = "rjToggleButton1";
-            this.rjToggleButton1.OffBackColor = System.Drawing.Color.Gray;
-            this.rjToggleButton1.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjToggleButton1.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.rjToggleButton1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjToggleButton1.Size = new System.Drawing.Size(50, 25);
-            this.rjToggleButton1.TabIndex = 43;
-            this.rjToggleButton1.UseVisualStyleBackColor = true;
+            this.rjInterviewer.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rjInterviewer.AutoSize = true;
+            this.rjInterviewer.Location = new System.Drawing.Point(150, 9);
+            this.rjInterviewer.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjInterviewer.Name = "rjInterviewer";
+            this.rjInterviewer.OffBackColor = System.Drawing.Color.Gray;
+            this.rjInterviewer.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjInterviewer.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.rjInterviewer.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjInterviewer.Size = new System.Drawing.Size(50, 25);
+            this.rjInterviewer.TabIndex = 43;
+            this.rjInterviewer.UseVisualStyleBackColor = true;
             // 
             // label22
             // 
@@ -1671,29 +1672,30 @@ namespace Constituency.Desktop.Views
             this.txtEmail.TabIndex = 17;
             this.txtEmail.Tag = "2,4";
             // 
-            // iconButton1
+            // ibtnInterviewerSave
             // 
-            this.iconButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconButton1.AutoSize = true;
-            this.iconButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
-            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 40;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(686, 688);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(161, 48);
-            this.iconButton1.TabIndex = 4;
-            this.iconButton1.Text = "Save/Update";
-            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = false;
+            this.ibtnInterviewerSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ibtnInterviewerSave.AutoSize = true;
+            this.ibtnInterviewerSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnInterviewerSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnInterviewerSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnInterviewerSave.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.ibtnInterviewerSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnInterviewerSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnInterviewerSave.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.ibtnInterviewerSave.IconColor = System.Drawing.Color.Black;
+            this.ibtnInterviewerSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnInterviewerSave.IconSize = 40;
+            this.ibtnInterviewerSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnInterviewerSave.Location = new System.Drawing.Point(686, 688);
+            this.ibtnInterviewerSave.Name = "ibtnInterviewerSave";
+            this.ibtnInterviewerSave.Size = new System.Drawing.Size(161, 48);
+            this.ibtnInterviewerSave.TabIndex = 4;
+            this.ibtnInterviewerSave.Text = "Save/Update";
+            this.ibtnInterviewerSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnInterviewerSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnInterviewerSave.UseVisualStyleBackColor = false;
+            this.ibtnInterviewerSave.Click += new System.EventHandler(this.iconButton1_ClickAsync);
             // 
             // groupBox7
             // 
@@ -1706,6 +1708,16 @@ namespace Constituency.Desktop.Views
             this.groupBox7.TabIndex = 52;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Interviews";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 25);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(838, 251);
+            this.dataGridView1.TabIndex = 53;
             // 
             // tabPage7
             // 
@@ -1766,16 +1778,6 @@ namespace Constituency.Desktop.Views
             this.label23.Size = new System.Drawing.Size(1, 21);
             this.label23.TabIndex = 35;
             this.label23.Text = "Active:";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 25);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(838, 251);
-            this.dataGridView1.TabIndex = 53;
             // 
             // Frm_App_Maintenance
             // 
@@ -1841,9 +1843,9 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel21.ResumeLayout(false);
             this.tableLayoutPanel21.PerformLayout();
             this.groupBox7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1933,8 +1935,8 @@ namespace Constituency.Desktop.Views
         private TreeView TVInterviewers;
         private TableLayoutPanel tableLayoutPanel12;
         private Label label22;
-        private Controls.RJToggleButton rjToggleButton1;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private Controls.RJToggleButton rjInterviewer;
+        private FontAwesome.Sharp.IconButton ibtnInterviewerSave;
         private TabPage tabPage7;
         private TableLayoutPanel tableLayoutPanel13;
         private TableLayoutPanel tableLayoutPanel14;

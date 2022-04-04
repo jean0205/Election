@@ -7,6 +7,7 @@ using Constituency.Desktop.Models;
 using Microsoft.AppCenter.Crashes;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Reflection;
 
 namespace Constituency.Desktop.Views
 {
@@ -26,10 +27,12 @@ namespace Constituency.Desktop.Views
         {
             cleanScreen();
             MandatoriesFilds();
+            FildsValidations();
             await LoadConstituencies();
             await LoadParties();
             await LoadCanvasTypes();
             await LoadCanvas();
+            await LoadInterviewers();
 
 
 
@@ -95,30 +98,69 @@ namespace Constituency.Desktop.Views
             }            
             return missing;
         }
+        private bool PaintRequiredFildsInterviewer()
+        {
+            bool missing = false;
+            //todos en blanco antes de comprobar
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel12, "TextBox").Cast<TextBox>().ToList().ForEach(t => t.BackColor = Color.FromKnownColor(KnownColor.Window));
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel12, "ComboBox").Cast<ComboBox>().ToList().ForEach(t => t.BackColor = Color.FromKnownColor(KnownColor.Window));
 
+            //validando textbox requeridos no vacios
+            if (UtilRecurrent.FindAllControlsIterative(tableLayoutPanel12, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().Any())
+            {
+                UtilRecurrent.FindAllControlsIterative(tableLayoutPanel12, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().ForEach(t => t.BackColor = Color.LightSalmon);
+                missing = true;
+            }
+            if (UtilRecurrent.FindAllControlsIterative(tableLayoutPanel12, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && x.Text == string.Empty).ToList().Any())
+            {
+                UtilRecurrent.FindAllControlsIterative(tableLayoutPanel12, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && x.Text == string.Empty).ToList().ForEach(t => t.BackColor = Color.LightSalmon);
+                missing = true;
+            }
+            return missing;
+        }        
         private void cleanScreen()
         {
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
 
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
-            cmbConstituency.SelectedItem = null;
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel4, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "ComboBox").Cast<ComboBox>().ToList().ForEach(x => x.SelectedItem = null);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DateTimePicker").Cast<DateTimePicker>().ToList().ForEach(x => x.Value = DateTime.Today);            
 
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel4, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel6, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
+            //sino resulta hay q hacerlo separado
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
 
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel6, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+            //cmbConstituency.SelectedItem = null;
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel4, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
 
-            //CanvasTypes
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
-            
-            //Canvas
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
-            cmbCanvasTypes.SelectedItem = null;
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel4, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel6, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
 
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel6, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
 
+            ////CanvasTypes
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+
+            ////Canvas
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
+            //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+            //cmbCanvasTypes.SelectedItem = null;
+        }
+        private void FildsValidations()
+        {
+            try
+            {
+                //tag=2 para only numbers
+                UtilRecurrent.FindAllControlsIterative(this, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("2")).ToList().ForEach(x => x.KeyPress += UtilRecurrent.txtOnlyIntegersNumber_KeyPress);
+
+                //tag=3 para only letters
+                UtilRecurrent.FindAllControlsIterative(this, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("3")).ToList().ForEach(x => x.KeyPress += UtilRecurrent.txtOnlyLetters_KeyPress);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
         }
         #endregion
 
@@ -1018,8 +1060,7 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
-        }
-       
+        }       
         private async Task<bool> SaveCanvas()
         {
             try
@@ -1095,6 +1136,251 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
+        #endregion
+
+        #region Interviewer
+
+        private ObservableCollection<Interviewer> InterviewerList;
+        Interviewer Interviewer;
+
+        private async Task LoadInterviewers()
+        {
+            UtilRecurrent.LockForm(waitForm, this);
+            Response response = await ApiServices.GetListAsync<Interviewer>("Interviewers", token);
+            UtilRecurrent.UnlockForm(waitForm, this);
+
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return;
+            }
+            InterviewerList = new ObservableCollection<Interviewer>((List<Interviewer>)response.Result);
+            if (InterviewerList.Any())
+            {
+                RefreshTreeViewInterviewers(InterviewerList.ToList());
+                //tView1.SelectedNode = tView1.Nodes[0];
+            }
+            else
+            {
+                cleanScreen();
+                TVInterviewers.Nodes.Clear();
+            }
+        }
+        private void RefreshTreeViewInterviewers(List<Interviewer> interviewers)
+        {
+            try
+            {
+                TVInterviewers.Nodes.Clear();
+                List<TreeNode> treeNodes = new List<TreeNode>();
+                List<TreeNode> childNodes = new List<TreeNode>();
+
+
+                foreach (Interviewer interviewer in interviewers)
+                {
+                    childNodes.Add(new TreeNode(interviewer.FullName, 2, 1));
+                    childNodes[childNodes.Count - 1].Tag = interviewer.Id;
+                    addContextMenu(childNodes[childNodes.Count - 1], "Delete Interviewer");
+                }
+                treeNodes.Add(new TreeNode("Interviewers", 0, 0, childNodes.ToArray()));
+                treeNodes[treeNodes.Count - 1].Tag = 0;
+                childNodes = new List<TreeNode>();
+
+                TVInterviewers.Nodes.AddRange(treeNodes.ToArray());
+                TVInterviewers.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void TVInterviewers_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            AfterSelectNodeTVInterviewers((int)e.Node.Tag);
+        }
+        private void AfterSelectNodeTVInterviewers(int nodeTag)
+        {
+            try
+            {
+                if (nodeTag > 0)
+                {
+                    Interviewer = InterviewerList.Where(u => u.Id == nodeTag).FirstOrDefault();
+                    showInterviewerInfo(Interviewer);
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void showInterviewerInfo(Interviewer interviewer)
+        {
+            try
+            {
+                if (interviewer.Id > 0)
+                {
+                    List<PropertyInfo> properties = interviewer.GetType().GetProperties().ToList();
+                    List<TextBox> interviewerTextBox = UtilRecurrent.FindAllTextBoxIterative(tableLayoutPanel12);
+                    foreach (TextBox txt in interviewerTextBox)
+                    {
+                        if (properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).Any())
+                        {
+
+                            txt.Text = properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Interviewer).ToString();
+                        }
+                    }
+                    rjInterviewer.Checked = interviewer.Active;
+                    cmbSex.SelectedItem = interviewer.Sex;
+                    dtpDOB.Value = (DateTime)interviewer.DOB;                   
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }        
+        private async void iconButton1_ClickAsync(object sender, EventArgs e)
+        {
+            try
+            {
+                if (PaintRequiredFildsInterviewer())
+                {
+                    UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
+                    return;
+                }
+                if (dtpDOB.Value.AddYears(16) > DateTime.Now)
+                {
+                    UtilRecurrent.ErrorMessage("Applicant younger than 16.");
+                    return;
+                }
+                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
+                {
+                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
+                    return;
+                }
+                if (TVInterviewers.SelectedNode == null || (TVInterviewers.SelectedNode != null && (int)TVInterviewers.SelectedNode.Tag == 0))
+                {
+                    if (await SaveInterviewers())
+                    {
+                        await LoadInterviewers();
+                    }
+                }
+                else
+                {
+                    await UpdateInterviewers((int)TVInterviewers.SelectedNode.Tag);
+                    await LoadInterviewers();
+                }
+                if (Interviewer != null && Interviewer.Id > 0)
+                {
+                    TVInterviewers.SelectedNode = CollectAllNodes(TVInterviewers.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interviewer.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+        private async Task<bool> SaveInterviewers()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Interviewers", BuildInterviewers(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+                Interviewer = (Interviewer)response.Result;
+                UtilRecurrent.InformationMessage("Interviewer sucessfully saved", "Interviewer Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+
+        }
+        private async Task UpdateInterviewers(int id)
+        {
+            try
+            {
+                var interv = BuildInterviewers();
+                interv.Id = id;                
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("Interviewers", interv, interv.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private Interviewer BuildInterviewers()
+        {
+            try
+            {
+                Interviewer = new Interviewer();
+                List<PropertyInfo> properties = Interviewer.GetType().GetProperties().ToList();
+                List<TextBox> intervTextBox = UtilRecurrent.FindAllTextBoxIterative(tableLayoutPanel12);
+                foreach (PropertyInfo prop in properties)
+                {
+                    if (intervTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).Any())
+                    {
+                        prop.SetValue(Interviewer, intervTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).FirstOrDefault().Text.TrimEnd().ToUpper());
+                    }
+                }
+                Interviewer.Active = rjInterviewer.Checked;
+                Interviewer.Sex = cmbSex.SelectedItem.ToString();
+                Interviewer.DOB = dtpDOB.Value;               
+                return Interviewer;
+            }
+
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private async Task DeleteInterviewers(int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.DeleteAsync("Interviewer", id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+
+
         #endregion
 
         #region Others
