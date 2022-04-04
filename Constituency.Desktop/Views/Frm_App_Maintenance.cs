@@ -146,7 +146,7 @@ namespace Constituency.Desktop.Views
                 RefreshTreeViewConstituency(ConstituenciesList.ToList());
                 RefreshTreeViewPolling(ConstituenciesList.ToList());
                 cmbConstituency.DataSource = null;
-                cmbConstituency.DataSource = ConstituenciesList;
+                cmbConstituency.DataSource = ConstituenciesList.Where(c => c.Active).ToList();
                 cmbConstituency.ValueMember = "Id";
                 cmbConstituency.DisplayMember = "Name";
                 cmbConstituency.SelectedItem = null;
@@ -695,12 +695,10 @@ namespace Constituency.Desktop.Views
                 RefreshTreeViewCanvasTypes(CanvasTypesList.ToList());
                 //tView1.SelectedNode = tView1.Nodes[0];
                 cmbCanvasTypes.DataSource = null;
-                cmbCanvasTypes.DataSource = CanvasTypesList;
+                cmbCanvasTypes.DataSource = CanvasTypesList.Where(x => x.Active).ToList();
                 cmbCanvasTypes.ValueMember = "Id";
                 cmbCanvasTypes.DisplayMember = "Type";
                 cmbCanvasTypes.SelectedItem = null;
-
-
             }
             else
             {

@@ -1,16 +1,10 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Election.API.Data;
 using Election.API.Data.Entities;
-using System.Net;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Election.API.Controllers
 {
@@ -30,14 +24,17 @@ namespace Election.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Interviewer>>> GetInterviewers()
         {
-            return await _context.Interviewers.ToListAsync();
+            return await _context.Interviewers
+                .Include(i => i.Interviews).ToListAsync();
         }
 
         // GET: api/Interviewers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Interviewer>> GetInterviewer(int id)
         {
-            var interviewer = await _context.Interviewers.FindAsync(id);
+            var interviewer = await _context.Interviewers
+                .Include(i => i.Interviews)
+                .FirstOrDefaultAsync(i => i.Id == id);
 
             if (interviewer == null)
             {
