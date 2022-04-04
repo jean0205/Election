@@ -13,5 +13,11 @@ namespace Election.API.Data.Entities
         [Display(Name = "Canvas Type")]
         [MaxLength(100)]
         public string Type { get; set; }
+       
+        [Display(Name = "Canvas Description")]
+        [MaxLength(1000)]
+        public string? Description { get; set; }
+
+        public ICollection<Canvas>? Canvas { get; set; }
     }
 }

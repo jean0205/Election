@@ -24,9 +24,10 @@ namespace Constituency.Desktop.Views
         }
         private async void Frm_App_Maintenance_Load(object sender, EventArgs e)
         {
-            MandatoriesFildsSectorsTypes();
+            MandatoriesFilds();
             await LoadConstituencies();
             await LoadParties();
+            await LoadCanvasTypes();    
 
 
         }
@@ -37,10 +38,10 @@ namespace Constituency.Desktop.Views
         }
         #endregion
         #region Mandatories and clear screen
-        private void MandatoriesFildsSectorsTypes()
+        private void MandatoriesFilds()
         {//tag= 1 para campos obligados
 
-            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1")).ToList().ForEach(x => toolTip1.SetToolTip(x, "Mandatory Field"));
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1")).ToList().ForEach(x => toolTip1.SetToolTip(x, "Mandatory Field"));
         }
         private bool PaintRequiredFildsConstituency()
         {
@@ -52,6 +53,20 @@ namespace Constituency.Desktop.Views
             if (UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().Any())
             {
                 UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().ForEach(t => t.BackColor = Color.LightSalmon);
+                missing = true;
+            }
+            return missing;
+        }
+        private bool PaintRequiredFildsCanvasType()
+        {
+            bool missing = false;
+            //todos en blanco antes de comprobar
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "TextBox").Cast<TextBox>().ToList().ForEach(t => t.BackColor = Color.FromKnownColor(KnownColor.Window));
+
+            //validando textbox requeridos no vacios
+            if (UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().Any())
+            {
+                UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().ForEach(t => t.BackColor = Color.LightSalmon);
                 missing = true;
             }
             return missing;
@@ -68,6 +83,10 @@ namespace Constituency.Desktop.Views
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel6, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
 
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel6, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+
+            //CanvasTypes
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
             cmbConstituency.SelectedItem = null;
 
         }
@@ -623,6 +642,214 @@ namespace Constituency.Desktop.Views
             };
         }
 
+        #endregion
+
+        #region Canvas Types
+        private ObservableCollection<CanvasType> CanvasTypesList;
+        CanvasType CanvasType;
+
+        private async Task LoadCanvasTypes()
+        {
+            UtilRecurrent.LockForm(waitForm, this);
+            Response response = await ApiServices.GetListAsync<CanvasType>("CanvasTypes", token);
+            UtilRecurrent.UnlockForm(waitForm, this);
+
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return;
+            }
+            CanvasTypesList = new ObservableCollection<CanvasType>((List<CanvasType>)response.Result);
+            if (CanvasTypesList.Any())
+            {
+                RefreshTreeViewCanvasTypes(CanvasTypesList.ToList());               
+                //tView1.SelectedNode = tView1.Nodes[0];
+            }
+            else
+            {
+                cleanScreen();
+                TVCanvasType.Nodes.Clear();
+            }
+        }
+        private void RefreshTreeViewCanvasTypes(List<CanvasType> canvasTypes)
+        {
+            try
+            {
+                TVCanvasType.Nodes.Clear();
+                List<TreeNode> treeNodes = new List<TreeNode>();
+                List<TreeNode> childNodes = new List<TreeNode>();
+
+
+                foreach (CanvasType canvasType in canvasTypes)
+                {
+                    childNodes.Add(new TreeNode(canvasType.Type, 2, 1));
+                    childNodes[childNodes.Count - 1].Tag = canvasType.Id;
+                    addContextMenu(childNodes[childNodes.Count - 1], "Delete Canvas Type");
+                }
+                treeNodes.Add(new TreeNode("Canvas Types", 0, 0, childNodes.ToArray()));
+                treeNodes[treeNodes.Count - 1].Tag = 0;
+                childNodes = new List<TreeNode>();
+
+                TVCanvasType.Nodes.AddRange(treeNodes.ToArray());
+                TVCanvasType.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void TVCanvasType_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            AfterSelectNodeTVCanvasType((int)e.Node.Tag);
+        }
+        private void AfterSelectNodeTVCanvasType(int nodeTag)
+        {
+            try
+            {
+                if (nodeTag > 0)
+                {
+                    CanvasType = CanvasTypesList.Where(u => u.Id == nodeTag).FirstOrDefault();
+                    showCanvasTypeInfo(CanvasType);
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); 
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void showCanvasTypeInfo(CanvasType canvasT)
+        {
+            try
+            {
+                txtCTName.Text = canvasT.Type;
+                txtCTDescription.Text = canvasT.Description;
+                rjCTActive.Checked = canvasT.Active;
+                txtCTCanvas.Clear();
+                if (canvasT.Canvas!= null && canvasT.Canvas.Any())
+                {
+                    foreach (var item in canvasT.Canvas)
+                    {
+                        txtCTCanvas.Text += item.ToString() + "\r\n";
+                    }
+                }               
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+        private async void ibtnSaveCanvasType_Click(object sender, EventArgs e)
+        {
+            if (PaintRequiredFildsCanvasType())
+            {
+                UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
+                return;
+            }
+            try
+            {
+                if (TVCanvasType.SelectedNode == null || (TVCanvasType.SelectedNode != null && (int)TVCanvasType.SelectedNode.Tag == 0))
+                {
+                    if (await SaveCanvasType())
+                    {
+                        await LoadCanvasTypes();
+                    }
+                }
+                else
+                {
+                    await UpdateCanvasType((int)tView1.SelectedNode.Tag);
+                    await LoadCanvasTypes();
+                }
+                if (constituency != null && constituency.Id > 0)
+                {
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == constituency.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> SaveCanvasType()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("CanvasTypes", BuildCanvasType(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+                CanvasType = (CanvasType)response.Result;
+                UtilRecurrent.InformationMessage("Canvas Type sucessfully saved", "Canvas Type Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); 
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+
+        }
+        private async Task UpdateCanvasType(int id)
+        {
+            try
+            {
+                var canvasT = BuildCanvasType();
+                canvasT.Id = id;
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("CanvasTypes", canvasT, canvasT.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private CanvasType BuildCanvasType()
+        {
+            return new CanvasType()
+            {
+                Active = rjCTActive.Checked,
+                Type = txtCTName.Text.ToUpper(),
+                Description = txtCTDescription.Text.ToUpper()
+            };
+        }
+        private async Task DeleteCanvasType(int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.DeleteAsync("CanvasTypes", id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); 
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
         #endregion
 
         #region Others

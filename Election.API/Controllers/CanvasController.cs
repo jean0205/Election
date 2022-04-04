@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Election.API.Data;
 using Election.API.Data.Entities;
-using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -17,47 +16,47 @@ namespace Election.API.Controllers
     [Route("api/[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
-    public class InterviewersController : ControllerBase
+    public class CanvasController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public InterviewersController(DataContext context)
+        public CanvasController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Interviewers
+        // GET: api/Canvas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Interviewer>>> GetInterviewers()
+        public async Task<ActionResult<IEnumerable<Canvas>>> GetCanvas()
         {
-            return await _context.Interviewers.ToListAsync();
+            return await _context.Canvas.ToListAsync();
         }
 
-        // GET: api/Interviewers/5
+        // GET: api/Canvas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Interviewer>> GetInterviewer(int id)
+        public async Task<ActionResult<Canvas>> GetCanvas(int id)
         {
-            var interviewer = await _context.Interviewers.FindAsync(id);
+            var canvas = await _context.Canvas.FindAsync(id);
 
-            if (interviewer == null)
+            if (canvas == null)
             {
                 return NotFound();
             }
 
-            return interviewer;
+            return canvas;
         }
 
-        // PUT: api/Interviewers/5
+        // PUT: api/Canvas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInterviewer(int id, Interviewer interviewer)
+        public async Task<IActionResult> PutCanvas(int id, Canvas canvas)
         {
-            if (id != interviewer.Id)
+            if (id != canvas.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(interviewer).State = EntityState.Modified;
+            _context.Entry(canvas).State = EntityState.Modified;
 
             try
             {
@@ -65,7 +64,7 @@ namespace Election.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!InterviewerExists(id))
+                if (!CanvasExists(id))
                 {
                     return NotFound();
                 }
@@ -78,36 +77,36 @@ namespace Election.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Interviewers
+        // POST: api/Canvas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Interviewer>> PostInterviewer(Interviewer interviewer)
+        public async Task<ActionResult<Canvas>> PostCanvas(Canvas canvas)
         {
-            _context.Interviewers.Add(interviewer);
+            _context.Canvas.Add(canvas);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetInterviewer", new { id = interviewer.Id }, interviewer);
+            return CreatedAtAction("GetCanvas", new { id = canvas.Id }, canvas);
         }
 
-        // DELETE: api/Interviewers/5
+        // DELETE: api/Canvas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteInterviewer(int id)
+        public async Task<IActionResult> DeleteCanvas(int id)
         {
-            var interviewer = await _context.Interviewers.FindAsync(id);
-            if (interviewer == null)
+            var canvas = await _context.Canvas.FindAsync(id);
+            if (canvas == null)
             {
                 return NotFound();
             }
 
-            _context.Interviewers.Remove(interviewer);
+            _context.Canvas.Remove(canvas);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool InterviewerExists(int id)
+        private bool CanvasExists(int id)
         {
-            return _context.Interviewers.Any(e => e.Id == id);
+            return _context.Canvas.Any(e => e.Id == id);
         }
     }
 }

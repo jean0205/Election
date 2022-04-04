@@ -72,6 +72,22 @@ namespace Constituency.Desktop.Views
             this.txtPCode = new System.Windows.Forms.TextBox();
             this.txtPpname = new System.Windows.Forms.TextBox();
             this.rjParty = new Constituency.Desktop.Controls.RJToggleButton();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.TVCanvasType = new System.Windows.Forms.TreeView();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.ibtnCTSaveUpdate = new FontAwesome.Sharp.IconButton();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtCTName = new System.Windows.Forms.TextBox();
+            this.txtCTDescription = new System.Windows.Forms.TextBox();
+            this.rjCTActive = new Constituency.Desktop.Controls.RJToggleButton();
+            this.txtCTCanvas = new System.Windows.Forms.TextBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -86,6 +102,10 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -94,6 +114,9 @@ namespace Constituency.Desktop.Views
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -104,7 +127,7 @@ namespace Constituency.Desktop.Views
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(56)))));
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage1.Controls.Add(this.tableLayoutPanel1);
             this.tabPage1.Location = new System.Drawing.Point(4, 33);
             this.tabPage1.Name = "tabPage1";
@@ -304,11 +327,11 @@ namespace Constituency.Desktop.Views
             // 
             // tabPage3
             // 
-            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(56)))));
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage3.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 33);
+            this.tabPage3.Location = new System.Drawing.Point(4, 27);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage3.Size = new System.Drawing.Size(1206, 751);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Polling Divisions";
             // 
@@ -324,7 +347,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1206, 751);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // groupBox2
@@ -334,7 +357,7 @@ namespace Constituency.Desktop.Views
             this.groupBox2.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(344, 739);
+            this.groupBox2.Size = new System.Drawing.Size(344, 745);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Polling Divisions List:";
@@ -347,7 +370,7 @@ namespace Constituency.Desktop.Views
             this.tViewPolling.Location = new System.Drawing.Point(3, 25);
             this.tViewPolling.Name = "tViewPolling";
             this.tViewPolling.SelectedImageIndex = 0;
-            this.tViewPolling.Size = new System.Drawing.Size(338, 711);
+            this.tViewPolling.Size = new System.Drawing.Size(338, 717);
             this.tViewPolling.TabIndex = 2;
             this.tViewPolling.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tViewPolling_AfterSelect);
             this.tViewPolling.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tView1_MouseClick);
@@ -372,7 +395,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(850, 745);
             this.tableLayoutPanel4.TabIndex = 4;
             // 
             // label6
@@ -401,7 +424,7 @@ namespace Constituency.Desktop.Views
             this.ibtnSavePolling.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnSavePolling.IconSize = 40;
             this.ibtnSavePolling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSavePolling.Location = new System.Drawing.Point(686, 688);
+            this.ibtnSavePolling.Location = new System.Drawing.Point(686, 694);
             this.ibtnSavePolling.Name = "ibtnSavePolling";
             this.ibtnSavePolling.Size = new System.Drawing.Size(161, 48);
             this.ibtnSavePolling.TabIndex = 4;
@@ -461,14 +484,15 @@ namespace Constituency.Desktop.Views
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(178, 15);
+            this.cmbConstituency.Location = new System.Drawing.Point(178, 18);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(669, 29);
             this.cmbConstituency.TabIndex = 45;
+            this.cmbConstituency.Tag = "1";
             // 
             // tabPage2
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(56)))));
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage2.Controls.Add(this.tableLayoutPanel5);
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
@@ -645,6 +669,213 @@ namespace Constituency.Desktop.Views
             this.rjParty.TabIndex = 42;
             this.rjParty.UseVisualStyleBackColor = true;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
+            this.tabPage4.Controls.Add(this.tableLayoutPanel7);
+            this.tabPage4.Location = new System.Drawing.Point(4, 33);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Canvas Types";
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 2;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 850F));
+            this.tableLayoutPanel7.Controls.Add(this.groupBox4, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 1, 0);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 1;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel7.TabIndex = 1;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.TVCanvasType);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(344, 739);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Canvas Types List:";
+            // 
+            // TVCanvasType
+            // 
+            this.TVCanvasType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TVCanvasType.ImageIndex = 0;
+            this.TVCanvasType.ImageList = this.imgListTreeView;
+            this.TVCanvasType.Location = new System.Drawing.Point(3, 25);
+            this.TVCanvasType.Name = "TVCanvasType";
+            this.TVCanvasType.SelectedImageIndex = 0;
+            this.TVCanvasType.Size = new System.Drawing.Size(338, 711);
+            this.TVCanvasType.TabIndex = 1;
+            this.TVCanvasType.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVCanvasType_AfterSelect);
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 2;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Controls.Add(this.label11, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.ibtnCTSaveUpdate, 1, 4);
+            this.tableLayoutPanel8.Controls.Add(this.label12, 0, 1);
+            this.tableLayoutPanel8.Controls.Add(this.label13, 0, 2);
+            this.tableLayoutPanel8.Controls.Add(this.label15, 0, 3);
+            this.tableLayoutPanel8.Controls.Add(this.txtCTName, 1, 1);
+            this.tableLayoutPanel8.Controls.Add(this.txtCTDescription, 1, 2);
+            this.tableLayoutPanel8.Controls.Add(this.rjCTActive, 1, 0);
+            this.tableLayoutPanel8.Controls.Add(this.txtCTCanvas, 1, 3);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(353, 3);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 5;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.286344F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.104259F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.651027F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.97947F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel8.TabIndex = 4;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label11.Location = new System.Drawing.Point(117, 7);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(55, 21);
+            this.label11.TabIndex = 35;
+            this.label11.Text = "Active:";
+            // 
+            // ibtnCTSaveUpdate
+            // 
+            this.ibtnCTSaveUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ibtnCTSaveUpdate.AutoSize = true;
+            this.ibtnCTSaveUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnCTSaveUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnCTSaveUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnCTSaveUpdate.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.ibtnCTSaveUpdate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnCTSaveUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnCTSaveUpdate.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.ibtnCTSaveUpdate.IconColor = System.Drawing.Color.Black;
+            this.ibtnCTSaveUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnCTSaveUpdate.IconSize = 40;
+            this.ibtnCTSaveUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnCTSaveUpdate.Location = new System.Drawing.Point(686, 690);
+            this.ibtnCTSaveUpdate.Name = "ibtnCTSaveUpdate";
+            this.ibtnCTSaveUpdate.Size = new System.Drawing.Size(161, 46);
+            this.ibtnCTSaveUpdate.TabIndex = 4;
+            this.ibtnCTSaveUpdate.Text = "Save/Update";
+            this.ibtnCTSaveUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnCTSaveUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnCTSaveUpdate.UseVisualStyleBackColor = false;
+            this.ibtnCTSaveUpdate.Click += new System.EventHandler(this.ibtnSaveCanvasType_Click);
+            // 
+            // label12
+            // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(81, 56);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(91, 21);
+            this.label12.TabIndex = 36;
+            this.label12.Text = "Type Name:";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(80, 98);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(92, 21);
+            this.label13.TabIndex = 37;
+            this.label13.Text = "Description:";
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(81, 157);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(91, 21);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "Canvas List:";
+            // 
+            // txtCTName
+            // 
+            this.txtCTName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCTName.Location = new System.Drawing.Point(178, 52);
+            this.txtCTName.Name = "txtCTName";
+            this.txtCTName.Size = new System.Drawing.Size(669, 29);
+            this.txtCTName.TabIndex = 40;
+            this.txtCTName.Tag = "1";
+            // 
+            // txtCTDescription
+            // 
+            this.txtCTDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCTDescription.Location = new System.Drawing.Point(178, 103);
+            this.txtCTDescription.Multiline = true;
+            this.txtCTDescription.Name = "txtCTDescription";
+            this.txtCTDescription.Size = new System.Drawing.Size(669, 48);
+            this.txtCTDescription.TabIndex = 41;
+            this.txtCTDescription.Tag = "1";
+            // 
+            // rjCTActive
+            // 
+            this.rjCTActive.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rjCTActive.AutoSize = true;
+            this.rjCTActive.Location = new System.Drawing.Point(178, 5);
+            this.rjCTActive.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjCTActive.Name = "rjCTActive";
+            this.rjCTActive.OffBackColor = System.Drawing.Color.Gray;
+            this.rjCTActive.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjCTActive.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.rjCTActive.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjCTActive.Size = new System.Drawing.Size(50, 25);
+            this.rjCTActive.TabIndex = 42;
+            this.rjCTActive.UseVisualStyleBackColor = true;
+            // 
+            // txtCTCanvas
+            // 
+            this.txtCTCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCTCanvas.Location = new System.Drawing.Point(178, 160);
+            this.txtCTCanvas.Multiline = true;
+            this.txtCTCanvas.Name = "txtCTCanvas";
+            this.txtCTCanvas.Size = new System.Drawing.Size(669, 524);
+            this.txtCTCanvas.TabIndex = 43;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
+            this.tabPage5.Location = new System.Drawing.Point(4, 27);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(1206, 751);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Canvas";
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
+            this.tabPage6.Location = new System.Drawing.Point(4, 27);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(1206, 751);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Interviewers";
+            // 
             // toolTip1
             // 
             this.toolTip1.AutomaticDelay = 100;
@@ -686,6 +917,11 @@ namespace Constituency.Desktop.Views
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -737,5 +973,21 @@ namespace Constituency.Desktop.Views
         private TextBox txtPCode;
         private TextBox txtPpname;
         private Controls.RJToggleButton rjParty;
+        private TabPage tabPage4;
+        private TabPage tabPage5;
+        private TabPage tabPage6;
+        private TableLayoutPanel tableLayoutPanel7;
+        private GroupBox groupBox4;
+        private TreeView TVCanvasType;
+        private TableLayoutPanel tableLayoutPanel8;
+        private Label label11;
+        private FontAwesome.Sharp.IconButton ibtnCTSaveUpdate;
+        private Label label12;
+        private Label label13;
+        private Label label15;
+        private TextBox txtCTName;
+        private TextBox txtCTDescription;
+        private Controls.RJToggleButton rjCTActive;
+        private TextBox txtCTCanvas;
     }
 }

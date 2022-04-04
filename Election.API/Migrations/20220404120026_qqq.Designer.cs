@@ -4,6 +4,7 @@ using Election.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Election.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220404120026_qqq")]
+    partial class qqq
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -619,7 +621,7 @@ namespace Election.API.Migrations
             modelBuilder.Entity("Election.API.Data.Entities.Canvas", b =>
                 {
                     b.HasOne("Election.API.Data.Entities.CanvasType", "Type")
-                        .WithMany("Canvas")
+                        .WithMany()
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -740,11 +742,6 @@ namespace Election.API.Migrations
             modelBuilder.Entity("Election.API.Data.Entities.Canvas", b =>
                 {
                     b.Navigation("Interviews");
-                });
-
-            modelBuilder.Entity("Election.API.Data.Entities.CanvasType", b =>
-                {
-                    b.Navigation("Canvas");
                 });
 
             modelBuilder.Entity("Election.API.Data.Entities.Constituency", b =>
