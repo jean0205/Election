@@ -4,6 +4,7 @@ using Election.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Election.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220404192051_election")]
+    partial class election
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,13 +140,16 @@ namespace Election.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("CommentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("InterviewerId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("ElectionDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int?>("NationalElectionId")
+                    b.Property<int?>("InterviewerId")
                         .HasColumnType("int");
 
                     b.Property<string>("OtherComment")
@@ -165,13 +170,11 @@ namespace Election.API.Migrations
 
                     b.HasIndex("InterviewerId");
 
-                    b.HasIndex("NationalElectionId");
-
                     b.HasIndex("SupportedPartyId");
 
                     b.HasIndex("VoterId");
 
-                    b.ToTable("ElectionVotes");
+                    b.ToTable("ElectionVote");
                 });
 
             modelBuilder.Entity("Election.API.Data.Entities.House", b =>
@@ -310,28 +313,6 @@ namespace Election.API.Migrations
                     b.ToTable("Interviewers");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.NationalElection", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ElectionDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NationalElections");
-                });
-
             modelBuilder.Entity("Election.API.Data.Entities.Party", b =>
                 {
                     b.Property<int>("Id")
@@ -351,14 +332,9 @@ namespace Election.API.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int?>("NationalElectionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Name");
-
-                    b.HasIndex("NationalElectionId");
 
                     b.ToTable("Parties");
                 });
@@ -713,10 +689,6 @@ namespace Election.API.Migrations
                         .WithMany("ElectionVotes")
                         .HasForeignKey("InterviewerId");
 
-                    b.HasOne("Election.API.Data.Entities.NationalElection", null)
-                        .WithMany("ElectionVotes")
-                        .HasForeignKey("NationalElectionId");
-
                     b.HasOne("Election.API.Data.Entities.Party", "SupportedParty")
                         .WithMany()
                         .HasForeignKey("SupportedPartyId")
@@ -771,13 +743,6 @@ namespace Election.API.Migrations
                     b.Navigation("SupportedParty");
 
                     b.Navigation("Voter");
-                });
-
-            modelBuilder.Entity("Election.API.Data.Entities.Party", b =>
-                {
-                    b.HasOne("Election.API.Data.Entities.NationalElection", null)
-                        .WithMany("Parties")
-                        .HasForeignKey("NationalElectionId");
                 });
 
             modelBuilder.Entity("Election.API.Data.Entities.PollingDivision", b =>
@@ -880,13 +845,6 @@ namespace Election.API.Migrations
                     b.Navigation("ElectionVotes");
 
                     b.Navigation("Interviews");
-                });
-
-            modelBuilder.Entity("Election.API.Data.Entities.NationalElection", b =>
-                {
-                    b.Navigation("ElectionVotes");
-
-                    b.Navigation("Parties");
                 });
 
             modelBuilder.Entity("Election.API.Data.Entities.Voter", b =>
