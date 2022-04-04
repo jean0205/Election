@@ -29,14 +29,18 @@ namespace Election.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CanvasType>>> GetCanvasTypes()
         {
-            return await _context.CanvasTypes.ToListAsync();
+            return await _context.CanvasTypes
+                .Include(c=>c.Canvas)
+                .ToListAsync();
         }
 
         // GET: api/CanvasTypes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CanvasType>> GetCanvasType(int id)
         {
-            var canvasType = await _context.CanvasTypes.FindAsync(id);
+            var canvasType = await _context.CanvasTypes
+                .Include(c => c.Canvas)
+                .FirstOrDefaultAsync(c=>c.Id==id);
 
             if (canvasType == null)
             {

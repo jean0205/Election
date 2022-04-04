@@ -87,6 +87,23 @@ namespace Constituency.Desktop.Views
             this.rjCTActive = new Constituency.Desktop.Controls.RJToggleButton();
             this.txtCTCanvas = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.TVCanvas = new System.Windows.Forms.TreeView();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.rjCanvasActive = new Constituency.Desktop.Controls.RJToggleButton();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cmbCanvasTypes = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtCanvasName = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.rjCanvasOpen = new Constituency.Desktop.Controls.RJToggleButton();
+            this.txtCanvasDescription = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.ibtnCanvasSave = new FontAwesome.Sharp.IconButton();
+            this.label21 = new System.Windows.Forms.Label();
+            this.dgvCanvasInterviews = new System.Windows.Forms.DataGridView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
@@ -106,6 +123,11 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel7.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCanvasInterviews)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -673,9 +695,9 @@ namespace Constituency.Desktop.Views
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage4.Controls.Add(this.tableLayoutPanel7);
-            this.tabPage4.Location = new System.Drawing.Point(4, 33);
+            this.tabPage4.Location = new System.Drawing.Point(4, 27);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage4.Size = new System.Drawing.Size(1206, 751);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Canvas Types";
             // 
@@ -691,7 +713,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1206, 751);
             this.tableLayoutPanel7.TabIndex = 1;
             // 
             // groupBox4
@@ -701,7 +723,7 @@ namespace Constituency.Desktop.Views
             this.groupBox4.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(344, 739);
+            this.groupBox4.Size = new System.Drawing.Size(344, 745);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Canvas Types List:";
@@ -714,7 +736,7 @@ namespace Constituency.Desktop.Views
             this.TVCanvasType.Location = new System.Drawing.Point(3, 25);
             this.TVCanvasType.Name = "TVCanvasType";
             this.TVCanvasType.SelectedImageIndex = 0;
-            this.TVCanvasType.Size = new System.Drawing.Size(338, 711);
+            this.TVCanvasType.Size = new System.Drawing.Size(338, 717);
             this.TVCanvasType.TabIndex = 1;
             this.TVCanvasType.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVCanvasType_AfterSelect);
             // 
@@ -741,7 +763,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.651027F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.97947F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(850, 745);
             this.tableLayoutPanel8.TabIndex = 4;
             // 
             // label11
@@ -770,7 +792,7 @@ namespace Constituency.Desktop.Views
             this.ibtnCTSaveUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnCTSaveUpdate.IconSize = 40;
             this.ibtnCTSaveUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnCTSaveUpdate.Location = new System.Drawing.Point(686, 690);
+            this.ibtnCTSaveUpdate.Location = new System.Drawing.Point(686, 696);
             this.ibtnCTSaveUpdate.Name = "ibtnCTSaveUpdate";
             this.ibtnCTSaveUpdate.Size = new System.Drawing.Size(161, 46);
             this.ibtnCTSaveUpdate.TabIndex = 4;
@@ -785,7 +807,7 @@ namespace Constituency.Desktop.Views
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(81, 56);
+            this.label12.Location = new System.Drawing.Point(81, 57);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(91, 21);
             this.label12.TabIndex = 36;
@@ -796,7 +818,7 @@ namespace Constituency.Desktop.Views
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(80, 98);
+            this.label13.Location = new System.Drawing.Point(80, 99);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(92, 21);
             this.label13.TabIndex = 37;
@@ -807,7 +829,7 @@ namespace Constituency.Desktop.Views
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(81, 157);
+            this.label15.Location = new System.Drawing.Point(81, 159);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(91, 21);
             this.label15.TabIndex = 38;
@@ -816,7 +838,7 @@ namespace Constituency.Desktop.Views
             // txtCTName
             // 
             this.txtCTName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCTName.Location = new System.Drawing.Point(178, 52);
+            this.txtCTName.Location = new System.Drawing.Point(178, 53);
             this.txtCTName.Name = "txtCTName";
             this.txtCTName.Size = new System.Drawing.Size(669, 29);
             this.txtCTName.TabIndex = 40;
@@ -825,7 +847,7 @@ namespace Constituency.Desktop.Views
             // txtCTDescription
             // 
             this.txtCTDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCTDescription.Location = new System.Drawing.Point(178, 103);
+            this.txtCTDescription.Location = new System.Drawing.Point(178, 105);
             this.txtCTDescription.Multiline = true;
             this.txtCTDescription.Name = "txtCTDescription";
             this.txtCTDescription.Size = new System.Drawing.Size(669, 48);
@@ -852,20 +874,252 @@ namespace Constituency.Desktop.Views
             this.txtCTCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCTCanvas.Location = new System.Drawing.Point(178, 160);
+            this.txtCTCanvas.Location = new System.Drawing.Point(178, 162);
             this.txtCTCanvas.Multiline = true;
             this.txtCTCanvas.Name = "txtCTCanvas";
-            this.txtCTCanvas.Size = new System.Drawing.Size(669, 524);
+            this.txtCTCanvas.Size = new System.Drawing.Size(669, 528);
             this.txtCTCanvas.TabIndex = 43;
             // 
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage5.Location = new System.Drawing.Point(4, 27);
+            this.tabPage5.Controls.Add(this.tableLayoutPanel9);
+            this.tabPage5.Location = new System.Drawing.Point(4, 33);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1206, 751);
+            this.tabPage5.Size = new System.Drawing.Size(1206, 745);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Canvas";
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 856F));
+            this.tableLayoutPanel9.Controls.Add(this.groupBox5, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel10, 1, 0);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 1;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel9.TabIndex = 2;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.TVCanvas);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.groupBox5.Location = new System.Drawing.Point(3, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(344, 739);
+            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Canvas List:";
+            // 
+            // TVCanvas
+            // 
+            this.TVCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TVCanvas.ImageIndex = 0;
+            this.TVCanvas.ImageList = this.imgListTreeView;
+            this.TVCanvas.Location = new System.Drawing.Point(3, 25);
+            this.TVCanvas.Name = "TVCanvas";
+            this.TVCanvas.SelectedImageIndex = 0;
+            this.TVCanvas.Size = new System.Drawing.Size(338, 711);
+            this.TVCanvas.TabIndex = 2;
+            this.TVCanvas.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVCanvas_AfterSelect);
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 2;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Controls.Add(this.label17, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.rjCanvasActive, 1, 1);
+            this.tableLayoutPanel10.Controls.Add(this.label18, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.cmbCanvasTypes, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.label16, 0, 3);
+            this.tableLayoutPanel10.Controls.Add(this.txtCanvasName, 1, 3);
+            this.tableLayoutPanel10.Controls.Add(this.label19, 0, 2);
+            this.tableLayoutPanel10.Controls.Add(this.rjCanvasOpen, 1, 2);
+            this.tableLayoutPanel10.Controls.Add(this.txtCanvasDescription, 1, 4);
+            this.tableLayoutPanel10.Controls.Add(this.label20, 0, 4);
+            this.tableLayoutPanel10.Controls.Add(this.ibtnCanvasSave, 1, 6);
+            this.tableLayoutPanel10.Controls.Add(this.label21, 0, 5);
+            this.tableLayoutPanel10.Controls.Add(this.dgvCanvasInterviews, 1, 5);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(353, 3);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 7;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 105F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 375F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel10.TabIndex = 4;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label17.Location = new System.Drawing.Point(117, 70);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(55, 21);
+            this.label17.TabIndex = 35;
+            this.label17.Text = "Active:";
+            // 
+            // rjCanvasActive
+            // 
+            this.rjCanvasActive.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rjCanvasActive.AutoSize = true;
+            this.rjCanvasActive.Location = new System.Drawing.Point(178, 68);
+            this.rjCanvasActive.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjCanvasActive.Name = "rjCanvasActive";
+            this.rjCanvasActive.OffBackColor = System.Drawing.Color.Gray;
+            this.rjCanvasActive.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjCanvasActive.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.rjCanvasActive.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjCanvasActive.Size = new System.Drawing.Size(50, 25);
+            this.rjCanvasActive.TabIndex = 43;
+            this.rjCanvasActive.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label18.Location = new System.Drawing.Point(66, 19);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(106, 21);
+            this.label18.TabIndex = 44;
+            this.label18.Text = "Canvas Types:";
+            // 
+            // cmbCanvasTypes
+            // 
+            this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCanvasTypes.FormattingEnabled = true;
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(178, 15);
+            this.cmbCanvasTypes.Name = "cmbCanvasTypes";
+            this.cmbCanvasTypes.Size = new System.Drawing.Size(669, 29);
+            this.cmbCanvasTypes.TabIndex = 45;
+            this.cmbCanvasTypes.Tag = "1";
+            // 
+            // label16
+            // 
+            this.label16.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label16.Location = new System.Drawing.Point(117, 159);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(55, 21);
+            this.label16.TabIndex = 36;
+            this.label16.Text = "Name:";
+            // 
+            // txtCanvasName
+            // 
+            this.txtCanvasName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCanvasName.Location = new System.Drawing.Point(178, 155);
+            this.txtCanvasName.Name = "txtCanvasName";
+            this.txtCanvasName.Size = new System.Drawing.Size(669, 29);
+            this.txtCanvasName.TabIndex = 40;
+            this.txtCanvasName.Tag = "1";
+            // 
+            // label19
+            // 
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label19.Location = new System.Drawing.Point(121, 111);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(51, 21);
+            this.label19.TabIndex = 46;
+            this.label19.Text = "Open:";
+            // 
+            // rjCanvasOpen
+            // 
+            this.rjCanvasOpen.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rjCanvasOpen.AutoSize = true;
+            this.rjCanvasOpen.Location = new System.Drawing.Point(178, 109);
+            this.rjCanvasOpen.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjCanvasOpen.Name = "rjCanvasOpen";
+            this.rjCanvasOpen.OffBackColor = System.Drawing.Color.Gray;
+            this.rjCanvasOpen.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjCanvasOpen.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.rjCanvasOpen.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjCanvasOpen.Size = new System.Drawing.Size(50, 25);
+            this.rjCanvasOpen.TabIndex = 47;
+            this.rjCanvasOpen.UseVisualStyleBackColor = true;
+            // 
+            // txtCanvasDescription
+            // 
+            this.txtCanvasDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCanvasDescription.Location = new System.Drawing.Point(178, 206);
+            this.txtCanvasDescription.Multiline = true;
+            this.txtCanvasDescription.Name = "txtCanvasDescription";
+            this.txtCanvasDescription.Size = new System.Drawing.Size(669, 86);
+            this.txtCanvasDescription.TabIndex = 48;
+            this.txtCanvasDescription.Tag = "";
+            // 
+            // label20
+            // 
+            this.label20.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label20.Location = new System.Drawing.Point(80, 239);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(92, 21);
+            this.label20.TabIndex = 49;
+            this.label20.Text = "Description:";
+            // 
+            // ibtnCanvasSave
+            // 
+            this.ibtnCanvasSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ibtnCanvasSave.AutoSize = true;
+            this.ibtnCanvasSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnCanvasSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnCanvasSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnCanvasSave.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.ibtnCanvasSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnCanvasSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnCanvasSave.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.ibtnCanvasSave.IconColor = System.Drawing.Color.Black;
+            this.ibtnCanvasSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnCanvasSave.IconSize = 40;
+            this.ibtnCanvasSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnCanvasSave.Location = new System.Drawing.Point(686, 688);
+            this.ibtnCanvasSave.Name = "ibtnCanvasSave";
+            this.ibtnCanvasSave.Size = new System.Drawing.Size(161, 48);
+            this.ibtnCanvasSave.TabIndex = 4;
+            this.ibtnCanvasSave.Text = "Save/Update";
+            this.ibtnCanvasSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnCanvasSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnCanvasSave.UseVisualStyleBackColor = false;
+            this.ibtnCanvasSave.Click += new System.EventHandler(this.ibtnCanvasSave_Click);
+            // 
+            // label21
+            // 
+            this.label21.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label21.Location = new System.Drawing.Point(88, 479);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(84, 21);
+            this.label21.TabIndex = 51;
+            this.label21.Text = "Interviews:";
+            // 
+            // dgvCanvasInterviews
+            // 
+            this.dgvCanvasInterviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCanvasInterviews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCanvasInterviews.Location = new System.Drawing.Point(178, 305);
+            this.dgvCanvasInterviews.Name = "dgvCanvasInterviews";
+            this.dgvCanvasInterviews.RowTemplate.Height = 25;
+            this.dgvCanvasInterviews.Size = new System.Drawing.Size(669, 369);
+            this.dgvCanvasInterviews.TabIndex = 52;
             // 
             // tabPage6
             // 
@@ -899,7 +1153,7 @@ namespace Constituency.Desktop.Views
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_App_Maintenance";
-            this.Text = "Frm_App_Maintenance";
+            this.Text = "Application Parameters Maintenance";
             this.Load += new System.EventHandler(this.Frm_App_Maintenance_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -922,6 +1176,12 @@ namespace Constituency.Desktop.Views
             this.groupBox4.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCanvasInterviews)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -989,5 +1249,22 @@ namespace Constituency.Desktop.Views
         private TextBox txtCTDescription;
         private Controls.RJToggleButton rjCTActive;
         private TextBox txtCTCanvas;
+        private TableLayoutPanel tableLayoutPanel9;
+        private GroupBox groupBox5;
+        private TreeView TVCanvas;
+        private TableLayoutPanel tableLayoutPanel10;
+        private Label label16;
+        private FontAwesome.Sharp.IconButton ibtnCanvasSave;
+        private Label label17;
+        private TextBox txtCanvasName;
+        private Controls.RJToggleButton rjCanvasActive;
+        private Label label18;
+        private ComboBox cmbCanvasTypes;
+        private Label label19;
+        private Controls.RJToggleButton rjCanvasOpen;
+        private TextBox txtCanvasDescription;
+        private Label label20;
+        private Label label21;
+        private DataGridView dgvCanvasInterviews;
     }
 }

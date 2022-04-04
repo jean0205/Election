@@ -24,10 +24,13 @@ namespace Constituency.Desktop.Views
         }
         private async void Frm_App_Maintenance_Load(object sender, EventArgs e)
         {
+            cleanScreen();
             MandatoriesFilds();
             await LoadConstituencies();
             await LoadParties();
-            await LoadCanvasTypes();    
+            await LoadCanvasTypes();
+            await LoadCanvas();
+
 
 
         }
@@ -42,6 +45,7 @@ namespace Constituency.Desktop.Views
         {//tag= 1 para campos obligados
 
             UtilRecurrent.FindAllControlsIterative(tabControl1, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1")).ToList().ForEach(x => toolTip1.SetToolTip(x, "Mandatory Field"));
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1")).ToList().ForEach(x => toolTip1.SetToolTip(x, "Mandatory Field"));
         }
         private bool PaintRequiredFildsConstituency()
         {
@@ -71,12 +75,33 @@ namespace Constituency.Desktop.Views
             }
             return missing;
         }
+        private bool PaintRequiredFildsCanvas()
+        {
+            bool missing = false;
+            //todos en blanco antes de comprobar
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "TextBox").Cast<TextBox>().ToList().ForEach(t => t.BackColor = Color.FromKnownColor(KnownColor.Window));
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "ComboBox").Cast<ComboBox>().ToList().ForEach(t => t.BackColor = Color.FromKnownColor(KnownColor.Window));
+
+            //validando textbox requeridos no vacios
+            if (UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().Any())
+            {
+                UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().ForEach(t => t.BackColor = Color.LightSalmon);
+                missing = true;
+            }
+            if (UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && x.Text == string.Empty).ToList().Any())
+            {
+                UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && x.Text == string.Empty).ToList().ForEach(t => t.BackColor = Color.LightSalmon);
+                missing = true;
+            }            
+            return missing;
+        }
 
         private void cleanScreen()
         {
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
 
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+            cmbConstituency.SelectedItem = null;
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel4, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
 
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel4, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
@@ -87,7 +112,12 @@ namespace Constituency.Desktop.Views
             //CanvasTypes
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
             UtilRecurrent.FindAllControlsIterative(tableLayoutPanel8, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
-            cmbConstituency.SelectedItem = null;
+            
+            //Canvas
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
+            UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
+            cmbCanvasTypes.SelectedItem = null;
+
 
         }
         #endregion
@@ -662,8 +692,15 @@ namespace Constituency.Desktop.Views
             CanvasTypesList = new ObservableCollection<CanvasType>((List<CanvasType>)response.Result);
             if (CanvasTypesList.Any())
             {
-                RefreshTreeViewCanvasTypes(CanvasTypesList.ToList());               
+                RefreshTreeViewCanvasTypes(CanvasTypesList.ToList());
                 //tView1.SelectedNode = tView1.Nodes[0];
+                cmbCanvasTypes.DataSource = null;
+                cmbCanvasTypes.DataSource = CanvasTypesList;
+                cmbCanvasTypes.ValueMember = "Id";
+                cmbCanvasTypes.DisplayMember = "Type";
+                cmbCanvasTypes.SelectedItem = null;
+
+
             }
             else
             {
@@ -764,12 +801,12 @@ namespace Constituency.Desktop.Views
                 }
                 else
                 {
-                    await UpdateCanvasType((int)tView1.SelectedNode.Tag);
+                    await UpdateCanvasType((int)TVCanvasType.SelectedNode.Tag);
                     await LoadCanvasTypes();
                 }
-                if (constituency != null && constituency.Id > 0)
+                if (CanvasType != null && CanvasType.Id > 0)
                 {
-                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == constituency.Id);
+                    TVCanvasType.SelectedNode = CollectAllNodes(TVCanvasType.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == CanvasType.Id);
                 }
             }
             catch (Exception ex)
@@ -852,6 +889,216 @@ namespace Constituency.Desktop.Views
         }
         #endregion
 
+        #region Canvas 
+        private ObservableCollection<Canvas> CanvasList;
+        Canvas Canvas;
+
+        private async Task LoadCanvas()
+        {
+            UtilRecurrent.LockForm(waitForm, this);
+            Response response = await ApiServices.GetListAsync<Canvas>("Canvas", token);
+            UtilRecurrent.UnlockForm(waitForm, this);
+
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return;
+            }
+            CanvasList = new ObservableCollection<Canvas>((List<Canvas>)response.Result);
+            if (CanvasList.Any())
+            {
+                RefreshTreeViewCanvas(CanvasList.ToList());
+                //tView1.SelectedNode = tView1.Nodes[0];
+            }
+            else
+            {
+                cleanScreen();
+                TVCanvas.Nodes.Clear();
+            }
+        }
+        private void RefreshTreeViewCanvas(List<Canvas> canvas)
+        {
+            try
+            {
+                TVCanvas.Nodes.Clear();
+                List<TreeNode> treeNodes = new List<TreeNode>();
+                List<TreeNode> childNodes = new List<TreeNode>();
+
+
+                foreach (Canvas canva in canvas)
+                {
+                    childNodes.Add(new TreeNode(canva.Name, 2, 1));
+                    childNodes[childNodes.Count - 1].Tag = canva.Id;
+                    addContextMenu(childNodes[childNodes.Count - 1], "Delete Canvas");
+                }
+                treeNodes.Add(new TreeNode("Canvas", 0, 0, childNodes.ToArray()));
+                treeNodes[treeNodes.Count - 1].Tag = 0;
+                childNodes = new List<TreeNode>();
+
+                TVCanvas.Nodes.AddRange(treeNodes.ToArray());
+                TVCanvas.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void TVCanvas_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            AfterSelectNodeTVCanvas((int)e.Node.Tag);
+        }
+        private void AfterSelectNodeTVCanvas(int nodeTag)
+        {
+            try
+            {
+                if (nodeTag > 0)
+                {
+                    Canvas = CanvasList.Where(u => u.Id == nodeTag).FirstOrDefault();
+                    showCanvasInfo(Canvas);
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void showCanvasInfo(Canvas canvas)
+        {
+            try
+            {
+                txtCanvasName.Text = canvas.Name;
+                txtCanvasDescription.Text = canvas.Description;
+                rjCanvasActive.Checked = canvas.Active;
+                rjCanvasOpen.Checked = canvas.Open;
+                cmbCanvasTypes.SelectedValue = canvas.Type.Id;
+
+                if (canvas.Interviews != null && canvas.Interviews.Any())
+                {
+                    dgvCanvasInterviews.DataSource = canvas.Interviews;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async void ibtnCanvasSave_Click(object sender, EventArgs e)
+        {
+            if (PaintRequiredFildsCanvas())
+            {
+                UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
+                return;
+            }
+            try
+            {
+                if (TVCanvas.SelectedNode == null || (TVCanvas.SelectedNode != null && (int)TVCanvas.SelectedNode.Tag == 0))
+                {
+                    if (await SaveCanvas())
+                    {
+                        await LoadCanvas();
+                    }
+                }
+                else
+                {
+                    await UpdateCanvas((int)TVCanvas.SelectedNode.Tag);
+                    await LoadCanvas();
+                }
+                if (Canvas != null && Canvas.Id > 0)
+                {
+                    TVCanvas.SelectedNode = CollectAllNodes(TVCanvas.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Canvas.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+       
+        private async Task<bool> SaveCanvas()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Canvas", BuildCanvas(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+                Canvas = (Canvas)response.Result;
+                UtilRecurrent.InformationMessage("Canvas sucessfully saved", "Canvas Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+
+        }
+        private async Task UpdateCanvas(int id)
+        {
+            try
+            {
+                var canvas = BuildCanvas();
+                canvas.Id = id;
+                canvas.Type.Canvas = null;
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("Canvas", canvas, canvas.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private Canvas BuildCanvas()
+        {
+            return new Canvas()
+            {
+                Active = rjCanvasActive.Checked,
+                Open = rjCanvasOpen.Checked,
+                Name = txtCanvasName.Text,
+                Type = CanvasTypesList.Where(u => u.Id == (int)cmbCanvasTypes.SelectedValue).FirstOrDefault(),
+                Description = txtCanvasDescription.Text.ToUpper()
+            };
+        }
+        private async Task DeleteCanvas(int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.DeleteAsync("Canvas", id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        #endregion
+
         #region Others
         public void addContextMenu(TreeNode tvw, string item)
         {
@@ -908,7 +1155,7 @@ namespace Constituency.Desktop.Views
             if (node_here == null) return;
         }
 
-        
+       
     }
 
     #endregion

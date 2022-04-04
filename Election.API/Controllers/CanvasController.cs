@@ -29,14 +29,19 @@ namespace Election.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Canvas>>> GetCanvas()
         {
-            return await _context.Canvas.ToListAsync();
+            return await _context.Canvas
+                .Include(c=>c.Type)
+                .Include(c=>c.Interviews)
+                .ToListAsync();
         }
 
         // GET: api/Canvas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Canvas>> GetCanvas(int id)
         {
-            var canvas = await _context.Canvas.FindAsync(id);
+            var canvas = await _context.Canvas
+                .Include(c => c.Interviews)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             if (canvas == null)
             {
@@ -56,6 +61,7 @@ namespace Election.API.Controllers
                 return BadRequest();
             }
 
+            var canvasType = await _context.CanvasTypes.FirstOrDefaultAsync(c => c.Id == canvas.Type.Id);
             _context.Entry(canvas).State = EntityState.Modified;
 
             try
@@ -82,6 +88,8 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Canvas>> PostCanvas(Canvas canvas)
         {
+            var canvasType = await _context.CanvasTypes.FirstOrDefaultAsync(c => c.Id == canvas.Type.Id);
+            canvas.Type = canvasType;
             _context.Canvas.Add(canvas);
             await _context.SaveChangesAsync();
 

@@ -29,14 +29,18 @@ namespace Election.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Constituency>>> GetConstituencies()
         {
-            return await _context.Constituencies.Include(c=>c.PollingDivisions).ToListAsync();
+            return await _context.Constituencies
+                .Include(c=>c.PollingDivisions)
+                .ToListAsync();
         }
 
         // GET: api/Constituencies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Constituency>> GetConstituency(int id)
         {
-            var constituency = await _context.Constituencies.FindAsync(id);
+            var constituency = await _context.Constituencies
+                .Include(c => c.PollingDivisions)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             if (constituency == null)
             {
@@ -45,9 +49,7 @@ namespace Election.API.Controllers
 
             return constituency;
         }
-
-        // PUT: api/Constituencies/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> PutConstituency(int id, Constituency constituency)
         {
