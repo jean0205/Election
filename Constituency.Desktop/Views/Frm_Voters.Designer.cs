@@ -476,7 +476,7 @@
             // 
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(565, 5);
+            this.cmbDivision.Location = new System.Drawing.Point(565, 8);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(313, 29);
             this.cmbDivision.TabIndex = 34;
@@ -486,7 +486,7 @@
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(309, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -712,7 +712,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(105, 5);
+            this.cmbSex.Location = new System.Drawing.Point(105, 8);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -939,10 +939,10 @@
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage4.Controls.Add(this.dataGridView2);
-            this.tabPage4.Location = new System.Drawing.Point(4, 30);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(874, 166);
+            this.tabPage4.Size = new System.Drawing.Size(874, 172);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Interviews";
             // 
@@ -953,17 +953,17 @@
             this.dataGridView2.Location = new System.Drawing.Point(3, 3);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(868, 160);
+            this.dataGridView2.Size = new System.Drawing.Size(868, 166);
             this.dataGridView2.TabIndex = 1;
             // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage3.Controls.Add(this.dataGridView1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 30);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(874, 166);
+            this.tabPage3.Size = new System.Drawing.Size(874, 172);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "House";
             // 
@@ -974,17 +974,17 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(868, 160);
+            this.dataGridView1.Size = new System.Drawing.Size(868, 166);
             this.dataGridView1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.ibtnUpdate);
             this.panel1.Controls.Add(this.ibtnSaveVoter);
-            this.panel1.Location = new System.Drawing.Point(664, 675);
+            this.panel1.Controls.Add(this.ibtnUpdate);
+            this.panel1.Location = new System.Drawing.Point(545, 675);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(227, 45);
+            this.panel1.Size = new System.Drawing.Size(346, 45);
             this.panel1.TabIndex = 10;
             // 
             // ibtnUpdate
@@ -1002,7 +1002,7 @@
             this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnUpdate.IconSize = 33;
             this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnUpdate.Location = new System.Drawing.Point(32, 1);
+            this.ibtnUpdate.Location = new System.Drawing.Point(177, 1);
             this.ibtnUpdate.Name = "ibtnUpdate";
             this.ibtnUpdate.Size = new System.Drawing.Size(155, 40);
             this.ibtnUpdate.TabIndex = 5;
@@ -1026,7 +1026,7 @@
             this.ibtnSaveVoter.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnSaveVoter.IconSize = 33;
             this.ibtnSaveVoter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSaveVoter.Location = new System.Drawing.Point(32, 1);
+            this.ibtnSaveVoter.Location = new System.Drawing.Point(3, 1);
             this.ibtnSaveVoter.Name = "ibtnSaveVoter";
             this.ibtnSaveVoter.Size = new System.Drawing.Size(155, 40);
             this.ibtnSaveVoter.TabIndex = 4;

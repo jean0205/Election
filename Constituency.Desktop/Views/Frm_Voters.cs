@@ -281,7 +281,7 @@ namespace Constituency.Desktop.Views
             }
 
         }
-        private void AfterSelectNodeVoter(int nodeTag)
+        private async void AfterSelectNodeVoter(int nodeTag)
         {
             VoterFieldsWhite();
             try
@@ -289,7 +289,7 @@ namespace Constituency.Desktop.Views
                 if (nodeTag > 0)
                 {
                     Voter = new Voter();
-                    Voter = VoterList.FirstOrDefault(v => v.Id == nodeTag);
+                    Voter = await LoadVoterAsyncById(nodeTag);
                     ShowApplicantInformation();
                     ibtnSaveVoter.Visible = false;
                     ibtnUpdate.Visible = true;
@@ -302,6 +302,32 @@ namespace Constituency.Desktop.Views
             catch (Exception ex)
             {
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<Voter> LoadVoterAsyncById(int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<Voter>("Voters", id.ToString(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    if (response.Message == "Not Found")
+                    {
+                        UtilRecurrent.ErrorMessage(response.Message);
+                        return null;
+                    }
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return null;
+                }
+                return (Voter)response.Result;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
             }
         }
         private void ShowApplicantInformation()
@@ -325,7 +351,8 @@ namespace Constituency.Desktop.Views
                     cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
                     FillUpdComboboxDivision();
                     cmbDivision.SelectedValue = Voter.PollingDivision.Id;
-                    //rjExtendSearch.Enabled = true;
+                    //TODO
+                    //mostrar en los datagrid los datos de las casa, las eleciones y las entrevistas
                 }
             }
             catch (Exception ex)

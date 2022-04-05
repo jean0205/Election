@@ -156,8 +156,8 @@ namespace Constituency.Desktop.Views
             this.ibtnEnterApp.Name = "ibtnEnterApp";
             this.ibtnEnterApp.Size = new System.Drawing.Size(237, 51);
             this.ibtnEnterApp.TabIndex = 2;
-            this.ibtnEnterApp.Tag = "Enter_Applications";
-            this.ibtnEnterApp.Text = "Enter Applications";
+            this.ibtnEnterApp.Tag = "Enter_Interviews";
+            this.ibtnEnterApp.Text = "Enter Interviews";
             this.ibtnEnterApp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ibtnEnterApp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnEnterApp.UseVisualStyleBackColor = false;

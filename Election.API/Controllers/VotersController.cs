@@ -19,26 +19,45 @@ namespace Election.API.Controllers
         {
             _context = context;
         }
-
         // GET: api/Voters
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Voter>>> GetVoters()
         {
             return await _context.Voters
-                .Include(v=>v.PollingDivision)
-                .ThenInclude(v=>v.Constituency)
+                .Include(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
                 .ToListAsync();
         }
 
-        // GET: api/Voters/5
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<Voter>> GetVoter(int id)
         {
             var voter = await _context.Voters.
-                Include(v => v.PollingDivision)
-                .ThenInclude(v => v.Constituency).
-                FirstOrDefaultAsync(v=>v.Id==id);
+              Include(v => v.PollingDivision)
+              .ThenInclude(v => v.Constituency)
+              .Include(v => v.Interviews)
+              .Include(v => v.House)
+              .Include(v => v.ElectionVotes)
+               .FirstOrDefaultAsync(v => v.Id == id);
+            if (voter == null)
+            {
+                return NotFound();
+            }
 
+            return voter;
+        }
+      
+        [HttpGet("FindRegistration/{id}")]
+        public async Task<ActionResult<Voter>> GetVoterByRegistration(string reg)
+        {
+            var voter = await _context.Voters.
+                Include(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
+                .Include(v => v.Interviews)
+                .Include(v => v.House)
+                .Include(v => v.ElectionVotes)
+                .FirstOrDefaultAsync(v => v.Reg == reg);
             if (voter == null)
             {
                 return NotFound();

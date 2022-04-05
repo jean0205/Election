@@ -38,18 +38,18 @@ namespace Constituency.Desktop.Views
 
         private async void iconButton1_Click(object sender, EventArgs e)
         {
-            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
-            {
-                Analytics.TrackEvent("Frm_EnterApplications NO ACCESS " + tokenResponse.User.FullName);
-                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
-                return;
-            }
+        //    if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+        //    {
+        //        Analytics.TrackEvent("Frm_EnterApplications NO ACCESS " + tokenResponse.User.FullName);
+        //        UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+        //        return;
+        //    }
            
             try
             {
-                Analytics.TrackEvent("Frm_EnterApplications  " + tokenResponse.User.FullName);
-                //Frm_EnterApplications frm = new();
-                //frm.ShowDialog();
+                Analytics.TrackEvent("Frm_EnterInterview  " + tokenResponse.User.FullName);
+                Frm_EnterInterview frm = new();
+                frm.ShowDialog();
             }
             catch (Exception ex)
             {
