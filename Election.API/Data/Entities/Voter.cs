@@ -59,6 +59,7 @@ namespace Election.API.Data.Entities
         public House? House { get; set; }
 
         public ICollection<Interview>? Interviews { get; set; }
+        public ICollection<ElectionVote>? ElectionVotes { get; set; }
 
     }
 }

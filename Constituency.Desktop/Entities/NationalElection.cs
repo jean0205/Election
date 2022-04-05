@@ -10,7 +10,7 @@ namespace Constituency.Desktop.Entities
     {
         public int Id { get; set; }
 
-        public bool Active { get; set; }
+        public bool Open { get; set; }
        
         public DateTime ElectionDate { get; set; }
 

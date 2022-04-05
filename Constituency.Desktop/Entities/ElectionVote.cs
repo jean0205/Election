@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Constituency.Desktop.Entities
 {
-    internal class ElectionVote
+    public class ElectionVote
     {
         public int Id { get; set; }
        

@@ -13,10 +13,10 @@ namespace Election.API.Data.Entities
 
         [Required(ErrorMessage = "{0} is a required field.")]
         public Voter Voter { get; set; }
-        
 
-        [Required(ErrorMessage = "{0} is a required field.")]
-        public Party SupportedParty { get; set; }
+        public bool Voted { get; set; }
+
+        public Party? SupportedParty { get; set; }
 
         public Comment? Comment { get; set; }
         

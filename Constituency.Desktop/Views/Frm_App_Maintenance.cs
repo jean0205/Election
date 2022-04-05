@@ -33,6 +33,7 @@ namespace Constituency.Desktop.Views
             await LoadCanvasTypes();
             await LoadCanvas();
             await LoadInterviewers();
+            await LoadNationalElections();
 
 
 
@@ -95,7 +96,7 @@ namespace Constituency.Desktop.Views
             {
                 UtilRecurrent.FindAllControlsIterative(tableLayoutPanel10, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && x.Text == string.Empty).ToList().ForEach(t => t.BackColor = Color.LightSalmon);
                 missing = true;
-            }            
+            }
             return missing;
         }
         private bool PaintRequiredFildsInterviewer()
@@ -117,14 +118,14 @@ namespace Constituency.Desktop.Views
                 missing = true;
             }
             return missing;
-        }        
+        }
         private void cleanScreen()
         {
             UtilRecurrent.FindAllControlsIterative(tabControl1, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
 
             UtilRecurrent.FindAllControlsIterative(tabControl1, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = true);
             UtilRecurrent.FindAllControlsIterative(tabControl1, "ComboBox").Cast<ComboBox>().ToList().ForEach(x => x.SelectedItem = null);
-            UtilRecurrent.FindAllControlsIterative(tabControl1, "DateTimePicker").Cast<DateTimePicker>().ToList().ForEach(x => x.Value = DateTime.Today);            
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DateTimePicker").Cast<DateTimePicker>().ToList().ForEach(x => x.Value = DateTime.Today);
 
             //sino resulta hay q hacerlo separado
             //UtilRecurrent.FindAllControlsIterative(tableLayoutPanel2, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
@@ -176,7 +177,7 @@ namespace Constituency.Desktop.Views
             Response response = await ApiServices.GetListAsync<ConstituencyC>("Constituencies", token);
             UtilRecurrent.UnlockForm(waitForm, this);
 
-           
+
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
@@ -260,7 +261,7 @@ namespace Constituency.Desktop.Views
                 rjActive.Checked = consty.Active;
                 txtPollings.Clear();
                 var pd = consty.PollingDivisions.Select(p => p.Name).ToList();
-                pd.ForEach(p => txtPollings.Text +=  p.ToString()+ "\r\n");
+                pd.ForEach(p => txtPollings.Text += p.ToString() + "\r\n");
 
 
             }
@@ -375,7 +376,7 @@ namespace Constituency.Desktop.Views
 
         }
         #endregion
-        
+
         #region Polling Divisions
 
         private void RefreshTreeViewPolling(List<ConstituencyC> constituencies)
@@ -471,7 +472,7 @@ namespace Constituency.Desktop.Views
                     await UpdatePolling((int)tViewPolling.SelectedNode.Tag);
                     await LoadConstituencies();
                 }
-                if (pollingDivision!=null && pollingDivision.Id > 0)
+                if (pollingDivision != null && pollingDivision.Id > 0)
                 {
                     tViewPolling.SelectedNode = CollectAllNodes(tViewPolling.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == pollingDivision.Id);
                 }
@@ -546,17 +547,19 @@ namespace Constituency.Desktop.Views
         {
             UtilRecurrent.LockForm(waitForm, this);
             Response response = await ApiServices.GetListAsync<Party>("Parties", token);
-            UtilRecurrent.UnlockForm(waitForm, this);           
+            UtilRecurrent.UnlockForm(waitForm, this);
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
                 return;
             }
             PartiesList = new ObservableCollection<Party>((List<Party>)response.Result);
-            if (PartiesList.Any())
+            if (PartiesList != null && PartiesList.Any())
             {
-                RefreshTreeViewParties(PartiesList.ToList());                
-                //tView1.SelectedNode = tView1.Nodes[0];
+                RefreshTreeViewParties(PartiesList.ToList());
+                //tView1.SelectedNode = tView1.Nodes[0]; 
+                chkElectionParties.Items.Clear();
+                chkElectionParties.Items.AddRange(PartiesList.Select(p=>p.Name).ToArray());
             }
             else
             {
@@ -626,15 +629,15 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        
-        
+
+
         private async void ibtnSaveParty_Click(object sender, EventArgs e)
         {
             if (txtPpname.TextLength == 0 || txtPCode.TextLength == 0)
             {
                 UtilRecurrent.ErrorMessage("Code and Name are required fields.");
                 return;
-            }            
+            }
             try
             {
                 if (tvParties.SelectedNode == null || (tvParties.SelectedNode != null && (int)tvParties.SelectedNode.Tag == 0))
@@ -649,7 +652,7 @@ namespace Constituency.Desktop.Views
                     await UpdateParty((int)tvParties.SelectedNode.Tag);
                     await LoadParties();
                 }
-                if (party!= null && party.Id > 0)
+                if (party != null && party.Id > 0)
                 {
                     tvParties.SelectedNode = CollectAllNodes(tvParties.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == party.Id);
                 }
@@ -796,7 +799,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); 
+                Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
@@ -808,13 +811,13 @@ namespace Constituency.Desktop.Views
                 txtCTDescription.Text = canvasT.Description;
                 rjCTActive.Checked = canvasT.Active;
                 txtCTCanvas.Clear();
-                if (canvasT.Canvas!= null && canvasT.Canvas.Any())
+                if (canvasT.Canvas != null && canvasT.Canvas.Any())
                 {
                     foreach (var item in canvasT.Canvas)
                     {
                         txtCTCanvas.Text += item.ToString() + "\r\n";
                     }
-                }               
+                }
             }
             catch (Exception ex)
             {
@@ -873,7 +876,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); 
+                Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
                 return false;
             }
@@ -923,11 +926,259 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); 
+                Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         #endregion
+
+      
+
+        #region Interviewer
+
+        private ObservableCollection<Interviewer> InterviewerList;
+        Interviewer Interviewer;
+
+        private async Task LoadInterviewers()
+        {
+            UtilRecurrent.LockForm(waitForm, this);
+            Response response = await ApiServices.GetListAsync<Interviewer>("Interviewers", token);
+            UtilRecurrent.UnlockForm(waitForm, this);
+
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return;
+            }
+            InterviewerList = new ObservableCollection<Interviewer>((List<Interviewer>)response.Result);
+            if (InterviewerList.Any())
+            {
+                RefreshTreeViewInterviewers(InterviewerList.ToList());
+                //tView1.SelectedNode = tView1.Nodes[0];
+            }
+            else
+            {
+                cleanScreen();
+                TVInterviewers.Nodes.Clear();
+            }
+        }
+        private void RefreshTreeViewInterviewers(List<Interviewer> interviewers)
+        {
+            try
+            {
+                TVInterviewers.Nodes.Clear();
+                List<TreeNode> treeNodes = new List<TreeNode>();
+                List<TreeNode> childNodes = new List<TreeNode>();
+
+
+                foreach (Interviewer interviewer in interviewers)
+                {
+                    childNodes.Add(new TreeNode(interviewer.FullName, 2, 1));
+                    childNodes[childNodes.Count - 1].Tag = interviewer.Id;
+                    addContextMenu(childNodes[childNodes.Count - 1], "Delete Interviewer");
+                }
+                treeNodes.Add(new TreeNode("Interviewers", 0, 0, childNodes.ToArray()));
+                treeNodes[treeNodes.Count - 1].Tag = 0;
+                childNodes = new List<TreeNode>();
+
+                TVInterviewers.Nodes.AddRange(treeNodes.ToArray());
+                TVInterviewers.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void TVInterviewers_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            AfterSelectNodeTVInterviewers((int)e.Node.Tag);
+        }
+        private void AfterSelectNodeTVInterviewers(int nodeTag)
+        {
+            try
+            {
+                if (nodeTag > 0)
+                {
+                    Interviewer = InterviewerList.Where(u => u.Id == nodeTag).FirstOrDefault();
+                    showInterviewerInfo(Interviewer);
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void showInterviewerInfo(Interviewer interviewer)
+        {
+            try
+            {
+                if (interviewer.Id > 0)
+                {
+                    List<PropertyInfo> properties = interviewer.GetType().GetProperties().ToList();
+                    List<TextBox> interviewerTextBox = UtilRecurrent.FindAllTextBoxIterative(tableLayoutPanel12);
+                    foreach (TextBox txt in interviewerTextBox)
+                    {
+                        if (properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).Any())
+                        {
+
+                            txt.Text = properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Interviewer).ToString();
+                        }
+                    }
+                    rjInterviewer.Checked = interviewer.Active;
+                    cmbSex.SelectedItem = interviewer.Sex;
+                    dtpDOB.Value = (DateTime)interviewer.DOB;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async void iconButton1_ClickAsync(object sender, EventArgs e)
+        {
+            try
+            {
+                if (PaintRequiredFildsInterviewer())
+                {
+                    UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
+                    return;
+                }
+                if (dtpDOB.Value.AddYears(16) > DateTime.Now)
+                {
+                    UtilRecurrent.ErrorMessage("Applicant younger than 16.");
+                    return;
+                }
+                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
+                {
+                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
+                    return;
+                }
+                if (TVInterviewers.SelectedNode == null || (TVInterviewers.SelectedNode != null && (int)TVInterviewers.SelectedNode.Tag == 0))
+                {
+                    if (await SaveInterviewers())
+                    {
+                        await LoadInterviewers();
+                    }
+                }
+                else
+                {
+                    await UpdateInterviewers((int)TVInterviewers.SelectedNode.Tag);
+                    await LoadInterviewers();
+                }
+                if (Interviewer != null && Interviewer.Id > 0)
+                {
+                    TVInterviewers.SelectedNode = CollectAllNodes(TVInterviewers.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interviewer.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+        private async Task<bool> SaveInterviewers()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Interviewers", BuildInterviewers(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+                Interviewer = (Interviewer)response.Result;
+                UtilRecurrent.InformationMessage("Interviewer sucessfully saved", "Interviewer Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+
+        }
+        private async Task UpdateInterviewers(int id)
+        {
+            try
+            {
+                var interv = BuildInterviewers();
+                interv.Id = id;
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("Interviewers", interv, interv.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private Interviewer BuildInterviewers()
+        {
+            try
+            {
+                Interviewer = new Interviewer();
+                List<PropertyInfo> properties = Interviewer.GetType().GetProperties().ToList();
+                List<TextBox> intervTextBox = UtilRecurrent.FindAllTextBoxIterative(tableLayoutPanel12);
+                foreach (PropertyInfo prop in properties)
+                {
+                    if (intervTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).Any())
+                    {
+                        prop.SetValue(Interviewer, intervTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).FirstOrDefault().Text.TrimEnd().ToUpper());
+                    }
+                }
+                Interviewer.Active = rjInterviewer.Checked;
+                Interviewer.Sex = cmbSex.SelectedItem.ToString();
+                Interviewer.DOB = dtpDOB.Value;
+                return Interviewer;
+            }
+
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private async Task DeleteInterviewers(int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.DeleteAsync("Interviewer", id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+
+
+        #endregion
+
 
         #region Canvas 
         private ObservableCollection<Canvas> CanvasList;
@@ -1060,7 +1311,7 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
-        }       
+        }
         private async Task<bool> SaveCanvas()
         {
             try
@@ -1138,15 +1389,15 @@ namespace Constituency.Desktop.Views
         }
         #endregion
 
-        #region Interviewer
+        #region National Elections
 
-        private ObservableCollection<Interviewer> InterviewerList;
-        Interviewer Interviewer;
+        private ObservableCollection<NationalElection> NationalElectionsList;
+        NationalElection NationalElection;
 
-        private async Task LoadInterviewers()
+        private async Task LoadNationalElections()
         {
             UtilRecurrent.LockForm(waitForm, this);
-            Response response = await ApiServices.GetListAsync<Interviewer>("Interviewers", token);
+            Response response = await ApiServices.GetListAsync<NationalElection>("NationalElections", token);
             UtilRecurrent.UnlockForm(waitForm, this);
 
             if (!response.IsSuccess)
@@ -1154,39 +1405,39 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(response.Message);
                 return;
             }
-            InterviewerList = new ObservableCollection<Interviewer>((List<Interviewer>)response.Result);
-            if (InterviewerList.Any())
+            NationalElectionsList = new ObservableCollection<NationalElection>((List<NationalElection>)response.Result);
+            if (NationalElectionsList.Any())
             {
-                RefreshTreeViewInterviewers(InterviewerList.ToList());
+                RefreshTreeViewNationalElection(NationalElectionsList.ToList());
                 //tView1.SelectedNode = tView1.Nodes[0];
             }
             else
             {
                 cleanScreen();
-                TVInterviewers.Nodes.Clear();
+                TVElections.Nodes.Clear();
             }
         }
-        private void RefreshTreeViewInterviewers(List<Interviewer> interviewers)
+        private void RefreshTreeViewNationalElection(List<NationalElection> elections)
         {
             try
             {
-                TVInterviewers.Nodes.Clear();
+                TVElections.Nodes.Clear();
                 List<TreeNode> treeNodes = new List<TreeNode>();
                 List<TreeNode> childNodes = new List<TreeNode>();
 
 
-                foreach (Interviewer interviewer in interviewers)
+                foreach (NationalElection election in elections)
                 {
-                    childNodes.Add(new TreeNode(interviewer.FullName, 2, 1));
-                    childNodes[childNodes.Count - 1].Tag = interviewer.Id;
-                    addContextMenu(childNodes[childNodes.Count - 1], "Delete Interviewer");
+                    childNodes.Add(new TreeNode(election.ElectionDate.ToString("MMMM-yyyy"), 2, 1));
+                    childNodes[childNodes.Count - 1].Tag = election.Id;
+                    addContextMenu(childNodes[childNodes.Count - 1], "Delete Election");
                 }
-                treeNodes.Add(new TreeNode("Interviewers", 0, 0, childNodes.ToArray()));
+                treeNodes.Add(new TreeNode("National Elections", 0, 0, childNodes.ToArray()));
                 treeNodes[treeNodes.Count - 1].Tag = 0;
                 childNodes = new List<TreeNode>();
 
-                TVInterviewers.Nodes.AddRange(treeNodes.ToArray());
-                TVInterviewers.ExpandAll();
+                TVElections.Nodes.AddRange(treeNodes.ToArray());
+                TVElections.ExpandAll();
             }
             catch (Exception ex)
             {
@@ -1194,18 +1445,18 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private void TVInterviewers_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TVElections_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            AfterSelectNodeTVInterviewers((int)e.Node.Tag);
+            AfterSelectNodeTVElections((int)e.Node.Tag);
         }
-        private void AfterSelectNodeTVInterviewers(int nodeTag)
+        private void AfterSelectNodeTVElections(int nodeTag)
         {
             try
             {
                 if (nodeTag > 0)
                 {
-                    Interviewer = InterviewerList.Where(u => u.Id == nodeTag).FirstOrDefault();
-                    showInterviewerInfo(Interviewer);
+                    NationalElection = NationalElectionsList.Where(u => u.Id == nodeTag).FirstOrDefault();
+                    showNationalElectionsInfo(NationalElection);
                 }
                 else
                 {
@@ -1218,66 +1469,27 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private void showInterviewerInfo(Interviewer interviewer)
+        private void showNationalElectionsInfo(NationalElection election)
         {
             try
             {
-                if (interviewer.Id > 0)
+                txtElectionDescription.Text = election.Description;
+                dtpElectionDate.Value = election.ElectionDate;
+                foreach (int i in chkElectionParties.CheckedIndices)
                 {
-                    List<PropertyInfo> properties = interviewer.GetType().GetProperties().ToList();
-                    List<TextBox> interviewerTextBox = UtilRecurrent.FindAllTextBoxIterative(tableLayoutPanel12);
-                    foreach (TextBox txt in interviewerTextBox)
+                    chkElectionParties.SetItemCheckState(i, CheckState.Unchecked);
+                }
+                if (election.Parties != null && election.Parties.Count > 0)
+                {
+                    foreach (Party party in election.Parties)
                     {
-                        if (properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).Any())
-                        {
-
-                            txt.Text = properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Interviewer).ToString();
-                        }
-                    }
-                    rjInterviewer.Checked = interviewer.Active;
-                    cmbSex.SelectedItem = interviewer.Sex;
-                    dtpDOB.Value = (DateTime)interviewer.DOB;                   
-                }
-            }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
-            }
-        }        
-        private async void iconButton1_ClickAsync(object sender, EventArgs e)
-        {
-            try
-            {
-                if (PaintRequiredFildsInterviewer())
-                {
-                    UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
-                    return;
-                }
-                if (dtpDOB.Value.AddYears(16) > DateTime.Now)
-                {
-                    UtilRecurrent.ErrorMessage("Applicant younger than 16.");
-                    return;
-                }
-                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
-                {
-                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
-                    return;
-                }
-                if (TVInterviewers.SelectedNode == null || (TVInterviewers.SelectedNode != null && (int)TVInterviewers.SelectedNode.Tag == 0))
-                {
-                    if (await SaveInterviewers())
-                    {
-                        await LoadInterviewers();
+                        chkElectionParties.SetItemChecked(chkElectionParties.Items.IndexOf(party.Name), true);
                     }
                 }
-                else
+                               
+                if (election.ElectionVotes != null && election.ElectionVotes.Any())
                 {
-                    await UpdateInterviewers((int)TVInterviewers.SelectedNode.Tag);
-                    await LoadInterviewers();
-                }
-                if (Interviewer != null && Interviewer.Id > 0)
-                {
-                    TVInterviewers.SelectedNode = CollectAllNodes(TVInterviewers.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interviewer.Id);
+                    DgvElectionVotes.DataSource = election.ElectionVotes;
                 }
             }
             catch (Exception ex)
@@ -1286,21 +1498,52 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-
-        private async Task<bool> SaveInterviewers()
+        private async void ibtnNationalElectionsSave_Click(object sender, EventArgs e)
+        {
+            if (chkElectionParties.SelectedItems == null || chkElectionParties.CheckedItems.Count < 1)
+            {
+                UtilRecurrent.ErrorMessage("Please select at least one party");
+                return;
+            }
+            try
+            {
+                if (TVElections.SelectedNode == null || (TVElections.SelectedNode != null && (int)TVElections.SelectedNode.Tag == 0))
+                {
+                    if (await SaveNationalElections())
+                    {
+                        await LoadNationalElections();
+                    }
+                }
+                else
+                {
+                    await UpdateNationalElections((int)TVElections.SelectedNode.Tag);
+                    await LoadNationalElections();
+                }
+                if (NationalElection != null && NationalElection.Id > 0)
+                {
+                    TVElections.SelectedNode = CollectAllNodes(TVElections.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Canvas.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> SaveNationalElections()
         {
             try
             {
                 UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.PostAsync("Interviewers", BuildInterviewers(), token);
+                Response response = await ApiServices.PostAsync("NationalElections", BuildNationalElections(), token);
                 UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
                     return response.IsSuccess;
                 }
-                Interviewer = (Interviewer)response.Result;
-                UtilRecurrent.InformationMessage("Interviewer sucessfully saved", "Interviewer Saved");
+                NationalElection = (NationalElection)response.Result;
+                UtilRecurrent.InformationMessage("National Election sucessfully saved", "National Election Saved");
                 return true;
             }
             catch (Exception ex)
@@ -1311,14 +1554,15 @@ namespace Constituency.Desktop.Views
             }
 
         }
-        private async Task UpdateInterviewers(int id)
+        private async Task UpdateNationalElections(int id)
         {
             try
             {
-                var interv = BuildInterviewers();
-                interv.Id = id;                
+                var nationalElection = BuildNationalElections();
+                nationalElection.Id = id;
+
                 UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.PutAsync("Interviewers", interv, interv.Id, token);
+                Response response = await ApiServices.PutAsync("NationalElections", nationalElection, nationalElection.Id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
@@ -1332,39 +1576,22 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private Interviewer BuildInterviewers()
+        private NationalElection BuildNationalElections()
         {
-            try
+            return new NationalElection()
             {
-                Interviewer = new Interviewer();
-                List<PropertyInfo> properties = Interviewer.GetType().GetProperties().ToList();
-                List<TextBox> intervTextBox = UtilRecurrent.FindAllTextBoxIterative(tableLayoutPanel12);
-                foreach (PropertyInfo prop in properties)
-                {
-                    if (intervTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).Any())
-                    {
-                        prop.SetValue(Interviewer, intervTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).FirstOrDefault().Text.TrimEnd().ToUpper());
-                    }
-                }
-                Interviewer.Active = rjInterviewer.Checked;
-                Interviewer.Sex = cmbSex.SelectedItem.ToString();
-                Interviewer.DOB = dtpDOB.Value;               
-                return Interviewer;
-            }
-
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);
-                UtilRecurrent.ErrorMessage(ex.Message);
-                return null;
-            }
+                Open = rjElectionActive.Checked,
+                ElectionDate = dtpElectionDate.Value,
+                Description = txtElectionDescription.Text,
+                Parties = PartiesList.Where(x => chkElectionParties.CheckedItems.Contains(x.Name)).ToList()
+            };
         }
-        private async Task DeleteInterviewers(int id)
+        private async Task DeleteNationalElections(int id)
         {
             try
             {
                 UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.DeleteAsync("Interviewer", id, token);
+                Response response = await ApiServices.DeleteAsync("NationalElections", id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
@@ -1378,9 +1605,6 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-
-
-
         #endregion
 
         #region Others
@@ -1439,7 +1663,7 @@ namespace Constituency.Desktop.Views
             if (node_here == null) return;
         }
 
-       
+
     }
 
     #endregion

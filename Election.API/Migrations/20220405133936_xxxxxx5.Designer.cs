@@ -4,6 +4,7 @@ using Election.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Election.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220405133936_xxxxxx5")]
+    partial class xxxxxx5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -354,9 +356,14 @@ namespace Election.API.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int?>("NationalElectionId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Name");
+
+                    b.HasIndex("NationalElectionId");
 
                     b.ToTable("Parties");
                 });
@@ -690,21 +697,6 @@ namespace Election.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("NationalElectionParty", b =>
-                {
-                    b.Property<int>("NationalElectionsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PartiesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("NationalElectionsId", "PartiesId");
-
-                    b.HasIndex("PartiesId");
-
-                    b.ToTable("NationalElectionParty");
-                });
-
             modelBuilder.Entity("Election.API.Data.Entities.Canvas", b =>
                 {
                     b.HasOne("Election.API.Data.Entities.CanvasType", "Type")
@@ -784,6 +776,13 @@ namespace Election.API.Migrations
                     b.Navigation("Voter");
                 });
 
+            modelBuilder.Entity("Election.API.Data.Entities.Party", b =>
+                {
+                    b.HasOne("Election.API.Data.Entities.NationalElection", null)
+                        .WithMany("Parties")
+                        .HasForeignKey("NationalElectionId");
+                });
+
             modelBuilder.Entity("Election.API.Data.Entities.PollingDivision", b =>
                 {
                     b.HasOne("Election.API.Data.Entities.Constituency", "Constituency")
@@ -859,21 +858,6 @@ namespace Election.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("NationalElectionParty", b =>
-                {
-                    b.HasOne("Election.API.Data.Entities.NationalElection", null)
-                        .WithMany()
-                        .HasForeignKey("NationalElectionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Election.API.Data.Entities.Party", null)
-                        .WithMany()
-                        .HasForeignKey("PartiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Election.API.Data.Entities.Canvas", b =>
                 {
                     b.Navigation("Interviews");
@@ -904,6 +888,8 @@ namespace Election.API.Migrations
             modelBuilder.Entity("Election.API.Data.Entities.NationalElection", b =>
                 {
                     b.Navigation("ElectionVotes");
+
+                    b.Navigation("Parties");
                 });
 
             modelBuilder.Entity("Election.API.Data.Entities.Voter", b =>

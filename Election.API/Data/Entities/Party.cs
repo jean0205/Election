@@ -18,5 +18,7 @@ namespace Election.API.Data.Entities
         [Display(Name = "Surname")]
         [MaxLength(200)]
         public string Name { get; set; }
+
+        public ICollection<NationalElection>? NationalElections { get; set; }
     }
 }
