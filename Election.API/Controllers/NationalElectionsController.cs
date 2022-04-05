@@ -58,6 +58,9 @@ namespace Election.API.Controllers
                 return NotFound();
             }
             electionDB.Parties = null;
+            electionDB.Open = nationalElection.Open;
+            electionDB.ElectionDate = nationalElection.ElectionDate;
+            electionDB.Description = nationalElection.Description;
             _context.Entry(electionDB).State = EntityState.Modified;
             try
             {
