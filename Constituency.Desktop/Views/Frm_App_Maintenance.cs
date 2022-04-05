@@ -1521,7 +1521,7 @@ namespace Constituency.Desktop.Views
                 }
                 if (NationalElection != null && NationalElection.Id > 0)
                 {
-                    TVElections.SelectedNode = CollectAllNodes(TVElections.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Canvas.Id);
+                    TVElections.SelectedNode = CollectAllNodes(TVElections.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == NationalElection.Id);
                 }
             }
             catch (Exception ex)
