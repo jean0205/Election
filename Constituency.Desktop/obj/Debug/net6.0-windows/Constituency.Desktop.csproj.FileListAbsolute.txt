@@ -113,3 +113,4 @@ C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-wind
 C:\Users\jeanc\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_App_Maintenance.resources
 C:\Users\jeanc\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_Voters.resources
 C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_EnterInterview.resources
+C:\Users\jeanc\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_EnterInterview.resources

@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Constituency.Desktop",
+    "\\Constituency.Desktop\\Entities",
+    "\\Constituency.Desktop\\Helpers",
+    "\\Constituency.Desktop\\Views",
+    "\\Election.API"
   ],
   "SelectedNode": "\\Election.sln",
   "PreviewInSolutionExplorer": false

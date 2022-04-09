@@ -16,54 +16,47 @@ namespace Election.API.Controllers
     [Route("api/[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
-    public class CanvasController : ControllerBase
+    public class CommentsController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public CanvasController(DataContext context)
+        public CommentsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Canvas
+        // GET: api/Comments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Canvas>>> GetCanvas()
+        public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
         {
-            return await _context.Canvas
-                .Include(c=>c.Type)
-                .Include(c=>c.Interviews)
-                .ThenInclude(i=>i.Voter)
-                .ToListAsync();
+            return await _context.Comments.ToListAsync();
         }
 
-        // GET: api/Canvas/5
+        // GET: api/Comments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Canvas>> GetCanvas(int id)
+        public async Task<ActionResult<Comment>> GetComment(int id)
         {
-            var canvas = await _context.Canvas
-                .Include(c => c.Interviews)
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var comment = await _context.Comments.FindAsync(id);
 
-            if (canvas == null)
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            return canvas;
+            return comment;
         }
 
-        // PUT: api/Canvas/5
+        // PUT: api/Comments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCanvas(int id, Canvas canvas)
+        public async Task<IActionResult> PutComment(int id, Comment comment)
         {
-            if (id != canvas.Id)
+            if (id != comment.Id)
             {
                 return BadRequest();
             }
 
-            var canvasType = await _context.CanvasTypes.FirstOrDefaultAsync(c => c.Id == canvas.Type.Id);
-            _context.Entry(canvas).State = EntityState.Modified;
+            _context.Entry(comment).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +64,7 @@ namespace Election.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CanvasExists(id))
+                if (!CommentExists(id))
                 {
                     return NotFound();
                 }
@@ -84,38 +77,36 @@ namespace Election.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Canvas
+        // POST: api/Comments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Canvas>> PostCanvas(Canvas canvas)
+        public async Task<ActionResult<Comment>> PostComment(Comment comment)
         {
-            var canvasType = await _context.CanvasTypes.FirstOrDefaultAsync(c => c.Id == canvas.Type.Id);
-            canvas.Type = canvasType;
-            _context.Canvas.Add(canvas);
+            _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCanvas", new { id = canvas.Id }, canvas);
+            return CreatedAtAction("GetComment", new { id = comment.Id }, comment);
         }
 
-        // DELETE: api/Canvas/5
+        // DELETE: api/Comments/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCanvas(int id)
+        public async Task<IActionResult> DeleteComment(int id)
         {
-            var canvas = await _context.Canvas.FindAsync(id);
-            if (canvas == null)
+            var comment = await _context.Comments.FindAsync(id);
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            _context.Canvas.Remove(canvas);
+            _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CanvasExists(int id)
+        private bool CommentExists(int id)
         {
-            return _context.Canvas.Any(e => e.Id == id);
+            return _context.Comments.Any(e => e.Id == id);
         }
     }
 }

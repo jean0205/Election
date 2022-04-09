@@ -598,7 +598,7 @@ namespace Constituency.Desktop.Views
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(180, 19);
+            this.cmbConstituency.Location = new System.Drawing.Point(180, 16);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(666, 29);
             this.cmbConstituency.TabIndex = 45;
@@ -1097,7 +1097,7 @@ namespace Constituency.Desktop.Views
             // 
             this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 16);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 19);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(666, 29);
             this.cmbCanvasTypes.TabIndex = 45;
@@ -1414,7 +1414,7 @@ namespace Constituency.Desktop.Views
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(119, 10);
+            this.cmbSex.Location = new System.Drawing.Point(119, 7);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -1758,9 +1758,9 @@ namespace Constituency.Desktop.Views
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage7.Location = new System.Drawing.Point(4, 27);
+            this.tabPage7.Location = new System.Drawing.Point(4, 33);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1206, 751);
+            this.tabPage7.Size = new System.Drawing.Size(1206, 745);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Saved Comments";
             // 
@@ -1881,7 +1881,7 @@ namespace Constituency.Desktop.Views
             // 
             this.rjElectionActive.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.rjElectionActive.AutoSize = true;
-            this.rjElectionActive.Location = new System.Drawing.Point(151, 12);
+            this.rjElectionActive.Location = new System.Drawing.Point(155, 12);
             this.rjElectionActive.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjElectionActive.Name = "rjElectionActive";
             this.rjElectionActive.OffBackColor = System.Drawing.Color.Gray;
@@ -1897,7 +1897,7 @@ namespace Constituency.Desktop.Views
             this.label35.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label35.Location = new System.Drawing.Point(93, 14);
+            this.label35.Location = new System.Drawing.Point(97, 14);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(51, 21);
             this.label35.TabIndex = 35;
