@@ -798,6 +798,7 @@
             this.txtReg.Size = new System.Drawing.Size(268, 29);
             this.txtReg.TabIndex = 17;
             this.txtReg.Tag = "1,2";
+            this.txtReg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReg_KeyPress);
             // 
             // tableLayoutPanel14
             // 

@@ -289,7 +289,7 @@ namespace Constituency.Desktop.Views
                 {
                     Voter = new Voter();
                     Voter = await LoadVoterAsyncById(nodeTag);
-                    ShowApplicantInformation();
+                    ShowVoterInformation();
                     ibtnSaveVoter.Visible = false;
                     ibtnUpdate.Visible = true;
                 }
@@ -329,7 +329,7 @@ namespace Constituency.Desktop.Views
                 return null;
             }
         }
-        private void ShowApplicantInformation()
+        private void ShowVoterInformation()
         {
             try
             {
@@ -356,7 +356,8 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private void cleanScreen()

@@ -5,6 +5,7 @@ using Constituency.Desktop.Models;
 using Microsoft.AppCenter.Crashes;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Reflection;
 
 namespace Constituency.Desktop.Views
 {
@@ -355,10 +356,10 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
                     return;
                 }
-                if (await SaveVoter())
-                {
-                    await LoadVoters();
-                }
+                //if (await SaveVoter())
+                //{
+                //    await LoadVoters();
+                //}
 
                 if (Voter != null && Voter.Id > 0)
                 {
@@ -411,6 +412,77 @@ namespace Constituency.Desktop.Views
             }
         }
 
-       
+        private async void txtReg_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)13 && ((TextBox)sender).TextLength > 0)
+                {
+                    Voter = await LoadVoterByRegAsync("Voters/FindRegistration", ((TextBox)sender).Text);
+                    ShowVoterInformation();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void ShowVoterInformation()
+        {
+            try
+            {
+                if (Voter.Id > 0)
+                {
+                    List<PropertyInfo> properties = Voter.GetType().GetProperties().ToList();
+                    List<TextBox> VoterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
+                    foreach (TextBox txt in VoterTextBox)
+                    {
+                        if (properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).Any())
+                        {
+
+                            txt.Text = properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Voter).ToString();
+                        }
+                    }
+                    cmbSex.SelectedItem = Voter.Sex;
+                    dtpDOB.Value = Voter.DOB;
+                    cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
+                    FillUpdComboboxDivision();
+                    cmbDivision.SelectedValue = Voter.PollingDivision.Id;
+                    //TODO
+                    //mostrar en los datagrid los datos de las casa, las eleciones y las entrevistas
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<Voter> LoadVoterByRegAsync(string route, string Id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<Voter>(route, Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    if (response.Message == "Not Found")
+                    {
+                        UtilRecurrent.ErrorMessage(response.Message);
+                        return null;
+                    }
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return null;
+                }
+                return (Voter)response.Result;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex); 
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
     }
 }

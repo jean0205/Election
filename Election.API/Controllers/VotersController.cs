@@ -48,7 +48,7 @@ namespace Election.API.Controllers
             return voter;
         }
       
-        [HttpGet("FindRegistration/{id}")]
+        [HttpGet("FindRegistration/{reg}")]
         public async Task<ActionResult<Voter>> GetVoterByRegistration(string reg)
         {
             var voter = await _context.Voters.
