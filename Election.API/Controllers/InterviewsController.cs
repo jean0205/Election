@@ -84,6 +84,16 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Interview>> PostInterview(Interview interview)
         {
+            var interviewDB = _context.Interviews.FirstOrDefault(i => i.Id == interview.Id);
+            interview.Interviewer = _context.Interviewers.FirstOrDefault(i => i.Id == interview.Interviewer.Id);
+            if (interview.Comment != null)
+            {
+                interview.Comment = _context.Comments.FirstOrDefault(c => c.Id == interview.Comment.Id);
+            }
+
+            interview.SupportedParty = _context.Parties.FirstOrDefault(s => s.Id == interview.SupportedParty.Id);
+            interview.Voter = _context.Voters.FirstOrDefault(v => v.Id == interview.Voter.Id);
+            interview.Canvas = _context.Canvas.FirstOrDefault(c => c.Id == interview.Canvas.Id);
             _context.Interviews.Add(interview);
             await _context.SaveChangesAsync();
 

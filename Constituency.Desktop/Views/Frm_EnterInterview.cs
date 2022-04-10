@@ -17,6 +17,7 @@ namespace Constituency.Desktop.Views
         //objects
         User user { get; set; }
         Voter Voter { get; set; }
+        Interview Interview { get; set; }
 
         WaitFormFunc waitForm = new WaitFormFunc();
 
@@ -129,7 +130,7 @@ namespace Constituency.Desktop.Views
             {
                 //UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.GetListAsync<Canvas>("Canvas", token);
-               // UtilRecurrent.UnlockForm(waitForm, this);
+                // UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -156,9 +157,9 @@ namespace Constituency.Desktop.Views
             {
                 UtilRecurrent.UnlockForm(waitForm, this);
                 Crashes.TrackError(ex);
-                UtilRecurrent.ErrorMessage(ex.Message);                
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
-        }        
+        }
         private async Task LoadConstituencies()
         {
             Response response = await ApiServices.GetListAsync<ConstituencyC>("Constituencies", token);
@@ -242,7 +243,7 @@ namespace Constituency.Desktop.Views
 
                 foreach (Canvas canva in Canvas)
                 {
-                    if (canva.Interviews!=null)
+                    if (canva.Interviews != null)
                     {
                         int cant2 = canva.Interviews.Count();
 
@@ -255,7 +256,7 @@ namespace Constituency.Desktop.Views
                         treeNodes.Add(new TreeNode(canva.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
                         treeNodes[treeNodes.Count - 1].Tag = canva.Id;
                         childNodes = new List<TreeNode>();
-                    }                    
+                    }
                 }
                 tView1.Nodes.AddRange(treeNodes.ToArray());
                 tView1.ExpandAll();
@@ -328,10 +329,185 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                UtilRecurrent.UnlockForm(waitForm, this);                
+                UtilRecurrent.UnlockForm(waitForm, this);
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
                 return null;
+            }
+        }
+
+        private void ShowVoterInformation()
+        {
+            try
+            {
+                if (Voter.Id > 0)
+                {
+                    List<PropertyInfo> properties = Voter.GetType().GetProperties().ToList();
+                    List<TextBox> VoterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
+                    foreach (TextBox txt in VoterTextBox)
+                    {
+                        if (properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).Any())
+                        {
+
+                            txt.Text = properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Voter).ToString();
+                        }
+                    }
+                    cmbSex.SelectedItem = Voter.Sex;
+                    dtpDOB.Value = Voter.DOB;
+                    cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
+                    FillUpdComboboxDivision();
+                    cmbDivision.SelectedValue = Voter.PollingDivision.Id;
+                    //TODO
+                    //mostrar en los datagrid los datos de las casa, las eleciones y las entrevistas
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<Voter> LoadVoterByRegAsync(string route, string Id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<Voter>(route, Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    if (response.Message == "Not Found")
+                    {
+                        UtilRecurrent.ErrorMessage(response.Message);
+                        return null;
+                    }
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return null;
+                }
+                return (Voter)response.Result;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private Voter BuildVoter()
+        {
+            try
+            {
+                var voter = new Voter();
+                voter.Id = Voter.Id;
+                List<PropertyInfo> properties = Voter.GetType().GetProperties().ToList();
+                List<TextBox> voterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
+                foreach (PropertyInfo prop in properties)
+                {
+                    if (voterTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).Any())
+                    {
+                        prop.SetValue(voter, voterTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).FirstOrDefault().Text.TrimEnd().ToUpper());
+                    }
+                }
+                voter.Sex = cmbSex.SelectedItem.ToString();
+                voter.DOB = dtpDOB.Value;
+                voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
+                return voter;
+            }
+
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private async Task<Interview> BuildInterview()
+        {
+            try
+            {
+                Interview = new Interview();
+                Interview.Canvas = new Canvas();
+                Interview.Canvas=(Canvas)cmbCanvas.SelectedItem;
+                Interview.Canvas.Type.Canvas = null;
+                Interview.Interviewer = new Interviewer();
+                Interview.Interviewer = (Interviewer)cmbInterviewers.SelectedItem;
+                Interview.SupportedParty = new Party();
+                Interview.SupportedParty = (Party)cmbISupportedParty.SelectedItem;
+               
+                if (cmbIComment.SelectedItem!=null)
+                {
+                    Interview.Comment = new Comment();                    
+                    Interview.Comment = (Comment)cmbIComment.SelectedItem;
+                }
+                Interview.Date = dtpIDate.Value;
+                Interview.OtherComment = txtIOtherComment.Text.ToUpper();
+                var voter2 = BuildVoter();
+                if (MySerializer.VoterEquealtoVpter2(Voter,voter2 ))
+                {
+                     Interview.Voter = Voter;
+                }
+                else
+                {
+                    await UpdateVoter();
+                    Voter = await LoadVoterAsyncById(Voter.Id);
+                    Interview.Voter = Voter;
+                }               
+              
+                return Interview;
+            }
+
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private async Task<Voter> LoadVoterAsyncById(int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<Voter>("Voters", id.ToString(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    if (response.Message == "Not Found")
+                    {
+                        UtilRecurrent.ErrorMessage(response.Message);
+                        return null;
+                    }
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return null;
+                }
+                return (Voter)response.Result;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private async Task UpdateVoter()
+        {
+            try
+            {
+                var voter = BuildVoter();
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("Voters", voter, voter.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         #endregion
@@ -344,7 +520,7 @@ namespace Constituency.Desktop.Views
                 if (PaintRequiredVoter())
                 {
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
-                    return;
+                   // return;
                 }
                 if (dtpDOB.Value.AddYears(18) > DateTime.Now)
                 {
@@ -356,10 +532,10 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
                     return;
                 }
-                //if (await SaveVoter())
-                //{
-                //    await LoadVoters();
-                //}
+                if (await SaveInterview())
+                {
+                    await LoadCanvas();
+                }
 
                 if (Voter != null && Voter.Id > 0)
                 {
@@ -373,6 +549,35 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
 
+        }
+        private async Task<bool> SaveInterview()
+        {
+            try
+            {
+                var voter = BuildVoter();
+                voter.Active = true;
+                var interview = await BuildInterview();
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Interviews", interview, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+
+                Interview = (Interview)response.Result;
+                //UtilRecurrent.InformationMessage("Application sucessfully saved", "Application Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex); 
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
         }
         #endregion
 
@@ -427,62 +632,6 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private void ShowVoterInformation()
-        {
-            try
-            {
-                if (Voter.Id > 0)
-                {
-                    List<PropertyInfo> properties = Voter.GetType().GetProperties().ToList();
-                    List<TextBox> VoterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
-                    foreach (TextBox txt in VoterTextBox)
-                    {
-                        if (properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).Any())
-                        {
-
-                            txt.Text = properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Voter).ToString();
-                        }
-                    }
-                    cmbSex.SelectedItem = Voter.Sex;
-                    dtpDOB.Value = Voter.DOB;
-                    cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
-                    FillUpdComboboxDivision();
-                    cmbDivision.SelectedValue = Voter.PollingDivision.Id;
-                    //TODO
-                    //mostrar en los datagrid los datos de las casa, las eleciones y las entrevistas
-                }
-            }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
-            }
-        }
-        private async Task<Voter> LoadVoterByRegAsync(string route, string Id)
-        {
-            try
-            {
-                UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.FindAsync<Voter>(route, Id, token);
-                UtilRecurrent.UnlockForm(waitForm, this);
-                if (!response.IsSuccess)
-                {
-                    if (response.Message == "Not Found")
-                    {
-                        UtilRecurrent.ErrorMessage(response.Message);
-                        return null;
-                    }
-                    UtilRecurrent.ErrorMessage(response.Message);
-                    return null;
-                }
-                return (Voter)response.Result;
-            }
-            catch (Exception ex)
-            {
-                UtilRecurrent.UnlockForm(waitForm, this);
-                Crashes.TrackError(ex); 
-                UtilRecurrent.ErrorMessage(ex.Message);
-                return null;
-            }
-        }
+       
     }
 }

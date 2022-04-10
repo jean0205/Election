@@ -80,6 +80,7 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Interviewer>> PostInterviewer(Interviewer interviewer)
         {
+           
             _context.Interviewers.Add(interviewer);
             await _context.SaveChangesAsync();
 

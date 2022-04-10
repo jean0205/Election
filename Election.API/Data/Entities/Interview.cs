@@ -16,6 +16,9 @@ namespace Election.API.Data.Entities
         public Voter Voter { get; set; }
 
         [Required(ErrorMessage = "{0} is a required field.")]
+        public Canvas Canvas { get; set; }
+
+        [Required(ErrorMessage = "{0} is a required field.")]
         public Party SupportedParty { get; set; }    
 
         public Comment? Comment { get; set; }
