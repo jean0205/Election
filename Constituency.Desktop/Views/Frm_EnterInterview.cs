@@ -492,78 +492,7 @@ namespace Constituency.Desktop.Views
                 return null;
             }
         }
-        private Voter BuildVoter()
-        {
-            try
-            {
-                var voter = new Voter();
-                voter.Id = Voter.Id;
-                List<PropertyInfo> properties = Voter.GetType().GetProperties().ToList();
-                List<TextBox> voterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
-                foreach (PropertyInfo prop in properties)
-                {
-                    if (voterTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).Any())
-                    {
-                        prop.SetValue(voter, voterTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).FirstOrDefault().Text.TrimEnd().ToUpper());
-                    }
-                }
-                voter.Sex = cmbSex.SelectedItem.ToString();
-                voter.DOB = dtpDOB.Value;
-                voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
-                return voter;
-            }
-
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);
-                UtilRecurrent.ErrorMessage(ex.Message);
-                return null;
-            }
-        }
-        private async Task<Interview> BuildInterview(int? id)
-        {
-            try
-            {
-                Interview = new Interview();               
-                Interview.Canvas = (Canvas)cmbCanvas.SelectedItem;
-                Interview.Canvas.Type.Canvas = null;
-                Interview.Canvas.Interviews = null;
-                Interview.Interviewer = (Interviewer)cmbInterviewers.SelectedItem;
-                Interview.Interviewer.Interviews = null;                
-                Interview.SupportedParty = (Party)cmbISupportedParty.SelectedItem;
-                if (cmbIComment.SelectedItem != null)
-                {
-                    Interview.Comment = new Comment();
-                    Interview.Comment = (Comment)cmbIComment.SelectedItem;
-                }
-                Interview.Date = dtpIDate.Value;
-                Interview.OtherComment = txtIOtherComment.Text.ToUpper();
-                var voter2 = BuildVoter();
-                if (MySerializer.VoterEquealtoVpter2(Voter, voter2))
-                {
-                    Interview.Voter = Voter;
-                    Interview.Voter.Interviews = null;
-                }
-                else
-                {
-                    await UpdateVoter();
-                    Voter = await LoadVoterAsyncById(Voter.Id);
-                    Voter.Interviews = null;
-                    Interview.Voter = Voter;
-                }
-                if (id != null)
-                {
-                    Interview.Id = (int)id;
-                }
-                return Interview;
-            }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);
-                UtilRecurrent.ErrorMessage(ex.Message);
-                return null;
-            }
-        }
+      
         private async Task<Voter> LoadVoterAsyncById(int id)
         {
             try
@@ -709,6 +638,7 @@ namespace Constituency.Desktop.Views
                 if (await UpdateInterview((int)tView1.SelectedNode.Tag))
                 {
                     await LoadCanvas();
+                   
                 }
                 if (Interview != null && Interview.Id > 0)
                 {
@@ -727,15 +657,16 @@ namespace Constituency.Desktop.Views
             {
                 
                 var interview = await BuildInterview(id);
+                UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PutAsync("Interviews", interview, interview.Id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
 
+                UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
-                    return response.IsSuccess;
+                    return false;
                 }
-                Interview = (Interview)response.Result;               
                 return true;
             }
             catch (Exception ex)
@@ -744,6 +675,78 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
                 return false;
+            }
+        }
+        private Voter BuildVoter()
+        {
+            try
+            {
+                var voter = new Voter();
+                voter.Id = Voter.Id;
+                List<PropertyInfo> properties = Voter.GetType().GetProperties().ToList();
+                List<TextBox> voterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
+                foreach (PropertyInfo prop in properties)
+                {
+                    if (voterTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).Any())
+                    {
+                        prop.SetValue(voter, voterTextBox.Where(p => p.Name.Replace("txt", string.Empty) == prop.Name).FirstOrDefault().Text.TrimEnd().ToUpper());
+                    }
+                }
+                voter.Sex = cmbSex.SelectedItem.ToString();
+                voter.DOB = dtpDOB.Value;
+                voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
+                return voter;
+            }
+
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private async Task<Interview> BuildInterview(int? id)
+        {
+            try
+            {
+                Interview = new Interview();
+                Interview.Canvas = (Canvas)cmbCanvas.SelectedItem;
+                Interview.Canvas.Type.Canvas = null;
+                Interview.Canvas.Interviews = null;
+                Interview.Interviewer = (Interviewer)cmbInterviewers.SelectedItem;
+                Interview.Interviewer.Interviews = null;
+                Interview.SupportedParty = (Party)cmbISupportedParty.SelectedItem;
+                if (cmbIComment.SelectedItem != null)
+                {
+                    Interview.Comment = new Comment();
+                    Interview.Comment = (Comment)cmbIComment.SelectedItem;
+                }
+                Interview.Date = dtpIDate.Value;
+                Interview.OtherComment = txtIOtherComment.Text.ToUpper();
+                var voter2 = BuildVoter();
+                if (MySerializer.VoterEquealtoVpter2(Voter, voter2))
+                {
+                    Interview.Voter = Voter;
+                    Interview.Voter.Interviews = null;
+                }
+                else
+                {
+                    await UpdateVoter();
+                    Voter = await LoadVoterAsyncById(Voter.Id);
+                    Voter.Interviews = null;
+                    Interview.Voter = Voter;
+                }
+                if (id != null)
+                {
+                    Interview.Id = (int)id;
+                }
+                return Interview;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
             }
         }
         #endregion

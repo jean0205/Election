@@ -61,8 +61,31 @@ namespace Election.API.Controllers
             {
                 return BadRequest();
             }
+            var interviewDB = await  _context.Interviews
+                .Include(i => i.Interviewer)
+                .Include(i => i.SupportedParty)
+                .Include(i => i.Voter)
+                .Include(i=>i.Canvas)
+                .Include(i => i.Comment)
+                .FirstOrDefaultAsync(i => i.Id == id);
+            if (interviewDB == null)
+            {
+                return NotFound();
+            }
+            interviewDB.Voter = _context.Voters.FirstOrDefault(v => v.Id == interview.Voter.Id);
+            interviewDB.Interviewer = _context.Interviewers.FirstOrDefault(i => i.Id == interview.Interviewer.Id);
+            interviewDB.SupportedParty = _context.Parties.FirstOrDefault(s => s.Id == interview.SupportedParty.Id);            
+            interviewDB.Canvas = _context.Canvas.FirstOrDefault(c => c.Id == interview.Canvas.Id);
+            if (interview.Comment==null)
+            {
+                interviewDB.Comment = null;
+            }
+            else
+            {
+                interviewDB.Comment = _context.Comments.FirstOrDefault(c => c.Id == interview.Comment.Id);
+            }           
 
-            _context.Entry(interview).State = EntityState.Modified;
+            _context.Entry(interviewDB).State = EntityState.Modified;
 
             try
             {
