@@ -31,6 +31,7 @@ namespace Election.API.Controllers
         {
             return await _context.CanvasTypes
                 .Include(c=>c.Canvas)
+                .ThenInclude(c => c.Interviews)
                 .ToListAsync();
         }
 

@@ -83,8 +83,9 @@ namespace Election.API.Controllers
             else
             {
                 interviewDB.Comment = _context.Comments.FirstOrDefault(c => c.Id == interview.Comment.Id);
-            }           
-
+            }
+            interviewDB.OtherComment = interview.OtherComment;
+            interviewDB.Date = interview.Date;
             _context.Entry(interviewDB).State = EntityState.Modified;
 
             try

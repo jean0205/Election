@@ -559,7 +559,7 @@ namespace Constituency.Desktop.Views
                 RefreshTreeViewParties(PartiesList.ToList());
                 //tView1.SelectedNode = tView1.Nodes[0]; 
                 chkElectionParties.Items.Clear();
-                chkElectionParties.Items.AddRange(PartiesList.Select(p=>p.Name).ToArray());
+                chkElectionParties.Items.AddRange(PartiesList.Select(p => p.Name).ToArray());
             }
             else
             {
@@ -815,7 +815,20 @@ namespace Constituency.Desktop.Views
                 {
                     foreach (var item in canvasT.Canvas)
                     {
-                        txtCTCanvas.Text += item.ToString() + "\r\n";
+                        var dateFrom = new DateTime();
+                        var dateTo = new DateTime();
+                        if (item.Interviews != null)
+                        {
+                            //select Interviews minimal date and maximal date
+                            dateFrom = item.Interviews.Min(x => x.Date);
+                            dateTo = item.Interviews.Max(x => x.Date);
+                            txtCTCanvas.Text += item.Name.ToString() + " (" + dateFrom.ToString("dd-MMM-yyyy") + "-" + dateTo.ToString("dd-MMM-yyyy") + ")" + "\r\n";
+                        }
+                        else
+                        {
+                            txtCTCanvas.Text += item.Name.ToString()  + "\r\n";
+                        }
+
                     }
                 }
             }
@@ -932,7 +945,7 @@ namespace Constituency.Desktop.Views
         }
         #endregion
 
-      
+
 
         #region Interviewer
 
@@ -1271,7 +1284,7 @@ namespace Constituency.Desktop.Views
 
                 if (canvas.Interviews != null && canvas.Interviews.Any())
                 {
-                    dgvCanvasInterviews.DataSource = canvas.Interviews;
+                    dgvCanvasInterviews.DataSource = canvas.Interviews.Select(u => new {  u.Voter.Reg,u.Voter.FullName,u.Voter.PollingDivision,u.SupportedParty., u.Description, u.Active, u.Open }).ToList();
                 }
             }
             catch (Exception ex)
@@ -1486,7 +1499,7 @@ namespace Constituency.Desktop.Views
                         chkElectionParties.SetItemChecked(chkElectionParties.Items.IndexOf(party.Name), true);
                     }
                 }
-                               
+
                 if (election.ElectionVotes != null && election.ElectionVotes.Any())
                 {
                     DgvElectionVotes.DataSource = election.ElectionVotes;

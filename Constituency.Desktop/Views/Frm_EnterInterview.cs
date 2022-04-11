@@ -270,27 +270,17 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private TreeNode FindNode(TreeView tvw, string voterId)
+      
+        private IEnumerable<TreeNode> CollectAllNodes(TreeNodeCollection nodes)
         {
-            try
+            foreach (TreeNode node in nodes)
             {
-                foreach (TreeNode node in tvw.Nodes)
+                yield return node;
+                foreach (var child in CollectAllNodes(node.Nodes))
                 {
-                    foreach (TreeNode childNode in node.Nodes)
-                    {
-                        if (childNode.Nodes.Cast<TreeNode>().Where(x => x.Tag.ToString() == voterId).Any())
-                        {
-                            return childNode.Nodes.Cast<TreeNode>().FirstOrDefault(x => x.Tag.ToString() == voterId);
-                        }
-                    }
+                    yield return child;
                 }
             }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);
-                UtilRecurrent.ErrorMessage(ex.Message);
-            }
-            return null;
         }
         private void cleanScreen()
         {
@@ -569,7 +559,8 @@ namespace Constituency.Desktop.Views
 
                 if (Interview != null && Interview.Id > 0)
                 {
-                    tView1.SelectedNode = FindNode(tView1, Interview.Id.ToString());
+                    
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);
                     //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
                 }
             }
@@ -642,7 +633,7 @@ namespace Constituency.Desktop.Views
                 }
                 if (Interview != null && Interview.Id > 0)
                 {
-                    tView1.SelectedNode = FindNode(tView1, Interview.Id.ToString());
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).Where( n=>NodeLevel(n) == 1).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);
                     //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
                 }
             }
@@ -793,8 +784,15 @@ namespace Constituency.Desktop.Views
             {
                 if (e.KeyChar == (char)13 && ((TextBox)sender).TextLength > 0)
                 {
-                    Voter = await LoadVoterByRegAsync("Voters/FindRegistration", ((TextBox)sender).Text);
+                    var vot= await LoadVoterByRegAsync("Voters/FindRegistration", ((TextBox)sender).Text);
+                  
+                    if (vot!=null)
+                    {
+                        Voter = vot;
+                        
+                    }
                     ShowVoterInformation();
+
                 }
             }
             catch (Exception ex)

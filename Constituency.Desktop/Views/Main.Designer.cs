@@ -115,7 +115,7 @@ namespace Constituency.Desktop.Views
             // 
             this.ibtnApplicants.AutoSize = true;
             this.ibtnApplicants.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnApplicants.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnApplicants.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.ibtnApplicants.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ibtnApplicants.FlatAppearance.BorderSize = 0;
             this.ibtnApplicants.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -141,7 +141,7 @@ namespace Constituency.Desktop.Views
             // 
             this.ibtnEnterApp.AutoSize = true;
             this.ibtnEnterApp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnEnterApp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnEnterApp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.ibtnEnterApp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ibtnEnterApp.FlatAppearance.BorderSize = 0;
             this.ibtnEnterApp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -157,7 +157,7 @@ namespace Constituency.Desktop.Views
             this.ibtnEnterApp.Size = new System.Drawing.Size(237, 51);
             this.ibtnEnterApp.TabIndex = 2;
             this.ibtnEnterApp.Tag = "Enter_Interviews";
-            this.ibtnEnterApp.Text = "Enter Interviews";
+            this.ibtnEnterApp.Text = "Interviews";
             this.ibtnEnterApp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ibtnEnterApp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnEnterApp.UseVisualStyleBackColor = false;
@@ -167,7 +167,7 @@ namespace Constituency.Desktop.Views
             // 
             this.ibtnReview.AutoSize = true;
             this.ibtnReview.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnReview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnReview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.ibtnReview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ibtnReview.FlatAppearance.BorderSize = 0;
             this.ibtnReview.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -183,7 +183,7 @@ namespace Constituency.Desktop.Views
             this.ibtnReview.Size = new System.Drawing.Size(237, 51);
             this.ibtnReview.TabIndex = 3;
             this.ibtnReview.Tag = "Review_Applications";
-            this.ibtnReview.Text = "Review Applications";
+            this.ibtnReview.Text = "Houses";
             this.ibtnReview.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ibtnReview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnReview.UseVisualStyleBackColor = false;
@@ -193,7 +193,7 @@ namespace Constituency.Desktop.Views
             // 
             this.iconButton1.AutoSize = true;
             this.iconButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.iconButton1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iconButton1.FlatAppearance.BorderSize = 0;
             this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -209,7 +209,7 @@ namespace Constituency.Desktop.Views
             this.iconButton1.Size = new System.Drawing.Size(237, 51);
             this.iconButton1.TabIndex = 5;
             this.iconButton1.Tag = "Approve_Applications";
-            this.iconButton1.Text = "Approve Applications";
+            this.iconButton1.Text = "Elections";
             this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton1.UseVisualStyleBackColor = false;
@@ -229,7 +229,7 @@ namespace Constituency.Desktop.Views
             // 
             this.iconButton5.AutoSize = true;
             this.iconButton5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.iconButton5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iconButton5.FlatAppearance.BorderSize = 0;
             this.iconButton5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -245,7 +245,6 @@ namespace Constituency.Desktop.Views
             this.iconButton5.Size = new System.Drawing.Size(237, 51);
             this.iconButton5.TabIndex = 9;
             this.iconButton5.Tag = "All_Applications";
-            this.iconButton5.Text = "All Applications";
             this.iconButton5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iconButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton5.UseVisualStyleBackColor = false;
@@ -255,7 +254,7 @@ namespace Constituency.Desktop.Views
             // 
             this.iconButton2.AutoSize = true;
             this.iconButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.iconButton2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iconButton2.FlatAppearance.BorderSize = 0;
             this.iconButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -281,7 +280,7 @@ namespace Constituency.Desktop.Views
             // 
             this.iconButton3.AutoSize = true;
             this.iconButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.iconButton3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iconButton3.FlatAppearance.BorderSize = 0;
             this.iconButton3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -307,7 +306,7 @@ namespace Constituency.Desktop.Views
             // 
             this.iconButton4.AutoSize = true;
             this.iconButton4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.iconButton4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iconButton4.FlatAppearance.BorderSize = 0;
             this.iconButton4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -829,7 +828,7 @@ namespace Constituency.Desktop.Views
             // 
             this.ibtnResenEmail.AutoSize = true;
             this.ibtnResenEmail.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnResenEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(60)))));
+            this.ibtnResenEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.ibtnResenEmail.Dock = System.Windows.Forms.DockStyle.Left;
             this.ibtnResenEmail.FlatAppearance.BorderSize = 0;
             this.ibtnResenEmail.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -856,7 +855,7 @@ namespace Constituency.Desktop.Views
             // 
             this.ibtnShowPanelPassword.AutoSize = true;
             this.ibtnShowPanelPassword.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnShowPanelPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(60)))));
+            this.ibtnShowPanelPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.ibtnShowPanelPassword.Dock = System.Windows.Forms.DockStyle.Left;
             this.ibtnShowPanelPassword.FlatAppearance.BorderSize = 0;
             this.ibtnShowPanelPassword.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -1054,7 +1053,7 @@ namespace Constituency.Desktop.Views
             // 
             this.iconButton7.AutoSize = true;
             this.iconButton7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.iconButton7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iconButton7.FlatAppearance.BorderSize = 0;
             this.iconButton7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
@@ -1070,7 +1069,6 @@ namespace Constituency.Desktop.Views
             this.iconButton7.Size = new System.Drawing.Size(237, 55);
             this.iconButton7.TabIndex = 9;
             this.iconButton7.Tag = "Master_File";
-            this.iconButton7.Text = "Master File";
             this.iconButton7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iconButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton7.UseVisualStyleBackColor = false;
@@ -1162,7 +1160,7 @@ namespace Constituency.Desktop.Views
             this.iconButton8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.iconButton8.AutoSize = true;
             this.iconButton8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(60)))));
+            this.iconButton8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.iconButton8.FlatAppearance.BorderSize = 0;
             this.iconButton8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CadetBlue;
             this.iconButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1190,7 +1188,7 @@ namespace Constituency.Desktop.Views
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.ClientSize = new System.Drawing.Size(1388, 780);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
