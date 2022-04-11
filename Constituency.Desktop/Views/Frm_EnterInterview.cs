@@ -336,6 +336,105 @@ namespace Constituency.Desktop.Views
             }
         }
 
+        private void tView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            try
+            {
+                if (e.Node != null)
+                {
+                    cleanScreen();
+                    if (NodeLevel(e.Node) == 0)
+                    {
+                        AfterSelectNodeCanvas((int)e.Node.Tag);
+                    }
+                    if (NodeLevel(e.Node) == 1)
+                    {
+                        AfterSelectNodeInterview((int)e.Node.Tag);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+
+            }
+        }
+        private void AfterSelectNodeCanvas(int nodeTag)
+        {
+            FieldsWhite();
+            try
+            {
+                if (nodeTag > 0)
+                {
+                    Interview = new();
+                    Voter = new();
+                    cmbCanvas.SelectedValue = nodeTag;
+                    ibtnSaveVoter.Visible = true;
+                    ibtnUpdate.Visible = false;
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async void AfterSelectNodeInterview(int nodeTag)
+        {
+            FieldsWhite();
+            try
+            {
+                if (nodeTag > 0)
+                {
+                    Interview = new();
+                    Voter = new();
+                    Interview = await LoadInterviewAsyncById(nodeTag);
+                    ShowInterviewInformation();
+                    ibtnSaveVoter.Visible = false;
+                    ibtnUpdate.Visible = true;
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        public int NodeLevel(TreeNode node)
+        {
+            int level = 0;
+            while ((node = node.Parent) != null) level++;
+            return level;
+        }
+        private void ShowInterviewInformation()
+        {
+            try
+            {
+                Voter = Interview.Voter;
+                ShowVoterInformation();
+                cmbCanvas.SelectedValue = Interview.Canvas.Id;
+                cmbISupportedParty.SelectedValue = Interview.SupportedParty.Id;
+                cmbInterviewers.SelectedValue = Interview.Interviewer.Id;
+                // cmbIComment.SelectedValue = Interview.Comment.Id;
+                txtIOtherComment.Text = Interview.OtherComment;
+                dtpIDate.Value = Interview.Date;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
         private void ShowVoterInformation()
         {
             try
@@ -421,41 +520,43 @@ namespace Constituency.Desktop.Views
                 return null;
             }
         }
-        private async Task<Interview> BuildInterview()
+        private async Task<Interview> BuildInterview(int? id)
         {
             try
             {
-                Interview = new Interview();
-                Interview.Canvas = new Canvas();
-                Interview.Canvas=(Canvas)cmbCanvas.SelectedItem;
+                Interview = new Interview();               
+                Interview.Canvas = (Canvas)cmbCanvas.SelectedItem;
                 Interview.Canvas.Type.Canvas = null;
-                Interview.Interviewer = new Interviewer();
+                Interview.Canvas.Interviews = null;
                 Interview.Interviewer = (Interviewer)cmbInterviewers.SelectedItem;
-                Interview.SupportedParty = new Party();
+                Interview.Interviewer.Interviews = null;                
                 Interview.SupportedParty = (Party)cmbISupportedParty.SelectedItem;
-               
-                if (cmbIComment.SelectedItem!=null)
+                if (cmbIComment.SelectedItem != null)
                 {
-                    Interview.Comment = new Comment();                    
+                    Interview.Comment = new Comment();
                     Interview.Comment = (Comment)cmbIComment.SelectedItem;
                 }
                 Interview.Date = dtpIDate.Value;
                 Interview.OtherComment = txtIOtherComment.Text.ToUpper();
                 var voter2 = BuildVoter();
-                if (MySerializer.VoterEquealtoVpter2(Voter,voter2 ))
+                if (MySerializer.VoterEquealtoVpter2(Voter, voter2))
                 {
-                     Interview.Voter = Voter;
+                    Interview.Voter = Voter;
+                    Interview.Voter.Interviews = null;
                 }
                 else
                 {
                     await UpdateVoter();
                     Voter = await LoadVoterAsyncById(Voter.Id);
+                    Voter.Interviews = null;
                     Interview.Voter = Voter;
-                }               
-              
+                }
+                if (id != null)
+                {
+                    Interview.Id = (int)id;
+                }
                 return Interview;
             }
-
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
@@ -512,7 +613,7 @@ namespace Constituency.Desktop.Views
         }
         #endregion
 
-        #region Save Interview
+        #region Save/update Interview
         private async void ibtnSaveVoter_Click(object sender, EventArgs e)
         {
             try
@@ -520,7 +621,7 @@ namespace Constituency.Desktop.Views
                 if (PaintRequiredVoter())
                 {
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
-                   // return;
+                     return;
                 }
                 if (dtpDOB.Value.AddYears(18) > DateTime.Now)
                 {
@@ -537,9 +638,9 @@ namespace Constituency.Desktop.Views
                     await LoadCanvas();
                 }
 
-                if (Voter != null && Voter.Id > 0)
+                if (Interview != null && Interview.Id > 0)
                 {
-                    tView1.SelectedNode = FindNode(tView1, Voter.Id.ToString());
+                    tView1.SelectedNode = FindNode(tView1, Interview.Id.ToString());
                     //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
                 }
             }
@@ -556,7 +657,7 @@ namespace Constituency.Desktop.Views
             {
                 var voter = BuildVoter();
                 voter.Active = true;
-                var interview = await BuildInterview();
+                var interview = await BuildInterview(null);
                 UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PostAsync("Interviews", interview, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
@@ -574,7 +675,73 @@ namespace Constituency.Desktop.Views
             catch (Exception ex)
             {
                 UtilRecurrent.UnlockForm(waitForm, this);
-                Crashes.TrackError(ex); 
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+        }
+        private async void ibtnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //TODO
+                //valorar si debo crear varios gets en los controladores unos q carguen todas las relaciones y otros
+                //que solo cargen la entidad principal como aqui en interview que estoy leyendo el voter con las interviews y despues tengo que hacerlas null
+                if (tView1.SelectedNode==null || (int)tView1.SelectedNode.Tag==0)
+                {
+                    return;
+                }
+                if (PaintRequiredVoter())
+                {
+                    UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
+                    return;
+                }
+                if (dtpDOB.Value.AddYears(18) > DateTime.Now)
+                {
+                    UtilRecurrent.ErrorMessage("Voter younger than 18.");
+                    return;
+                }
+                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
+                {
+                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
+                    return;
+                }
+                if (await UpdateInterview((int)tView1.SelectedNode.Tag))
+                {
+                    await LoadCanvas();
+                }
+                if (Interview != null && Interview.Id > 0)
+                {
+                    tView1.SelectedNode = FindNode(tView1, Interview.Id.ToString());
+                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> UpdateInterview(int? id)
+        {
+            try
+            {
+                
+                var interview = await BuildInterview(id);
+                Response response = await ApiServices.PutAsync("Interviews", interview, interview.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+                Interview = (Interview)response.Result;               
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
                 return false;
             }
@@ -632,6 +799,7 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-       
+
+        
     }
 }

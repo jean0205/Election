@@ -188,6 +188,7 @@
             this.tView1.Name = "tView1";
             this.tView1.Size = new System.Drawing.Size(254, 656);
             this.tView1.TabIndex = 0;
+            this.tView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tView1_AfterSelect);
             // 
             // tableLayoutPanel49
             // 
@@ -434,6 +435,7 @@
             // cmbDivision
             // 
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
             this.cmbDivision.Location = new System.Drawing.Point(566, 5);
             this.cmbDivision.Name = "cmbDivision";
@@ -444,6 +446,7 @@
             // cmbConstituency
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
             this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
             this.cmbConstituency.Name = "cmbConstituency";
@@ -908,6 +911,7 @@
             // cmbInterviewers
             // 
             this.cmbInterviewers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbInterviewers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInterviewers.FormattingEnabled = true;
             this.cmbInterviewers.Location = new System.Drawing.Point(162, 169);
             this.cmbInterviewers.Name = "cmbInterviewers";
@@ -940,6 +944,7 @@
             // cmbISupportedParty
             // 
             this.cmbISupportedParty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbISupportedParty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbISupportedParty.FormattingEnabled = true;
             this.cmbISupportedParty.Location = new System.Drawing.Point(162, 10);
             this.cmbISupportedParty.Name = "cmbISupportedParty";
@@ -972,12 +977,13 @@
             // cmbIComment
             // 
             this.cmbIComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbIComment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIComment.FormattingEnabled = true;
             this.cmbIComment.Location = new System.Drawing.Point(162, 55);
             this.cmbIComment.Name = "cmbIComment";
             this.cmbIComment.Size = new System.Drawing.Size(714, 29);
             this.cmbIComment.TabIndex = 38;
-            this.cmbIComment.Tag = "1";
+            this.cmbIComment.Tag = "";
             // 
             // txtIOtherComment
             // 
@@ -1022,6 +1028,7 @@
             // cmbCanvas
             // 
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
             this.cmbCanvas.Location = new System.Drawing.Point(562, 12);
             this.cmbCanvas.Name = "cmbCanvas";
@@ -1083,6 +1090,7 @@
             this.ibtnUpdate.Text = "Update";
             this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnUpdate.UseVisualStyleBackColor = false;
+            this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
             // 
             // ibtnSaveVoter
             // 

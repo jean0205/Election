@@ -32,6 +32,7 @@ namespace Election.API.Controllers
         public async Task<ActionResult<Interview>> GetInterview(int id)
         {
             var interview = await _context.Interviews
+                .Include(i=>i.Canvas)
                 .Include(i => i.Interviewer)
                 .Include(i => i.Comment)
                 .Include(i => i.SupportedParty)
@@ -53,6 +54,9 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutInterview(int id, Interview interview)
         {
+            //TODO
+            //modificar elupdate para qactualice las relacions, si cambia en interviewer o el party
+            //revisar q al hacer null las relaciones, no se borren cuando se actualiza
             if (id != interview.Id)
             {
                 return BadRequest();

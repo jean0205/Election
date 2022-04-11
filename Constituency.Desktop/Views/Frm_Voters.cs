@@ -300,7 +300,8 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private async Task<Voter> LoadVoterAsyncById(int id)
@@ -488,7 +489,7 @@ namespace Constituency.Desktop.Views
 
         private async void ibtnUpdate_Click(object sender, EventArgs e)
         {
-            try
+             try
             {
                 if (PaintRequiredVoter())
                 {
