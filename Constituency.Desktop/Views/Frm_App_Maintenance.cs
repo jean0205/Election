@@ -1276,6 +1276,7 @@ namespace Constituency.Desktop.Views
         {
             try
             {
+                //TODO mostrar la informacion de las entrevistas en el datagridview
                 txtCanvasName.Text = canvas.Name;
                 txtCanvasDescription.Text = canvas.Description;
                 rjCanvasActive.Checked = canvas.Active;
