@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -94,14 +95,13 @@
             this.cmbIComment = new System.Windows.Forms.ComboBox();
             this.txtIOtherComment = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.label20 = new System.Windows.Forms.Label();
-            this.cmbCanvas = new System.Windows.Forms.ComboBox();
             this.dtpIDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
             this.ibtnSaveVoter = new FontAwesome.Sharp.IconButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -176,7 +176,7 @@
             this.groupBox1.Size = new System.Drawing.Size(260, 775);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Interviews List:";
+            this.groupBox1.Text = "Election Votes List:";
             // 
             // tView1
             // 
@@ -433,6 +433,7 @@
             // 
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDivision.Enabled = false;
             this.cmbDivision.FormattingEnabled = true;
             this.cmbDivision.Location = new System.Drawing.Point(566, 8);
             this.cmbDivision.Name = "cmbDivision";
@@ -444,6 +445,7 @@
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConstituency.Enabled = false;
             this.cmbConstituency.FormattingEnabled = true;
             this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
@@ -482,6 +484,7 @@
             // txtEmail
             // 
             this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEmail.Enabled = false;
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtEmail.Location = new System.Drawing.Point(107, 5);
             this.txtEmail.Name = "txtEmail";
@@ -524,6 +527,7 @@
             // txtMobile1
             // 
             this.txtMobile1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMobile1.Enabled = false;
             this.txtMobile1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtMobile1.Location = new System.Drawing.Point(106, 5);
             this.txtMobile1.Name = "txtMobile1";
@@ -545,6 +549,7 @@
             // txtMobile2
             // 
             this.txtMobile2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMobile2.Enabled = false;
             this.txtMobile2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtMobile2.Location = new System.Drawing.Point(576, 5);
             this.txtMobile2.Name = "txtMobile2";
@@ -583,6 +588,7 @@
             // txtOccupation
             // 
             this.txtOccupation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOccupation.Enabled = false;
             this.txtOccupation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtOccupation.Location = new System.Drawing.Point(107, 5);
             this.txtOccupation.Name = "txtOccupation";
@@ -621,6 +627,7 @@
             // txtAddress
             // 
             this.txtAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAddress.Enabled = false;
             this.txtAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtAddress.Location = new System.Drawing.Point(107, 5);
             this.txtAddress.Name = "txtAddress";
@@ -665,6 +672,7 @@
             this.cmbSex.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbSex.BackColor = System.Drawing.SystemColors.Window;
             this.cmbSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSex.Enabled = false;
             this.cmbSex.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSex.FormattingEnabled = true;
             this.cmbSex.Items.AddRange(new object[] {
@@ -680,6 +688,7 @@
             // 
             this.dtpDOB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpDOB.CustomFormat = "dd-MMM-yyyy";
+            this.dtpDOB.Enabled = false;
             this.dtpDOB.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDOB.Location = new System.Drawing.Point(576, 5);
             this.dtpDOB.Name = "dtpDOB";
@@ -732,6 +741,7 @@
             // txtSurName
             // 
             this.txtSurName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSurName.Enabled = false;
             this.txtSurName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSurName.Location = new System.Drawing.Point(106, 5);
             this.txtSurName.Name = "txtSurName";
@@ -753,6 +763,7 @@
             // txtGivenNames
             // 
             this.txtGivenNames.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtGivenNames.Enabled = false;
             this.txtGivenNames.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtGivenNames.Location = new System.Drawing.Point(558, 5);
             this.txtGivenNames.Name = "txtGivenNames";
@@ -797,6 +808,7 @@
             this.txtReg.Size = new System.Drawing.Size(268, 29);
             this.txtReg.TabIndex = 17;
             this.txtReg.Tag = "1,2";
+            this.txtReg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReg_KeyPress);
             // 
             // tableLayoutPanel14
             // 
@@ -833,6 +845,7 @@
             // txtHomePhone
             // 
             this.txtHomePhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtHomePhone.Enabled = false;
             this.txtHomePhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtHomePhone.Location = new System.Drawing.Point(106, 5);
             this.txtHomePhone.Name = "txtHomePhone";
@@ -854,6 +867,7 @@
             // txtWorkPhone
             // 
             this.txtWorkPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWorkPhone.Enabled = false;
             this.txtWorkPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtWorkPhone.Location = new System.Drawing.Point(576, 5);
             this.txtWorkPhone.Name = "txtWorkPhone";
@@ -874,7 +888,7 @@
             this.groupBox2.Size = new System.Drawing.Size(886, 267);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Interview";
+            this.groupBox2.Text = "Election Vote:";
             // 
             // tableLayoutPanel1
             // 
@@ -992,13 +1006,9 @@
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel5.ColumnCount = 4;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.08874F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.39932F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.96141F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.32236F));
-            this.tableLayoutPanel5.Controls.Add(this.label20, 2, 0);
-            this.tableLayoutPanel5.Controls.Add(this.cmbCanvas, 3, 0);
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.74744F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 82.25256F));
             this.tableLayoutPanel5.Controls.Add(this.dtpIDate, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1009,34 +1019,12 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(880, 47);
             this.tableLayoutPanel5.TabIndex = 10;
             // 
-            // label20
-            // 
-            this.label20.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label20.Location = new System.Drawing.Point(492, 13);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(63, 21);
-            this.label20.TabIndex = 17;
-            this.label20.Text = "Canvas:";
-            // 
-            // cmbCanvas
-            // 
-            this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(562, 9);
-            this.cmbCanvas.Name = "cmbCanvas";
-            this.cmbCanvas.Size = new System.Drawing.Size(314, 29);
-            this.cmbCanvas.TabIndex = 34;
-            this.cmbCanvas.Tag = "1";
-            // 
             // dtpIDate
             // 
             this.dtpIDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpIDate.CustomFormat = "dd-MMM-yyyy hh:mm tt";
             this.dtpIDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpIDate.Location = new System.Drawing.Point(163, 9);
+            this.dtpIDate.Location = new System.Drawing.Point(160, 9);
             this.dtpIDate.Name = "dtpIDate";
             this.dtpIDate.Size = new System.Drawing.Size(213, 29);
             this.dtpIDate.TabIndex = 32;
@@ -1047,7 +1035,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(46, 13);
+            this.label5.Location = new System.Drawing.Point(43, 13);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 21);
             this.label5.TabIndex = 22;
@@ -1112,10 +1100,10 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage2.Location = new System.Drawing.Point(4, 30);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1176, 787);
+            this.tabPage2.Size = new System.Drawing.Size(1176, 793);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             // 
@@ -1128,9 +1116,10 @@
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.White;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_ElectionVotes";
             this.Text = "Frm_ElectionVotes";
+            this.Load += new System.EventHandler(this.Frm_ElectionVotes_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1240,13 +1229,12 @@
         private ComboBox cmbIComment;
         private TextBox txtIOtherComment;
         private TableLayoutPanel tableLayoutPanel5;
-        private Label label20;
-        private ComboBox cmbCanvas;
         private DateTimePicker dtpIDate;
         private Label label5;
         private Panel panel1;
         private FontAwesome.Sharp.IconButton ibtnUpdate;
         private FontAwesome.Sharp.IconButton ibtnSaveVoter;
         private TabPage tabPage2;
+        private ToolTip toolTip1;
     }
 }

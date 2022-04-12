@@ -13,6 +13,9 @@
     <Compile Update="Views\Frm_App_Maintenance.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\Frm_ElectionVotes.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Frm_EnterInterview.cs">
       <SubType>Form</SubType>
     </Compile>

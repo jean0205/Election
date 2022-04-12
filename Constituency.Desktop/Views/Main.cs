@@ -114,9 +114,9 @@ namespace Constituency.Desktop.Views
            
             try
             {
-                Analytics.TrackEvent("Frm_ApproveApplications " + tokenResponse.User.FullName);
-                //Frm_ApproveApplications frm = new Frm_ApproveApplications();
-                //frm.ShowDialog();
+                Analytics.TrackEvent("Frm_ElectionVotes " + tokenResponse.User.FullName);
+                Frm_ElectionVotes frm = new Frm_ElectionVotes();
+                frm.ShowDialog();
             }
             catch (Exception ex)
             {

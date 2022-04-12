@@ -9,7 +9,8 @@ namespace Constituency.Desktop.Entities
     public class ElectionVote
     {
         public int Id { get; set; }
-       
+
+        public NationalElection Election { get; set; }
         public DateTime VoteTime { get; set; }
       
         public Voter Voter { get; set; }

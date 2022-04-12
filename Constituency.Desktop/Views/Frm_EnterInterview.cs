@@ -446,8 +446,7 @@ namespace Constituency.Desktop.Views
                     cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
                     FillUpdComboboxDivision();
                     cmbDivision.SelectedValue = Voter.PollingDivision.Id;
-                    //TODO
-                    //mostrar en los datagrid los datos de las casa, las eleciones y las entrevistas
+                    
                 }
             }
             catch (Exception ex)

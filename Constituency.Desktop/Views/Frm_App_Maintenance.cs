@@ -954,8 +954,6 @@ namespace Constituency.Desktop.Views
         }
         #endregion
 
-
-
         #region Interviewer
 
         private ObservableCollection<Interviewer> InterviewerList;
@@ -1505,6 +1503,7 @@ namespace Constituency.Desktop.Views
             {
                 txtElectionDescription.Text = election.Description;
                 dtpElectionDate.Value = election.ElectionDate;
+                rjElectionActive.Checked = election.Open;
                 foreach (int i in chkElectionParties.CheckedIndices)
                 {
                     chkElectionParties.SetItemCheckState(i, CheckState.Unchecked);
