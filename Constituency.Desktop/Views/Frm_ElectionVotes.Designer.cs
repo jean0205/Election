@@ -1,6 +1,6 @@
 ﻿namespace Constituency.Desktop.Views
 {
-    partial class Frm_EnterInterview
+    partial class Frm_ElectionVotes
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -103,7 +102,6 @@
             this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
             this.ibtnSaveVoter = new FontAwesome.Sharp.IconButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -137,7 +135,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1184, 821);
-            this.tabControl1.TabIndex = 1;
+            this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
             // 
@@ -188,7 +186,6 @@
             this.tView1.Name = "tView1";
             this.tView1.Size = new System.Drawing.Size(254, 653);
             this.tView1.TabIndex = 0;
-            this.tView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tView1_AfterSelect);
             // 
             // tableLayoutPanel49
             // 
@@ -437,7 +434,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(566, 5);
+            this.cmbDivision.Location = new System.Drawing.Point(566, 8);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(316, 29);
             this.cmbDivision.TabIndex = 34;
@@ -448,12 +445,11 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(310, 29);
             this.cmbConstituency.TabIndex = 33;
             this.cmbConstituency.Tag = "1";
-            this.cmbConstituency.SelectionChangeCommitted += new System.EventHandler(this.cmbConstituency_SelectionChangeCommitted);
             // 
             // tableLayoutPanel15
             // 
@@ -674,7 +670,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(107, 5);
+            this.cmbSex.Location = new System.Drawing.Point(107, 8);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -801,7 +797,6 @@
             this.txtReg.Size = new System.Drawing.Size(268, 29);
             this.txtReg.TabIndex = 17;
             this.txtReg.Tag = "1,2";
-            this.txtReg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReg_KeyPress);
             // 
             // tableLayoutPanel14
             // 
@@ -913,7 +908,7 @@
             this.cmbInterviewers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbInterviewers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInterviewers.FormattingEnabled = true;
-            this.cmbInterviewers.Location = new System.Drawing.Point(162, 169);
+            this.cmbInterviewers.Location = new System.Drawing.Point(162, 166);
             this.cmbInterviewers.Name = "cmbInterviewers";
             this.cmbInterviewers.Size = new System.Drawing.Size(714, 29);
             this.cmbInterviewers.TabIndex = 41;
@@ -946,7 +941,7 @@
             this.cmbISupportedParty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbISupportedParty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbISupportedParty.FormattingEnabled = true;
-            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 10);
+            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 7);
             this.cmbISupportedParty.Name = "cmbISupportedParty";
             this.cmbISupportedParty.Size = new System.Drawing.Size(714, 29);
             this.cmbISupportedParty.TabIndex = 35;
@@ -979,7 +974,7 @@
             this.cmbIComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbIComment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIComment.FormattingEnabled = true;
-            this.cmbIComment.Location = new System.Drawing.Point(162, 55);
+            this.cmbIComment.Location = new System.Drawing.Point(162, 52);
             this.cmbIComment.Name = "cmbIComment";
             this.cmbIComment.Size = new System.Drawing.Size(714, 29);
             this.cmbIComment.TabIndex = 38;
@@ -1030,7 +1025,7 @@
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(562, 12);
+            this.cmbCanvas.Location = new System.Drawing.Point(562, 9);
             this.cmbCanvas.Name = "cmbCanvas";
             this.cmbCanvas.Size = new System.Drawing.Size(314, 29);
             this.cmbCanvas.TabIndex = 34;
@@ -1083,14 +1078,13 @@
             this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnUpdate.IconSize = 33;
             this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnUpdate.Location = new System.Drawing.Point(743, 4);
+            this.ibtnUpdate.Location = new System.Drawing.Point(1435, -26);
             this.ibtnUpdate.Name = "ibtnUpdate";
             this.ibtnUpdate.Size = new System.Drawing.Size(155, 37);
             this.ibtnUpdate.TabIndex = 5;
             this.ibtnUpdate.Text = "Update";
             this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnUpdate.UseVisualStyleBackColor = false;
-            this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
             // 
             // ibtnSaveVoter
             // 
@@ -1107,37 +1101,36 @@
             this.ibtnSaveVoter.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnSaveVoter.IconSize = 33;
             this.ibtnSaveVoter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSaveVoter.Location = new System.Drawing.Point(560, 4);
+            this.ibtnSaveVoter.Location = new System.Drawing.Point(1252, -26);
             this.ibtnSaveVoter.Name = "ibtnSaveVoter";
             this.ibtnSaveVoter.Size = new System.Drawing.Size(155, 37);
             this.ibtnSaveVoter.TabIndex = 4;
             this.ibtnSaveVoter.Text = "Save";
             this.ibtnSaveVoter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnSaveVoter.UseVisualStyleBackColor = false;
-            this.ibtnSaveVoter.Click += new System.EventHandler(this.ibtnSaveVoter_Click);
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1176, 796);
+            this.tabPage2.Size = new System.Drawing.Size(1176, 787);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             // 
-            // Frm_EnterInterview
+            // Frm_ElectionVotes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.ClientSize = new System.Drawing.Size(1184, 821);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.White;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Frm_EnterInterview";
-            this.Text = "Frm_EnterInterview";
-            this.Load += new System.EventHandler(this.Frm_EnterInterview_Load);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "Frm_ElectionVotes";
+            this.Text = "Frm_ElectionVotes";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1236,25 +1229,24 @@
         private TextBox txtHomePhone;
         private Label label12;
         private TextBox txtWorkPhone;
-        private Panel panel1;
-        private FontAwesome.Sharp.IconButton ibtnUpdate;
-        private FontAwesome.Sharp.IconButton ibtnSaveVoter;
-        private TabPage tabPage2;
         private GroupBox groupBox2;
         private TableLayoutPanel tableLayoutPanel1;
-        private Label label5;
-        private DateTimePicker dtpIDate;
+        private ComboBox cmbInterviewers;
+        private Label label18;
         private Label label8;
         private ComboBox cmbISupportedParty;
         private Label label16;
         private Label label17;
         private ComboBox cmbIComment;
-        private ComboBox cmbInterviewers;
-        private Label label18;
         private TextBox txtIOtherComment;
         private TableLayoutPanel tableLayoutPanel5;
         private Label label20;
         private ComboBox cmbCanvas;
-        private ToolTip toolTip1;
+        private DateTimePicker dtpIDate;
+        private Label label5;
+        private Panel panel1;
+        private FontAwesome.Sharp.IconButton ibtnUpdate;
+        private FontAwesome.Sharp.IconButton ibtnSaveVoter;
+        private TabPage tabPage2;
     }
 }

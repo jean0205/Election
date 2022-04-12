@@ -1766,9 +1766,9 @@ namespace Constituency.Desktop.Views
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage7.Location = new System.Drawing.Point(4, 27);
+            this.tabPage7.Location = new System.Drawing.Point(4, 33);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1206, 751);
+            this.tabPage7.Size = new System.Drawing.Size(1206, 745);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Saved Comments";
             // 
@@ -1776,9 +1776,9 @@ namespace Constituency.Desktop.Views
             // 
             this.tabPage8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage8.Controls.Add(this.tableLayoutPanel22);
-            this.tabPage8.Location = new System.Drawing.Point(4, 27);
+            this.tabPage8.Location = new System.Drawing.Point(4, 33);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1206, 751);
+            this.tabPage8.Size = new System.Drawing.Size(1206, 745);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "National Elections";
             // 
@@ -1794,7 +1794,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel22.Name = "tableLayoutPanel22";
             this.tableLayoutPanel22.RowCount = 1;
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel22.Size = new System.Drawing.Size(1206, 751);
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(1206, 745);
             this.tableLayoutPanel22.TabIndex = 4;
             // 
             // groupBox8
@@ -1804,7 +1804,7 @@ namespace Constituency.Desktop.Views
             this.groupBox8.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox8.Location = new System.Drawing.Point(3, 3);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(344, 745);
+            this.groupBox8.Size = new System.Drawing.Size(344, 739);
             this.groupBox8.TabIndex = 1;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "National Elections:";
@@ -1817,7 +1817,7 @@ namespace Constituency.Desktop.Views
             this.TVElections.Location = new System.Drawing.Point(3, 25);
             this.TVElections.Name = "TVElections";
             this.TVElections.SelectedImageIndex = 0;
-            this.TVElections.Size = new System.Drawing.Size(338, 717);
+            this.TVElections.Size = new System.Drawing.Size(338, 711);
             this.TVElections.TabIndex = 2;
             this.TVElections.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVElections_AfterSelect);
             // 
@@ -1841,7 +1841,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 119F));
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(850, 745);
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(850, 739);
             this.tableLayoutPanel23.TabIndex = 2;
             // 
             // ibtnElectionSave
@@ -1859,7 +1859,7 @@ namespace Constituency.Desktop.Views
             this.ibtnElectionSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnElectionSave.IconSize = 40;
             this.ibtnElectionSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnElectionSave.Location = new System.Drawing.Point(686, 694);
+            this.ibtnElectionSave.Location = new System.Drawing.Point(686, 688);
             this.ibtnElectionSave.Name = "ibtnElectionSave";
             this.ibtnElectionSave.Size = new System.Drawing.Size(161, 48);
             this.ibtnElectionSave.TabIndex = 54;
@@ -2030,7 +2030,7 @@ namespace Constituency.Desktop.Views
             this.groupBox9.ForeColor = System.Drawing.Color.White;
             this.groupBox9.Location = new System.Drawing.Point(3, 332);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(844, 350);
+            this.groupBox9.Size = new System.Drawing.Size(844, 344);
             this.groupBox9.TabIndex = 53;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Votes:";
@@ -2042,7 +2042,7 @@ namespace Constituency.Desktop.Views
             this.DgvElectionVotes.Location = new System.Drawing.Point(3, 25);
             this.DgvElectionVotes.Name = "DgvElectionVotes";
             this.DgvElectionVotes.RowTemplate.Height = 25;
-            this.DgvElectionVotes.Size = new System.Drawing.Size(838, 322);
+            this.DgvElectionVotes.Size = new System.Drawing.Size(838, 316);
             this.DgvElectionVotes.TabIndex = 53;
             // 
             // toolTip1
