@@ -29,14 +29,20 @@ namespace Election.API.Controllers
                 .ToListAsync();
         }
 
-       
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Voter>> GetVoter(int id)
         {
             var voter = await _context.Voters.
               Include(v => v.PollingDivision)
               .ThenInclude(v => v.Constituency)
-              .Include(v => v.Interviews)
+              .Include(c => c.Interviews)
+              .ThenInclude(i => i.Interviewer)
+              .Include(c => c.Interviews)
+              .ThenInclude(i => i.Canvas)
+              .ThenInclude(i => i.Type)
+              .Include(c => c.Interviews)
+              .ThenInclude(c => c.SupportedParty)
               .Include(v => v.House)
               .Include(v => v.ElectionVotes)
                .FirstOrDefaultAsync(v => v.Id == id);
@@ -47,7 +53,7 @@ namespace Election.API.Controllers
 
             return voter;
         }
-      
+
         [HttpGet("FindRegistration/{reg}")]
         public async Task<ActionResult<Voter>> GetVoterByRegistration(string reg)
         {

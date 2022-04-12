@@ -27,6 +27,7 @@ namespace Constituency.Desktop.Views
         {
             cleanScreen();
             MandatoriesFilds();
+            DGVFormats();
             FildsValidations();
             await LoadConstituencies();
             await LoadParties();
@@ -50,6 +51,14 @@ namespace Constituency.Desktop.Views
 
             UtilRecurrent.FindAllControlsIterative(tabControl1, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1")).ToList().ForEach(x => toolTip1.SetToolTip(x, "Mandatory Field"));
             UtilRecurrent.FindAllControlsIterative(tabControl1, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1")).ToList().ForEach(x => toolTip1.SetToolTip(x, "Mandatory Field"));
+        }
+        private void DGVFormats()
+        {//tag= 1 para campos obligados
+
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DefaultCellStyle.BackColor=Color.Beige);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque);
+
+           
         }
         private bool PaintRequiredFildsConstituency()
         {
@@ -787,7 +796,7 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                if (nodeTag > 0)
+                if (nodeTag > 0 && CanvasTypesList!=null && CanvasTypesList.Where(u => u.Id == nodeTag).Any())
                 {
                     CanvasType = CanvasTypesList.Where(u => u.Id == nodeTag).FirstOrDefault();
                     showCanvasTypeInfo(CanvasType);
@@ -817,12 +826,12 @@ namespace Constituency.Desktop.Views
                     {
                         var dateFrom = new DateTime();
                         var dateTo = new DateTime();
-                        if (item.Interviews != null)
+                        if (item.Interviews != null && item.Interviews.Any())
                         {
                             //select Interviews minimal date and maximal date
                             dateFrom = item.Interviews.Min(x => x.Date);
                             dateTo = item.Interviews.Max(x => x.Date);
-                            txtCTCanvas.Text += item.Name.ToString() + " (" + dateFrom.ToString("dd-MMM-yyyy") + "-" + dateTo.ToString("dd-MMM-yyyy") + ")" + "\r\n";
+                            txtCTCanvas.Text += item.Name.ToString() + " (" + dateFrom.ToString("dd-MMM-yyyy") + " - " + dateTo.ToString("dd-MMM-yyyy") + ")" + "\r\n";
                         }
                         else
                         {
@@ -1011,7 +1020,7 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                if (nodeTag > 0)
+                if (nodeTag > 0 && InterviewerList is not null && InterviewerList.Where(u => u.Id == nodeTag).Any())
                 {
                     Interviewer = InterviewerList.Where(u => u.Id == nodeTag).FirstOrDefault();
                     showInterviewerInfo(Interviewer);
@@ -1046,6 +1055,13 @@ namespace Constituency.Desktop.Views
                     rjInterviewer.Checked = interviewer.Active;
                     cmbSex.SelectedItem = interviewer.Sex;
                     dtpDOB.Value = (DateTime)interviewer.DOB;
+
+                    dgvInterviewerInterviews.DataSource = null;
+                    if (interviewer.Interviews != null && interviewer.Interviews.Any())
+                    {
+                        dgvInterviewerInterviews.DataSource = interviewer.Interviews.Select(u => new { Registration = u.Voter.Reg, u.Voter.FullName, PD = u.Voter.PollingDivision.Name, Party = u.SupportedParty.Name, u.Date }).ToList();
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -1282,10 +1298,10 @@ namespace Constituency.Desktop.Views
                 rjCanvasActive.Checked = canvas.Active;
                 rjCanvasOpen.Checked = canvas.Open;
                 cmbCanvasTypes.SelectedValue = canvas.Type.Id;
-
+                dgvCanvasInterviews.DataSource = null;
                 if (canvas.Interviews != null && canvas.Interviews.Any())
                 {
-                    dgvCanvasInterviews.DataSource = canvas.Interviews.Select(u => new {  u.Voter.Reg,u.Voter.FullName,u.Voter.PollingDivision,u.SupportedParty., u.Description, u.Active, u.Open }).ToList();
+                    dgvCanvasInterviews.DataSource = canvas.Interviews.Select(u => new {   Registration=u.Voter.Reg,u.Voter.FullName, PD=u.Voter.PollingDivision.Name,Party=u.SupportedParty.Name, u.Date,Interviewer=u.Interviewer.FullName }).ToList();
                 }
             }
             catch (Exception ex)

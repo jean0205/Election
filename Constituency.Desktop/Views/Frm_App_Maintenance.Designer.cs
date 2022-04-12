@@ -143,7 +143,7 @@ namespace Constituency.Desktop.Views
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.ibtnInterviewerSave = new FontAwesome.Sharp.IconButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvInterviewerInterviews = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
@@ -204,7 +204,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel20.SuspendLayout();
             this.tableLayoutPanel21.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInterviewerInterviews)).BeginInit();
             this.tabPage8.SuspendLayout();
             this.tableLayoutPanel22.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -598,7 +598,7 @@ namespace Constituency.Desktop.Views
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(180, 16);
+            this.cmbConstituency.Location = new System.Drawing.Point(180, 19);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(666, 29);
             this.cmbConstituency.TabIndex = 45;
@@ -1097,7 +1097,7 @@ namespace Constituency.Desktop.Views
             // 
             this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 19);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 16);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(666, 29);
             this.cmbCanvasTypes.TabIndex = 45;
@@ -1208,10 +1208,13 @@ namespace Constituency.Desktop.Views
             // 
             // dgvCanvasInterviews
             // 
+            this.dgvCanvasInterviews.AllowUserToAddRows = false;
+            this.dgvCanvasInterviews.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCanvasInterviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCanvasInterviews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCanvasInterviews.Location = new System.Drawing.Point(180, 311);
             this.dgvCanvasInterviews.Name = "dgvCanvasInterviews";
+            this.dgvCanvasInterviews.RowHeadersVisible = false;
             this.dgvCanvasInterviews.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dgvCanvasInterviews.RowTemplate.Height = 25;
             this.dgvCanvasInterviews.Size = new System.Drawing.Size(666, 369);
@@ -1415,7 +1418,7 @@ namespace Constituency.Desktop.Views
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(119, 7);
+            this.cmbSex.Location = new System.Drawing.Point(119, 10);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -1707,7 +1710,7 @@ namespace Constituency.Desktop.Views
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(738, 29);
             this.txtEmail.TabIndex = 17;
-            this.txtEmail.Tag = "2,4";
+            this.txtEmail.Tag = "";
             // 
             // ibtnInterviewerSave
             // 
@@ -1736,7 +1739,7 @@ namespace Constituency.Desktop.Views
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.dataGridView1);
+            this.groupBox7.Controls.Add(this.dgvInterviewerInterviews);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.ForeColor = System.Drawing.Color.White;
             this.groupBox7.Location = new System.Drawing.Point(3, 403);
@@ -1746,15 +1749,19 @@ namespace Constituency.Desktop.Views
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Interviews";
             // 
-            // dataGridView1
+            // dgvInterviewerInterviews
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 25);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(838, 257);
-            this.dataGridView1.TabIndex = 53;
+            this.dgvInterviewerInterviews.AllowUserToAddRows = false;
+            this.dgvInterviewerInterviews.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvInterviewerInterviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInterviewerInterviews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvInterviewerInterviews.Location = new System.Drawing.Point(3, 25);
+            this.dgvInterviewerInterviews.Name = "dgvInterviewerInterviews";
+            this.dgvInterviewerInterviews.RowHeadersVisible = false;
+            this.dgvInterviewerInterviews.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dgvInterviewerInterviews.RowTemplate.Height = 25;
+            this.dgvInterviewerInterviews.Size = new System.Drawing.Size(838, 257);
+            this.dgvInterviewerInterviews.TabIndex = 53;
             // 
             // tabPage7
             // 
@@ -2153,7 +2160,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel21.ResumeLayout(false);
             this.tableLayoutPanel21.PerformLayout();
             this.groupBox7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInterviewerInterviews)).EndInit();
             this.tabPage8.ResumeLayout(false);
             this.tableLayoutPanel22.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
@@ -2297,7 +2304,7 @@ namespace Constituency.Desktop.Views
         private Label label34;
         private TextBox txtEmail;
         private GroupBox groupBox7;
-        private DataGridView dataGridView1;
+        private DataGridView dgvInterviewerInterviews;
         private TabPage tabPage8;
         private TableLayoutPanel tableLayoutPanel22;
         private GroupBox groupBox8;

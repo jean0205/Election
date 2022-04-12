@@ -33,6 +33,11 @@ namespace Election.API.Controllers
                 .Include(c=>c.Type)
                 .Include(c=>c.Interviews)
                 .ThenInclude(i=>i.Voter)
+                .ThenInclude(i => i.PollingDivision)                
+                .Include(c => c.Interviews)
+                .ThenInclude(i => i.Interviewer)                
+                .Include(c => c.Interviews)
+                .ThenInclude(c=>c.SupportedParty)
                 .ToListAsync();
         }
 

@@ -88,15 +88,15 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtWorkPhone = new System.Windows.Forms.TextBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvInterviews = new System.Windows.Forms.DataGridView();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.dgvElections = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvHouse = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
             this.ibtnSaveVoter = new FontAwesome.Sharp.IconButton();
+            this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
@@ -125,12 +125,12 @@
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
             this.tabControl2.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInterviews)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvElections)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHouse)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
@@ -529,7 +529,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(772, 29);
             this.txtEmail.TabIndex = 17;
-            this.txtEmail.Tag = "2,4";
+            this.txtEmail.Tag = "";
             // 
             // tableLayoutPanel13
             // 
@@ -905,8 +905,8 @@
             // 
             // tabControl2
             // 
-            this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(3, 408);
@@ -915,67 +915,70 @@
             this.tabControl2.Size = new System.Drawing.Size(882, 200);
             this.tabControl2.TabIndex = 10;
             // 
-            // tabPage5
-            // 
-            this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage5.Controls.Add(this.dataGridView3);
-            this.tabPage5.Location = new System.Drawing.Point(4, 30);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(874, 166);
-            this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "Elections";
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowTemplate.Height = 25;
-            this.dataGridView3.Size = new System.Drawing.Size(874, 166);
-            this.dataGridView3.TabIndex = 1;
-            // 
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage4.Controls.Add(this.dataGridView2);
-            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Controls.Add(this.dgvInterviews);
+            this.tabPage4.Location = new System.Drawing.Point(4, 30);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(874, 172);
+            this.tabPage4.Size = new System.Drawing.Size(874, 166);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Interviews";
             // 
-            // dataGridView2
+            // dgvInterviews
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(868, 166);
-            this.dataGridView2.TabIndex = 1;
+            this.dgvInterviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInterviews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvInterviews.Location = new System.Drawing.Point(3, 3);
+            this.dgvInterviews.Name = "dgvInterviews";
+            this.dgvInterviews.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dgvInterviews.RowTemplate.Height = 25;
+            this.dgvInterviews.Size = new System.Drawing.Size(868, 160);
+            this.dgvInterviews.TabIndex = 1;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
+            this.tabPage5.Controls.Add(this.dgvElections);
+            this.tabPage5.Location = new System.Drawing.Point(4, 24);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(874, 172);
+            this.tabPage5.TabIndex = 2;
+            this.tabPage5.Text = "Elections";
+            // 
+            // dgvElections
+            // 
+            this.dgvElections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvElections.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvElections.Location = new System.Drawing.Point(0, 0);
+            this.dgvElections.Name = "dgvElections";
+            this.dgvElections.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dgvElections.RowTemplate.Height = 25;
+            this.dgvElections.Size = new System.Drawing.Size(874, 172);
+            this.dgvElections.TabIndex = 1;
             // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage3.Controls.Add(this.dataGridView1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Controls.Add(this.dgvHouse);
+            this.tabPage3.Location = new System.Drawing.Point(4, 30);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(874, 172);
+            this.tabPage3.Size = new System.Drawing.Size(874, 166);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "House";
             // 
-            // dataGridView1
+            // dgvHouse
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(868, 166);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvHouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHouse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvHouse.Location = new System.Drawing.Point(3, 3);
+            this.dgvHouse.Name = "dgvHouse";
+            this.dgvHouse.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dgvHouse.RowTemplate.Height = 25;
+            this.dgvHouse.Size = new System.Drawing.Size(868, 160);
+            this.dgvHouse.TabIndex = 0;
             // 
             // panel1
             // 
@@ -986,30 +989,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(346, 45);
             this.panel1.TabIndex = 10;
-            // 
-            // ibtnUpdate
-            // 
-            this.ibtnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.ibtnUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.ibtnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
-            this.ibtnUpdate.FlatAppearance.BorderSize = 2;
-            this.ibtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ibtnUpdate.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ibtnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.ibtnUpdate.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
-            this.ibtnUpdate.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.ibtnUpdate.IconSize = 33;
-            this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnUpdate.Location = new System.Drawing.Point(177, 1);
-            this.ibtnUpdate.Name = "ibtnUpdate";
-            this.ibtnUpdate.Size = new System.Drawing.Size(155, 40);
-            this.ibtnUpdate.TabIndex = 5;
-            this.ibtnUpdate.Text = "Update";
-            this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.ibtnUpdate.UseVisualStyleBackColor = false;
-            this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
             // 
             // ibtnSaveVoter
             // 
@@ -1034,6 +1013,30 @@
             this.ibtnSaveVoter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnSaveVoter.UseVisualStyleBackColor = false;
             this.ibtnSaveVoter.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // ibtnUpdate
+            // 
+            this.ibtnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.ibtnUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ibtnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnUpdate.FlatAppearance.BorderSize = 2;
+            this.ibtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnUpdate.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnUpdate.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.ibtnUpdate.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnUpdate.IconSize = 33;
+            this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnUpdate.Location = new System.Drawing.Point(177, 1);
+            this.ibtnUpdate.Name = "ibtnUpdate";
+            this.ibtnUpdate.Size = new System.Drawing.Size(155, 40);
+            this.ibtnUpdate.TabIndex = 5;
+            this.ibtnUpdate.Text = "Update";
+            this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnUpdate.UseVisualStyleBackColor = false;
+            this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
             // 
             // tabPage2
             // 
@@ -1170,12 +1173,12 @@
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
             this.tabControl2.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInterviews)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvElections)).EndInit();
             this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHouse)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
@@ -1259,11 +1262,11 @@
         private Panel panel1;
         private TabControl tabControl2;
         private TabPage tabPage3;
-        private DataGridView dataGridView1;
+        private DataGridView dgvHouse;
         private TabPage tabPage4;
-        private DataGridView dataGridView2;
+        private DataGridView dgvInterviews;
         private TabPage tabPage5;
-        private DataGridView dataGridView3;
+        private DataGridView dgvElections;
         private ComboBox cmbDivision;
     }
 }

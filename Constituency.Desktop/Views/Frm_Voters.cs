@@ -37,13 +37,22 @@ namespace Constituency.Desktop.Views
         {
             FildsValidations();
             MandatoriesFilds();
+            DGVFormats();
             await LoadConstituencies();
             await LoadVoters();
 
         }
 
         #region Tab1
+        private void DGVFormats()
+        {//tag= 1 para campos obligados
 
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DefaultCellStyle.BackColor = Color.Beige);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells);
+
+
+        }
         private void FildsValidations()
         {
             try
@@ -283,6 +292,7 @@ namespace Constituency.Desktop.Views
         private async void AfterSelectNodeVoter(int nodeTag)
         {
             VoterFieldsWhite();
+            dgvInterviews.DataSource = null;
             try
             {
                 if (nodeTag > 0)
@@ -353,6 +363,12 @@ namespace Constituency.Desktop.Views
                     cmbDivision.SelectedValue = Voter.PollingDivision.Id;
                     //TODO
                     //mostrar en los datagrid los datos de las casa, las eleciones y las entrevistas
+
+                   
+                    if (Voter.Interviews != null && Voter.Interviews.Any())
+                    {
+                        dgvInterviews.DataSource = Voter.Interviews.Select(u => new { u.Canvas.Type.Type,u.Canvas.Name, u.Date, Party = u.SupportedParty.Name, u.Interviewer.FullName }).ToList();
+                    }
                 }
             }
             catch (Exception ex)
@@ -520,6 +536,8 @@ namespace Constituency.Desktop.Views
             try
             {
                 var voter = BuildUpdateVoter();
+                voter.Interviews = null;
+                
                 UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PutAsync("Voters", voter, voter.Id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
@@ -550,6 +568,7 @@ namespace Constituency.Desktop.Views
                 Voter.Sex = cmbSex.SelectedItem.ToString();
                 Voter.DOB = dtpDOB.Value;
                 Voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
+               
                 return Voter;
             }
 

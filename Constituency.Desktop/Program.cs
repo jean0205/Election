@@ -1,4 +1,6 @@
+using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Views;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 
 namespace Constituency.Desktop
@@ -15,6 +17,8 @@ namespace Constituency.Desktop
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+            Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
+
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
@@ -22,6 +26,12 @@ namespace Constituency.Desktop
             };
 
             Application.Run(new Frm_Login());
+        }
+        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            Crashes.TrackError(e.Exception);
+            UtilRecurrent.ErrorMessage(e.Exception.Message);
+
         }
     }
 }
