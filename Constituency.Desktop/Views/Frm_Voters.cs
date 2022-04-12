@@ -514,7 +514,12 @@ namespace Constituency.Desktop.Views
                 }
                 if (dtpDOB.Value.AddYears(18) > DateTime.Now)
                 {
-                    UtilRecurrent.ErrorMessage("Applicant younger than 18.");
+                    UtilRecurrent.ErrorMessage("Voter younger than 18.");
+                    return;
+                }
+                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
+                {
+                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
                     return;
                 }
                 await UpdateVoter();

@@ -199,7 +199,7 @@
             this.groupBox1.Size = new System.Drawing.Size(258, 723);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Applicants List";
+            this.groupBox1.Text = "Voters List:";
             // 
             // tView1
             // 
@@ -476,7 +476,7 @@
             // 
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(565, 8);
+            this.cmbDivision.Location = new System.Drawing.Point(565, 5);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(313, 29);
             this.cmbDivision.TabIndex = 34;
@@ -486,7 +486,7 @@
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(309, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -712,7 +712,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(105, 8);
+            this.cmbSex.Location = new System.Drawing.Point(105, 5);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -962,10 +962,10 @@
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage3.Controls.Add(this.dgvHouse);
-            this.tabPage3.Location = new System.Drawing.Point(4, 30);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(874, 166);
+            this.tabPage3.Size = new System.Drawing.Size(874, 172);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "House";
             // 
@@ -977,7 +977,7 @@
             this.dgvHouse.Name = "dgvHouse";
             this.dgvHouse.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dgvHouse.RowTemplate.Height = 25;
-            this.dgvHouse.Size = new System.Drawing.Size(868, 160);
+            this.dgvHouse.Size = new System.Drawing.Size(868, 166);
             this.dgvHouse.TabIndex = 0;
             // 
             // panel1
@@ -992,9 +992,9 @@
             // 
             // ibtnSaveVoter
             // 
-            this.ibtnSaveVoter.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ibtnSaveVoter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ibtnSaveVoter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnSaveVoter.Dock = System.Windows.Forms.DockStyle.Right;
             this.ibtnSaveVoter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
             this.ibtnSaveVoter.FlatAppearance.BorderSize = 2;
             this.ibtnSaveVoter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1005,9 +1005,9 @@
             this.ibtnSaveVoter.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnSaveVoter.IconSize = 33;
             this.ibtnSaveVoter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSaveVoter.Location = new System.Drawing.Point(3, 1);
+            this.ibtnSaveVoter.Location = new System.Drawing.Point(36, 0);
             this.ibtnSaveVoter.Name = "ibtnSaveVoter";
-            this.ibtnSaveVoter.Size = new System.Drawing.Size(155, 40);
+            this.ibtnSaveVoter.Size = new System.Drawing.Size(155, 45);
             this.ibtnSaveVoter.TabIndex = 4;
             this.ibtnSaveVoter.Text = "Save";
             this.ibtnSaveVoter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -1016,9 +1016,9 @@
             // 
             // ibtnUpdate
             // 
-            this.ibtnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ibtnUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ibtnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ibtnUpdate.Dock = System.Windows.Forms.DockStyle.Right;
             this.ibtnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
             this.ibtnUpdate.FlatAppearance.BorderSize = 2;
             this.ibtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1029,9 +1029,9 @@
             this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnUpdate.IconSize = 33;
             this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnUpdate.Location = new System.Drawing.Point(177, 1);
+            this.ibtnUpdate.Location = new System.Drawing.Point(191, 0);
             this.ibtnUpdate.Name = "ibtnUpdate";
-            this.ibtnUpdate.Size = new System.Drawing.Size(155, 40);
+            this.ibtnUpdate.Size = new System.Drawing.Size(155, 45);
             this.ibtnUpdate.TabIndex = 5;
             this.ibtnUpdate.Text = "Update";
             this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

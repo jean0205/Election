@@ -97,9 +97,13 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.dtpIDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
+            this.cmbElection = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.iconButton2 = new FontAwesome.Sharp.IconButton();
             this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
             this.ibtnSaveVoter = new FontAwesome.Sharp.IconButton();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
@@ -186,6 +190,7 @@
             this.tView1.Name = "tView1";
             this.tView1.Size = new System.Drawing.Size(254, 653);
             this.tView1.TabIndex = 0;
+            this.tView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tView1_AfterSelect);
             // 
             // tableLayoutPanel49
             // 
@@ -433,7 +438,6 @@
             // 
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDivision.Enabled = false;
             this.cmbDivision.FormattingEnabled = true;
             this.cmbDivision.Location = new System.Drawing.Point(566, 8);
             this.cmbDivision.Name = "cmbDivision";
@@ -445,7 +449,6 @@
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbConstituency.Enabled = false;
             this.cmbConstituency.FormattingEnabled = true;
             this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
@@ -488,6 +491,7 @@
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtEmail.Location = new System.Drawing.Point(107, 5);
             this.txtEmail.Name = "txtEmail";
+            this.txtEmail.ReadOnly = true;
             this.txtEmail.Size = new System.Drawing.Size(775, 29);
             this.txtEmail.TabIndex = 17;
             this.txtEmail.Tag = "2,4";
@@ -531,6 +535,7 @@
             this.txtMobile1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtMobile1.Location = new System.Drawing.Point(106, 5);
             this.txtMobile1.Name = "txtMobile1";
+            this.txtMobile1.ReadOnly = true;
             this.txtMobile1.Size = new System.Drawing.Size(300, 29);
             this.txtMobile1.TabIndex = 23;
             this.txtMobile1.Tag = "2";
@@ -553,6 +558,7 @@
             this.txtMobile2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtMobile2.Location = new System.Drawing.Point(576, 5);
             this.txtMobile2.Name = "txtMobile2";
+            this.txtMobile2.ReadOnly = true;
             this.txtMobile2.Size = new System.Drawing.Size(306, 29);
             this.txtMobile2.TabIndex = 24;
             this.txtMobile2.Tag = "2";
@@ -592,6 +598,7 @@
             this.txtOccupation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtOccupation.Location = new System.Drawing.Point(107, 5);
             this.txtOccupation.Name = "txtOccupation";
+            this.txtOccupation.ReadOnly = true;
             this.txtOccupation.Size = new System.Drawing.Size(775, 29);
             this.txtOccupation.TabIndex = 17;
             this.txtOccupation.Tag = "";
@@ -631,6 +638,7 @@
             this.txtAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtAddress.Location = new System.Drawing.Point(107, 5);
             this.txtAddress.Name = "txtAddress";
+            this.txtAddress.ReadOnly = true;
             this.txtAddress.Size = new System.Drawing.Size(775, 29);
             this.txtAddress.TabIndex = 17;
             this.txtAddress.Tag = "";
@@ -672,7 +680,6 @@
             this.cmbSex.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbSex.BackColor = System.Drawing.SystemColors.Window;
             this.cmbSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSex.Enabled = false;
             this.cmbSex.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSex.FormattingEnabled = true;
             this.cmbSex.Items.AddRange(new object[] {
@@ -688,7 +695,6 @@
             // 
             this.dtpDOB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpDOB.CustomFormat = "dd-MMM-yyyy";
-            this.dtpDOB.Enabled = false;
             this.dtpDOB.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDOB.Location = new System.Drawing.Point(576, 5);
             this.dtpDOB.Name = "dtpDOB";
@@ -745,6 +751,7 @@
             this.txtSurName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSurName.Location = new System.Drawing.Point(106, 5);
             this.txtSurName.Name = "txtSurName";
+            this.txtSurName.ReadOnly = true;
             this.txtSurName.Size = new System.Drawing.Size(333, 29);
             this.txtSurName.TabIndex = 23;
             this.txtSurName.Tag = "1,3";
@@ -767,6 +774,7 @@
             this.txtGivenNames.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtGivenNames.Location = new System.Drawing.Point(558, 5);
             this.txtGivenNames.Name = "txtGivenNames";
+            this.txtGivenNames.ReadOnly = true;
             this.txtGivenNames.Size = new System.Drawing.Size(324, 29);
             this.txtGivenNames.TabIndex = 24;
             this.txtGivenNames.Tag = "1,3";
@@ -849,6 +857,7 @@
             this.txtHomePhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtHomePhone.Location = new System.Drawing.Point(106, 5);
             this.txtHomePhone.Name = "txtHomePhone";
+            this.txtHomePhone.ReadOnly = true;
             this.txtHomePhone.Size = new System.Drawing.Size(300, 29);
             this.txtHomePhone.TabIndex = 23;
             this.txtHomePhone.Tag = "2";
@@ -871,6 +880,7 @@
             this.txtWorkPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtWorkPhone.Location = new System.Drawing.Point(576, 5);
             this.txtWorkPhone.Name = "txtWorkPhone";
+            this.txtWorkPhone.ReadOnly = true;
             this.txtWorkPhone.Size = new System.Drawing.Size(306, 29);
             this.txtWorkPhone.TabIndex = 24;
             this.txtWorkPhone.Tag = "2";
@@ -1006,11 +1016,15 @@
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.74744F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 82.25256F));
+            this.tableLayoutPanel5.ColumnCount = 4;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.58559F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.41441F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 182F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel5.Controls.Add(this.dtpIDate, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.cmbElection, 3, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label19, 2, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -1024,7 +1038,7 @@
             this.dtpIDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpIDate.CustomFormat = "dd-MMM-yyyy hh:mm tt";
             this.dtpIDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpIDate.Location = new System.Drawing.Point(160, 9);
+            this.dtpIDate.Location = new System.Drawing.Point(162, 9);
             this.dtpIDate.Name = "dtpIDate";
             this.dtpIDate.Size = new System.Drawing.Size(213, 29);
             this.dtpIDate.TabIndex = 32;
@@ -1035,21 +1049,69 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(43, 13);
+            this.label5.Location = new System.Drawing.Point(42, 13);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 21);
+            this.label5.Size = new System.Drawing.Size(113, 21);
             this.label5.TabIndex = 22;
-            this.label5.Text = "Date and Time";
+            this.label5.Text = "Date and Time:";
+            // 
+            // cmbElection
+            // 
+            this.cmbElection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbElection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbElection.FormattingEnabled = true;
+            this.cmbElection.Location = new System.Drawing.Point(631, 12);
+            this.cmbElection.Name = "cmbElection";
+            this.cmbElection.Size = new System.Drawing.Size(245, 29);
+            this.cmbElection.TabIndex = 35;
+            this.cmbElection.Tag = "1";
+            // 
+            // label19
+            // 
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label19.Location = new System.Drawing.Point(557, 13);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(67, 21);
+            this.label19.TabIndex = 36;
+            this.label19.Text = "Election:";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.iconButton2);
             this.panel1.Controls.Add(this.ibtnUpdate);
             this.panel1.Controls.Add(this.ibtnSaveVoter);
+            this.panel1.Controls.Add(this.iconButton1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 731);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(892, 41);
             this.panel1.TabIndex = 10;
+            // 
+            // iconButton2
+            // 
+            this.iconButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.iconButton2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.iconButton2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.iconButton2.FlatAppearance.BorderSize = 2;
+            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.iconButton2.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton2.IconSize = 33;
+            this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton2.Location = new System.Drawing.Point(582, 0);
+            this.iconButton2.Name = "iconButton2";
+            this.iconButton2.Size = new System.Drawing.Size(155, 41);
+            this.iconButton2.TabIndex = 6;
+            this.iconButton2.Text = "Save";
+            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton2.UseVisualStyleBackColor = false;
+            this.iconButton2.Click += new System.EventHandler(this.iconButton2_Click);
             // 
             // ibtnUpdate
             // 
@@ -1096,6 +1158,29 @@
             this.ibtnSaveVoter.Text = "Save";
             this.ibtnSaveVoter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnSaveVoter.UseVisualStyleBackColor = false;
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.iconButton1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.iconButton1.FlatAppearance.BorderSize = 2;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.iconButton1.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 33;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(737, 0);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(155, 41);
+            this.iconButton1.TabIndex = 7;
+            this.iconButton1.Text = "Update";
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
             // 
             // tabPage2
             // 
@@ -1236,5 +1321,9 @@
         private FontAwesome.Sharp.IconButton ibtnSaveVoter;
         private TabPage tabPage2;
         private ToolTip toolTip1;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton iconButton2;
+        private ComboBox cmbElection;
+        private Label label19;
     }
 }

@@ -39,7 +39,15 @@ namespace Election.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ElectionVote>> GetElectionVote(int id)
         {
-            var electionVote = await _context.ElectionVotes.FindAsync(id);
+            var electionVote = await _context.ElectionVotes
+                .Include(e=>e.Election)
+                .Include(e => e.Voter)
+                .ThenInclude(e=>e.PollingDivision)
+                .ThenInclude(e=>e.Constituency)
+                .Include(e => e.SupportedParty)
+                .Include(e=>e.Comment)
+                .Include(e=>e.Interviewer)
+                .FirstOrDefaultAsync(e=>e.Id== id);
 
             if (electionVote == null)
             {
@@ -85,6 +93,15 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<ElectionVote>> PostElectionVote(ElectionVote electionVote)
         {
+            electionVote.Election = await _context.NationalElections.FindAsync(electionVote.Election.Id);
+            electionVote.Voter = await _context.Voters.FindAsync(electionVote.Voter.Id);
+            electionVote.SupportedParty = await _context.Parties.FindAsync(electionVote.SupportedParty.Id);
+            electionVote.Interviewer = await _context.Interviewers.FindAsync(electionVote.Interviewer.Id);
+            if (electionVote.Comment != null)
+            {
+                electionVote.Comment = _context.Comments.FirstOrDefault(c => c.Id == electionVote.Comment.Id);
+            }
+            
             _context.ElectionVotes.Add(electionVote);
             await _context.SaveChangesAsync();
 

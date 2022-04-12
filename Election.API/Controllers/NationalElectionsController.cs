@@ -29,6 +29,14 @@ namespace Election.API.Controllers
                 .Include(e => e.Parties)
                 .ToListAsync();
         }
+        [HttpGet("Votes")]
+        public async Task<ActionResult<IEnumerable<NationalElection>>> GetNationalElectionsVotes()
+        {
+            return await _context.NationalElections
+                .Include(e => e.ElectionVotes)
+                .ThenInclude(e=>e.Voter)
+                .ToListAsync();
+        }
 
         // GET: api/NationalElections/5
         [HttpGet("{id}")]
