@@ -100,10 +100,8 @@
             this.cmbElection = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.ibtnSave = new FontAwesome.Sharp.IconButton();
             this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
-            this.ibtnSaveVoter = new FontAwesome.Sharp.IconButton();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
@@ -1059,12 +1057,15 @@
             // 
             this.cmbElection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbElection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbElection.FormatString = "MMMM-yyyy";
             this.cmbElection.FormattingEnabled = true;
             this.cmbElection.Location = new System.Drawing.Point(631, 12);
             this.cmbElection.Name = "cmbElection";
             this.cmbElection.Size = new System.Drawing.Size(245, 29);
             this.cmbElection.TabIndex = 35;
             this.cmbElection.Tag = "1";
+            this.cmbElection.SelectionChangeCommitted += new System.EventHandler(this.cmbElection_SelectionChangeCommitted);
+            this.cmbElection.SelectedValueChanged += new System.EventHandler(this.cmbElection_SelectedValueChanged);
             // 
             // label19
             // 
@@ -1079,45 +1080,43 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.iconButton2);
+            this.panel1.Controls.Add(this.ibtnSave);
             this.panel1.Controls.Add(this.ibtnUpdate);
-            this.panel1.Controls.Add(this.ibtnSaveVoter);
-            this.panel1.Controls.Add(this.iconButton1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 731);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(892, 41);
             this.panel1.TabIndex = 10;
             // 
-            // iconButton2
+            // ibtnSave
             // 
-            this.iconButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
-            this.iconButton2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.iconButton2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
-            this.iconButton2.FlatAppearance.BorderSize = 2;
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.iconButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
-            this.iconButton2.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.IconSize = 33;
-            this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton2.Location = new System.Drawing.Point(582, 0);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(155, 41);
-            this.iconButton2.TabIndex = 6;
-            this.iconButton2.Text = "Save";
-            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton2.UseVisualStyleBackColor = false;
-            this.iconButton2.Click += new System.EventHandler(this.iconButton2_Click);
+            this.ibtnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ibtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnSave.FlatAppearance.BorderSize = 2;
+            this.ibtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnSave.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnSave.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.ibtnSave.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnSave.IconSize = 33;
+            this.ibtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnSave.Location = new System.Drawing.Point(582, 0);
+            this.ibtnSave.Name = "ibtnSave";
+            this.ibtnSave.Size = new System.Drawing.Size(155, 41);
+            this.ibtnSave.TabIndex = 6;
+            this.ibtnSave.Text = "Save";
+            this.ibtnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnSave.UseVisualStyleBackColor = false;
+            this.ibtnSave.Click += new System.EventHandler(this.iconButton2_Click);
             // 
             // ibtnUpdate
             // 
-            this.ibtnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ibtnUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ibtnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ibtnUpdate.Dock = System.Windows.Forms.DockStyle.Right;
             this.ibtnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
             this.ibtnUpdate.FlatAppearance.BorderSize = 2;
             this.ibtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1128,60 +1127,15 @@
             this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnUpdate.IconSize = 33;
             this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnUpdate.Location = new System.Drawing.Point(1435, -26);
+            this.ibtnUpdate.Location = new System.Drawing.Point(737, 0);
             this.ibtnUpdate.Name = "ibtnUpdate";
-            this.ibtnUpdate.Size = new System.Drawing.Size(155, 37);
-            this.ibtnUpdate.TabIndex = 5;
+            this.ibtnUpdate.Size = new System.Drawing.Size(155, 41);
+            this.ibtnUpdate.TabIndex = 7;
             this.ibtnUpdate.Text = "Update";
             this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnUpdate.UseVisualStyleBackColor = false;
-            // 
-            // ibtnSaveVoter
-            // 
-            this.ibtnSaveVoter.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.ibtnSaveVoter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnSaveVoter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
-            this.ibtnSaveVoter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
-            this.ibtnSaveVoter.FlatAppearance.BorderSize = 2;
-            this.ibtnSaveVoter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ibtnSaveVoter.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ibtnSaveVoter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.ibtnSaveVoter.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
-            this.ibtnSaveVoter.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.ibtnSaveVoter.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.ibtnSaveVoter.IconSize = 33;
-            this.ibtnSaveVoter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSaveVoter.Location = new System.Drawing.Point(1252, -26);
-            this.ibtnSaveVoter.Name = "ibtnSaveVoter";
-            this.ibtnSaveVoter.Size = new System.Drawing.Size(155, 37);
-            this.ibtnSaveVoter.TabIndex = 4;
-            this.ibtnSaveVoter.Text = "Save";
-            this.ibtnSaveVoter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.ibtnSaveVoter.UseVisualStyleBackColor = false;
-            // 
-            // iconButton1
-            // 
-            this.iconButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.iconButton1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
-            this.iconButton1.FlatAppearance.BorderSize = 2;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
-            this.iconButton1.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 33;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(737, 0);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(155, 41);
-            this.iconButton1.TabIndex = 7;
-            this.iconButton1.Text = "Update";
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = false;
-            this.iconButton1.Click += new System.EventHandler(this.ibtnUpdate_Click);
+            this.ibtnUpdate.Visible = false;
+            this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
             // 
             // tabPage2
             // 
@@ -1318,12 +1272,11 @@
         private DateTimePicker dtpIDate;
         private Label label5;
         private Panel panel1;
-        private FontAwesome.Sharp.IconButton ibtnUpdate;
-        private FontAwesome.Sharp.IconButton ibtnSaveVoter;
+       
         private TabPage tabPage2;
         private ToolTip toolTip1;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton ibtnUpdate;
+        private FontAwesome.Sharp.IconButton ibtnSave;
         private ComboBox cmbElection;
         private Label label19;
     }

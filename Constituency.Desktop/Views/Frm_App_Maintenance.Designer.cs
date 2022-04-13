@@ -165,6 +165,13 @@ namespace Constituency.Desktop.Views
             this.chkElectionParties = new System.Windows.Forms.CheckedListBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.DgvElectionVotes = new System.Windows.Forms.DataGridView();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.rjToggleButton2 = new Constituency.Desktop.Controls.RJToggleButton();
@@ -215,6 +222,11 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel27.SuspendLayout();
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvElectionVotes)).BeginInit();
+            this.tabPage9.SuspendLayout();
+            this.tableLayoutPanel28.SuspendLayout();
+            this.tableLayoutPanel29.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tableLayoutPanel30.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -229,6 +241,7 @@ namespace Constituency.Desktop.Views
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage9);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -978,9 +991,9 @@ namespace Constituency.Desktop.Views
             // 
             this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage5.Controls.Add(this.tableLayoutPanel9);
-            this.tabPage5.Location = new System.Drawing.Point(4, 33);
+            this.tabPage5.Location = new System.Drawing.Point(4, 27);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage5.Size = new System.Drawing.Size(1206, 751);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Canvas";
             // 
@@ -996,7 +1009,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1206, 751);
             this.tableLayoutPanel9.TabIndex = 2;
             // 
             // groupBox5
@@ -1006,7 +1019,7 @@ namespace Constituency.Desktop.Views
             this.groupBox5.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox5.Location = new System.Drawing.Point(3, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(344, 739);
+            this.groupBox5.Size = new System.Drawing.Size(344, 745);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Canvas List:";
@@ -1019,7 +1032,7 @@ namespace Constituency.Desktop.Views
             this.TVCanvas.Location = new System.Drawing.Point(3, 25);
             this.TVCanvas.Name = "TVCanvas";
             this.TVCanvas.SelectedImageIndex = 0;
-            this.TVCanvas.Size = new System.Drawing.Size(338, 711);
+            this.TVCanvas.Size = new System.Drawing.Size(338, 717);
             this.TVCanvas.TabIndex = 2;
             this.TVCanvas.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVCanvas_AfterSelect);
             // 
@@ -1053,7 +1066,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 107F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 375F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(850, 745);
             this.tableLayoutPanel10.TabIndex = 4;
             // 
             // label17
@@ -1766,9 +1779,9 @@ namespace Constituency.Desktop.Views
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage7.Location = new System.Drawing.Point(4, 33);
+            this.tabPage7.Location = new System.Drawing.Point(4, 27);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage7.Size = new System.Drawing.Size(1206, 751);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Saved Comments";
             // 
@@ -1776,9 +1789,9 @@ namespace Constituency.Desktop.Views
             // 
             this.tabPage8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage8.Controls.Add(this.tableLayoutPanel22);
-            this.tabPage8.Location = new System.Drawing.Point(4, 33);
+            this.tabPage8.Location = new System.Drawing.Point(4, 27);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage8.Size = new System.Drawing.Size(1206, 751);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "National Elections";
             // 
@@ -1794,7 +1807,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel22.Name = "tableLayoutPanel22";
             this.tableLayoutPanel22.RowCount = 1;
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel22.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(1206, 751);
             this.tableLayoutPanel22.TabIndex = 4;
             // 
             // groupBox8
@@ -1804,7 +1817,7 @@ namespace Constituency.Desktop.Views
             this.groupBox8.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox8.Location = new System.Drawing.Point(3, 3);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(344, 739);
+            this.groupBox8.Size = new System.Drawing.Size(344, 745);
             this.groupBox8.TabIndex = 1;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "National Elections:";
@@ -1817,7 +1830,7 @@ namespace Constituency.Desktop.Views
             this.TVElections.Location = new System.Drawing.Point(3, 25);
             this.TVElections.Name = "TVElections";
             this.TVElections.SelectedImageIndex = 0;
-            this.TVElections.Size = new System.Drawing.Size(338, 711);
+            this.TVElections.Size = new System.Drawing.Size(338, 717);
             this.TVElections.TabIndex = 2;
             this.TVElections.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVElections_AfterSelect);
             // 
@@ -1841,7 +1854,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 119F));
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(850, 745);
             this.tableLayoutPanel23.TabIndex = 2;
             // 
             // ibtnElectionSave
@@ -1859,7 +1872,7 @@ namespace Constituency.Desktop.Views
             this.ibtnElectionSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnElectionSave.IconSize = 40;
             this.ibtnElectionSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnElectionSave.Location = new System.Drawing.Point(686, 688);
+            this.ibtnElectionSave.Location = new System.Drawing.Point(686, 694);
             this.ibtnElectionSave.Name = "ibtnElectionSave";
             this.ibtnElectionSave.Size = new System.Drawing.Size(161, 48);
             this.ibtnElectionSave.TabIndex = 54;
@@ -2030,7 +2043,7 @@ namespace Constituency.Desktop.Views
             this.groupBox9.ForeColor = System.Drawing.Color.White;
             this.groupBox9.Location = new System.Drawing.Point(3, 332);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(844, 344);
+            this.groupBox9.Size = new System.Drawing.Size(844, 350);
             this.groupBox9.TabIndex = 53;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Votes:";
@@ -2042,8 +2055,129 @@ namespace Constituency.Desktop.Views
             this.DgvElectionVotes.Location = new System.Drawing.Point(3, 25);
             this.DgvElectionVotes.Name = "DgvElectionVotes";
             this.DgvElectionVotes.RowTemplate.Height = 25;
-            this.DgvElectionVotes.Size = new System.Drawing.Size(838, 316);
+            this.DgvElectionVotes.Size = new System.Drawing.Size(838, 322);
             this.DgvElectionVotes.TabIndex = 53;
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
+            this.tabPage9.Controls.Add(this.tableLayoutPanel28);
+            this.tabPage9.Location = new System.Drawing.Point(4, 33);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage9.TabIndex = 8;
+            this.tabPage9.Text = "Import Const/PD";
+            // 
+            // tableLayoutPanel28
+            // 
+            this.tableLayoutPanel28.ColumnCount = 1;
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1055F));
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel28.Controls.Add(this.tableLayoutPanel29, 1, 0);
+            this.tableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel28.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel28.Name = "tableLayoutPanel28";
+            this.tableLayoutPanel28.RowCount = 1;
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel28.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel28.TabIndex = 2;
+            // 
+            // tableLayoutPanel29
+            // 
+            this.tableLayoutPanel29.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel29.ColumnCount = 1;
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
+            this.tableLayoutPanel29.Controls.Add(this.dataGridView1, 0, 0);
+            this.tableLayoutPanel29.Controls.Add(this.tableLayoutPanel30, 0, 1);
+            this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel29.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel29.Name = "tableLayoutPanel29";
+            this.tableLayoutPanel29.RowCount = 2;
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 114F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel29.Size = new System.Drawing.Size(1200, 739);
+            this.tableLayoutPanel29.TabIndex = 4;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(4, 4);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(1192, 616);
+            this.dataGridView1.TabIndex = 6;
+            // 
+            // tableLayoutPanel30
+            // 
+            this.tableLayoutPanel30.ColumnCount = 2;
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel30.Controls.Add(this.iconButton2, 0, 0);
+            this.tableLayoutPanel30.Controls.Add(this.iconButton1, 1, 0);
+            this.tableLayoutPanel30.Location = new System.Drawing.Point(4, 627);
+            this.tableLayoutPanel30.Name = "tableLayoutPanel30";
+            this.tableLayoutPanel30.RowCount = 1;
+            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel30.Size = new System.Drawing.Size(1191, 100);
+            this.tableLayoutPanel30.TabIndex = 5;
+            this.tableLayoutPanel30.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel30_Paint);
+            // 
+            // iconButton2
+            // 
+            this.iconButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconButton2.AutoSize = true;
+            this.iconButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton2.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.iconButton2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.iconButton2.IconColor = System.Drawing.Color.Black;
+            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton2.IconSize = 40;
+            this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton2.Location = new System.Drawing.Point(474, 49);
+            this.iconButton2.Name = "iconButton2";
+            this.iconButton2.Size = new System.Drawing.Size(118, 48);
+            this.iconButton2.TabIndex = 5;
+            this.iconButton2.Text = "Upload";
+            this.iconButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton2.UseVisualStyleBackColor = false;
+            this.iconButton2.Click += new System.EventHandler(this.iconButton2_Click);
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconButton1.AutoSize = true;
+            this.iconButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.iconButton1.IconColor = System.Drawing.Color.Black;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 40;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(1093, 49);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(95, 48);
+            this.iconButton1.TabIndex = 4;
+            this.iconButton1.Text = "Post";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // toolTip1
             // 
@@ -2176,6 +2310,12 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel27.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvElectionVotes)).EndInit();
+            this.tabPage9.ResumeLayout(false);
+            this.tableLayoutPanel28.ResumeLayout(false);
+            this.tableLayoutPanel29.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tableLayoutPanel30.ResumeLayout(false);
+            this.tableLayoutPanel30.PerformLayout();
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
             this.ResumeLayout(false);
@@ -2325,5 +2465,12 @@ namespace Constituency.Desktop.Views
         private CheckedListBox chkElectionParties;
         private GroupBox groupBox9;
         private DataGridView DgvElectionVotes;
+        private TabPage tabPage9;
+        private TableLayoutPanel tableLayoutPanel28;
+        private TableLayoutPanel tableLayoutPanel29;
+        private TableLayoutPanel tableLayoutPanel30;
+        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private DataGridView dataGridView1;
     }
 }

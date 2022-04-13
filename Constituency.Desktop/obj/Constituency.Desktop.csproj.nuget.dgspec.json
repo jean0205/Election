@@ -1,24 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jeanc\\source\\repos\\Election\\Constituency.Desktop\\Constituency.Desktop.csproj": {}
+    "C:\\Users\\jcsoto\\source\\repos\\Election\\Constituency.Desktop\\Constituency.Desktop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jeanc\\source\\repos\\Election\\Constituency.Desktop\\Constituency.Desktop.csproj": {
+    "C:\\Users\\jcsoto\\source\\repos\\Election\\Constituency.Desktop\\Constituency.Desktop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jeanc\\source\\repos\\Election\\Constituency.Desktop\\Constituency.Desktop.csproj",
+        "projectUniqueName": "C:\\Users\\jcsoto\\source\\repos\\Election\\Constituency.Desktop\\Constituency.Desktop.csproj",
         "projectName": "Constituency.Desktop",
-        "projectPath": "C:\\Users\\jeanc\\source\\repos\\Election\\Constituency.Desktop\\Constituency.Desktop.csproj",
-        "packagesPath": "C:\\Users\\jeanc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jeanc\\source\\repos\\Election\\Constituency.Desktop\\obj\\",
+        "projectPath": "C:\\Users\\jcsoto\\source\\repos\\Election\\Constituency.Desktop\\Constituency.Desktop.csproj",
+        "packagesPath": "C:\\Users\\jcsoto\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jcsoto\\source\\repos\\Election\\Constituency.Desktop\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\jeanc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jcsoto\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -65,6 +66,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "System.Data.OleDb": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [

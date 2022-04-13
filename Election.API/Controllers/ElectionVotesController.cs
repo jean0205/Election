@@ -66,8 +66,25 @@ namespace Election.API.Controllers
             {
                 return BadRequest();
             }
-
-            _context.Entry(electionVote).State = EntityState.Modified;
+            var electionVoteDB = await _context.ElectionVotes
+                .Include(e => e.Election)                
+                .Include(e => e.SupportedParty)
+                .Include(e => e.Comment)
+                .Include(e => e.Interviewer)
+                .FirstOrDefaultAsync(e => e.Id == id);
+            electionVoteDB.Election = await _context.NationalElections.FirstOrDefaultAsync(e => e.Id == electionVote.Election.Id);
+            electionVoteDB.SupportedParty = await _context.Parties.FirstOrDefaultAsync(e => e.Id == electionVote.SupportedParty.Id);
+            if (electionVote.Comment == null)
+            {
+                electionVoteDB.Comment = null;
+            }
+            else
+            {
+                electionVoteDB.Comment = _context.Comments.FirstOrDefault(c => c.Id == electionVote.Comment.Id);
+            }
+            electionVoteDB.OtherComment = electionVote.OtherComment;
+            electionVoteDB.VoteTime = electionVote.VoteTime;
+            _context.Entry(electionVoteDB).State = EntityState.Modified;
 
             try
             {

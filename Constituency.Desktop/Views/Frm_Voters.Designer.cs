@@ -98,6 +98,9 @@
             this.ibtnSaveVoter = new FontAwesome.Sharp.IconButton();
             this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -132,6 +135,8 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHouse)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
             this.SuspendLayout();
@@ -475,6 +480,7 @@
             // cmbDivision
             // 
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
             this.cmbDivision.Location = new System.Drawing.Point(565, 5);
             this.cmbDivision.Name = "cmbDivision";
@@ -485,6 +491,7 @@
             // cmbConstituency
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
             this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
             this.cmbConstituency.Name = "cmbConstituency";
@@ -1036,17 +1043,55 @@
             this.ibtnUpdate.Text = "Update";
             this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnUpdate.UseVisualStyleBackColor = false;
+            this.ibtnUpdate.Visible = false;
             this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1170, 741);
+            this.tabPage2.Size = new System.Drawing.Size(1170, 735);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.Location = new System.Drawing.Point(389, 639);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(139, 37);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Post";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(24, 639);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(139, 37);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Upload";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(5, 6);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(1159, 592);
+            this.dataGridView1.TabIndex = 0;
             // 
             // tableLayoutPanel7
             // 
@@ -1180,6 +1225,8 @@
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHouse)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
@@ -1268,5 +1315,8 @@
         private TabPage tabPage5;
         private DataGridView dgvElections;
         private ComboBox cmbDivision;
+        private Button button2;
+        private Button button1;
+        private DataGridView dataGridView1;
     }
 }

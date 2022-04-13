@@ -45,6 +45,9 @@ namespace Election.API.Controllers
               .ThenInclude(c => c.SupportedParty)
               .Include(v => v.House)
               .Include(v => v.ElectionVotes)
+              .ThenInclude(v => v.Election)
+              .Include(v => v.ElectionVotes)
+              .ThenInclude(v => v.SupportedParty)
                .FirstOrDefaultAsync(v => v.Id == id);
             if (voter == null)
             {

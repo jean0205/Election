@@ -7,6 +7,7 @@ using Constituency.Desktop.Models;
 using Microsoft.AppCenter.Crashes;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Reflection;
 
 namespace Constituency.Desktop.Views
@@ -57,9 +58,12 @@ namespace Constituency.Desktop.Views
 
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DefaultCellStyle.BackColor=Color.Beige);
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.RowHeadersVisible = false);
 
-           
         }
+       
+
         private bool PaintRequiredFildsConstituency()
         {
             bool missing = false;
@@ -267,7 +271,7 @@ namespace Constituency.Desktop.Views
             {
                 txtSGSE.Text = consty.SGSE;
                 txtName.Text = consty.Name;
-                rjActive.Checked = consty.Active;
+                rjActive.Checked = consty.Active;               
                 txtPollings.Clear();
                 var pd = consty.PollingDivisions.Select(p => p.Name).ToList();
                 pd.ForEach(p => txtPollings.Text += p.ToString() + "\r\n");
@@ -387,7 +391,9 @@ namespace Constituency.Desktop.Views
         #endregion
 
         #region Polling Divisions
-
+        //TODO guardar el id del la constituency en el nodo tambien
+        //diferenciar nosd de nivel 0 y de nivel 1
+        //cuando eleccione un nodo de nivel 0 poner el valor en el combobos de las constituencies
         private void RefreshTreeViewPolling(List<ConstituencyC> constituencies)
         {
             try
@@ -433,7 +439,7 @@ namespace Constituency.Desktop.Views
 
 
                     pollingDivision.Constituency = ConstituenciesList.Where(c => c.PollingDivisions.Contains(pollingDivision)).FirstOrDefault();
-
+                    //cmbConstituency.SelectedValue = pollingDivision.Constituency.Id;
                     showPollingInfo(pollingDivision);
                 }
                 else
@@ -1692,7 +1698,161 @@ namespace Constituency.Desktop.Views
             if (node_here == null) return;
         }
 
+        private void iconButton2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = "xlsx";
+            ofd.FileName = "Upload File";
+            ofd.Filter = "Excel  files|*.xls;*.xlsx";
+            ofd.Title = "Select file";
+            //  Allow the user to select multiple images.
 
+            if (ofd.ShowDialog() != DialogResult.Cancel)
+            {
+                String name = "Sheet1";
+                String constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                                ofd.FileName.ToString() +
+                                ";Extended Properties='Excel 12.0 XML;HDR=NO;';";
+
+                OleDbConnection con = new OleDbConnection(constr);
+                OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
+                con.Open();
+
+                OleDbDataAdapter sda = new OleDbDataAdapter(oconn);
+                DataTable data = new DataTable();
+                sda.Fill(data);
+                dataGridView1.DataSource = data;
+                dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
+                dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
+            }
+        }
+
+        private async  void tableLayoutPanel30_Paint(object sender, PaintEventArgs e)
+        {
+         
+        }
+        private async void iconButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                List<ConstituencyC> constituencies = new List<ConstituencyC>();
+                var listConst = new List<string>();
+                var listPD = new List<string>();
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+
+                    if (row.Cells[0].Value != null)
+                    {
+                        var constituency = row.Cells[0].Value.ToString().ToUpper();
+                        if (!listConst.Contains(constituency))
+                        {
+                            listConst.Add(constituency);
+                        }
+
+                    }
+                }
+                foreach (var consty in listConst)
+                {
+                    if (!ConstituenciesList.Select(c => c.Name.ToUpper()).Contains(consty.ToUpper()))
+                    {
+                        await SaveConstituencyBatch(consty, consty);
+                        constituencies.Add(constituency);
+                    }
+                }
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+
+                    if (row.Cells[1].Value != null)
+                    {
+                        var pd = row.Cells[1].Value.ToString().ToUpper();
+                        if (!listPD.Contains(pd))
+                        {
+                            listPD.Add(pd);
+                            await SavePollingBatch(constituencies.FirstOrDefault(c => c.Name.ToUpper() == row.Cells[0].Value.ToString().ToUpper()), pd);
+
+                        }
+
+                    }
+                }
+                UtilRecurrent.UnlockForm(waitForm, this);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> SaveConstituencyBatch(string sgse, string name)
+        {
+            try
+            {
+               // UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Constituencies", BuildConstituencyB( sgse,  name), token);
+               // UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+
+                constituency = (ConstituencyC)response.Result;
+               // UtilRecurrent.InformationMessage("Constituency sucessfully saved", "Constituency Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+
+        }
+        private ConstituencyC BuildConstituencyB(string sgse,string name)
+        {
+            return new ConstituencyC()
+            {
+                Active = true,
+                SGSE = sgse.ToUpper(),
+                Name = name.ToUpper()
+            };
+        }
+
+        private async Task<bool> SavePollingBatch(ConstituencyC constituency, string name)
+        {
+            try
+            {
+               // UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("PollingDivisions", BuildPollingB(constituency,name), token);
+               // UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+
+                pollingDivision = (PollingDivision)response.Result;
+               // UtilRecurrent.InformationMessage("Polling Division sucessfully saved", "Polling Division Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+
+        }
+        private PollingDivision BuildPollingB(ConstituencyC constituency,string name)
+        {
+            return new PollingDivision()
+            {
+                Active = true,
+                Name = name,
+                Constituency =  constituency
+            };
+        }
+
+       
     }
 
     #endregion

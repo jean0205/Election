@@ -116,3 +116,5 @@ C:\Users\jeanc\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windo
 C:\Users\jeanc\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.pdb
 C:\Users\jeanc\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.genruntimeconfig.cache
 C:\Users\jeanc\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\ref\Constituency.Desktop.dll
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\bin\Debug\net6.0-windows\System.Data.OleDb.dll
+C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Data.OleDb.dll

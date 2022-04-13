@@ -7,11 +7,6 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Reflection;
 
-//TODO mostrascuando seleccione la eleccion, solo los partidos q participan en esa eleccion
-//esconder los botones de save and update al principio y mostraslos cuando selecciones algo en el tview
-//actualizar el controlador para actualizar las election vote
-//
-
 namespace Constituency.Desktop.Views
 {
     public partial class Frm_ElectionVotes : Form
@@ -52,9 +47,10 @@ namespace Constituency.Desktop.Views
             await LoadConstituencies();
             //await LoadComments();
             await LoadInterviewers();
-            await LoadParties();
+           // await LoadParties();
             await LoadElections();
             UtilRecurrent.UnlockForm(waitForm, this);
+            ibtnUpdate.Visible = false;
 
         }
         #region Mandatories and Validations
@@ -150,9 +146,13 @@ namespace Constituency.Desktop.Views
                     RefreshTreeView(ElectionList.ToList());
                     cmbElection.DataSource = null;
                     cmbElection.DataSource = ElectionList.Where(e => e.Open).ToList();
+
+
+
                     cmbElection.ValueMember = "Id";
                     cmbElection.DisplayMember = "ElectionDate";
                     cmbElection.SelectedItem = null;
+                    
                 }
                 else
                 {
@@ -214,24 +214,24 @@ namespace Constituency.Desktop.Views
                 cmbInterviewers.SelectedItem = null;
             }
         }
-        private async Task LoadParties()
-        {
-            Response response = await ApiServices.GetListAsync<Party>("Parties", token);
-            if (!response.IsSuccess)
-            {
-                UtilRecurrent.ErrorMessage(response.Message);
-                return;
-            }
-            PartiesList = new((List<Party>)response.Result);
-            if (PartiesList.Any())
-            {
-                cmbISupportedParty.DataSource = null;
-                cmbISupportedParty.DataSource = PartiesList;
-                cmbISupportedParty.ValueMember = "Id";
-                cmbISupportedParty.DisplayMember = "Name";
-                cmbISupportedParty.SelectedItem = null;
-            }
-        }
+        //private async Task LoadParties()
+        //{
+        //    Response response = await ApiServices.GetListAsync<Party>("Parties", token);
+        //    if (!response.IsSuccess)
+        //    {
+        //        UtilRecurrent.ErrorMessage(response.Message);
+        //        return;
+        //    }
+        //    PartiesList = new((List<Party>)response.Result);
+        //    if (PartiesList.Any())
+        //    {
+        //        cmbISupportedParty.DataSource = null;
+        //        cmbISupportedParty.DataSource = PartiesList;
+        //        cmbISupportedParty.ValueMember = "Id";
+        //        cmbISupportedParty.DisplayMember = "Name";
+        //        cmbISupportedParty.SelectedItem = null;
+        //    }
+        //}
         private async Task LoadComments()
         {
             Response response = await ApiServices.GetListAsync<Comment>("Comments", token);
@@ -393,7 +393,7 @@ namespace Constituency.Desktop.Views
                 if (nodeTag > 0)
                 {
                     cmbElection.SelectedValue = nodeTag;
-                    ibtnSaveVoter.Visible = true;
+                    ibtnSave.Visible = true;
                     ibtnUpdate.Visible = false;
                 }
                 else
@@ -417,7 +417,7 @@ namespace Constituency.Desktop.Views
                     ElectionVote = new();
                     ElectionVote = await LoadElectionVoteAsyncById(nodeTag);
                     ShowElectionVoteInformation();
-                    ibtnSaveVoter.Visible = false;
+                    ibtnSave.Visible = false;
                     ibtnUpdate.Visible = true;
                 }
                 else
@@ -436,10 +436,10 @@ namespace Constituency.Desktop.Views
             try
             {
                 Voter = ElectionVote.Voter;
-                ShowVoterInformation();
-                cmbISupportedParty.SelectedValue = ElectionVote.SupportedParty.Id;
+                ShowVoterInformation();               
                 cmbInterviewers.SelectedValue = ElectionVote.Interviewer.Id;
                 cmbElection.SelectedValue = ElectionVote.Election.Id;
+                cmbISupportedParty.SelectedValue = ElectionVote.SupportedParty.Id;               
                 // cmbIComment.SelectedValue = Interview.Comment.Id;
                 txtIOtherComment.Text = ElectionVote.OtherComment;
                 dtpIDate.Value = ElectionVote.VoteTime;
@@ -606,6 +606,7 @@ namespace Constituency.Desktop.Views
                 //making null what is not necesary
                 ElectionVote.Voter.Interviews = null;
                 ElectionVote.Interviewer.Interviews = null;
+                ElectionVote.Election.ElectionVotes = null;
 
                 if (id != null)
                 {
@@ -702,8 +703,13 @@ namespace Constituency.Desktop.Views
                     if (vot != null)
                     {
                         Voter = vot;
+                        ShowVoterInformation();
                     }
-                    ShowVoterInformation();
+                    else
+                    {
+                        cleanScreen();
+                    }
+                   
                 }
             }
             catch (Exception ex)
@@ -719,6 +725,35 @@ namespace Constituency.Desktop.Views
             return level;
         }
 
-        
+        private void cmbElection_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbElection_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                cmbISupportedParty.DataSource = null;
+                if (cmbElection.SelectedItem != null && (cmbElection.SelectedItem as NationalElection).Parties != null && (cmbElection.SelectedItem as NationalElection).Parties.Any())
+                {
+                    var parties = (cmbElection.SelectedItem as NationalElection).Parties;
+                    cmbISupportedParty.DataSource = null;
+                    cmbISupportedParty.DataSource = parties;
+                    cmbISupportedParty.ValueMember = "Id";
+                    cmbISupportedParty.DisplayMember = "Name";
+                    cmbISupportedParty.SelectedItem = null;
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
     }
 }

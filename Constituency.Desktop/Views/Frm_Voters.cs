@@ -6,7 +6,10 @@ using Constituency.Desktop.Models;
 using Microsoft.AppCenter.Crashes;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Reflection;
+
+
 
 namespace Constituency.Desktop.Views
 {
@@ -50,8 +53,7 @@ namespace Constituency.Desktop.Views
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DefaultCellStyle.BackColor = Color.Beige);
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque);
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells);
-
-
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.RowHeadersVisible=false);
         }
         private void FildsValidations()
         {
@@ -364,10 +366,13 @@ namespace Constituency.Desktop.Views
                     //TODO
                     //mostrar en los datagrid los datos de las casa, las eleciones y las entrevistas
 
-                   
                     if (Voter.Interviews != null && Voter.Interviews.Any())
                     {
-                        dgvInterviews.DataSource = Voter.Interviews.Select(u => new { u.Canvas.Type.Type,u.Canvas.Name, u.Date, Party = u.SupportedParty.Name, u.Interviewer.FullName }).ToList();
+                        dgvInterviews.DataSource = Voter.Interviews.Select(u => new { u.Canvas.Type.Type, u.Canvas.Name, u.Date, Party = u.SupportedParty.Name, u.Interviewer.FullName }).ToList();
+                    }
+                    if (Voter.ElectionVotes != null && Voter.ElectionVotes.Any())
+                    {
+                        dgvElections.DataSource = Voter.ElectionVotes.Select(u => new { u.Election.ElectionDate, u.VoteTime, VotedParty = u.SupportedParty.Name }).ToList();
                     }
                 }
             }
@@ -384,6 +389,7 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "ComboBox").Cast<ComboBox>().ToList().ForEach(x => x.SelectedIndex = -1);
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "DateTimePicker").Cast<DateTimePicker>().ToList().ForEach(x => x.Value = DateTime.Now.Date);
+                UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DataSource = null);
                 Voter = new Voter();
             }
             catch (Exception ex)
@@ -505,7 +511,7 @@ namespace Constituency.Desktop.Views
 
         private async void ibtnUpdate_Click(object sender, EventArgs e)
         {
-             try
+            try
             {
                 if (PaintRequiredVoter())
                 {
@@ -542,7 +548,7 @@ namespace Constituency.Desktop.Views
             {
                 var voter = BuildUpdateVoter();
                 voter.Interviews = null;
-                
+
                 UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PutAsync("Voters", voter, voter.Id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
@@ -573,7 +579,7 @@ namespace Constituency.Desktop.Views
                 Voter.Sex = cmbSex.SelectedItem.ToString();
                 Voter.DOB = dtpDOB.Value;
                 Voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
-               
+
                 return Voter;
             }
 
@@ -651,8 +657,36 @@ namespace Constituency.Desktop.Views
 
 
 
+
         #endregion
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = "xlsx";
+            ofd.FileName = "Upload File";
+            ofd.Filter = "Excel  files|*.xls;*.xlsx";
+            ofd.Title = "Select file";
+            //  Allow the user to select multiple images.
+
+            if (ofd.ShowDialog() != DialogResult.Cancel)
+            {
+                String name = "Sheet1";
+                String constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                                ofd.FileName.ToString() +
+                                ";Extended Properties='Excel 12.0 XML;HDR=NO;';";
+
+                OleDbConnection con = new OleDbConnection(constr);
+                OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
+                con.Open();
+
+                OleDbDataAdapter sda = new OleDbDataAdapter(oconn);
+                DataTable data = new DataTable();
+                sda.Fill(data);
+                dataGridView1.DataSource = data;
+                dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
+                dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
+            }
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace Election.API.Controllers
             return await _context.NationalElections
                 .Include(e => e.ElectionVotes)
                 .ThenInclude(e=>e.Voter)
+                .Include(e => e.Parties)
                 .ToListAsync();
         }
 
