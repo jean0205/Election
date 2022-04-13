@@ -129,6 +129,7 @@ namespace Election.API.Controllers
 
             return CreatedAtAction("GetVoter", new { id = voter.Id }, voter);
         }
+        
 
         [HttpPost("Range")]
         public async Task<ActionResult<Voter>> PostVoterList(List<Voter> voters)

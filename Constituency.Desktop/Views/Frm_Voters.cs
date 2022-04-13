@@ -28,6 +28,7 @@ namespace Constituency.Desktop.Views
         private ObservableCollection<Voter> VoterList;
         private List<ConstituencyC> ConstituenciesList;
         private List<PollingDivision> PollingDivisionsList;
+        private List<PollingDivision> PollingDivisionsListBatch;
         public Frm_Voters()
         {
             this.AutoScaleMode = AutoScaleMode.Dpi;
@@ -43,6 +44,7 @@ namespace Constituency.Desktop.Views
             DGVFormats();
             await LoadConstituencies();
             await LoadVoters();
+            await LoadDivisionsBatch();
 
         }
 
@@ -53,7 +55,7 @@ namespace Constituency.Desktop.Views
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DefaultCellStyle.BackColor = Color.Beige);
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque);
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells);
-            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.RowHeadersVisible=false);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.RowHeadersVisible = false);
         }
         private void FildsValidations()
         {
@@ -67,7 +69,8 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private void MandatoriesFilds()
@@ -149,6 +152,17 @@ namespace Constituency.Desktop.Views
                 cmbConstituency.DisplayMember = "Name";
                 cmbConstituency.SelectedItem = null;
             }
+        }
+        private async Task LoadDivisionsBatch()
+        {
+            Response response = await ApiServices.GetListAsync<PollingDivision>("PollingDivisions", token);
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return;
+            }
+            PollingDivisionsListBatch = new((List<PollingDivision>)response.Result);
+            
         }
         private async Task LoadVoters()
         {
@@ -660,8 +674,10 @@ namespace Constituency.Desktop.Views
 
         #endregion
 
+        #region Import Batch
         private void button1_Click(object sender, EventArgs e)
         {
+
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.DefaultExt = "xlsx";
             ofd.FileName = "Upload File";
@@ -686,7 +702,97 @@ namespace Constituency.Desktop.Views
                 dataGridView1.DataSource = data;
                 dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
                 dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
+
+                
             }
         }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            checkVoterList();
+        }
+        List<Voter> votersBatch = new ();
+       async  void checkVoterList()
+        {
+            try
+            {
+                votersBatch = new();
+                votersBatch = BuildVoterList();
+
+                label16.Text = votersBatch.Count.ToString();
+                //count the repeted voters
+                label17.Text = votersBatch.GroupBy(v => v.Reg).Where(g => g.Count() > 1).Count().ToString();
+                var duplicatedVoters = votersBatch.GroupBy(v => v.Reg).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
+                var correctOnes = votersBatch.Where(v => !String.IsNullOrEmpty(v.Reg)).ToList();
+
+
+                await UploadMasterFile(correctOnes.Take(1000).ToList());
+
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                
+            }
+        }
+        private async Task<bool> UploadMasterFile(List<Voter> list)
+        {
+            try
+            {
+                waitForm.Show(this);
+                Cursor.Hide();
+                Response response = await ApiServices.PostMasterFileAsync("Voters/Range", list, token);
+
+                waitForm.Close();
+                Cursor.Show();
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+                UtilRecurrent.InformationMessage("Master File sucessfully uploaded", "Master File");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+
+        }
+        private List<Voter> BuildVoterList()
+        {
+            try
+            {
+                List<Voter> voters = new List<Voter>();
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    Voter voter = new Voter();
+                    voter.SurName = dataGridView1.Rows[i].Cells[1].Value.ToString().ToUpper().Trim();
+                    voter.GivenNames = dataGridView1.Rows[i].Cells[2].Value.ToString().ToUpper().Trim();
+                    voter.Sex = dataGridView1.Rows[i].Cells[3].Value.ToString().ToUpper().Trim();
+                    voter.Address = dataGridView1.Rows[i].Cells[4].Value.ToString().ToUpper().Trim();
+                    voter.Occupation = dataGridView1.Rows[i].Cells[5].Value.ToString().ToUpper().Trim();
+                    voter.Reg = dataGridView1.Rows[i].Cells[6].Value.ToString().ToUpper().Trim();
+                    voter.PollingDivision = new PollingDivision();
+                    string pd = dataGridView1.Rows[i].Cells[7].Value.ToString().ToUpper().Trim();
+                    voter.PollingDivision = PollingDivisionsListBatch.FirstOrDefault(p => p.Name == pd);
+                    voters.Add(voter);
+
+                }
+                return voters;
+
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+
+        #endregion
+
+       
     }
 }

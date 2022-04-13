@@ -29,7 +29,7 @@ namespace Election.API.Data.Entities
         public string Sex { get; set; }
 
 
-        [Required(ErrorMessage = "{0} is a required field.")]
+        
         [Display(Name = "Date of Birth")]        
         public DateTime DOB { get; set; }
         
