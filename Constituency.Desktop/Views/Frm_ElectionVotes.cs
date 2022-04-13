@@ -7,6 +7,10 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Reflection;
 
+//TODO mostrascuando seleccione la eleccion, solo los partidos q participan en esa eleccion
+//esconder los botones de save and update al principio y mostraslos cuando selecciones algo en el tview
+//actualizar el controlador para actualizar las election vote
+//
 
 namespace Constituency.Desktop.Views
 {
@@ -616,6 +620,74 @@ namespace Constituency.Desktop.Views
                 return null;
             }
         }
+
+        private async void ibtnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //TODO
+                //valorar si debo crear varios gets en los controladores unos q carguen todas las relaciones y otros
+                //que solo cargen la entidad principal como aqui en interview que estoy leyendo el voter con las interviews y despues tengo que hacerlas null
+                if (tView1.SelectedNode == null || (int)tView1.SelectedNode.Tag == 0)
+                {
+                    return;
+                }
+                if (PaintRequiredVoter())
+                {
+                    UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
+                    return;
+                }
+                if (dtpDOB.Value.AddYears(18) > DateTime.Now)
+                {
+                    UtilRecurrent.ErrorMessage("Voter younger than 18.");
+                    return;
+                }
+                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
+                {
+                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
+                    return;
+                }
+                if (await UpdateElectionVote((int)tView1.SelectedNode.Tag))
+                {
+                    await LoadElections();
+                }
+                if (ElectionVote != null && ElectionVote.Id > 0)
+                {
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == ElectionVote.Id);
+                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> UpdateElectionVote(int? id)
+        {
+            try
+            {
+
+                var electionVote = await BuildElectionVote(id);
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("ElectionVotes", electionVote, electionVote.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+        }
         #endregion
 
 
@@ -630,10 +702,8 @@ namespace Constituency.Desktop.Views
                     if (vot != null)
                     {
                         Voter = vot;
-
                     }
                     ShowVoterInformation();
-
                 }
             }
             catch (Exception ex)
@@ -649,5 +719,6 @@ namespace Constituency.Desktop.Views
             return level;
         }
 
+        
     }
 }
