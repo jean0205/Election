@@ -91,7 +91,7 @@ namespace Constituency.Desktop.Views
                 }
                
                 TokenResponse tokenResponse = (TokenResponse)response.Result;
-                //TODO LLAMAR AL FORMULARIO PRINCIPAL DESDE AQUI
+                
                 Main main = new Main(tokenResponse);
                 Analytics.TrackEvent("Login  " + tokenResponse.User.FullName);
                 this.Hide();

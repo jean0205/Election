@@ -2,6 +2,7 @@
 
 namespace Election.API.Data.Entities
 {
+    //todo add deceased field
     public class Voter
     {
         public int Id { get; set; }

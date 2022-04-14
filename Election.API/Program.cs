@@ -50,6 +50,8 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+builder.Services.AddMvc(options =>
+    options.SuppressAsyncSuffixInActionNames = false);
 builder.Services.AddTransient<SeedDB>();
 builder.Services.AddScoped<IUserHelper, UserHelper>();
 

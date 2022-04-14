@@ -82,6 +82,9 @@
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label30 = new System.Windows.Forms.Label();
             this.txtReg = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.rjDeceased = new Constituency.Desktop.Controls.RJToggleButton();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.label11 = new System.Windows.Forms.Label();
             this.txtHomePhone = new System.Windows.Forms.TextBox();
@@ -129,6 +132,7 @@
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -815,11 +819,13 @@
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnCount = 3;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.78261F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.21739F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 291F));
             this.tableLayoutPanel6.Controls.Add(this.label30, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.txtReg, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.panel2, 2, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -834,9 +840,9 @@
             this.label30.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label30.Location = new System.Drawing.Point(56, 9);
+            this.label30.Location = new System.Drawing.Point(45, 1);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(159, 21);
+            this.label30.Size = new System.Drawing.Size(98, 37);
             this.label30.TabIndex = 16;
             this.label30.Text = "Registration Number:";
             // 
@@ -844,11 +850,44 @@
             // 
             this.txtReg.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtReg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtReg.Location = new System.Drawing.Point(222, 5);
+            this.txtReg.Location = new System.Drawing.Point(150, 5);
             this.txtReg.Name = "txtReg";
             this.txtReg.Size = new System.Drawing.Size(268, 29);
             this.txtReg.TabIndex = 17;
             this.txtReg.Tag = "1,2";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label18);
+            this.panel2.Controls.Add(this.rjDeceased);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(592, 4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(286, 31);
+            this.panel2.TabIndex = 18;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(72, 3);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(76, 21);
+            this.label18.TabIndex = 50;
+            this.label18.Text = "Deceased";
+            // 
+            // rjDeceased
+            // 
+            this.rjDeceased.AutoSize = true;
+            this.rjDeceased.Location = new System.Drawing.Point(12, 3);
+            this.rjDeceased.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjDeceased.Name = "rjDeceased";
+            this.rjDeceased.OffBackColor = System.Drawing.Color.Gray;
+            this.rjDeceased.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjDeceased.OnBackColor = System.Drawing.Color.MediumSlateBlue;
+            this.rjDeceased.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjDeceased.Size = new System.Drawing.Size(50, 25);
+            this.rjDeceased.TabIndex = 49;
+            this.rjDeceased.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel14
             // 
@@ -1058,17 +1097,17 @@
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 30);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1170, 735);
+            this.tabPage2.Size = new System.Drawing.Size(1170, 741);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.Location = new System.Drawing.Point(483, 570);
+            this.button3.Location = new System.Drawing.Point(483, 528);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(139, 37);
             this.button3.TabIndex = 5;
@@ -1080,7 +1119,7 @@
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(881, 629);
+            this.label17.Location = new System.Drawing.Point(881, 587);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(61, 21);
             this.label17.TabIndex = 4;
@@ -1090,7 +1129,7 @@
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(881, 590);
+            this.label16.Location = new System.Drawing.Point(881, 548);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(61, 21);
             this.label16.TabIndex = 3;
@@ -1099,7 +1138,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(233, 572);
+            this.button2.Location = new System.Drawing.Point(233, 530);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(139, 37);
             this.button2.TabIndex = 2;
@@ -1109,7 +1148,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(24, 572);
+            this.button1.Location = new System.Drawing.Point(24, 530);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 37);
             this.button1.TabIndex = 1;
@@ -1128,7 +1167,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1159, 544);
+            this.dataGridView1.Size = new System.Drawing.Size(1159, 502);
             this.dataGridView1.TabIndex = 0;
             // 
             // tableLayoutPanel7
@@ -1222,6 +1261,8 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Voters";
             this.Text = "Frm_Voters";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_Voters_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Frm_Voters_FormClosed);
             this.Load += new System.EventHandler(this.Frm_Voters_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -1253,6 +1294,8 @@
             this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
             this.tabControl2.ResumeLayout(false);
@@ -1360,5 +1403,8 @@
         private Label label16;
         private Label label17;
         private Button button3;
+        private Panel panel2;
+        private Label label18;
+        private Controls.RJToggleButton rjDeceased;
     }
 }

@@ -9,6 +9,12 @@ using System.Data;
 using System.Data.OleDb;
 using System.Reflection;
 
+//todo if women and icn different if man
+//introduce deceased field
+//if deacessed different icon too
+//poner la ventana de upload bonita
+//agregar validaciones para si algun polling division no existe o algun campo requerido esta en blanco
+//hacer table para salvar los duplicados
 
 
 namespace Constituency.Desktop.Views
@@ -162,7 +168,7 @@ namespace Constituency.Desktop.Views
                 return;
             }
             PollingDivisionsListBatch = new((List<PollingDivision>)response.Result);
-            
+
         }
         private async Task LoadVoters()
         {
@@ -220,7 +226,8 @@ namespace Constituency.Desktop.Views
         private void RefreshTreeView(List<Voter> Voters)
         {
             try
-            {
+            {              
+                tView1.BeginUpdate();                
                 tView1.Nodes.Clear();
                 //TreeNode node;
                 List<TreeNode> treeNodes = new List<TreeNode>();
@@ -255,11 +262,13 @@ namespace Constituency.Desktop.Views
                     childNodes = new List<TreeNode>();
                 }
                 tView1.Nodes.AddRange(treeNodes.ToArray());
-                tView1.ExpandAll();
-                rjCollapseAll.Checked = true;
-                lblExpand.Text = "Collapse All";
+                //tView1.ExpandAll();
+                tView1.CollapseAll();
+                rjCollapseAll.Checked = false;
+                lblExpand.Text = "EXPAND All";
                 tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-                groupBox1.Text = "Voters List ( " + Voters.Count.ToString("N") + " )";
+                groupBox1.Text = "Voters List ( " + Voters.Count.ToString("N0") + " )";
+                tView1.EndUpdate();
 
             }
             catch (Exception ex)
@@ -366,19 +375,18 @@ namespace Constituency.Desktop.Views
                     List<TextBox> VoterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
                     foreach (TextBox txt in VoterTextBox)
                     {
-                        if (properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).Any())
+                        if (properties.Where(p => p.GetValue(Voter) != null && p.Name == txt.Name.Replace("txt", string.Empty)).Any())
                         {
-
-                            txt.Text = properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Voter).ToString();
+                            txt.Text = properties.Where(p => p.GetValue(Voter) != null && p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Voter).ToString();
                         }
                     }
                     cmbSex.SelectedItem = Voter.Sex;
-                    dtpDOB.Value = Voter.DOB;
+                    dtpDOB.Value = Voter.DOB.Date == new DateTime(1, 1, 0001) ? DateTime.Today : Voter.DOB;
                     cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
                     FillUpdComboboxDivision();
                     cmbDivision.SelectedValue = Voter.PollingDivision.Id;
-                    //TODO
-                    //mostrar en los datagrid los datos de las casa, las eleciones y las entrevistas
+
+              
 
                     if (Voter.Interviews != null && Voter.Interviews.Any())
                     {
@@ -703,15 +711,15 @@ namespace Constituency.Desktop.Views
                 dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
                 dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
 
-                
+
             }
         }
         private void button3_Click(object sender, EventArgs e)
         {
             checkVoterList();
         }
-        List<Voter> votersBatch = new ();
-       async  void checkVoterList()
+        List<Voter> votersBatch = new();
+        async void checkVoterList()
         {
             try
             {
@@ -724,33 +732,58 @@ namespace Constituency.Desktop.Views
                 var duplicatedVoters = votersBatch.GroupBy(v => v.Reg).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
                 var correctOnes = votersBatch.Where(v => !String.IsNullOrEmpty(v.Reg)).ToList();
 
+                var batches = BuildChunksWithLinq(correctOnes, 1000);
 
-                await UploadMasterFile(correctOnes.Take(1000).ToList());
+                foreach (var batch in batches)
+                {
+                    await UploadMasterFile((List<Voter>)batch);
+
+                }
+
+
 
             }
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
-                
+            }
+        }
+        private IEnumerable<IEnumerable<T>> BuildChunksWithLinq<T>(List<T> fullList, int batchSize)
+        {
+            int total = 0;
+            var chunkedList = new List<List<T>>();
+            while (total < fullList.Count)
+            {
+                var chunk = fullList.Skip(total).Take(batchSize);
+                chunkedList.Add(chunk.ToList());
+                total += batchSize;
+            }
+
+            return chunkedList;
+        }
+        private IEnumerable<IEnumerable<T>> BuildChunksWithLinqAndYield<T>(List<T> fullList, int batchSize)
+        {
+            int total = 0;
+            while (total < fullList.Count)
+            {
+                yield return fullList.Skip(total).Take(batchSize);
+                total += batchSize;
             }
         }
         private async Task<bool> UploadMasterFile(List<Voter> list)
         {
             try
             {
-                waitForm.Show(this);
-                Cursor.Hide();
+                UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PostMasterFileAsync("Voters/Range", list, token);
 
-                waitForm.Close();
-                Cursor.Show();
+                UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
                     return response.IsSuccess;
                 }
-                UtilRecurrent.InformationMessage("Master File sucessfully uploaded", "Master File");
                 return true;
             }
             catch (Exception ex)
@@ -768,6 +801,7 @@ namespace Constituency.Desktop.Views
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     Voter voter = new Voter();
+                    voter.Active = true;
                     voter.SurName = dataGridView1.Rows[i].Cells[1].Value.ToString().ToUpper().Trim();
                     voter.GivenNames = dataGridView1.Rows[i].Cells[2].Value.ToString().ToUpper().Trim();
                     voter.Sex = dataGridView1.Rows[i].Cells[3].Value.ToString().ToUpper().Trim();
@@ -791,8 +825,22 @@ namespace Constituency.Desktop.Views
             }
         }
 
+
         #endregion
 
-       
+        private void Frm_Voters_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+           
+            UtilRecurrent.LockForm(waitForm, this);
+            tView1.BeginUpdate();
+            tView1.Nodes.Clear();
+            tView1.EndUpdate();
+        }
+
+        private void Frm_Voters_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            UtilRecurrent.UnlockForm(waitForm, this);
+        }
     }
 }

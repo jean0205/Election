@@ -487,19 +487,17 @@ namespace Constituency.Desktop.Views
                     List<TextBox> VoterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
                     foreach (TextBox txt in VoterTextBox)
                     {
-                        if (properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).Any())
+                        if (properties.Where(p => p.GetValue(Voter) != null && p.Name == txt.Name.Replace("txt", string.Empty)).Any())
                         {
-
-                            txt.Text = properties.Where(p => p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Voter).ToString();
+                            txt.Text = properties.Where(p => p.GetValue(Voter) != null && p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Voter).ToString();
                         }
                     }
                     cmbSex.SelectedItem = Voter.Sex;
-                    dtpDOB.Value = Voter.DOB;
+                    dtpDOB.Value = Voter.DOB.Date == new DateTime(1, 1, 0001) ? DateTime.Today : Voter.DOB;
                     cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
                     FillUpdComboboxDivision();
                     cmbDivision.SelectedValue = Voter.PollingDivision.Id;
-                    //TODO
-                    //mostrar en los datagrid los datos de las casa, las eleciones y las entrevistas
+                 
                 }
             }
             catch (Exception ex)
@@ -626,8 +624,7 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                //TODO
-                //valorar si debo crear varios gets en los controladores unos q carguen todas las relaciones y otros
+                //TODO valorar si debo crear varios gets en los controladores unos q carguen todas las relaciones y otros
                 //que solo cargen la entidad principal como aqui en interview que estoy leyendo el voter con las interviews y despues tengo que hacerlas null
                 if (tView1.SelectedNode == null || (int)tView1.SelectedNode.Tag == 0)
                 {

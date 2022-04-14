@@ -130,7 +130,6 @@ namespace Election.API.Controllers
             return CreatedAtAction("GetVoter", new { id = voter.Id }, voter);
         }
         
-
         [HttpPost("Range")]
         public async Task<ActionResult<Voter>> PostVoterList(List<Voter> voters)
         {
@@ -141,19 +140,16 @@ namespace Election.API.Controllers
                     PollingDivision pollingDivision = await _context.PollingDivisions.FirstOrDefaultAsync(p => p.Name == voter.PollingDivision.Name);
                     voter.PollingDivision = pollingDivision;
                 }
-
                 //TODO VERIFICAR CUAL SERA EL ID DE LA CASA, PROBABLEMENTE EL NUMERO Y BUSCARLA ENTONCES POR EL NUMERO NO POR EL ID
                 if (voter.House != null)
                 {
                     House house = await _context.Houses.FirstOrDefaultAsync(h => h.Id == voter.House.Id);
                     voter.House = house;
                 }
-
             }
             await _context.Voters.AddRangeAsync(voters);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("Upload Voters List", "Completed");
+            return NoContent();
         }
         // DELETE: api/Voters/5
         [HttpDelete("{id}")]

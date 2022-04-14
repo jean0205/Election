@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Constituency.Desktop.Entities
+﻿namespace Constituency.Desktop.Entities
 {
     public class ElectionVote
     {
@@ -12,9 +6,9 @@ namespace Constituency.Desktop.Entities
 
         public NationalElection Election { get; set; }
         public DateTime VoteTime { get; set; }
-      
+
         public Voter Voter { get; set; }
-       
+
         public Party SupportedParty { get; set; }
 
         public Comment? Comment { get; set; }

@@ -248,6 +248,7 @@ namespace Constituency.Desktop.Views
             this.iconButton5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iconButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton5.UseVisualStyleBackColor = false;
+            this.iconButton5.Visible = false;
             this.iconButton5.Click += new System.EventHandler(this.iconButton5_Click_1);
             // 
             // iconButton2
@@ -1072,6 +1073,7 @@ namespace Constituency.Desktop.Views
             this.iconButton7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iconButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton7.UseVisualStyleBackColor = false;
+            this.iconButton7.Visible = false;
             this.iconButton7.Click += new System.EventHandler(this.iconButton7_Click);
             // 
             // tableLayoutPanel7
