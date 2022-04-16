@@ -46,8 +46,8 @@ namespace Constituency.Desktop.Views
             UtilRecurrent.LockForm(waitForm, this);
             await LoadConstituencies();
             //await LoadComments();
-            await LoadInterviewers();
-           // await LoadParties();
+            //await LoadInterviewers();
+            // await LoadParties();
             await LoadElections();
             UtilRecurrent.UnlockForm(waitForm, this);
             ibtnUpdate.Visible = false;
@@ -152,7 +152,7 @@ namespace Constituency.Desktop.Views
                     cmbElection.ValueMember = "Id";
                     cmbElection.DisplayMember = "ElectionDate";
                     cmbElection.SelectedItem = null;
-                    
+
                 }
                 else
                 {
@@ -196,24 +196,24 @@ namespace Constituency.Desktop.Views
         //        UtilRecurrent.ErrorMessage(ex.Message);
         //    }
         //}
-        private async Task LoadInterviewers()
-        {
-            Response response = await ApiServices.GetListAsync<Interviewer>("Interviewers", token);
-            if (!response.IsSuccess)
-            {
-                UtilRecurrent.ErrorMessage(response.Message);
-                return;
-            }
-            InterviewersList = new((List<Interviewer>)response.Result);
-            if (InterviewersList.Any())
-            {
-                cmbInterviewers.DataSource = null;
-                cmbInterviewers.DataSource = InterviewersList;
-                cmbInterviewers.ValueMember = "Id";
-                cmbInterviewers.DisplayMember = "FullName";
-                cmbInterviewers.SelectedItem = null;
-            }
-        }
+        //private async Task LoadInterviewers()
+        //{
+        //    Response response = await ApiServices.GetListAsync<Interviewer>("Interviewers", token);
+        //    if (!response.IsSuccess)
+        //    {
+        //        UtilRecurrent.ErrorMessage(response.Message);
+        //        return;
+        //    }
+        //    InterviewersList = new((List<Interviewer>)response.Result);
+        //    if (InterviewersList.Any())
+        //    {
+        //        cmbInterviewers.DataSource = null;
+        //        cmbInterviewers.DataSource = InterviewersList;
+        //        cmbInterviewers.ValueMember = "Id";
+        //        cmbInterviewers.DisplayMember = "FullName";
+        //        cmbInterviewers.SelectedItem = null;
+        //    }
+        //}
         //private async Task LoadParties()
         //{
         //    Response response = await ApiServices.GetListAsync<Party>("Parties", token);
@@ -300,7 +300,7 @@ namespace Constituency.Desktop.Views
                 rjCollapseAll.Checked = true;
                 lblExpand.Text = "Collapse All";
                 tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-                groupBox1.Text = "Interviews List: ( " + ElectionList.Count.ToString("N0") + " )";
+                groupBox1.Text = "Election Votes List: ( " + ElectionList.Count.ToString("N0") + " )";
             }
             catch (Exception ex)
             {
@@ -323,8 +323,13 @@ namespace Constituency.Desktop.Views
             try
             {
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
-                UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "ComboBox").Cast<ComboBox>().ToList().ForEach(x => x.SelectedIndex = -1);
+                //UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "ComboBox").Cast<ComboBox>().ToList().ForEach(x => x.SelectedIndex = -1);
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "DateTimePicker").Cast<DateTimePicker>().ToList().ForEach(x => x.Value = DateTime.Now.Date);
+                dtpIDate.Value = DateTime.Now;
+                cmbConstituency.SelectedIndex = -1;
+                cmbDivision.SelectedIndex = -1;
+                cmbIComment.SelectedIndex = -1;
+                cmbSex.SelectedIndex = -1;
                 Voter = new Voter();
             }
             catch (Exception ex)
@@ -436,13 +441,20 @@ namespace Constituency.Desktop.Views
             try
             {
                 Voter = ElectionVote.Voter;
-                ShowVoterInformation();               
-                cmbInterviewers.SelectedValue = ElectionVote.Interviewer.Id;
+                ShowVoterInformation();
+
                 cmbElection.SelectedValue = ElectionVote.Election.Id;
-                cmbISupportedParty.SelectedValue = ElectionVote.SupportedParty.Id;               
-                // cmbIComment.SelectedValue = Interview.Comment.Id;
+                if (ElectionVote.SupportedParty != null)
+                {
+                    cmbISupportedParty.SelectedValue = ElectionVote.SupportedParty.Id;
+                }
+                else
+                {
+                    cmbISupportedParty.SelectedIndex = -1;
+                }
                 txtIOtherComment.Text = ElectionVote.OtherComment;
                 dtpIDate.Value = ElectionVote.VoteTime;
+                labelUser.Text = ElectionVote.User.FullName;
             }
             catch (Exception ex)
             {
@@ -493,11 +505,12 @@ namespace Constituency.Desktop.Views
                         }
                     }
                     cmbSex.SelectedItem = Voter.Sex;
-                    dtpDOB.Value = Voter.DOB.Date == new DateTime(1, 1, 0001) ? DateTime.Today : Voter.DOB;
+                    dtpDOB.Value = Voter.DOB.HasValue ? (DateTime)Voter.DOB : DateTime.Today;
                     cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
                     FillUpdComboboxDivision();
                     cmbDivision.SelectedValue = Voter.PollingDivision.Id;
-                 
+
+
                 }
             }
             catch (Exception ex)
@@ -600,11 +613,13 @@ namespace Constituency.Desktop.Views
                 ElectionVote.SupportedParty = cmbISupportedParty.SelectedItem as Party;
                 ElectionVote.Comment = cmbIComment.SelectedItem as Comment;
                 ElectionVote.OtherComment = txtIOtherComment.Text.ToUpper();
-                ElectionVote.Interviewer = cmbInterviewers.SelectedItem as Interviewer;
+                ElectionVote.User = user;
+                //ElectionVote.Interviewer = cmbInterviewers.SelectedItem as Interviewer;
                 //making null what is not necesary
                 ElectionVote.Voter.Interviews = null;
-                ElectionVote.Interviewer.Interviews = null;
+                //ElectionVote.Interviewer.Interviews = null;
                 ElectionVote.Election.ElectionVotes = null;
+                ElectionVote.Voter.ElectionVotes = null;
 
                 if (id != null)
                 {
@@ -635,11 +650,7 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
                 }
-                if (dtpDOB.Value.AddYears(18) > DateTime.Now)
-                {
-                    UtilRecurrent.ErrorMessage("Voter younger than 18.");
-                    return;
-                }
+                
                 if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
                 {
                     UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
@@ -706,7 +717,7 @@ namespace Constituency.Desktop.Views
                     {
                         cleanScreen();
                     }
-                   
+
                 }
             }
             catch (Exception ex)

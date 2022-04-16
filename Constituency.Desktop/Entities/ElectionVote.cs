@@ -9,12 +9,12 @@
 
         public Voter Voter { get; set; }
 
-        public Party SupportedParty { get; set; }
+        public Party? SupportedParty { get; set; }
 
         public Comment? Comment { get; set; }
 
         public string? OtherComment { get; set; }
 
-        public Interviewer? Interviewer { get; set; }
+        public User? User { get; set; }
     }
 }

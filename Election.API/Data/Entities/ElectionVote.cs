@@ -24,6 +24,6 @@ namespace Election.API.Data.Entities
         
         public string? OtherComment { get; set; }
         
-        public Interviewer? Interviewer { get; set; }
+        public User? User { get; set; }
     }
 }

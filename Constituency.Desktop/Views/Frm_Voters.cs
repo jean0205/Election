@@ -226,8 +226,8 @@ namespace Constituency.Desktop.Views
         private void RefreshTreeView(List<Voter> Voters)
         {
             try
-            {              
-                tView1.BeginUpdate();                
+            {
+                tView1.BeginUpdate();
                 tView1.Nodes.Clear();
                 //TreeNode node;
                 List<TreeNode> treeNodes = new List<TreeNode>();
@@ -381,12 +381,12 @@ namespace Constituency.Desktop.Views
                         }
                     }
                     cmbSex.SelectedItem = Voter.Sex;
-                    dtpDOB.Value = Voter.DOB.Date == new DateTime(1, 1, 0001) ? DateTime.Today : Voter.DOB;
+                    dtpDOB.Value = Voter.DOB.HasValue ? (DateTime)Voter.DOB: DateTime.Today ;
                     cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
                     FillUpdComboboxDivision();
                     cmbDivision.SelectedValue = Voter.PollingDivision.Id;
 
-              
+
 
                     if (Voter.Interviews != null && Voter.Interviews.Any())
                     {
@@ -394,7 +394,7 @@ namespace Constituency.Desktop.Views
                     }
                     if (Voter.ElectionVotes != null && Voter.ElectionVotes.Any())
                     {
-                        dgvElections.DataSource = Voter.ElectionVotes.Select(u => new { u.Election.ElectionDate, u.VoteTime, VotedParty = u.SupportedParty.Name }).ToList();
+                        dgvElections.DataSource = Voter.ElectionVotes.Select(u => new { u.Election.ElectionDate, u.VoteTime }).ToList();
                     }
                 }
             }
@@ -497,7 +497,7 @@ namespace Constituency.Desktop.Views
                     }
                 }
                 Voter.Sex = cmbSex.SelectedItem.ToString();
-                Voter.DOB = dtpDOB.Value;
+                Voter.DOB = dtpDOB.Value.Date == DateTime.Today ? null : dtpDOB.Value;
                 Voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
                 return Voter;
             }
@@ -599,7 +599,7 @@ namespace Constituency.Desktop.Views
                     }
                 }
                 Voter.Sex = cmbSex.SelectedItem.ToString();
-                Voter.DOB = dtpDOB.Value;
+                Voter.DOB = dtpDOB.Value.Date == DateTime.Today? null : dtpDOB.Value;
                 Voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
 
                 return Voter;
@@ -686,37 +686,11 @@ namespace Constituency.Desktop.Views
         private void button1_Click(object sender, EventArgs e)
         {
 
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.DefaultExt = "xlsx";
-            ofd.FileName = "Upload File";
-            ofd.Filter = "Excel  files|*.xls;*.xlsx";
-            ofd.Title = "Select file";
-            //  Allow the user to select multiple images.
-
-            if (ofd.ShowDialog() != DialogResult.Cancel)
-            {
-                String name = "Sheet1";
-                String constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                                ofd.FileName.ToString() +
-                                ";Extended Properties='Excel 12.0 XML;HDR=NO;';";
-
-                OleDbConnection con = new OleDbConnection(constr);
-                OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
-                con.Open();
-
-                OleDbDataAdapter sda = new OleDbDataAdapter(oconn);
-                DataTable data = new DataTable();
-                sda.Fill(data);
-                dataGridView1.DataSource = data;
-                dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
-                dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
-
-
-            }
+           
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            checkVoterList();
+           
         }
         List<Voter> votersBatch = new();
         async void checkVoterList()
@@ -732,7 +706,7 @@ namespace Constituency.Desktop.Views
                 var duplicatedVoters = votersBatch.GroupBy(v => v.Reg).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
                 var correctOnes = votersBatch.Where(v => !String.IsNullOrEmpty(v.Reg)).ToList();
 
-                var batches = BuildChunksWithLinq(correctOnes, 1000);
+                var batches = BuildChunksWithLinq(correctOnes, 5000);
 
                 foreach (var batch in batches)
                 {
@@ -811,6 +785,12 @@ namespace Constituency.Desktop.Views
                     voter.PollingDivision = new PollingDivision();
                     string pd = dataGridView1.Rows[i].Cells[7].Value.ToString().ToUpper().Trim();
                     voter.PollingDivision = PollingDivisionsListBatch.FirstOrDefault(p => p.Name == pd);
+                    voter.DOB = null;
+                    voter.Mobile1 = String.Empty;
+                    voter.Mobile2 = String.Empty;
+                    voter.Email = String.Empty;
+                    voter.HomePhone = String.Empty;
+                    voter.WorkPhone = String.Empty;
                     voters.Add(voter);
 
                 }
@@ -831,7 +811,7 @@ namespace Constituency.Desktop.Views
         private void Frm_Voters_FormClosing(object sender, FormClosingEventArgs e)
         {
 
-           
+
             UtilRecurrent.LockForm(waitForm, this);
             tView1.BeginUpdate();
             tView1.Nodes.Clear();
@@ -841,6 +821,63 @@ namespace Constituency.Desktop.Views
         private void Frm_Voters_FormClosed(object sender, FormClosedEventArgs e)
         {
             UtilRecurrent.UnlockForm(waitForm, this);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void iconButton1_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = "xlsx";
+            ofd.FileName = "Upload File";
+            ofd.Filter = "Excel  files|*.xls;*.xlsx";
+            ofd.Title = "Select file";
+            //  Allow the user to select multiple images.
+
+            if (ofd.ShowDialog() != DialogResult.Cancel)
+            {
+                String name = "Sheet1";
+                String constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                                ofd.FileName.ToString() +
+                                ";Extended Properties='Excel 12.0 XML;HDR=NO;';";
+
+                OleDbConnection con = new OleDbConnection(constr);
+                OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
+                con.Open();
+
+                OleDbDataAdapter sda = new OleDbDataAdapter(oconn);
+                DataTable data = new DataTable();
+                sda.Fill(data);
+                dataGridView1.DataSource = data;
+                dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
+                dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
+                ibtnImport.Visible = true;
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+
+
+            }
+        }
+
+        private void iconButton2_Click(object sender, EventArgs e)
+        {
+            checkVoterList();
         }
     }
 }

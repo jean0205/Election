@@ -12,7 +12,7 @@
         public string FullName => $"{SurName} {GivenNames}";
 
         public string Sex { get; set; }
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
 
         public string? Address { get; set; }
 

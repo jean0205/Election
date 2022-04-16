@@ -46,7 +46,7 @@ namespace Election.API.Controllers
                 .ThenInclude(e=>e.Constituency)
                 .Include(e => e.SupportedParty)
                 .Include(e=>e.Comment)
-                .Include(e=>e.Interviewer)
+                .Include(e=>e.User)
                 .FirstOrDefaultAsync(e=>e.Id== id);
 
             if (electionVote == null)
@@ -70,10 +70,18 @@ namespace Election.API.Controllers
                 .Include(e => e.Election)                
                 .Include(e => e.SupportedParty)
                 .Include(e => e.Comment)
-                .Include(e => e.Interviewer)
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(e => e.Id == id);
-            electionVoteDB.Election = await _context.NationalElections.FirstOrDefaultAsync(e => e.Id == electionVote.Election.Id);
-            electionVoteDB.SupportedParty = await _context.Parties.FirstOrDefaultAsync(e => e.Id == electionVote.SupportedParty.Id);
+            electionVoteDB.Election = await _context.NationalElections.FirstOrDefaultAsync(e => e.Id == electionVote.Election.Id);            
+            electionVoteDB.User = await _context.Users.FirstOrDefaultAsync(e => e.Id == electionVote.User.Id);
+            if (electionVote.SupportedParty == null)
+            {
+                electionVoteDB.SupportedParty = null;
+            }
+            else
+            {
+                electionVoteDB.SupportedParty = await _context.Parties.FirstOrDefaultAsync(e => e.Id == electionVote.SupportedParty.Id);
+            }
             if (electionVote.Comment == null)
             {
                 electionVoteDB.Comment = null;
@@ -112,8 +120,13 @@ namespace Election.API.Controllers
         {
             electionVote.Election = await _context.NationalElections.FindAsync(electionVote.Election.Id);
             electionVote.Voter = await _context.Voters.FindAsync(electionVote.Voter.Id);
-            electionVote.SupportedParty = await _context.Parties.FindAsync(electionVote.SupportedParty.Id);
-            electionVote.Interviewer = await _context.Interviewers.FindAsync(electionVote.Interviewer.Id);
+            
+            if (electionVote.SupportedParty!=null)
+            {
+                electionVote.SupportedParty = await _context.Parties.FindAsync(electionVote.SupportedParty.Id);
+            }
+           
+            electionVote.User = await _context.Users.FindAsync(electionVote.User.Id);
             if (electionVote.Comment != null)
             {
                 electionVote.Comment = _context.Comments.FirstOrDefault(c => c.Id == electionVote.Comment.Id);

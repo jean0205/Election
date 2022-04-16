@@ -86,7 +86,6 @@
             this.txtWorkPhone = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cmbInterviewers = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbISupportedParty = new System.Windows.Forms.ComboBox();
@@ -94,6 +93,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.cmbIComment = new System.Windows.Forms.ComboBox();
             this.txtIOtherComment = new System.Windows.Forms.TextBox();
+            this.labelUser = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.dtpIDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
@@ -437,7 +437,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(566, 5);
+            this.cmbDivision.Location = new System.Drawing.Point(566, 8);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(316, 29);
             this.cmbDivision.TabIndex = 34;
@@ -448,7 +448,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(310, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -683,7 +683,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(107, 5);
+            this.cmbSex.Location = new System.Drawing.Point(107, 8);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -904,7 +904,6 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.95455F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 82.04545F));
-            this.tableLayoutPanel1.Controls.Add(this.cmbInterviewers, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label18, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cmbISupportedParty, 1, 0);
@@ -912,6 +911,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label17, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.cmbIComment, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtIOtherComment, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelUser, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 72);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -925,27 +925,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(880, 192);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // cmbInterviewers
-            // 
-            this.cmbInterviewers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbInterviewers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbInterviewers.FormattingEnabled = true;
-            this.cmbInterviewers.Location = new System.Drawing.Point(162, 169);
-            this.cmbInterviewers.Name = "cmbInterviewers";
-            this.cmbInterviewers.Size = new System.Drawing.Size(714, 29);
-            this.cmbInterviewers.TabIndex = 41;
-            this.cmbInterviewers.Tag = "1";
-            // 
             // label18
             // 
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label18.Location = new System.Drawing.Point(64, 170);
+            this.label18.Location = new System.Drawing.Point(110, 170);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(91, 21);
+            this.label18.Size = new System.Drawing.Size(45, 21);
             this.label18.TabIndex = 40;
-            this.label18.Text = "Interviewer:";
+            this.label18.Text = "User:";
             // 
             // label8
             // 
@@ -963,11 +952,11 @@
             this.cmbISupportedParty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbISupportedParty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbISupportedParty.FormattingEnabled = true;
-            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 10);
+            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 7);
             this.cmbISupportedParty.Name = "cmbISupportedParty";
             this.cmbISupportedParty.Size = new System.Drawing.Size(714, 29);
             this.cmbISupportedParty.TabIndex = 35;
-            this.cmbISupportedParty.Tag = "1";
+            this.cmbISupportedParty.Tag = "";
             // 
             // label16
             // 
@@ -996,7 +985,7 @@
             this.cmbIComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbIComment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIComment.FormattingEnabled = true;
-            this.cmbIComment.Location = new System.Drawing.Point(162, 55);
+            this.cmbIComment.Location = new System.Drawing.Point(162, 52);
             this.cmbIComment.Name = "cmbIComment";
             this.cmbIComment.Size = new System.Drawing.Size(714, 29);
             this.cmbIComment.TabIndex = 38;
@@ -1010,6 +999,17 @@
             this.txtIOtherComment.Name = "txtIOtherComment";
             this.txtIOtherComment.Size = new System.Drawing.Size(714, 48);
             this.txtIOtherComment.TabIndex = 39;
+            // 
+            // labelUser
+            // 
+            this.labelUser.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelUser.AutoSize = true;
+            this.labelUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelUser.Location = new System.Drawing.Point(162, 170);
+            this.labelUser.Name = "labelUser";
+            this.labelUser.Size = new System.Drawing.Size(45, 21);
+            this.labelUser.TabIndex = 41;
+            this.labelUser.Text = "User:";
             // 
             // tableLayoutPanel5
             // 
@@ -1035,6 +1035,8 @@
             // 
             this.dtpIDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpIDate.CustomFormat = "dd-MMM-yyyy hh:mm tt";
+            this.dtpIDate.Enabled = false;
+            this.dtpIDate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.dtpIDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpIDate.Location = new System.Drawing.Point(162, 9);
             this.dtpIDate.Name = "dtpIDate";
@@ -1057,9 +1059,10 @@
             // 
             this.cmbElection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbElection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbElection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbElection.FormatString = "MMMM-yyyy";
             this.cmbElection.FormattingEnabled = true;
-            this.cmbElection.Location = new System.Drawing.Point(631, 9);
+            this.cmbElection.Location = new System.Drawing.Point(631, 12);
             this.cmbElection.Name = "cmbElection";
             this.cmbElection.Size = new System.Drawing.Size(245, 29);
             this.cmbElection.TabIndex = 35;
@@ -1107,7 +1110,7 @@
             this.ibtnSave.Name = "ibtnSave";
             this.ibtnSave.Size = new System.Drawing.Size(155, 41);
             this.ibtnSave.TabIndex = 6;
-            this.ibtnSave.Text = "Save";
+            this.ibtnSave.Text = "Vote";
             this.ibtnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnSave.UseVisualStyleBackColor = false;
             this.ibtnSave.Click += new System.EventHandler(this.iconButton2_Click);
@@ -1260,7 +1263,6 @@
         private TextBox txtWorkPhone;
         private GroupBox groupBox2;
         private TableLayoutPanel tableLayoutPanel1;
-        private ComboBox cmbInterviewers;
         private Label label18;
         private Label label8;
         private ComboBox cmbISupportedParty;
@@ -1279,5 +1281,6 @@
         private FontAwesome.Sharp.IconButton ibtnSave;
         private ComboBox cmbElection;
         private Label label19;
+        private Label labelUser;
     }
 }

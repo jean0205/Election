@@ -32,7 +32,7 @@ namespace Election.API.Data.Entities
 
         
         [Display(Name = "Date of Birth")]        
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
         
         [MaxLength(200)]
         public string? Address { get; set; }
