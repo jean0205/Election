@@ -263,7 +263,7 @@ namespace Constituency.Desktop.Views
                 rjCollapseAll.Checked = true;
                 lblExpand.Text = "Collapse All";
                 tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-                groupBox1.Text = "Interviews List: ( " + Canvas.SelectMany(c => c.Interviews).Count().ToString("N") + " )";
+                groupBox1.Text = "Interviews List: ( " + Canvas.SelectMany(c => c.Interviews).Count().ToString("N0") + " )";
             }
             catch (Exception ex)
             {
@@ -795,6 +795,18 @@ namespace Constituency.Desktop.Views
             }
         }
 
-
+        private async void ibtnRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await LoadCanvas();
+                tView1.SelectedNode = tView1.Nodes[0];
+                lblFiltering.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
     }
 }

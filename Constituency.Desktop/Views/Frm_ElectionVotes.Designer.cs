@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_ElectionVotes));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tView1 = new System.Windows.Forms.TreeView();
+            this.imgListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
             this.rjCollapseAll = new Constituency.Desktop.Controls.RJToggleButton();
             this.lblExpand = new System.Windows.Forms.Label();
@@ -184,11 +186,24 @@
             // 
             this.tView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tView1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tView1.ImageIndex = 0;
+            this.tView1.ImageList = this.imgListTreeView;
             this.tView1.Location = new System.Drawing.Point(3, 46);
             this.tView1.Name = "tView1";
+            this.tView1.SelectedImageIndex = 0;
             this.tView1.Size = new System.Drawing.Size(254, 653);
             this.tView1.TabIndex = 0;
             this.tView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tView1_AfterSelect);
+            // 
+            // imgListTreeView
+            // 
+            this.imgListTreeView.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imgListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTreeView.ImageStream")));
+            this.imgListTreeView.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgListTreeView.Images.SetKeyName(0, "customers-icon-35908.jpg");
+            this.imgListTreeView.Images.SetKeyName(1, "customers-icon-35912 (1).png");
+            this.imgListTreeView.Images.SetKeyName(2, "person-icon-1680.png");
+            this.imgListTreeView.Images.SetKeyName(3, "human-icon-png-1906.png");
             // 
             // tableLayoutPanel49
             // 
@@ -437,7 +452,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(566, 5);
+            this.cmbDivision.Location = new System.Drawing.Point(566, 8);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(316, 29);
             this.cmbDivision.TabIndex = 34;
@@ -448,7 +463,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(310, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -683,7 +698,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(107, 5);
+            this.cmbSex.Location = new System.Drawing.Point(107, 8);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -952,7 +967,7 @@
             this.cmbISupportedParty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbISupportedParty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbISupportedParty.FormattingEnabled = true;
-            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 10);
+            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 7);
             this.cmbISupportedParty.Name = "cmbISupportedParty";
             this.cmbISupportedParty.Size = new System.Drawing.Size(714, 29);
             this.cmbISupportedParty.TabIndex = 35;
@@ -985,7 +1000,7 @@
             this.cmbIComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbIComment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIComment.FormattingEnabled = true;
-            this.cmbIComment.Location = new System.Drawing.Point(162, 55);
+            this.cmbIComment.Location = new System.Drawing.Point(162, 52);
             this.cmbIComment.Name = "cmbIComment";
             this.cmbIComment.Size = new System.Drawing.Size(714, 29);
             this.cmbIComment.TabIndex = 38;
@@ -1062,7 +1077,7 @@
             this.cmbElection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbElection.FormatString = "MMMM-yyyy";
             this.cmbElection.FormattingEnabled = true;
-            this.cmbElection.Location = new System.Drawing.Point(631, 9);
+            this.cmbElection.Location = new System.Drawing.Point(631, 12);
             this.cmbElection.Name = "cmbElection";
             this.cmbElection.Size = new System.Drawing.Size(245, 29);
             this.cmbElection.TabIndex = 35;
@@ -1282,5 +1297,6 @@
         private ComboBox cmbElection;
         private Label label19;
         private Label labelUser;
+        private ImageList imgListTreeView;
     }
 }
