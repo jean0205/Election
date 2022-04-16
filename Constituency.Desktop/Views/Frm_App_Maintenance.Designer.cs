@@ -353,7 +353,9 @@ namespace Constituency.Desktop.Views
             this.ibtnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ibtnSave.AutoSize = true;
             this.ibtnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnSave.FlatAppearance.BorderSize = 2;
             this.ibtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ibtnSave.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
             this.ibtnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -363,9 +365,9 @@ namespace Constituency.Desktop.Views
             this.ibtnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnSave.IconSize = 40;
             this.ibtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSave.Location = new System.Drawing.Point(679, 683);
+            this.ibtnSave.Location = new System.Drawing.Point(677, 683);
             this.ibtnSave.Name = "ibtnSave";
-            this.ibtnSave.Size = new System.Drawing.Size(161, 46);
+            this.ibtnSave.Size = new System.Drawing.Size(163, 46);
             this.ibtnSave.TabIndex = 4;
             this.ibtnSave.Text = "Save/Update";
             this.ibtnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -455,9 +457,9 @@ namespace Constituency.Desktop.Views
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage3.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 33);
+            this.tabPage3.Location = new System.Drawing.Point(4, 27);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage3.Size = new System.Drawing.Size(1206, 751);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Polling Divisions";
             // 
@@ -473,7 +475,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1206, 751);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // groupBox2
@@ -483,7 +485,7 @@ namespace Constituency.Desktop.Views
             this.groupBox2.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(344, 739);
+            this.groupBox2.Size = new System.Drawing.Size(344, 745);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Polling Divisions List:";
@@ -496,7 +498,7 @@ namespace Constituency.Desktop.Views
             this.tViewPolling.Location = new System.Drawing.Point(3, 25);
             this.tViewPolling.Name = "tViewPolling";
             this.tViewPolling.SelectedImageIndex = 0;
-            this.tViewPolling.Size = new System.Drawing.Size(338, 711);
+            this.tViewPolling.Size = new System.Drawing.Size(338, 717);
             this.tViewPolling.TabIndex = 2;
             this.tViewPolling.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tViewPolling_AfterSelect);
             this.tViewPolling.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tView1_MouseClick);
@@ -522,7 +524,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(850, 745);
             this.tableLayoutPanel4.TabIndex = 4;
             // 
             // label6
@@ -541,7 +543,9 @@ namespace Constituency.Desktop.Views
             this.ibtnSavePolling.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ibtnSavePolling.AutoSize = true;
             this.ibtnSavePolling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnSavePolling.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnSavePolling.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnSavePolling.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnSavePolling.FlatAppearance.BorderSize = 2;
             this.ibtnSavePolling.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ibtnSavePolling.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
             this.ibtnSavePolling.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -551,9 +555,9 @@ namespace Constituency.Desktop.Views
             this.ibtnSavePolling.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnSavePolling.IconSize = 40;
             this.ibtnSavePolling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSavePolling.Location = new System.Drawing.Point(685, 687);
+            this.ibtnSavePolling.Location = new System.Drawing.Point(683, 691);
             this.ibtnSavePolling.Name = "ibtnSavePolling";
-            this.ibtnSavePolling.Size = new System.Drawing.Size(161, 48);
+            this.ibtnSavePolling.Size = new System.Drawing.Size(163, 50);
             this.ibtnSavePolling.TabIndex = 4;
             this.ibtnSavePolling.Text = "Save/Update";
             this.ibtnSavePolling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -610,6 +614,8 @@ namespace Constituency.Desktop.Views
             // cmbConstituency
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConstituency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConstituency.FormattingEnabled = true;
             this.cmbConstituency.Location = new System.Drawing.Point(180, 16);
             this.cmbConstituency.Name = "cmbConstituency";
@@ -710,7 +716,9 @@ namespace Constituency.Desktop.Views
             this.ibtnSaveParty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ibtnSaveParty.AutoSize = true;
             this.ibtnSaveParty.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnSaveParty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnSaveParty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnSaveParty.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnSaveParty.FlatAppearance.BorderSize = 2;
             this.ibtnSaveParty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ibtnSaveParty.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
             this.ibtnSaveParty.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -720,9 +728,9 @@ namespace Constituency.Desktop.Views
             this.ibtnSaveParty.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnSaveParty.IconSize = 40;
             this.ibtnSaveParty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnSaveParty.Location = new System.Drawing.Point(679, 681);
+            this.ibtnSaveParty.Location = new System.Drawing.Point(677, 679);
             this.ibtnSaveParty.Name = "ibtnSaveParty";
-            this.ibtnSaveParty.Size = new System.Drawing.Size(161, 48);
+            this.ibtnSaveParty.Size = new System.Drawing.Size(163, 50);
             this.ibtnSaveParty.TabIndex = 4;
             this.ibtnSaveParty.Text = "Save/Update";
             this.ibtnSaveParty.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -801,9 +809,9 @@ namespace Constituency.Desktop.Views
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage4.Controls.Add(this.tableLayoutPanel7);
-            this.tabPage4.Location = new System.Drawing.Point(4, 33);
+            this.tabPage4.Location = new System.Drawing.Point(4, 27);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage4.Size = new System.Drawing.Size(1206, 751);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Canvas Types";
             // 
@@ -819,7 +827,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1206, 751);
             this.tableLayoutPanel7.TabIndex = 1;
             // 
             // groupBox4
@@ -829,7 +837,7 @@ namespace Constituency.Desktop.Views
             this.groupBox4.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(344, 739);
+            this.groupBox4.Size = new System.Drawing.Size(344, 745);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Canvas Types List:";
@@ -842,9 +850,10 @@ namespace Constituency.Desktop.Views
             this.TVCanvasType.Location = new System.Drawing.Point(3, 25);
             this.TVCanvasType.Name = "TVCanvasType";
             this.TVCanvasType.SelectedImageIndex = 0;
-            this.TVCanvasType.Size = new System.Drawing.Size(338, 711);
+            this.TVCanvasType.Size = new System.Drawing.Size(338, 717);
             this.TVCanvasType.TabIndex = 1;
             this.TVCanvasType.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVCanvasType_AfterSelect);
+            this.TVCanvasType.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tView1_MouseClick);
             // 
             // tableLayoutPanel8
             // 
@@ -870,7 +879,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.651027F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.97947F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(850, 745);
             this.tableLayoutPanel8.TabIndex = 4;
             // 
             // label11
@@ -889,7 +898,9 @@ namespace Constituency.Desktop.Views
             this.ibtnCTSaveUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ibtnCTSaveUpdate.AutoSize = true;
             this.ibtnCTSaveUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnCTSaveUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnCTSaveUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnCTSaveUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnCTSaveUpdate.FlatAppearance.BorderSize = 2;
             this.ibtnCTSaveUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ibtnCTSaveUpdate.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
             this.ibtnCTSaveUpdate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -899,9 +910,9 @@ namespace Constituency.Desktop.Views
             this.ibtnCTSaveUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnCTSaveUpdate.IconSize = 40;
             this.ibtnCTSaveUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnCTSaveUpdate.Location = new System.Drawing.Point(685, 690);
+            this.ibtnCTSaveUpdate.Location = new System.Drawing.Point(683, 695);
             this.ibtnCTSaveUpdate.Name = "ibtnCTSaveUpdate";
-            this.ibtnCTSaveUpdate.Size = new System.Drawing.Size(161, 45);
+            this.ibtnCTSaveUpdate.Size = new System.Drawing.Size(163, 46);
             this.ibtnCTSaveUpdate.TabIndex = 4;
             this.ibtnCTSaveUpdate.Text = "Save/Update";
             this.ibtnCTSaveUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -984,7 +995,7 @@ namespace Constituency.Desktop.Views
             this.txtCTCanvas.Location = new System.Drawing.Point(180, 164);
             this.txtCTCanvas.Multiline = true;
             this.txtCTCanvas.Name = "txtCTCanvas";
-            this.txtCTCanvas.Size = new System.Drawing.Size(666, 519);
+            this.txtCTCanvas.Size = new System.Drawing.Size(666, 524);
             this.txtCTCanvas.TabIndex = 43;
             // 
             // tabPage5
@@ -1035,6 +1046,7 @@ namespace Constituency.Desktop.Views
             this.TVCanvas.Size = new System.Drawing.Size(338, 717);
             this.TVCanvas.TabIndex = 2;
             this.TVCanvas.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVCanvas_AfterSelect);
+            this.TVCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tView1_MouseClick);
             // 
             // tableLayoutPanel10
             // 
@@ -1109,6 +1121,8 @@ namespace Constituency.Desktop.Views
             // cmbCanvasTypes
             // 
             this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCanvasTypes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbCanvasTypes.FormattingEnabled = true;
             this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 19);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
@@ -1188,7 +1202,9 @@ namespace Constituency.Desktop.Views
             this.ibtnCanvasSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ibtnCanvasSave.AutoSize = true;
             this.ibtnCanvasSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnCanvasSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnCanvasSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnCanvasSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnCanvasSave.FlatAppearance.BorderSize = 2;
             this.ibtnCanvasSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ibtnCanvasSave.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
             this.ibtnCanvasSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -1198,9 +1214,9 @@ namespace Constituency.Desktop.Views
             this.ibtnCanvasSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnCanvasSave.IconSize = 40;
             this.ibtnCanvasSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnCanvasSave.Location = new System.Drawing.Point(685, 695);
+            this.ibtnCanvasSave.Location = new System.Drawing.Point(683, 693);
             this.ibtnCanvasSave.Name = "ibtnCanvasSave";
-            this.ibtnCanvasSave.Size = new System.Drawing.Size(161, 48);
+            this.ibtnCanvasSave.Size = new System.Drawing.Size(163, 50);
             this.ibtnCanvasSave.TabIndex = 4;
             this.ibtnCanvasSave.Text = "Save/Update";
             this.ibtnCanvasSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1281,6 +1297,7 @@ namespace Constituency.Desktop.Views
             this.TVInterviewers.Size = new System.Drawing.Size(338, 717);
             this.TVInterviewers.TabIndex = 2;
             this.TVInterviewers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVInterviewers_AfterSelect);
+            this.TVInterviewers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tView1_MouseClick);
             // 
             // tableLayoutPanel12
             // 
@@ -1730,7 +1747,9 @@ namespace Constituency.Desktop.Views
             this.ibtnInterviewerSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ibtnInterviewerSave.AutoSize = true;
             this.ibtnInterviewerSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnInterviewerSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnInterviewerSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnInterviewerSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnInterviewerSave.FlatAppearance.BorderSize = 2;
             this.ibtnInterviewerSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ibtnInterviewerSave.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
             this.ibtnInterviewerSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -1740,9 +1759,9 @@ namespace Constituency.Desktop.Views
             this.ibtnInterviewerSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnInterviewerSave.IconSize = 40;
             this.ibtnInterviewerSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnInterviewerSave.Location = new System.Drawing.Point(686, 694);
+            this.ibtnInterviewerSave.Location = new System.Drawing.Point(684, 694);
             this.ibtnInterviewerSave.Name = "ibtnInterviewerSave";
-            this.ibtnInterviewerSave.Size = new System.Drawing.Size(161, 48);
+            this.ibtnInterviewerSave.Size = new System.Drawing.Size(163, 48);
             this.ibtnInterviewerSave.TabIndex = 4;
             this.ibtnInterviewerSave.Text = "Save/Update";
             this.ibtnInterviewerSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1833,6 +1852,7 @@ namespace Constituency.Desktop.Views
             this.TVElections.Size = new System.Drawing.Size(338, 717);
             this.TVElections.TabIndex = 2;
             this.TVElections.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVElections_AfterSelect);
+            this.TVElections.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tView1_MouseClick);
             // 
             // tableLayoutPanel23
             // 
@@ -1862,7 +1882,9 @@ namespace Constituency.Desktop.Views
             this.ibtnElectionSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ibtnElectionSave.AutoSize = true;
             this.ibtnElectionSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnElectionSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(158)))), ((int)(((byte)(5)))));
+            this.ibtnElectionSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnElectionSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnElectionSave.FlatAppearance.BorderSize = 2;
             this.ibtnElectionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ibtnElectionSave.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
             this.ibtnElectionSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -1872,9 +1894,9 @@ namespace Constituency.Desktop.Views
             this.ibtnElectionSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnElectionSave.IconSize = 40;
             this.ibtnElectionSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnElectionSave.Location = new System.Drawing.Point(686, 694);
+            this.ibtnElectionSave.Location = new System.Drawing.Point(684, 692);
             this.ibtnElectionSave.Name = "ibtnElectionSave";
-            this.ibtnElectionSave.Size = new System.Drawing.Size(161, 48);
+            this.ibtnElectionSave.Size = new System.Drawing.Size(163, 50);
             this.ibtnElectionSave.TabIndex = 54;
             this.ibtnElectionSave.Text = "Save/Update";
             this.ibtnElectionSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

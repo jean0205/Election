@@ -34,7 +34,7 @@ namespace Election.API.Controllers
         {
             return await _context.NationalElections
                 .Include(e => e.ElectionVotes)
-                .ThenInclude(e=>e.Voter)
+                .ThenInclude(e => e.Voter)
                 .Include(e => e.Parties)
                 .ToListAsync();
         }
@@ -52,6 +52,30 @@ namespace Election.API.Controllers
             }
             return nationalElection;
         }
+        [HttpGet("IncludingVotes/{id}")]
+        public async Task<ActionResult<NationalElection>> GetNationalElectionWithVotes(int id)
+        {
+            var nationalElection = await _context.NationalElections
+                .Include(e => e.ElectionVotes)
+                .FirstOrDefaultAsync(e => e.ElectionVotes.Any() && e.Id == id);
+            if (nationalElection == null)
+            {
+                return NotFound();
+            }
+            return nationalElection;
+        }
+        [HttpGet("FindByParty/{id}")]
+        public async Task<ActionResult<NationalElection>> GetNationalElectionByParty(int id)
+        {
+            var nationalElection = await _context.NationalElections
+                .Include(e => e.Parties)
+                .FirstOrDefaultAsync(e => e.Parties.Any(p => p.Id == id));
+            if (nationalElection == null)
+            {
+                return NotFound();
+            }
+            return nationalElection;
+        }
 
 
         [HttpPut("{id}")]
@@ -61,7 +85,7 @@ namespace Election.API.Controllers
             {
                 return BadRequest();
             }
-            var electionDB = await _context.NationalElections.Include(e=>e.Parties).FirstOrDefaultAsync(e => e.Id == id);
+            var electionDB = await _context.NationalElections.Include(e => e.Parties).FirstOrDefaultAsync(e => e.Id == id);
             if (electionDB == null)
             {
                 return NotFound();
@@ -88,8 +112,8 @@ namespace Election.API.Controllers
             }
 
             if (nationalElection.Parties != null && nationalElection.Parties.Any())
-            {             
-              electionDB.Parties = new List<Party>();
+            {
+                electionDB.Parties = new List<Party>();
                 foreach (var party in nationalElection.Parties)
                 {
                     var partyDB = _context.Parties.FirstOrDefault(x => x.Id == party.Id);
@@ -111,8 +135,8 @@ namespace Election.API.Controllers
                         }
                     }
                 }
-            }          
-            
+            }
+
 
             return NoContent();
         }

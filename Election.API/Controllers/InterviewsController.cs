@@ -48,6 +48,20 @@ namespace Election.API.Controllers
 
             return interview;
         }
+        [HttpGet("FindByParty/{id}")]
+        public async Task<ActionResult<Interview>> GetInterviewByParty(int id)
+        {
+            var interview = await _context.Interviews                
+                .Include(i => i.SupportedParty)
+                .FirstOrDefaultAsync(i => i.SupportedParty.Id == id);
+
+            if (interview == null)
+            {
+                return NotFound();
+            }
+
+            return interview;
+        }
 
         // PUT: api/Interviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

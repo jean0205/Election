@@ -11,7 +11,8 @@ namespace Election.API.Data.Entities
         public bool Active { get; set; }
         
         [Required(ErrorMessage = "{0} is a required field.")]
-        public int Code { get; set; }
+        [MaxLength(50)]
+        public string Code { get; set; }
 
 
         [Required(ErrorMessage = "{0} is a required field.")]

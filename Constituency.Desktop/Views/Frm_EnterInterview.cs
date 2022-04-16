@@ -709,7 +709,9 @@ namespace Constituency.Desktop.Views
                 if (MySerializer.VoterEquealtoVpter2(Voter, voter2))
                 {
                     Interview.Voter = Voter;
-                    Interview.Voter.Interviews = null;
+                    Voter.Interviews = null;
+                    Voter.ElectionVotes = null;
+                    Interview.Voter = Voter;
                 }
                 else
                 {

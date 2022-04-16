@@ -74,6 +74,20 @@ namespace Election.API.Controllers
 
             return voter;
         }
+        //get voter by division
+        [HttpGet("FindByDivision/{id}")]
+        public async Task<ActionResult<Voter>> GetVoterByDivision(int id)
+        {
+            var voter = await _context.Voters.
+                Include(v => v.PollingDivision)
+                .FirstOrDefaultAsync(v => v.PollingDivision.Id == id);
+            if (voter == null)
+            {
+                return NotFound();
+            }
+
+            return voter;
+        }
 
         // PUT: api/Voters/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

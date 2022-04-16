@@ -30,16 +30,37 @@ namespace Constituency.Desktop.Views
             MandatoriesFilds();
             DGVFormats();
             FildsValidations();
-            await LoadConstituencies();
-            await LoadParties();
-            await LoadCanvasTypes();
-            await LoadCanvas();
-            await LoadInterviewers();
-            await LoadNationalElections();
-
-
+            await LoadInfo();
+            //await LoadConstituencies();
+            // await LoadParties();
+            // await LoadCanvasTypes();
+            // await LoadCanvas();
+            // await LoadInterviewers();
+            //await LoadNationalElections();
 
         }
+        public async Task LoadInfo()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                await LoadConstituencies();
+                await LoadParties();
+                await LoadCanvasTypes();
+                await LoadCanvas();
+                await LoadInterviewers();
+                await LoadNationalElections();
+                UtilRecurrent.UnlockForm(waitForm, this);
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+
         #region General events
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -56,13 +77,13 @@ namespace Constituency.Desktop.Views
         private void DGVFormats()
         {//tag= 1 para campos obligados
 
-            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DefaultCellStyle.BackColor=Color.Beige);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DefaultCellStyle.BackColor = Color.Beige);
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque);
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells);
             UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.RowHeadersVisible = false);
 
         }
-       
+
 
         private bool PaintRequiredFildsConstituency()
         {
@@ -186,11 +207,9 @@ namespace Constituency.Desktop.Views
 
         private async Task LoadConstituencies()
         {
-            UtilRecurrent.LockForm(waitForm, this);
+            //UtilRecurrent.LockForm(waitForm, this);
             Response response = await ApiServices.GetListAsync<ConstituencyC>("Constituencies", token);
-            UtilRecurrent.UnlockForm(waitForm, this);
-
-
+            // UtilRecurrent.UnlockForm(waitForm, this);
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
@@ -271,7 +290,7 @@ namespace Constituency.Desktop.Views
             {
                 txtSGSE.Text = consty.SGSE;
                 txtName.Text = consty.Name;
-                rjActive.Checked = consty.Active;               
+                rjActive.Checked = consty.Active;
                 txtPollings.Clear();
                 var pd = consty.PollingDivisions.Select(p => p.Name).ToList();
                 pd.ForEach(p => txtPollings.Text += p.ToString() + "\r\n");
@@ -297,13 +316,15 @@ namespace Constituency.Desktop.Views
                 {
                     if (await SaveConstituency())
                     {
-                        await LoadConstituencies();
+                        //await LoadConstituencies();
+                        await LoadInfo();
                     }
                 }
                 else
                 {
                     await UpdateConstituency((int)tView1.SelectedNode.Tag);
-                    await LoadConstituencies();
+                    //await LoadConstituencies();
+                    await LoadInfo();
                 }
                 if (constituency != null && constituency.Id > 0)
                 {
@@ -369,12 +390,12 @@ namespace Constituency.Desktop.Views
                 Name = txtName.Text.ToUpper()
             };
         }
-        private async Task DeleteConstituency(int id)
+        private async Task DeleteAsyncGeneric(string controller, int id)
         {
             try
             {
                 UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.DeleteAsync("Constituencies", id, token);
+                Response response = await ApiServices.DeleteAsync(controller, id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
@@ -479,13 +500,15 @@ namespace Constituency.Desktop.Views
                 {
                     if (await SavePolling())
                     {
-                        await LoadConstituencies();
+                        //await LoadConstituencies();
+                        await LoadInfo();
                     }
                 }
                 else
                 {
                     await UpdatePolling((int)tViewPolling.SelectedNode.Tag);
-                    await LoadConstituencies();
+                    //await LoadConstituencies();
+                    await LoadInfo();
                 }
                 if (pollingDivision != null && pollingDivision.Id > 0)
                 {
@@ -560,9 +583,9 @@ namespace Constituency.Desktop.Views
 
         private async Task LoadParties()
         {
-            UtilRecurrent.LockForm(waitForm, this);
+            //UtilRecurrent.LockForm(waitForm, this);
             Response response = await ApiServices.GetListAsync<Party>("Parties", token);
-            UtilRecurrent.UnlockForm(waitForm, this);
+            //UtilRecurrent.UnlockForm(waitForm, this);
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
@@ -659,13 +682,15 @@ namespace Constituency.Desktop.Views
                 {
                     if (await SaveParty())
                     {
-                        await LoadParties();
+                        //await LoadParties();
+                        await LoadInfo();
                     }
                 }
                 else
                 {
                     await UpdateParty((int)tvParties.SelectedNode.Tag);
-                    await LoadParties();
+                    // await LoadParties();
+                    await LoadInfo();
                 }
                 if (party != null && party.Id > 0)
                 {
@@ -697,6 +722,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
+                UtilRecurrent.UnlockForm(waitForm, this);
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
                 return false;
             }
@@ -728,7 +754,7 @@ namespace Constituency.Desktop.Views
             {
                 Active = rjParty.Checked,
                 Name = txtPpname.Text.ToUpper(),
-                Code = int.Parse(txtPCode.Text.ToUpper())
+                Code = txtPCode.Text.ToUpper()
             };
         }
 
@@ -740,9 +766,9 @@ namespace Constituency.Desktop.Views
 
         private async Task LoadCanvasTypes()
         {
-            UtilRecurrent.LockForm(waitForm, this);
+            //UtilRecurrent.LockForm(waitForm, this);
             Response response = await ApiServices.GetListAsync<CanvasType>("CanvasTypes", token);
-            UtilRecurrent.UnlockForm(waitForm, this);
+            // UtilRecurrent.UnlockForm(waitForm, this);
 
             if (!response.IsSuccess)
             {
@@ -802,7 +828,7 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                if (nodeTag > 0 && CanvasTypesList!=null && CanvasTypesList.Where(u => u.Id == nodeTag).Any())
+                if (nodeTag > 0 && CanvasTypesList != null && CanvasTypesList.Where(u => u.Id == nodeTag).Any())
                 {
                     CanvasType = CanvasTypesList.Where(u => u.Id == nodeTag).FirstOrDefault();
                     showCanvasTypeInfo(CanvasType);
@@ -841,7 +867,7 @@ namespace Constituency.Desktop.Views
                         }
                         else
                         {
-                            txtCTCanvas.Text += item.Name.ToString()  + "\r\n";
+                            txtCTCanvas.Text += item.Name.ToString() + "\r\n";
                         }
 
                     }
@@ -867,13 +893,15 @@ namespace Constituency.Desktop.Views
                 {
                     if (await SaveCanvasType())
                     {
-                        await LoadCanvasTypes();
+                        //await LoadCanvasTypes();
+                        await LoadInfo();
                     }
                 }
                 else
                 {
                     await UpdateCanvasType((int)TVCanvasType.SelectedNode.Tag);
-                    await LoadCanvasTypes();
+                    //await LoadCanvasTypes();
+                    await LoadInfo();
                 }
                 if (CanvasType != null && CanvasType.Id > 0)
                 {
@@ -967,9 +995,9 @@ namespace Constituency.Desktop.Views
 
         private async Task LoadInterviewers()
         {
-            UtilRecurrent.LockForm(waitForm, this);
+            // UtilRecurrent.LockForm(waitForm, this);
             Response response = await ApiServices.GetListAsync<Interviewer>("Interviewers", token);
-            UtilRecurrent.UnlockForm(waitForm, this);
+            //UtilRecurrent.UnlockForm(waitForm, this);
 
             if (!response.IsSuccess)
             {
@@ -1096,13 +1124,15 @@ namespace Constituency.Desktop.Views
                 {
                     if (await SaveInterviewers())
                     {
-                        await LoadInterviewers();
+                        //await LoadInterviewers();
+                        await LoadInfo();
                     }
                 }
                 else
                 {
                     await UpdateInterviewers((int)TVInterviewers.SelectedNode.Tag);
-                    await LoadInterviewers();
+                    // await LoadInterviewers();
+                    await LoadInfo();
                 }
                 if (Interviewer != null && Interviewer.Id > 0)
                 {
@@ -1188,27 +1218,6 @@ namespace Constituency.Desktop.Views
                 return null;
             }
         }
-        private async Task DeleteInterviewers(int id)
-        {
-            try
-            {
-                UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.DeleteAsync("Interviewer", id, token);
-                UtilRecurrent.UnlockForm(waitForm, this);
-                if (!response.IsSuccess)
-                {
-                    UtilRecurrent.ErrorMessage(response.Message);
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);
-                UtilRecurrent.ErrorMessage(ex.Message);
-            }
-        }
-
-
 
         #endregion
 
@@ -1219,9 +1228,9 @@ namespace Constituency.Desktop.Views
 
         private async Task LoadCanvas()
         {
-            UtilRecurrent.LockForm(waitForm, this);
+            //UtilRecurrent.LockForm(waitForm, this);
             Response response = await ApiServices.GetListAsync<Canvas>("Canvas", token);
-            UtilRecurrent.UnlockForm(waitForm, this);
+            //UtilRecurrent.UnlockForm(waitForm, this);
 
             if (!response.IsSuccess)
             {
@@ -1296,7 +1305,7 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-               
+
                 txtCanvasName.Text = canvas.Name;
                 txtCanvasDescription.Text = canvas.Description;
                 rjCanvasActive.Checked = canvas.Active;
@@ -1305,7 +1314,7 @@ namespace Constituency.Desktop.Views
                 dgvCanvasInterviews.DataSource = null;
                 if (canvas.Interviews != null && canvas.Interviews.Any())
                 {
-                    dgvCanvasInterviews.DataSource = canvas.Interviews.Select(u => new {   Registration=u.Voter.Reg,u.Voter.FullName, PD=u.Voter.PollingDivision.Name,Party=u.SupportedParty.Name, u.Date,Interviewer=u.Interviewer.FullName }).ToList();
+                    dgvCanvasInterviews.DataSource = canvas.Interviews.Select(u => new { Registration = u.Voter.Reg, u.Voter.FullName, PD = u.Voter.PollingDivision.Name, Party = u.SupportedParty.Name, u.Date, Interviewer = u.Interviewer.FullName }).ToList();
                 }
             }
             catch (Exception ex)
@@ -1327,13 +1336,15 @@ namespace Constituency.Desktop.Views
                 {
                     if (await SaveCanvas())
                     {
-                        await LoadCanvas();
+                        // await LoadCanvas();
+                        await LoadInfo();
                     }
                 }
                 else
                 {
                     await UpdateCanvas((int)TVCanvas.SelectedNode.Tag);
-                    await LoadCanvas();
+                    // await LoadCanvas();
+                    await LoadInfo();
                 }
                 if (Canvas != null && Canvas.Id > 0)
                 {
@@ -1430,9 +1441,9 @@ namespace Constituency.Desktop.Views
 
         private async Task LoadNationalElections()
         {
-            UtilRecurrent.LockForm(waitForm, this);
+            //UtilRecurrent.LockForm(waitForm, this);
             Response response = await ApiServices.GetListAsync<NationalElection>("NationalElections", token);
-            UtilRecurrent.UnlockForm(waitForm, this);
+            //UtilRecurrent.UnlockForm(waitForm, this);
 
             if (!response.IsSuccess)
             {
@@ -1546,13 +1557,15 @@ namespace Constituency.Desktop.Views
                 {
                     if (await SaveNationalElections())
                     {
-                        await LoadNationalElections();
+                        // await LoadNationalElections();
+                        await LoadInfo();
                     }
                 }
                 else
                 {
                     await UpdateNationalElections((int)TVElections.SelectedNode.Tag);
-                    await LoadNationalElections();
+                    //await LoadNationalElections();
+                    await LoadInfo();
                 }
                 if (NationalElection != null && NationalElection.Id > 0)
                 {
@@ -1652,14 +1665,16 @@ namespace Constituency.Desktop.Views
         }
         private async void contextmenu_click(object sender, ToolStripItemClickedEventArgs e)
         {
+
             switch (e.ClickedItem.Text)
             {
                 case "Delete Constituency":
                     {
                         if (constituency.PollingDivisions.Count == 0)
                         {
-                            await DeleteConstituency(constituency.Id);
-                            await LoadConstituencies();
+                            await DeleteAsyncGeneric("Constituencies", constituency.Id);
+                            // await LoadConstituencies();
+                            await LoadInfo();
                             if (tView1.Nodes.Count > 0)
                             {
                                 tView1.SelectedNode = tView1.Nodes[0];
@@ -1670,10 +1685,190 @@ namespace Constituency.Desktop.Views
                         {
                             UtilRecurrent.ErrorMessage("The selected constituency can not be deleted.Polling divisions associated to the constituency in the database.");
                         }
+
+                        break;
+                    }
+
+                case "Delete Polling":
+                    {
+                        if (await LoadVoterAsyncByDivision(pollingDivision.Id) == null)
+                        {
+                            await DeleteAsyncGeneric("PollingDivisions", pollingDivision.Id);
+                            // await LoadConstituencies();
+                            await LoadInfo();
+                            if (tViewPolling.Nodes.Count > 0)
+                            {
+                                tViewPolling.SelectedNode = tViewPolling.Nodes[0];
+                            }
+                            UtilRecurrent.UnlockForm(waitForm, this);
+                        }
+                        else
+                        {
+                            UtilRecurrent.ErrorMessage("The selected Polling Division can not be deleted. Voters associated to the Polling Division in the database.");
+                        }
+                        break;
+                    }
+                case "Delete Party":
+                    {
+                        if (await LoadAsyncByParty("NationalElections/FindByParty", party.Id) == null && await LoadAsyncByParty("Interviews/FindByParty", party.Id) == null && await LoadAsyncByParty("ElectionVotes/FindByParty", party.Id) == null)
+                        {
+                            await DeleteAsyncGeneric("Parties", party.Id);
+                            //await LoadParties();
+                            await LoadInfo();
+                            if (tvParties.Nodes.Count > 0)
+                            {
+                                tvParties.SelectedNode = tvParties.Nodes[0];
+                            }
+                            UtilRecurrent.UnlockForm(waitForm, this);
+                        }
+                        else
+                        {
+                            UtilRecurrent.ErrorMessage("The selected Party can not be deleted. Interviews, Elections, or Votes associated to the Party in the database.");
+                        }
+                        break;
+                    }
+                case "Delete Canvas Type":
+                    {
+                        if (CanvasType.Canvas.Count == 0)
+                        {
+                            await DeleteAsyncGeneric("CanvasTypes", CanvasType.Id);
+                            // await LoadCanvasTypes();
+                            await LoadInfo();
+                            if (TVCanvasType.Nodes.Count > 0)
+                            {
+                                TVCanvasType.SelectedNode = TVCanvasType.Nodes[0];
+                            }
+                            UtilRecurrent.UnlockForm(waitForm, this);
+                        }
+                        else
+                        {
+                            UtilRecurrent.ErrorMessage("The selected Canvas Type can not be deleted. Canvas associated to the Canvas Type in the database.");
+                        }
+                        break;
+                    }
+                case "Delete Canvas":
+                    {
+                        if (Canvas.Interviews.Count == 0)
+                        {
+                            await DeleteAsyncGeneric("Canvas", Canvas.Id);
+                            // await LoadCanvas();
+                            await LoadInfo();
+                            if (TVCanvas.Nodes.Count > 0)
+                            {
+                                TVCanvas.SelectedNode = TVCanvas.Nodes[0];
+                            }
+                            UtilRecurrent.UnlockForm(waitForm, this);
+                        }
+                        else
+                        {
+                            UtilRecurrent.ErrorMessage("The selected Canvas can not be deleted. Voters associated to the Canvas in the database.");
+                        }
+                        break;
+                    }
+                case "Delete Interviewer":
+                    {
+                        if (Interviewer.Interviews.Count == 0)
+                        {
+                            await DeleteAsyncGeneric("Interviewers", Interviewer.Id);
+                            // await LoadCanvas();
+                            await LoadInfo();
+                            if (TVInterviewers.Nodes.Count > 0)
+                            {
+                                TVInterviewers.SelectedNode = TVInterviewers.Nodes[0];
+                            }
+                            UtilRecurrent.UnlockForm(waitForm, this);
+                        }
+                        else
+                        {
+                            UtilRecurrent.ErrorMessage("The selected Interviewer can not be deleted. Interviews associated to the Interviewer in the database.");
+                        }
+                        break;
+                    }
+                case "Delete Election":
+                    {
+                        if (await LoadElectionAsyncWithVotes("NationalElections/IncludingVotes", NationalElection.Id) == null)
+                        {
+                            await DeleteAsyncGeneric("NationalElections", NationalElection.Id);
+                            // await LoadConstituencies();
+                            await LoadInfo();
+                            if (TVElections.Nodes.Count > 0)
+                            {
+                                TVElections.SelectedNode = TVElections.Nodes[0];
+                            }
+                            UtilRecurrent.UnlockForm(waitForm, this);
+                        }
+                        else
+                        {
+                            UtilRecurrent.ErrorMessage("The selected Election can not be deleted. Votes associated to the Election in the database.");
+                        }
                         break;
                     }
             }
         }
+        #region FindRelations before delete
+        private async Task<Voter> LoadVoterAsyncByDivision(int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<Voter>("Voters/FindByDivision", id.ToString(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    return null;
+                }
+                return (Voter)response.Result;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private async Task<Party> LoadAsyncByParty(string controller, int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<Party>(controller, id.ToString(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    return null;
+                }
+                return (Party)response.Result;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private async Task<NationalElection> LoadElectionAsyncWithVotes(string controller, int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<NationalElection>(controller, id.ToString(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    return null;
+                }
+                return (NationalElection)response.Result;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+
+        #endregion
+
         private IEnumerable<TreeNode> CollectAllNodes(TreeNodeCollection nodes)
         {
             foreach (TreeNode node in nodes)
@@ -1727,9 +1922,9 @@ namespace Constituency.Desktop.Views
             }
         }
 
-        private async  void tableLayoutPanel30_Paint(object sender, PaintEventArgs e)
+        private async void tableLayoutPanel30_Paint(object sender, PaintEventArgs e)
         {
-         
+
         }
         private async void iconButton1_Click(object sender, EventArgs e)
         {
@@ -1788,9 +1983,9 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-               // UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.PostAsync("Constituencies", BuildConstituencyB( sgse,  name), token);
-               // UtilRecurrent.UnlockForm(waitForm, this);
+                // UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Constituencies", BuildConstituencyB(sgse, name), token);
+                // UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -1798,7 +1993,7 @@ namespace Constituency.Desktop.Views
                 }
 
                 constituency = (ConstituencyC)response.Result;
-               // UtilRecurrent.InformationMessage("Constituency sucessfully saved", "Constituency Saved");
+                // UtilRecurrent.InformationMessage("Constituency sucessfully saved", "Constituency Saved");
                 return true;
             }
             catch (Exception ex)
@@ -1808,7 +2003,7 @@ namespace Constituency.Desktop.Views
             }
 
         }
-        private ConstituencyC BuildConstituencyB(string sgse,string name)
+        private ConstituencyC BuildConstituencyB(string sgse, string name)
         {
             return new ConstituencyC()
             {
@@ -1822,9 +2017,9 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-               // UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.PostAsync("PollingDivisions", BuildPollingB(constituency,name), token);
-               // UtilRecurrent.UnlockForm(waitForm, this);
+                // UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("PollingDivisions", BuildPollingB(constituency, name), token);
+                // UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -1832,7 +2027,7 @@ namespace Constituency.Desktop.Views
                 }
 
                 pollingDivision = (PollingDivision)response.Result;
-               // UtilRecurrent.InformationMessage("Polling Division sucessfully saved", "Polling Division Saved");
+                // UtilRecurrent.InformationMessage("Polling Division sucessfully saved", "Polling Division Saved");
                 return true;
             }
             catch (Exception ex)
@@ -1842,17 +2037,17 @@ namespace Constituency.Desktop.Views
             }
 
         }
-        private PollingDivision BuildPollingB(ConstituencyC constituency,string name)
+        private PollingDivision BuildPollingB(ConstituencyC constituency, string name)
         {
             return new PollingDivision()
             {
                 Active = true,
                 Name = name,
-                Constituency =  constituency
+                Constituency = constituency
             };
         }
 
-       
+
     }
 
     #endregion

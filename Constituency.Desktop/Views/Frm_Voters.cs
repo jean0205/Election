@@ -683,15 +683,7 @@ namespace Constituency.Desktop.Views
         #endregion
 
         #region Import Batch
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-           
-        }
-        private void button3_Click(object sender, EventArgs e)
-        {
-           
-        }
+      
         List<Voter> votersBatch = new();
         async void checkVoterList()
         {
@@ -804,13 +796,8 @@ namespace Constituency.Desktop.Views
                 return null;
             }
         }
-
-
-        #endregion
-
         private void Frm_Voters_FormClosing(object sender, FormClosingEventArgs e)
         {
-
 
             UtilRecurrent.LockForm(waitForm, this);
             tView1.BeginUpdate();
@@ -823,10 +810,7 @@ namespace Constituency.Desktop.Views
             UtilRecurrent.UnlockForm(waitForm, this);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void iconButton1_Click_1(object sender, EventArgs e)
         {
@@ -855,22 +839,6 @@ namespace Constituency.Desktop.Views
                 dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
                 dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
                 ibtnImport.Visible = true;
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
-
 
             }
         }
@@ -879,5 +847,9 @@ namespace Constituency.Desktop.Views
         {
             checkVoterList();
         }
+
+        #endregion
+
+
     }
 }

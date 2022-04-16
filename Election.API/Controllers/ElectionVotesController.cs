@@ -56,6 +56,20 @@ namespace Election.API.Controllers
 
             return electionVote;
         }
+        [HttpGet("FindByParty/{id}")]
+        public async Task<ActionResult<ElectionVote>> GetElectionVoteByParty(int id)
+        {
+            var electionVote = await _context.ElectionVotes               
+                .Include(e => e.SupportedParty)
+                .FirstOrDefaultAsync(e => e.SupportedParty.Id == id);
+
+            if (electionVote == null)
+            {
+                return NotFound();
+            }
+
+            return electionVote;
+        }
 
         // PUT: api/ElectionVotes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
