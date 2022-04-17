@@ -120,3 +120,4 @@ C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\bin\Debug\net6.0-wind
 C:\Users\jcsoto\source\repos\Election\Constituency.Desktop\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Data.OleDb.dll
 C:\Users\jeanc\source\repos\Election\Constituency.Desktop\bin\Debug\net6.0-windows\System.Data.OleDb.dll
 C:\Users\jeanc\source\repos\Election\Constituency.Desktop\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Data.OleDb.dll
+C:\Users\jeanc\source\repos\Election\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_Configuration.resources
