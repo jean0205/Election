@@ -805,7 +805,7 @@ namespace Constituency.Desktop.Helpers
                 return new Response
                 {
                     IsSuccess = true,
-                    Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
+                    Message = "Confirmation Email successfully sent"
                 };
 
             }

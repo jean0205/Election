@@ -238,7 +238,7 @@ namespace Constituency.Desktop.Views
                 waitForm.Show(this);
                 //Frm_MasterFile frm = new Frm_MasterFile();
                 //frm.Show(this);
-                waitForm.Close();
+             UtilRecurrent.UnlockForm(waitForm, this);
                
             }
             catch (Exception ex)
@@ -347,12 +347,12 @@ namespace Constituency.Desktop.Views
         }
         private async Task<List<string>> LoadUsersRoles(User user)
         {
-            waitForm.Show(this);
-            Cursor.Hide();
+            UtilRecurrent.LockForm(waitForm, this);
+          
             Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName, tokenResponse.Token);
 
-            waitForm.Close();
-            Cursor.Show();
+         UtilRecurrent.UnlockForm(waitForm, this);
+            
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
@@ -363,11 +363,11 @@ namespace Constituency.Desktop.Views
         private async Task<bool> changePasswordAsync(ChangePasswordViewModel model)
         {
             waitForm.Show(this);
-            Cursor.Hide();
+          
             Response response = await ApiServices.PostAsync<ChangePasswordViewModel>("Account/ChangePassword", model, tokenResponse.Token);
 
-            waitForm.Close();
-            Cursor.Show();
+         UtilRecurrent.UnlockForm(waitForm, this);
+            
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
@@ -380,11 +380,11 @@ namespace Constituency.Desktop.Views
             try
             {
                 waitForm.Show(this);
-                Cursor.Hide();
+              
                 Response response = await ApiServices.ResendEmail("Account/SendEmailConfirmation", tokenResponse.User.UserName, tokenResponse.Token);
 
-                waitForm.Close();
-                Cursor.Show();
+             UtilRecurrent.UnlockForm(waitForm, this);
+                
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -509,10 +509,10 @@ namespace Constituency.Desktop.Views
             try
             {
                 waitForm.Show(this);
-                Cursor.Hide();
+              
                 Response response = await ApiServices.RegisterUser(route, user, tokenResponse.Token);
-                waitForm.Close();
-                Cursor.Show();
+             UtilRecurrent.UnlockForm(waitForm, this);
+                
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -576,10 +576,10 @@ namespace Constituency.Desktop.Views
             try
             {
                 waitForm.Show(this);
-                Cursor.Hide();
+              
                 Response response = await ApiServices.RegisterUser(route, user, tokenResponse.Token);
-                waitForm.Close();
-                Cursor.Show();
+             UtilRecurrent.UnlockForm(waitForm, this);
+                
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -608,7 +608,7 @@ namespace Constituency.Desktop.Views
                // Response response = await ApiServices.LogutAsync("Account/Logout",tokenResponse.Token);
                // Analytics.TrackEvent("Logout  " + tokenResponse.User.FullName);
                // // waitForm.Close();
-               // // Cursor.Show();
+               // // 
 
                // FormCollection forms = Application.OpenForms;
                // for (int i = forms.Count - 1; i >= 0; i--)

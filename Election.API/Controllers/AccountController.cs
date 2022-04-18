@@ -159,7 +159,7 @@ namespace Election.API.Controllers
                         token = myToken
                     }, protocol: HttpContext.Request.Scheme);
 
-                    Response response = _mailHelper.SendMail(user.Email, "SBDF - Email Account Confirmation", $"<h1>SBDF - Email Account Confirmation</h1>" +
+                    Response response = _mailHelper.SendMail(user.Email, "Constituencies - Email Account Confirmation", $"<h1>Constituencies - Email Account Confirmation</h1>" +
                         $"To confirm your Email Address, " +
                         $"please click in the following link : </br></br><a href = \"{tokenLink}\">Confirm Email</a>");
 
@@ -206,7 +206,7 @@ namespace Election.API.Controllers
                     IdentityResult result = await _userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
-                        return CreatedAtAction(string.Empty, user);
+                        return CreatedAtAction("ChangePassword", user);
                     }
                     else
                     {
