@@ -4,17 +4,18 @@
     {
         User,
         Admin,
-        Applicants,
-        Enter_Applications,
-        Review_Applications,
-        Approve_Applications,
-        All_Applications,
+        Voters,
+        Interviews,
+        Hosues,
+        Elections,
+        All_Interviews,
+        All_Elections,
         See_Reports,
         App_Maintenance,
         App_Configuration,
         Manage_Users,
         Export_Reports,
-        Master_File
+        
 
     }
 }

@@ -38,13 +38,13 @@ namespace Constituency.Desktop.Views
 
         private async void iconButton1_Click(object sender, EventArgs e)
         {
-        //    if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
-        //    {
-        //        Analytics.TrackEvent("Frm_EnterApplications NO ACCESS " + tokenResponse.User.FullName);
-        //        UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
-        //        return;
-        //    }
-           
+            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+            {
+                Analytics.TrackEvent("Frm_EnterInterview NO ACCESS " + tokenResponse.User.FullName);
+                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+                return;
+            }
+
             try
             {
                 Analytics.TrackEvent("Frm_EnterInterview  " + tokenResponse.User.FullName);
@@ -59,14 +59,14 @@ namespace Constituency.Desktop.Views
         }
 
         private async void iconButton3_ClickAsync(object sender, EventArgs e)
-        {           
-        //    if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
-        //    {
-        //        Analytics.TrackEvent("Frm_Applicants NO ACCESS " + tokenResponse.User.FullName);
-        //        UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
-        //        return;
-        //    }
-           
+        {
+            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+            {
+                Analytics.TrackEvent("Frm_Voters NO ACCESS " + tokenResponse.User.FullName);
+                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+                return;
+            }
+
             try
             {
                 Analytics.TrackEvent("Frm_Voters " + tokenResponse.User.FullName);
@@ -105,13 +105,13 @@ namespace Constituency.Desktop.Views
         }
         private async void iconButton1_Click_1(object sender, EventArgs e)
         {
-            //if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
-            //{
-            //    Analytics.TrackEvent("Frm_ApproveApplications NO ACCESS " + tokenResponse.User.FullName);
-            //    UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
-            //    return;
-            //}
-           
+            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+            {
+                Analytics.TrackEvent("Frm_ElectionVotes NO ACCESS " + tokenResponse.User.FullName);
+                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+                return;
+            }
+
             try
             {
                 Analytics.TrackEvent("Frm_ElectionVotes " + tokenResponse.User.FullName);
@@ -163,12 +163,12 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
                 return;
             }
-           
+
             try
             {
                 Analytics.TrackEvent("Frm_Configuration " + tokenResponse.User.FullName);
-                //Frm_Configuration frm = new Frm_Configuration();
-                //frm.Show(this);
+                Frm_Configuration frm = new Frm_Configuration();
+                frm.Show(this);
             }
             catch (Exception ex)
             {
@@ -180,13 +180,13 @@ namespace Constituency.Desktop.Views
 
         private async void iconButton3_Click(object sender, EventArgs e)
         {
-            //if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
-            //{
-            //    Analytics.TrackEvent("Frm_App_Maintenance NO ACCESS " + tokenResponse.User.FullName);
-            //    UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
-            //    return;
-            //}
-           
+            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+            {
+                Analytics.TrackEvent("Frm_App_Maintenance NO ACCESS " + tokenResponse.User.FullName);
+                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+                return;
+            }
+
             try
             {
                 Analytics.TrackEvent("Frm_App_Maintenance " + tokenResponse.User.FullName);

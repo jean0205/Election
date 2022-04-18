@@ -130,7 +130,7 @@ namespace Constituency.Desktop.Views
             this.ibtnApplicants.Name = "ibtnApplicants";
             this.ibtnApplicants.Size = new System.Drawing.Size(237, 51);
             this.ibtnApplicants.TabIndex = 4;
-            this.ibtnApplicants.Tag = "Applicants";
+            this.ibtnApplicants.Tag = "Voters";
             this.ibtnApplicants.Text = "Voters";
             this.ibtnApplicants.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ibtnApplicants.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -156,7 +156,7 @@ namespace Constituency.Desktop.Views
             this.ibtnEnterApp.Name = "ibtnEnterApp";
             this.ibtnEnterApp.Size = new System.Drawing.Size(237, 51);
             this.ibtnEnterApp.TabIndex = 2;
-            this.ibtnEnterApp.Tag = "Enter_Interviews";
+            this.ibtnEnterApp.Tag = "Interviews";
             this.ibtnEnterApp.Text = "Interviews";
             this.ibtnEnterApp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ibtnEnterApp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -182,7 +182,7 @@ namespace Constituency.Desktop.Views
             this.ibtnReview.Name = "ibtnReview";
             this.ibtnReview.Size = new System.Drawing.Size(237, 51);
             this.ibtnReview.TabIndex = 3;
-            this.ibtnReview.Tag = "Review_Applications";
+            this.ibtnReview.Tag = "Hosues";
             this.ibtnReview.Text = "Houses";
             this.ibtnReview.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ibtnReview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -208,7 +208,7 @@ namespace Constituency.Desktop.Views
             this.iconButton1.Name = "iconButton1";
             this.iconButton1.Size = new System.Drawing.Size(237, 51);
             this.iconButton1.TabIndex = 5;
-            this.iconButton1.Tag = "Approve_Applications";
+            this.iconButton1.Tag = "Elections";
             this.iconButton1.Text = "Elections";
             this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

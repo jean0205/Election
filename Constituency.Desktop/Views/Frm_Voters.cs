@@ -582,6 +582,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
+                UtilRecurrent.UnlockForm(waitForm, this);                
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
@@ -823,22 +824,35 @@ namespace Constituency.Desktop.Views
 
             if (ofd.ShowDialog() != DialogResult.Cancel)
             {
-                String name = "Sheet1";
-                String constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                                ofd.FileName.ToString() +
-                                ";Extended Properties='Excel 12.0 XML;HDR=NO;';";
+                try
+                {
+                    UtilRecurrent.LockForm(waitForm, this);
+                    String name = "Sheet1";
+                    String constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                                    ofd.FileName.ToString() +
+                                    ";Extended Properties='Excel 12.0 XML;HDR=NO;';";
 
-                OleDbConnection con = new OleDbConnection(constr);
-                OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
-                con.Open();
+                    OleDbConnection con = new OleDbConnection(constr);
+                    OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
+                    con.Open();
 
-                OleDbDataAdapter sda = new OleDbDataAdapter(oconn);
-                DataTable data = new DataTable();
-                sda.Fill(data);
-                dataGridView1.DataSource = data;
-                dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
-                dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
-                ibtnImport.Visible = true;
+                    OleDbDataAdapter sda = new OleDbDataAdapter(oconn);
+                    DataTable data = new DataTable();
+                    sda.Fill(data);
+                    dataGridView1.DataSource = data;
+                    dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
+                    dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
+                    ibtnImport.Visible = true;
+                    UtilRecurrent.UnlockForm(waitForm, this);
+                    ibtnUpload.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    UtilRecurrent.UnlockForm(waitForm, this);
+                    Crashes.TrackError(ex); 
+                    UtilRecurrent.ErrorMessage(ex.Message);
+                }
+               
 
             }
         }

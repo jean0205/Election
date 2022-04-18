@@ -56,11 +56,11 @@ namespace Constituency.Desktop.Views
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.rjApplicants = new Constituency.Desktop.Controls.RJToggleButton();
-            this.rjEnter_Applications = new Constituency.Desktop.Controls.RJToggleButton();
-            this.rjReview_Applications = new Constituency.Desktop.Controls.RJToggleButton();
-            this.rjApprove_Applications = new Constituency.Desktop.Controls.RJToggleButton();
-            this.rjSee_Reports = new Constituency.Desktop.Controls.RJToggleButton();
+            this.rjVoters = new Constituency.Desktop.Controls.RJToggleButton();
+            this.rjInterviews = new Constituency.Desktop.Controls.RJToggleButton();
+            this.rjAll_Interviews = new Constituency.Desktop.Controls.RJToggleButton();
+            this.rjHosues = new Constituency.Desktop.Controls.RJToggleButton();
+            this.rjElections = new Constituency.Desktop.Controls.RJToggleButton();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.rjManage_Users = new Constituency.Desktop.Controls.RJToggleButton();
@@ -68,9 +68,11 @@ namespace Constituency.Desktop.Views
             this.rjApp_Configuration = new Constituency.Desktop.Controls.RJToggleButton();
             this.rjApp_Maintenance = new Constituency.Desktop.Controls.RJToggleButton();
             this.label15 = new System.Windows.Forms.Label();
-            this.rjAll_Applications = new Constituency.Desktop.Controls.RJToggleButton();
+            this.rjAll_Elections = new Constituency.Desktop.Controls.RJToggleButton();
             this.rjExport_Reports = new Constituency.Desktop.Controls.RJToggleButton();
             this.label16 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.rjSee_Reports = new Constituency.Desktop.Controls.RJToggleButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label14 = new System.Windows.Forms.Label();
@@ -91,8 +93,6 @@ namespace Constituency.Desktop.Views
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label17 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.rjMaster_File = new Constituency.Desktop.Controls.RJToggleButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -360,33 +360,35 @@ namespace Constituency.Desktop.Views
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel3.ColumnCount = 4;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.ColumnCount = 6;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label8, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.label9, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.label10, 0, 4);
-            this.tableLayoutPanel3.Controls.Add(this.rjApplicants, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.rjEnter_Applications, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.rjReview_Applications, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.rjApprove_Applications, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.rjSee_Reports, 1, 4);
-            this.tableLayoutPanel3.Controls.Add(this.label12, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label11, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.rjManage_Users, 3, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label13, 0, 5);
-            this.tableLayoutPanel3.Controls.Add(this.rjApp_Configuration, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(this.rjApp_Maintenance, 1, 5);
-            this.tableLayoutPanel3.Controls.Add(this.label15, 2, 2);
-            this.tableLayoutPanel3.Controls.Add(this.rjAll_Applications, 3, 2);
-            this.tableLayoutPanel3.Controls.Add(this.rjExport_Reports, 3, 3);
-            this.tableLayoutPanel3.Controls.Add(this.label16, 2, 3);
-            this.tableLayoutPanel3.Controls.Add(this.label19, 2, 4);
-            this.tableLayoutPanel3.Controls.Add(this.rjMaster_File, 3, 4);
+            this.tableLayoutPanel3.Controls.Add(this.rjVoters, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.rjInterviews, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.rjAll_Interviews, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.rjHosues, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.rjElections, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.label12, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label11, 4, 1);
+            this.tableLayoutPanel3.Controls.Add(this.rjManage_Users, 5, 1);
+            this.tableLayoutPanel3.Controls.Add(this.rjApp_Configuration, 5, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label15, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.rjAll_Elections, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.label19, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.rjSee_Reports, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label16, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.rjExport_Reports, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.rjApp_Maintenance, 5, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label13, 4, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -405,137 +407,137 @@ namespace Constituency.Desktop.Views
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(102, 1);
+            this.label5.Location = new System.Drawing.Point(46, 1);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(145, 21);
+            this.label5.Size = new System.Drawing.Size(117, 21);
             this.label5.TabIndex = 21;
-            this.label5.Text = "Manage Applicants:";
+            this.label5.Text = "Manage Voters:";
             // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(109, 36);
+            this.label7.Location = new System.Drawing.Point(39, 36);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(138, 21);
+            this.label7.Size = new System.Drawing.Size(124, 21);
             this.label7.TabIndex = 22;
-            this.label7.Text = "Enter Applications:";
+            this.label7.Text = "Enter Interviews:";
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(95, 71);
+            this.label8.Location = new System.Drawing.Point(19, 71);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(152, 21);
+            this.label8.Size = new System.Drawing.Size(144, 21);
             this.label8.TabIndex = 23;
-            this.label8.Text = "Review Applications:";
+            this.label8.Text = "View All Interviews:";
             // 
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(86, 106);
+            this.label9.Location = new System.Drawing.Point(99, 106);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(161, 21);
+            this.label9.Size = new System.Drawing.Size(64, 21);
             this.label9.TabIndex = 24;
-            this.label9.Text = "Approve Applications:";
+            this.label9.Text = "Houses:";
             // 
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(151, 141);
+            this.label10.Location = new System.Drawing.Point(14, 141);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(96, 21);
+            this.label10.Size = new System.Drawing.Size(149, 21);
             this.label10.TabIndex = 25;
-            this.label10.Text = "See Reports:";
+            this.label10.Text = "Enter Election Votes:";
             // 
-            // rjApplicants
+            // rjVoters
             // 
-            this.rjApplicants.AutoSize = true;
-            this.rjApplicants.Location = new System.Drawing.Point(254, 4);
-            this.rjApplicants.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjApplicants.Name = "rjApplicants";
-            this.rjApplicants.OffBackColor = System.Drawing.Color.Gray;
-            this.rjApplicants.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjApplicants.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.rjApplicants.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjApplicants.Size = new System.Drawing.Size(50, 25);
-            this.rjApplicants.TabIndex = 47;
-            this.rjApplicants.Tag = "1";
-            this.rjApplicants.UseVisualStyleBackColor = true;
+            this.rjVoters.AutoSize = true;
+            this.rjVoters.Location = new System.Drawing.Point(170, 4);
+            this.rjVoters.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjVoters.Name = "rjVoters";
+            this.rjVoters.OffBackColor = System.Drawing.Color.Gray;
+            this.rjVoters.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjVoters.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjVoters.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjVoters.Size = new System.Drawing.Size(50, 25);
+            this.rjVoters.TabIndex = 47;
+            this.rjVoters.Tag = "1";
+            this.rjVoters.UseVisualStyleBackColor = true;
             // 
-            // rjEnter_Applications
+            // rjInterviews
             // 
-            this.rjEnter_Applications.AutoSize = true;
-            this.rjEnter_Applications.Location = new System.Drawing.Point(254, 39);
-            this.rjEnter_Applications.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjEnter_Applications.Name = "rjEnter_Applications";
-            this.rjEnter_Applications.OffBackColor = System.Drawing.Color.Gray;
-            this.rjEnter_Applications.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjEnter_Applications.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.rjEnter_Applications.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjEnter_Applications.Size = new System.Drawing.Size(50, 25);
-            this.rjEnter_Applications.TabIndex = 48;
-            this.rjEnter_Applications.Tag = "1";
-            this.rjEnter_Applications.UseVisualStyleBackColor = true;
+            this.rjInterviews.AutoSize = true;
+            this.rjInterviews.Location = new System.Drawing.Point(170, 39);
+            this.rjInterviews.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjInterviews.Name = "rjInterviews";
+            this.rjInterviews.OffBackColor = System.Drawing.Color.Gray;
+            this.rjInterviews.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjInterviews.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjInterviews.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjInterviews.Size = new System.Drawing.Size(50, 25);
+            this.rjInterviews.TabIndex = 48;
+            this.rjInterviews.Tag = "1";
+            this.rjInterviews.UseVisualStyleBackColor = true;
             // 
-            // rjReview_Applications
+            // rjAll_Interviews
             // 
-            this.rjReview_Applications.AutoSize = true;
-            this.rjReview_Applications.Location = new System.Drawing.Point(254, 74);
-            this.rjReview_Applications.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjReview_Applications.Name = "rjReview_Applications";
-            this.rjReview_Applications.OffBackColor = System.Drawing.Color.Gray;
-            this.rjReview_Applications.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjReview_Applications.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.rjReview_Applications.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjReview_Applications.Size = new System.Drawing.Size(50, 25);
-            this.rjReview_Applications.TabIndex = 49;
-            this.rjReview_Applications.Tag = "1";
-            this.rjReview_Applications.UseVisualStyleBackColor = true;
+            this.rjAll_Interviews.AutoSize = true;
+            this.rjAll_Interviews.Location = new System.Drawing.Point(170, 74);
+            this.rjAll_Interviews.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjAll_Interviews.Name = "rjAll_Interviews";
+            this.rjAll_Interviews.OffBackColor = System.Drawing.Color.Gray;
+            this.rjAll_Interviews.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjAll_Interviews.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjAll_Interviews.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjAll_Interviews.Size = new System.Drawing.Size(50, 25);
+            this.rjAll_Interviews.TabIndex = 49;
+            this.rjAll_Interviews.Tag = "1";
+            this.rjAll_Interviews.UseVisualStyleBackColor = true;
             // 
-            // rjApprove_Applications
+            // rjHosues
             // 
-            this.rjApprove_Applications.AutoSize = true;
-            this.rjApprove_Applications.Location = new System.Drawing.Point(254, 109);
-            this.rjApprove_Applications.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjApprove_Applications.Name = "rjApprove_Applications";
-            this.rjApprove_Applications.OffBackColor = System.Drawing.Color.Gray;
-            this.rjApprove_Applications.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjApprove_Applications.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.rjApprove_Applications.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjApprove_Applications.Size = new System.Drawing.Size(50, 25);
-            this.rjApprove_Applications.TabIndex = 50;
-            this.rjApprove_Applications.Tag = "1";
-            this.rjApprove_Applications.UseVisualStyleBackColor = true;
+            this.rjHosues.AutoSize = true;
+            this.rjHosues.Location = new System.Drawing.Point(170, 109);
+            this.rjHosues.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjHosues.Name = "rjHosues";
+            this.rjHosues.OffBackColor = System.Drawing.Color.Gray;
+            this.rjHosues.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjHosues.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjHosues.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjHosues.Size = new System.Drawing.Size(50, 25);
+            this.rjHosues.TabIndex = 50;
+            this.rjHosues.Tag = "1";
+            this.rjHosues.UseVisualStyleBackColor = true;
             // 
-            // rjSee_Reports
+            // rjElections
             // 
-            this.rjSee_Reports.AutoSize = true;
-            this.rjSee_Reports.Location = new System.Drawing.Point(254, 144);
-            this.rjSee_Reports.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjSee_Reports.Name = "rjSee_Reports";
-            this.rjSee_Reports.OffBackColor = System.Drawing.Color.Gray;
-            this.rjSee_Reports.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjSee_Reports.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.rjSee_Reports.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjSee_Reports.Size = new System.Drawing.Size(50, 25);
-            this.rjSee_Reports.TabIndex = 51;
-            this.rjSee_Reports.Tag = "1";
-            this.rjSee_Reports.UseVisualStyleBackColor = true;
+            this.rjElections.AutoSize = true;
+            this.rjElections.Location = new System.Drawing.Point(170, 144);
+            this.rjElections.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjElections.Name = "rjElections";
+            this.rjElections.OffBackColor = System.Drawing.Color.Gray;
+            this.rjElections.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjElections.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjElections.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjElections.Size = new System.Drawing.Size(50, 25);
+            this.rjElections.TabIndex = 51;
+            this.rjElections.Tag = "1";
+            this.rjElections.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(606, 1);
+            this.label12.Location = new System.Drawing.Point(686, 1);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(141, 21);
             this.label12.TabIndex = 53;
@@ -546,7 +548,7 @@ namespace Constituency.Desktop.Views
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(635, 36);
+            this.label11.Location = new System.Drawing.Point(715, 36);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(112, 21);
             this.label11.TabIndex = 26;
@@ -555,7 +557,7 @@ namespace Constituency.Desktop.Views
             // rjManage_Users
             // 
             this.rjManage_Users.AutoSize = true;
-            this.rjManage_Users.Location = new System.Drawing.Point(754, 39);
+            this.rjManage_Users.Location = new System.Drawing.Point(834, 39);
             this.rjManage_Users.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjManage_Users.Name = "rjManage_Users";
             this.rjManage_Users.OffBackColor = System.Drawing.Color.Gray;
@@ -572,7 +574,7 @@ namespace Constituency.Desktop.Views
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(113, 176);
+            this.label13.Location = new System.Drawing.Point(693, 71);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(134, 21);
             this.label13.TabIndex = 54;
@@ -581,7 +583,7 @@ namespace Constituency.Desktop.Views
             // rjApp_Configuration
             // 
             this.rjApp_Configuration.AutoSize = true;
-            this.rjApp_Configuration.Location = new System.Drawing.Point(754, 4);
+            this.rjApp_Configuration.Location = new System.Drawing.Point(834, 4);
             this.rjApp_Configuration.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjApp_Configuration.Name = "rjApp_Configuration";
             this.rjApp_Configuration.OffBackColor = System.Drawing.Color.Gray;
@@ -596,7 +598,7 @@ namespace Constituency.Desktop.Views
             // rjApp_Maintenance
             // 
             this.rjApp_Maintenance.AutoSize = true;
-            this.rjApp_Maintenance.Location = new System.Drawing.Point(254, 179);
+            this.rjApp_Maintenance.Location = new System.Drawing.Point(834, 74);
             this.rjApp_Maintenance.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjApp_Maintenance.Name = "rjApp_Maintenance";
             this.rjApp_Maintenance.OffBackColor = System.Drawing.Color.Gray;
@@ -613,31 +615,31 @@ namespace Constituency.Desktop.Views
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(598, 71);
+            this.label15.Location = new System.Drawing.Point(35, 176);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(149, 21);
+            this.label15.Size = new System.Drawing.Size(128, 37);
             this.label15.TabIndex = 57;
-            this.label15.Text = "See All Applications:";
+            this.label15.Text = "View All Election Votes:";
             // 
-            // rjAll_Applications
+            // rjAll_Elections
             // 
-            this.rjAll_Applications.AutoSize = true;
-            this.rjAll_Applications.Location = new System.Drawing.Point(754, 74);
-            this.rjAll_Applications.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjAll_Applications.Name = "rjAll_Applications";
-            this.rjAll_Applications.OffBackColor = System.Drawing.Color.Gray;
-            this.rjAll_Applications.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjAll_Applications.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.rjAll_Applications.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjAll_Applications.Size = new System.Drawing.Size(50, 25);
-            this.rjAll_Applications.TabIndex = 58;
-            this.rjAll_Applications.Tag = "1";
-            this.rjAll_Applications.UseVisualStyleBackColor = true;
+            this.rjAll_Elections.AutoSize = true;
+            this.rjAll_Elections.Location = new System.Drawing.Point(170, 179);
+            this.rjAll_Elections.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjAll_Elections.Name = "rjAll_Elections";
+            this.rjAll_Elections.OffBackColor = System.Drawing.Color.Gray;
+            this.rjAll_Elections.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjAll_Elections.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjAll_Elections.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjAll_Elections.Size = new System.Drawing.Size(50, 25);
+            this.rjAll_Elections.TabIndex = 58;
+            this.rjAll_Elections.Tag = "1";
+            this.rjAll_Elections.UseVisualStyleBackColor = true;
             // 
             // rjExport_Reports
             // 
             this.rjExport_Reports.AutoSize = true;
-            this.rjExport_Reports.Location = new System.Drawing.Point(754, 109);
+            this.rjExport_Reports.Location = new System.Drawing.Point(502, 39);
             this.rjExport_Reports.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjExport_Reports.Name = "rjExport_Reports";
             this.rjExport_Reports.OffBackColor = System.Drawing.Color.Gray;
@@ -654,11 +656,37 @@ namespace Constituency.Desktop.Views
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label16.Location = new System.Drawing.Point(632, 106);
+            this.label16.Location = new System.Drawing.Point(380, 36);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(115, 21);
             this.label16.TabIndex = 60;
             this.label16.Text = "Export Reports:";
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label19.Location = new System.Drawing.Point(399, 1);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(96, 21);
+            this.label19.TabIndex = 61;
+            this.label19.Text = "See Reports:";
+            // 
+            // rjSee_Reports
+            // 
+            this.rjSee_Reports.AutoSize = true;
+            this.rjSee_Reports.Location = new System.Drawing.Point(502, 4);
+            this.rjSee_Reports.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjSee_Reports.Name = "rjSee_Reports";
+            this.rjSee_Reports.OffBackColor = System.Drawing.Color.Gray;
+            this.rjSee_Reports.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjSee_Reports.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjSee_Reports.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjSee_Reports.Size = new System.Drawing.Size(50, 25);
+            this.rjSee_Reports.TabIndex = 62;
+            this.rjSee_Reports.Tag = "1";
+            this.rjSee_Reports.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -918,32 +946,6 @@ namespace Constituency.Desktop.Views
             this.label17.TabIndex = 21;
             this.label17.Text = "Phone Number:";
             // 
-            // label19
-            // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label19.Location = new System.Drawing.Point(658, 141);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(89, 21);
-            this.label19.TabIndex = 61;
-            this.label19.Text = "Master File:";
-            // 
-            // rjMaster_File
-            // 
-            this.rjMaster_File.AutoSize = true;
-            this.rjMaster_File.Location = new System.Drawing.Point(754, 144);
-            this.rjMaster_File.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjMaster_File.Name = "rjMaster_File";
-            this.rjMaster_File.OffBackColor = System.Drawing.Color.Gray;
-            this.rjMaster_File.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjMaster_File.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.rjMaster_File.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjMaster_File.Size = new System.Drawing.Size(50, 25);
-            this.rjMaster_File.TabIndex = 62;
-            this.rjMaster_File.Tag = "1";
-            this.rjMaster_File.UseVisualStyleBackColor = true;
-            // 
             // Frm_Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1015,11 +1017,11 @@ namespace Constituency.Desktop.Views
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox gbActions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private Controls.RJToggleButton rjApplicants;
-        private Controls.RJToggleButton rjEnter_Applications;
-        private Controls.RJToggleButton rjReview_Applications;
-        private Controls.RJToggleButton rjApprove_Applications;
-        private Controls.RJToggleButton rjSee_Reports;
+        private Controls.RJToggleButton rjVoters;
+        private Controls.RJToggleButton rjInterviews;
+        private Controls.RJToggleButton rjAll_Interviews;
+        private Controls.RJToggleButton rjHosues;
+        private Controls.RJToggleButton rjElections;
         private Controls.RJToggleButton rjApp_Maintenance;
         private System.Windows.Forms.ImageList imgListTreeView;
         private System.Windows.Forms.Label label12;
@@ -1034,7 +1036,7 @@ namespace Constituency.Desktop.Views
         private Controls.RJToggleButton rjEmailConfirmed;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label15;
-        private Controls.RJToggleButton rjAll_Applications;
+        private Controls.RJToggleButton rjAll_Elections;
         private System.Windows.Forms.GroupBox gbStatistics;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Label lblLogin;
@@ -1046,6 +1048,6 @@ namespace Constituency.Desktop.Views
         private Controls.RJToggleButton rjExport_Reports;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label19;
-        private Controls.RJToggleButton rjMaster_File;
+        private Controls.RJToggleButton rjSee_Reports;
     }
 }

@@ -1,8 +1,12 @@
+using Azure.Core.Extensions;
+using Azure.Storage.Blobs;
+using Azure.Storage.Queues;
 using Election.API.Data;
 using Election.API.Data.Entities;
 using Election.API.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
 using Microsoft.IdentityModel.Tokens;
 using System.Text.Json.Serialization;
 
@@ -29,7 +33,8 @@ builder.Services.AddIdentity<User, IdentityRole>(cfg =>
     cfg.Password.RequireLowercase = false;
     cfg.Password.RequireNonAlphanumeric = false;
     cfg.Password.RequireUppercase = false;
-}).AddEntityFrameworkStores<DataContext>();
+}).AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<DataContext>();
 
 builder.Services
                .AddAuthentication()
@@ -54,6 +59,13 @@ builder.Services.AddMvc(options =>
     options.SuppressAsyncSuffixInActionNames = false);
 builder.Services.AddTransient<SeedDB>();
 builder.Services.AddScoped<IUserHelper, UserHelper>();
+builder.Services.AddScoped<IMailHelper, MailHelper>();
+builder.Services.AddScoped<IBlobHelper, BlobHelper>();
+builder.Services.AddAzureClients(builder =>
+{
+    builder.AddBlobServiceClient(Configuration["Blob:ConnectionString:blob"], preferMsi: true);
+    builder.AddQueueServiceClient(Configuration["Blob:ConnectionString:queue"], preferMsi: true);
+});
 
 var app = builder.Build();
 SeedData();
@@ -84,3 +96,29 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+internal static class StartupExtensions
+{
+    public static IAzureClientBuilder<BlobServiceClient, BlobClientOptions> AddBlobServiceClient(this AzureClientFactoryBuilder builder, string serviceUriOrConnectionString, bool preferMsi)
+    {
+        if (preferMsi && Uri.TryCreate(serviceUriOrConnectionString, UriKind.Absolute, out Uri serviceUri))
+        {
+            return builder.AddBlobServiceClient(serviceUri);
+        }
+        else
+        {
+            return builder.AddBlobServiceClient(serviceUriOrConnectionString);
+        }
+    }
+    public static IAzureClientBuilder<QueueServiceClient, QueueClientOptions> AddQueueServiceClient(this AzureClientFactoryBuilder builder, string serviceUriOrConnectionString, bool preferMsi)
+    {
+        if (preferMsi && Uri.TryCreate(serviceUriOrConnectionString, UriKind.Absolute, out Uri serviceUri))
+        {
+            return builder.AddQueueServiceClient(serviceUri);
+        }
+        else
+        {
+            return builder.AddQueueServiceClient(serviceUriOrConnectionString);
+        }
+    }
+}
