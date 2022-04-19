@@ -46,7 +46,7 @@ namespace Election.API.Controllers
                 .ThenInclude(e=>e.Constituency)
                 .Include(e => e.SupportedParty)
                 .Include(e=>e.Comment)
-                .Include(e=>e.User)
+                .Include(e=>e.RecorderBy)
                 .FirstOrDefaultAsync(e=>e.Id== id);
 
             if (electionVote == null)
@@ -84,10 +84,10 @@ namespace Election.API.Controllers
                 .Include(e => e.Election)                
                 .Include(e => e.SupportedParty)
                 .Include(e => e.Comment)
-                .Include(e => e.User)
+                .Include(e => e.RecorderBy)
                 .FirstOrDefaultAsync(e => e.Id == id);
             electionVoteDB.Election = await _context.NationalElections.FirstOrDefaultAsync(e => e.Id == electionVote.Election.Id);            
-            electionVoteDB.User = await _context.Users.FirstOrDefaultAsync(e => e.Id == electionVote.User.Id);
+            electionVoteDB.RecorderBy = await _context.Users.FirstOrDefaultAsync(e => e.Id == electionVote.RecorderBy.Id);
             if (electionVote.SupportedParty == null)
             {
                 electionVoteDB.SupportedParty = null;
@@ -140,7 +140,7 @@ namespace Election.API.Controllers
                 electionVote.SupportedParty = await _context.Parties.FindAsync(electionVote.SupportedParty.Id);
             }
            
-            electionVote.User = await _context.Users.FindAsync(electionVote.User.Id);
+            electionVote.RecorderBy = await _context.Users.FindAsync(electionVote.RecorderBy.Id);
             if (electionVote.Comment != null)
             {
                 electionVote.Comment = _context.Comments.FirstOrDefault(c => c.Id == electionVote.Comment.Id);

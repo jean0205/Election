@@ -26,6 +26,12 @@ namespace Election.API.Data.Entities
         public string? OtherComment { get; set; }
        
         public Interviewer? Interviewer { get; set; }
+        
+        public bool Locked { get; set; }
+        
+        public User? LockedBy { get; set; }
+
+        public User? RecorderBy { get; set; }
 
     }
 }

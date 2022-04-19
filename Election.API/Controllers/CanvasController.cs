@@ -10,6 +10,7 @@ using Election.API.Data;
 using Election.API.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
 
 namespace Election.API.Controllers
 {
@@ -38,6 +39,55 @@ namespace Election.API.Controllers
                 .ThenInclude(i => i.Interviewer)                
                 .Include(c => c.Interviews)
                 .ThenInclude(c=>c.SupportedParty)
+                .ToListAsync();
+        }
+        // GET: api/Canvas
+        [HttpGet("Actives")]
+        public async Task<ActionResult<IEnumerable<Canvas>>> GetCanvasActives()
+        {
+            return await _context.Canvas
+                .Include(c => c.Type)
+                .Include(c => c.Interviews)
+                .ThenInclude(i => i.Voter)
+                .ThenInclude(i => i.PollingDivision)
+                .Include(c => c.Interviews)
+                .ThenInclude(i => i.Interviewer)
+                .Include(c => c.Interviews)
+                .ThenInclude(c => c.SupportedParty)
+                .Where(c=>c.Active)
+                .ToListAsync();
+        }
+        [HttpGet("OpenAll")]
+        public async Task<ActionResult<IEnumerable<Canvas>>> GetCanvasOpen()
+        {
+            return await _context.Canvas
+                .Include(c => c.Type)
+                .Include(c => c.Interviews)
+                .ThenInclude(i => i.Voter)
+                .ThenInclude(i => i.PollingDivision)
+                .Include(c => c.Interviews)
+                .ThenInclude(i => i.Interviewer)
+                .Include(c => c.Interviews)
+                .ThenInclude(c => c.SupportedParty)
+                .Where(c => c.Open)
+                .ToListAsync();
+        }
+        [HttpGet("OpenByUser")]
+        public async Task<ActionResult<IEnumerable<Canvas>>> GetCanvasOpenByUser()
+        {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            return await _context.Canvas
+                .Include(c => c.Type)
+                .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
+                .ThenInclude(i => i.Voter)
+                .ThenInclude(i => i.PollingDivision)
+                .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
+                .ThenInclude(i => i.Interviewer)
+               .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
+                .ThenInclude(c => c.SupportedParty)
+                .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
+                .ThenInclude(c => c.RecorderBy)
+                .Where(c => c.Open)
                 .ToListAsync();
         }
 

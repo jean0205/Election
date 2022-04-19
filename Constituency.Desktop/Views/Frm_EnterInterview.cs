@@ -1,4 +1,5 @@
 ﻿using Constituency.Desktop.Components;
+using Constituency.Desktop.Controls;
 using Constituency.Desktop.Entities;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
@@ -124,13 +125,30 @@ namespace Constituency.Desktop.Views
         #endregion
 
         #region load Information
+        private async Task<List<string>> LoadUsersRoles(User user)
+        {
+            Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName, token);          
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return null;
+            }
+            return (List<string>)response.Result;
+        }
         private async Task LoadCanvas()
         {
             try
             {
-                //UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.GetListAsync<Canvas>("Canvas", token);
-                // UtilRecurrent.UnlockForm(waitForm, this);
+                Response response;
+                var roles = await LoadUsersRoles(user);
+                if (roles != null && roles.Contains(UserAccess.All_Interviews.ToString()))
+                {
+                     response = await ApiServices.GetListAsync<Canvas>("Canvas/OpenAll", token);
+                }
+                else
+                {
+                     response = await ApiServices.GetListAsync<Canvas>("Canvas/OpenByUser", token);
+                }              
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -180,7 +198,7 @@ namespace Constituency.Desktop.Views
         }
         private async Task LoadInterviewers()
         {
-            Response response = await ApiServices.GetListAsync<Interviewer>("Interviewers", token);
+            Response response = await ApiServices.GetListAsync<Interviewer>("Interviewers/Actives", token);
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
@@ -252,10 +270,11 @@ namespace Constituency.Desktop.Views
                             TreeNode node = new TreeNode(interview.Voter.FullName, 2, 3);
                             node.Tag = interview.Id;
                             childNodes.Add(node);
+                            addContextMenu(childNodes[childNodes.Count - 1], "Delete Interview");
                         }
                         treeNodes.Add(new TreeNode(canva.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
                         treeNodes[treeNodes.Count - 1].Tag = canva.Id;
-                        childNodes = new List<TreeNode>();
+                        childNodes = new List<TreeNode>();                       
                     }
                 }
                 tView1.Nodes.AddRange(treeNodes.ToArray());
@@ -610,7 +629,7 @@ namespace Constituency.Desktop.Views
                 {
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
-                }               
+                }
                 if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
                 {
                     UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
@@ -725,6 +744,11 @@ namespace Constituency.Desktop.Views
                 {
                     Interview.Id = (int)id;
                 }
+                else
+                {
+                    //creating the interview for first time, I don't want to update the user, just the one who created
+                    Interview.RecorderBy = user;
+                }               
                 return Interview;
             }
             catch (Exception ex)
@@ -802,6 +826,107 @@ namespace Constituency.Desktop.Views
                 await LoadCanvas();
                 tView1.SelectedNode = tView1.Nodes[0];
                 lblFiltering.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        public void addContextMenu(TreeNode tvw, string item)
+        {
+            try
+            {
+                ContextMenuStrip _contextmenu = new ContextMenuStrip();
+                _contextmenu.Items.Add(item);
+                _contextmenu.ItemClicked += contextmenu_click;
+                tvw.ContextMenuStrip = _contextmenu;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async void contextmenu_click(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+            switch (e.ClickedItem.Text)
+            {
+                case "Delete Interview":
+                    {
+                        if (UtilRecurrent.yesOrNot("Are you sure you want to delete this interview?", "Delete Interview"))
+                        {
+                            await DeleteAsyncGeneric("Interviews", Interview.Id);
+                            await LoadCanvas();
+                            if (tView1.Nodes.Count > 0)
+                            {
+                                tView1.SelectedNode = tView1.Nodes[0];
+                            }
+                            UtilRecurrent.UnlockForm(waitForm, this);
+                        }
+                        break;
+                    }
+            }
+        }
+        private async Task DeleteAsyncGeneric(string controller, int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.DeleteAsync(controller, id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+        private void tView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                //// Make sure this is the right button.
+                //if (e.Button != MouseButtons.Left) return;
+
+                // Select this node.
+                TreeNode node_here = ((TreeView)sender).GetNodeAt(e.X, e.Y);
+                ((TreeView)sender).SelectedNode = node_here;
+
+                // See if we got a node.
+                if (node_here == null)
+                {
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void rjCollapseAll_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (((RJToggleButton)sender).Checked)
+                {
+                    tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+                    tView1.ExpandAll();
+                    lblExpand.Text = "Collapse All";
+                }
+                else
+                {
+                    tView1.CollapseAll();
+                    tView1.Font = new Font("Courier New", 12, FontStyle.Regular);
+                    tView1.SelectedNode = tView1.Nodes[0];
+                    lblExpand.Text = "Expand All";
+                }
             }
             catch (Exception ex)
             {

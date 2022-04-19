@@ -125,7 +125,8 @@ namespace Election.API.Controllers
         public async Task<ActionResult<Interview>> PostInterview(Interview interview)
         {
           
-            interview.Interviewer = _context.Interviewers.FirstOrDefault(i => i.Id == interview.Interviewer.Id);
+            interview.Interviewer = await _context.Interviewers.FirstOrDefaultAsync(i => i.Id == interview.Interviewer.Id);
+            interview.RecorderBy = await _context.Users.FirstOrDefaultAsync(u => u.Id == interview.RecorderBy.Id);
             if (interview.Comment != null)
             {
                 interview.Comment = _context.Comments.FirstOrDefault(c => c.Id == interview.Comment.Id);

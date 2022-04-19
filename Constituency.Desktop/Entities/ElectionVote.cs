@@ -15,6 +15,11 @@
 
         public string? OtherComment { get; set; }
 
-        public User? User { get; set; }
+        public User? RecorderBy { get; set; }       
+
+        public bool Locked { get; set; }
+
+        public User? LockedBy { get; set; }
+
     }
 }

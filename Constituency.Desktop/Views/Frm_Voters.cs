@@ -540,11 +540,7 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
                 }
-                if (dtpDOB.Value.AddYears(18) > DateTime.Now)
-                {
-                    UtilRecurrent.ErrorMessage("Voter younger than 18.");
-                    return;
-                }
+                
                 if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
                 {
                     UtilRecurrent.ErrorMessage("You must provide a valid Email address.");

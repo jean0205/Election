@@ -405,9 +405,10 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                UtilRecurrent.UnlockForm(waitForm, this);                
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
-
         }
         #endregion
 

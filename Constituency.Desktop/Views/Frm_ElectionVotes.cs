@@ -1,4 +1,5 @@
 ﻿using Constituency.Desktop.Components;
+using Constituency.Desktop.Controls;
 using Constituency.Desktop.Entities;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
@@ -44,10 +45,7 @@ namespace Constituency.Desktop.Views
             FildsValidations();
             MandatoriesFilds();
             UtilRecurrent.LockForm(waitForm, this);
-            await LoadConstituencies();
-            //await LoadComments();
-            //await LoadInterviewers();
-            // await LoadParties();
+            await LoadConstituencies();           
             await LoadElections();
             UtilRecurrent.UnlockForm(waitForm, this);
             ibtnUpdate.Visible = false;
@@ -127,32 +125,46 @@ namespace Constituency.Desktop.Views
         #endregion
 
         #region Load Info
+        private async Task<List<string>> LoadUsersRoles(User user)
+        {
+            Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName, token);
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return null;
+            }
+            return (List<string>)response.Result;
+        }
         private async Task LoadElections()
         {
             try
             {
-                //UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.GetListAsync<NationalElection>("NationalElections/Votes", token);
-                // UtilRecurrent.UnlockForm(waitForm, this);
+                Response response;
+                var roles = await LoadUsersRoles(user);
+                if (roles != null && roles.Contains(UserAccess.All_Elections.ToString()))
+                {
+                    response = await ApiServices.GetListAsync<NationalElection>("NationalElections/Votes-Open", token);
+                }
+                else
+                {
+                    response = await ApiServices.GetListAsync<NationalElection>("NationalElections/Votes-OpenByUser", token);
+                }
+                //Response response = await ApiServices.GetListAsync<NationalElection>("NationalElections/Votes-Open", token);
+               
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
                     return;
-                }
-                // Applicant = new Applicant();
+                }               
                 ElectionList = new ObservableCollection<NationalElection>((List<NationalElection>)response.Result);
                 if (ElectionList != null && ElectionList.Any())
                 {
                     RefreshTreeView(ElectionList.ToList());
                     cmbElection.DataSource = null;
                     cmbElection.DataSource = ElectionList.Where(e => e.Open).ToList();
-
-
-
                     cmbElection.ValueMember = "Id";
                     cmbElection.DisplayMember = "ElectionDate";
                     cmbElection.SelectedItem = null;
-
                 }
                 else
                 {
@@ -454,7 +466,7 @@ namespace Constituency.Desktop.Views
                 }
                 txtIOtherComment.Text = ElectionVote.OtherComment;
                 dtpIDate.Value = ElectionVote.VoteTime;
-                labelUser.Text = ElectionVote.User.FullName;
+                labelUser.Text = ElectionVote.RecorderBy.FullName;
             }
             catch (Exception ex)
             {
@@ -613,7 +625,7 @@ namespace Constituency.Desktop.Views
                 ElectionVote.SupportedParty = cmbISupportedParty.SelectedItem as Party;
                 ElectionVote.Comment = cmbIComment.SelectedItem as Comment;
                 ElectionVote.OtherComment = txtIOtherComment.Text.ToUpper();
-                ElectionVote.User = user;
+                ElectionVote.RecorderBy = user;
                 //ElectionVote.Interviewer = cmbInterviewers.SelectedItem as Interviewer;
                 //making null what is not necesary
                 ElectionVote.Voter.Interviews = null;
@@ -753,15 +765,40 @@ namespace Constituency.Desktop.Views
                     cmbISupportedParty.DisplayMember = "Name";
                     cmbISupportedParty.SelectedItem = null;
                 }
-
-
-
             }
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
+        }
+        private void rjCollapseAll_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (((RJToggleButton)sender).Checked)
+                {
+                    tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+                    tView1.ExpandAll();
+                    lblExpand.Text = "Collapse All";
+                }
+                else
+                {
+                    tView1.CollapseAll();
+                    tView1.Font = new Font("Courier New", 12, FontStyle.Regular);
+                    tView1.SelectedNode = tView1.Nodes[0];
+                    lblExpand.Text = "Expand All";
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+        private async  void ibtnRefresh_Click(object sender, EventArgs e)
+        {
+            await LoadElections();
         }
     }
 }

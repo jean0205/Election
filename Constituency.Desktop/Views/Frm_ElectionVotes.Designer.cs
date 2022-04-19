@@ -104,7 +104,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.ibtnSave = new FontAwesome.Sharp.IconButton();
             this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -133,7 +132,6 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -150,7 +148,6 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1176, 787);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
             // 
             // tableLayoutPanel2
             // 
@@ -233,6 +230,7 @@
             this.rjCollapseAll.Size = new System.Drawing.Size(50, 25);
             this.rjCollapseAll.TabIndex = 53;
             this.rjCollapseAll.UseVisualStyleBackColor = true;
+            this.rjCollapseAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rjCollapseAll_MouseClick);
             // 
             // lblExpand
             // 
@@ -267,6 +265,7 @@
             this.ibtnRefresh.Text = "          Refresh";
             this.ibtnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnRefresh.UseVisualStyleBackColor = false;
+            this.ibtnRefresh.Click += new System.EventHandler(this.ibtnRefresh_Click);
             // 
             // lblFiltering
             // 
@@ -452,7 +451,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(566, 5);
+            this.cmbDivision.Location = new System.Drawing.Point(566, 8);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(316, 29);
             this.cmbDivision.TabIndex = 34;
@@ -463,7 +462,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(310, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -698,7 +697,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(107, 5);
+            this.cmbSex.Location = new System.Drawing.Point(107, 8);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -967,7 +966,7 @@
             this.cmbISupportedParty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbISupportedParty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbISupportedParty.FormattingEnabled = true;
-            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 10);
+            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 7);
             this.cmbISupportedParty.Name = "cmbISupportedParty";
             this.cmbISupportedParty.Size = new System.Drawing.Size(714, 29);
             this.cmbISupportedParty.TabIndex = 35;
@@ -1000,7 +999,7 @@
             this.cmbIComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbIComment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIComment.FormattingEnabled = true;
-            this.cmbIComment.Location = new System.Drawing.Point(162, 55);
+            this.cmbIComment.Location = new System.Drawing.Point(162, 52);
             this.cmbIComment.Name = "cmbIComment";
             this.cmbIComment.Size = new System.Drawing.Size(714, 29);
             this.cmbIComment.TabIndex = 38;
@@ -1077,7 +1076,7 @@
             this.cmbElection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbElection.FormatString = "MMMM-yyyy";
             this.cmbElection.FormattingEnabled = true;
-            this.cmbElection.Location = new System.Drawing.Point(631, 9);
+            this.cmbElection.Location = new System.Drawing.Point(631, 12);
             this.cmbElection.Name = "cmbElection";
             this.cmbElection.Size = new System.Drawing.Size(245, 29);
             this.cmbElection.TabIndex = 35;
@@ -1154,16 +1153,6 @@
             this.ibtnUpdate.UseVisualStyleBackColor = false;
             this.ibtnUpdate.Visible = false;
             this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1176, 793);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
             // 
             // Frm_ElectionVotes
             // 

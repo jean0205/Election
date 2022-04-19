@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace Election.API.Controllers
 {
@@ -38,7 +39,28 @@ namespace Election.API.Controllers
                 .Include(e => e.Parties)
                 .ToListAsync();
         }
-
+        [HttpGet("Votes-Open")]
+        public async Task<ActionResult<IEnumerable<NationalElection>>> GetNationalElectionsVotesOpen()
+        {
+            return await _context.NationalElections
+                .Include(e => e.ElectionVotes)
+                .ThenInclude(e => e.Voter)
+                .Include(e => e.Parties)
+                .Where(e => e.Open)
+                .ToListAsync();
+        }
+        [HttpGet("Votes-OpenByUser")]
+        public async Task<ActionResult<IEnumerable<NationalElection>>> GetNationalElectionsVotesOpenByUser()
+        {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            return await _context.NationalElections
+                .Include(e => e.ElectionVotes.Where(i => i.RecorderBy.UserName == userName))
+                .ThenInclude(e => e.Voter)
+                .Include(e => e.Parties)
+                .Where(e => e.Open)
+                .ToListAsync();
+        }
+       
         // GET: api/NationalElections/5
         [HttpGet("{id}")]
         public async Task<ActionResult<NationalElection>> GetNationalElection(int id)

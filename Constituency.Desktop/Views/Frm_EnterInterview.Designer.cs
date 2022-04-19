@@ -140,7 +140,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1184, 832);
+            this.tabControl1.Size = new System.Drawing.Size(1184, 838);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -150,7 +150,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 30);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1176, 798);
+            this.tabPage1.Size = new System.Drawing.Size(1176, 804);
             this.tabPage1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -165,7 +165,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1170, 792);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1170, 798);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox1
@@ -178,7 +178,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(260, 786);
+            this.groupBox1.Size = new System.Drawing.Size(260, 792);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Interviews List:";
@@ -192,9 +192,10 @@
             this.tView1.Location = new System.Drawing.Point(3, 46);
             this.tView1.Name = "tView1";
             this.tView1.SelectedImageIndex = 0;
-            this.tView1.Size = new System.Drawing.Size(254, 664);
+            this.tView1.Size = new System.Drawing.Size(254, 670);
             this.tView1.TabIndex = 0;
             this.tView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tView1_AfterSelect);
+            this.tView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tView1_MouseClick);
             // 
             // imgListTreeView
             // 
@@ -214,7 +215,7 @@
             this.tableLayoutPanel49.Controls.Add(this.rjCollapseAll, 0, 0);
             this.tableLayoutPanel49.Controls.Add(this.lblExpand, 1, 0);
             this.tableLayoutPanel49.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel49.Location = new System.Drawing.Point(3, 710);
+            this.tableLayoutPanel49.Location = new System.Drawing.Point(3, 716);
             this.tableLayoutPanel49.Name = "tableLayoutPanel49";
             this.tableLayoutPanel49.RowCount = 1;
             this.tableLayoutPanel49.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -234,6 +235,7 @@
             this.rjCollapseAll.Size = new System.Drawing.Size(50, 25);
             this.rjCollapseAll.TabIndex = 53;
             this.rjCollapseAll.UseVisualStyleBackColor = true;
+            this.rjCollapseAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rjCollapseAll_MouseClick);
             // 
             // lblExpand
             // 
@@ -261,7 +263,7 @@
             this.ibtnRefresh.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnRefresh.IconSize = 28;
             this.ibtnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnRefresh.Location = new System.Drawing.Point(3, 743);
+            this.ibtnRefresh.Location = new System.Drawing.Point(3, 749);
             this.ibtnRefresh.Name = "ibtnRefresh";
             this.ibtnRefresh.Size = new System.Drawing.Size(254, 40);
             this.ibtnRefresh.TabIndex = 3;
@@ -295,7 +297,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(898, 786);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(898, 792);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // tableLayoutPanel25
@@ -404,7 +406,7 @@
             this.tpanelVoter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tpanelVoter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tpanelVoter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tpanelVoter.Size = new System.Drawing.Size(892, 689);
+            this.tpanelVoter.Size = new System.Drawing.Size(892, 695);
             this.tpanelVoter.TabIndex = 3;
             // 
             // tableLayoutPanel16
@@ -454,7 +456,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(566, 5);
+            this.cmbDivision.Location = new System.Drawing.Point(566, 8);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(316, 29);
             this.cmbDivision.TabIndex = 34;
@@ -465,7 +467,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(310, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -691,7 +693,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(107, 5);
+            this.cmbSex.Location = new System.Drawing.Point(107, 8);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -928,7 +930,7 @@
             this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(3, 408);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(886, 278);
+            this.groupBox2.Size = new System.Drawing.Size(886, 284);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Interview";
@@ -956,7 +958,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(880, 203);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(880, 209);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // cmbInterviewers
@@ -965,7 +967,7 @@
             this.cmbInterviewers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInterviewers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbInterviewers.FormattingEnabled = true;
-            this.cmbInterviewers.Location = new System.Drawing.Point(162, 169);
+            this.cmbInterviewers.Location = new System.Drawing.Point(162, 166);
             this.cmbInterviewers.Name = "cmbInterviewers";
             this.cmbInterviewers.Size = new System.Drawing.Size(714, 29);
             this.cmbInterviewers.TabIndex = 41;
@@ -999,7 +1001,7 @@
             this.cmbISupportedParty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbISupportedParty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbISupportedParty.FormattingEnabled = true;
-            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 10);
+            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 7);
             this.cmbISupportedParty.Name = "cmbISupportedParty";
             this.cmbISupportedParty.Size = new System.Drawing.Size(714, 29);
             this.cmbISupportedParty.TabIndex = 35;
@@ -1033,7 +1035,7 @@
             this.cmbIComment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIComment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbIComment.FormattingEnabled = true;
-            this.cmbIComment.Location = new System.Drawing.Point(162, 55);
+            this.cmbIComment.Location = new System.Drawing.Point(162, 52);
             this.cmbIComment.Name = "cmbIComment";
             this.cmbIComment.Size = new System.Drawing.Size(714, 29);
             this.cmbIComment.TabIndex = 38;
@@ -1084,7 +1086,7 @@
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(562, 12);
+            this.cmbCanvas.Location = new System.Drawing.Point(562, 9);
             this.cmbCanvas.Name = "cmbCanvas";
             this.cmbCanvas.Size = new System.Drawing.Size(314, 29);
             this.cmbCanvas.TabIndex = 34;
@@ -1117,7 +1119,7 @@
             this.panel1.Controls.Add(this.ibtnSaveVoter);
             this.panel1.Controls.Add(this.ibtnUpdate);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 742);
+            this.panel1.Location = new System.Drawing.Point(3, 748);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(892, 41);
             this.panel1.TabIndex = 10;
@@ -1175,7 +1177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 832);
+            this.ClientSize = new System.Drawing.Size(1184, 838);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.White;
