@@ -126,7 +126,7 @@ namespace Constituency.Desktop.Views
             this.ibtnApplicants.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ibtnApplicants.Location = new System.Drawing.Point(3, 3);
             this.ibtnApplicants.Name = "ibtnApplicants";
-            this.ibtnApplicants.Size = new System.Drawing.Size(237, 70);
+            this.ibtnApplicants.Size = new System.Drawing.Size(237, 64);
             this.ibtnApplicants.TabIndex = 4;
             this.ibtnApplicants.Tag = "Voters";
             this.ibtnApplicants.Text = "Voters";
@@ -150,9 +150,9 @@ namespace Constituency.Desktop.Views
             this.ibtnEnterApp.IconColor = System.Drawing.Color.DeepSkyBlue;
             this.ibtnEnterApp.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnEnterApp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnEnterApp.Location = new System.Drawing.Point(3, 79);
+            this.ibtnEnterApp.Location = new System.Drawing.Point(3, 73);
             this.ibtnEnterApp.Name = "ibtnEnterApp";
-            this.ibtnEnterApp.Size = new System.Drawing.Size(237, 70);
+            this.ibtnEnterApp.Size = new System.Drawing.Size(237, 64);
             this.ibtnEnterApp.TabIndex = 2;
             this.ibtnEnterApp.Tag = "Interviews";
             this.ibtnEnterApp.Text = "Interviews";
@@ -176,9 +176,9 @@ namespace Constituency.Desktop.Views
             this.ibtnReview.IconColor = System.Drawing.Color.DeepSkyBlue;
             this.ibtnReview.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnReview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnReview.Location = new System.Drawing.Point(3, 155);
+            this.ibtnReview.Location = new System.Drawing.Point(3, 143);
             this.ibtnReview.Name = "ibtnReview";
-            this.ibtnReview.Size = new System.Drawing.Size(237, 70);
+            this.ibtnReview.Size = new System.Drawing.Size(237, 64);
             this.ibtnReview.TabIndex = 3;
             this.ibtnReview.Tag = "Hosues";
             this.ibtnReview.Text = "Houses";
@@ -202,9 +202,9 @@ namespace Constituency.Desktop.Views
             this.iconButton1.IconColor = System.Drawing.Color.DeepSkyBlue;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(3, 231);
+            this.iconButton1.Location = new System.Drawing.Point(3, 213);
             this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(237, 70);
+            this.iconButton1.Size = new System.Drawing.Size(237, 64);
             this.iconButton1.TabIndex = 5;
             this.iconButton1.Tag = "Elections";
             this.iconButton1.Text = "Elections";
@@ -221,7 +221,7 @@ namespace Constituency.Desktop.Views
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(243, 247);
+            this.panel2.Size = new System.Drawing.Size(243, 283);
             this.panel2.TabIndex = 2;
             // 
             // iconButton2
@@ -239,9 +239,9 @@ namespace Constituency.Desktop.Views
             this.iconButton2.IconColor = System.Drawing.Color.LightGreen;
             this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton2.Location = new System.Drawing.Point(3, 307);
+            this.iconButton2.Location = new System.Drawing.Point(3, 283);
             this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(237, 70);
+            this.iconButton2.Size = new System.Drawing.Size(237, 64);
             this.iconButton2.TabIndex = 6;
             this.iconButton2.Tag = "See_Reports";
             this.iconButton2.Text = "Reports";
@@ -966,8 +966,8 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 3;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.18776F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.81224F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.19471F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 59.80529F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(249, 774);
             this.tableLayoutPanel5.TabIndex = 3;
@@ -983,17 +983,16 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel6.Controls.Add(this.ibtnEnterApp, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.ibtnApplicants, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 256);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 292);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 6;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(243, 460);
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(243, 424);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
             // iconButton3
@@ -1011,9 +1010,9 @@ namespace Constituency.Desktop.Views
             this.iconButton3.IconColor = System.Drawing.Color.LightGreen;
             this.iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton3.Location = new System.Drawing.Point(3, 383);
+            this.iconButton3.Location = new System.Drawing.Point(3, 353);
             this.iconButton3.Name = "iconButton3";
-            this.iconButton3.Size = new System.Drawing.Size(237, 74);
+            this.iconButton3.Size = new System.Drawing.Size(237, 68);
             this.iconButton3.TabIndex = 7;
             this.iconButton3.Tag = "App_Maintenance";
             this.iconButton3.Text = "App Maintenance";

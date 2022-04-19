@@ -702,9 +702,6 @@ namespace Constituency.Desktop.Views
                     await UploadMasterFile((List<Voter>)batch);
 
                 }
-
-
-
             }
             catch (Exception ex)
             {

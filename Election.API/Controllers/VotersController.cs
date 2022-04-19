@@ -28,7 +28,15 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Constituency)
                 .ToListAsync();
         }
-
+        [HttpGet("ByDivisions/{id}")]
+        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisions(int id)
+        {
+            return await _context.Voters
+                .Include(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
+                .Where(v => v.PollingDivision.Id == id)
+                .ToListAsync();
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Voter>> GetVoter(int id)
@@ -53,7 +61,6 @@ namespace Election.API.Controllers
             {
                 return NotFound();
             }
-
             return voter;
         }
 

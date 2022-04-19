@@ -112,6 +112,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCanvas(int id, Canvas canvas)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (id != canvas.Id)
             {
                 return BadRequest();
@@ -122,7 +123,7 @@ namespace Election.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
             }
             catch (DbUpdateConcurrencyException)
             {

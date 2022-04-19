@@ -1,9 +1,10 @@
-﻿using Election.API.Data.Entities;
+﻿using Election.API.Data.Audit;
+using Election.API.Data.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace Election.API.Data
 {
-    public class DataContext : IdentityDbContext<User>
+    public class DataContext : AuditDataContext
     {
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)

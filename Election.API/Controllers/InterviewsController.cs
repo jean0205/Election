@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Election.API.Controllers
 {
@@ -68,7 +69,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutInterview(int id, Interview interview)
         {
-            
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (id != interview.Id)
             {
                 return BadRequest();
@@ -102,7 +103,7 @@ namespace Election.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
             }
             catch (DbUpdateConcurrencyException)
             {
