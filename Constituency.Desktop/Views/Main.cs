@@ -603,21 +603,21 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-               //// waitForm.Show(this);
-               // //Cursor.Hide();
-               // Response response = await ApiServices.LogutAsync("Account/Logout",tokenResponse.Token);
-               // Analytics.TrackEvent("Logout  " + tokenResponse.User.FullName);
-               // // waitForm.Close();
-               // // 
+                // waitForm.Show(this);
+                //Cursor.Hide();
+                Response response = await ApiServices.LogutAsync("Account/Logout", tokenResponse.Token);
+                Analytics.TrackEvent("Logout  " + tokenResponse.User.FullName);
+                // waitForm.Close();
+                // 
 
-               // FormCollection forms = Application.OpenForms;
-               // for (int i = forms.Count - 1; i >= 0; i--)
-               // {
-               //     //if (forms[i].Name != "Frm_Login")
-               //     //{
-               //         forms[i].Close();
-               //     //}
-               // }
+                FormCollection forms = Application.OpenForms;
+                for (int i = forms.Count - 1; i >= 0; i--)
+                {
+                    //if (forms[i].Name != "Frm_Login")
+                    //{
+                    forms[i].Close();
+                    //}
+                }
             }
             catch (Exception ex)
             {

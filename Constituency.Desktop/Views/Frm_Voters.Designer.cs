@@ -492,7 +492,7 @@
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(565, 8);
+            this.cmbDivision.Location = new System.Drawing.Point(565, 5);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(313, 29);
             this.cmbDivision.TabIndex = 34;
@@ -504,7 +504,7 @@
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(309, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -730,7 +730,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(105, 8);
+            this.cmbSex.Location = new System.Drawing.Point(105, 5);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -1311,7 +1311,7 @@
             this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Voters";
-            this.Text = "Frm_Voters";
+            this.Text = "Voters";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_Voters_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Frm_Voters_FormClosed);
             this.Load += new System.EventHandler(this.Frm_Voters_Load);

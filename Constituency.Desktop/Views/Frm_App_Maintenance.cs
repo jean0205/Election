@@ -31,12 +31,7 @@ namespace Constituency.Desktop.Views
             DGVFormats();
             FildsValidations();
             await LoadInfo();
-            //await LoadConstituencies();
-            // await LoadParties();
-            // await LoadCanvasTypes();
-            // await LoadCanvas();
-            // await LoadInterviewers();
-            //await LoadNationalElections();
+            tabControl1.TabPages.RemoveAt(8);
 
         }
         public async Task LoadInfo()

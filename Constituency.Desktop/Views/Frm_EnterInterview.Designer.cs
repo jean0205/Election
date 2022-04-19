@@ -456,7 +456,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(566, 8);
+            this.cmbDivision.Location = new System.Drawing.Point(566, 5);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(316, 29);
             this.cmbDivision.TabIndex = 34;
@@ -467,7 +467,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(310, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -693,7 +693,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(107, 8);
+            this.cmbSex.Location = new System.Drawing.Point(107, 5);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -967,7 +967,7 @@
             this.cmbInterviewers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInterviewers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbInterviewers.FormattingEnabled = true;
-            this.cmbInterviewers.Location = new System.Drawing.Point(162, 166);
+            this.cmbInterviewers.Location = new System.Drawing.Point(162, 169);
             this.cmbInterviewers.Name = "cmbInterviewers";
             this.cmbInterviewers.Size = new System.Drawing.Size(714, 29);
             this.cmbInterviewers.TabIndex = 41;
@@ -1001,7 +1001,7 @@
             this.cmbISupportedParty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbISupportedParty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbISupportedParty.FormattingEnabled = true;
-            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 7);
+            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 10);
             this.cmbISupportedParty.Name = "cmbISupportedParty";
             this.cmbISupportedParty.Size = new System.Drawing.Size(714, 29);
             this.cmbISupportedParty.TabIndex = 35;
@@ -1035,7 +1035,7 @@
             this.cmbIComment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIComment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbIComment.FormattingEnabled = true;
-            this.cmbIComment.Location = new System.Drawing.Point(162, 52);
+            this.cmbIComment.Location = new System.Drawing.Point(162, 55);
             this.cmbIComment.Name = "cmbIComment";
             this.cmbIComment.Size = new System.Drawing.Size(714, 29);
             this.cmbIComment.TabIndex = 38;
@@ -1086,7 +1086,7 @@
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(562, 9);
+            this.cmbCanvas.Location = new System.Drawing.Point(562, 12);
             this.cmbCanvas.Name = "cmbCanvas";
             this.cmbCanvas.Size = new System.Drawing.Size(314, 29);
             this.cmbCanvas.TabIndex = 34;
@@ -1183,7 +1183,7 @@
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_EnterInterview";
-            this.Text = "Frm_EnterInterview";
+            this.Text = "Enter Interview";
             this.Load += new System.EventHandler(this.Frm_EnterInterview_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
