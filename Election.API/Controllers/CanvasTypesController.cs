@@ -10,6 +10,7 @@ using Election.API.Data;
 using Election.API.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
 
 namespace Election.API.Controllers
 {
@@ -19,12 +20,10 @@ namespace Election.API.Controllers
     public class CanvasTypesController : ControllerBase
     {
         private readonly DataContext _context;
-
         public CanvasTypesController(DataContext context)
         {
             _context = context;
         }
-
         // GET: api/CanvasTypes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CanvasType>>> GetCanvasTypes()
@@ -34,7 +33,6 @@ namespace Election.API.Controllers
                 .ThenInclude(c => c.Interviews)
                 .ToListAsync();
         }
-
         // GET: api/CanvasTypes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CanvasType>> GetCanvasType(int id)
@@ -56,6 +54,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCanvasType(int id, CanvasType canvasType)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (id != canvasType.Id)
             {
                 return BadRequest();
@@ -65,7 +64,7 @@ namespace Election.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -87,8 +86,9 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<CanvasType>> PostCanvasType(CanvasType canvasType)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             _context.CanvasTypes.Add(canvasType);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return CreatedAtAction("GetCanvasType", new { id = canvasType.Id }, canvasType);
         }
@@ -97,6 +97,7 @@ namespace Election.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCanvasType(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var canvasType = await _context.CanvasTypes.FindAsync(id);
             if (canvasType == null)
             {
@@ -104,7 +105,7 @@ namespace Election.API.Controllers
             }
 
             _context.CanvasTypes.Remove(canvasType);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return NoContent();
         }

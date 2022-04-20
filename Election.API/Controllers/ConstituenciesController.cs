@@ -10,6 +10,7 @@ using Election.API.Data;
 using Election.API.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
 
 namespace Election.API.Controllers
 {
@@ -53,6 +54,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutConstituency(int id, Constituency constituency)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (id != constituency.Id)
             {
                 return BadRequest();
@@ -62,7 +64,7 @@ namespace Election.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -84,8 +86,9 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Constituency>> PostConstituency(Constituency constituency)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             _context.Constituencies.Add(constituency);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return CreatedAtAction("GetConstituency", new { id = constituency.Id }, constituency);
         }
@@ -94,6 +97,7 @@ namespace Election.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteConstituency(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var constituency = await _context.Constituencies.FindAsync(id);
             if (constituency == null)
             {
@@ -101,7 +105,7 @@ namespace Election.API.Controllers
             }
 
             _context.Constituencies.Remove(constituency);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return NoContent();
         }

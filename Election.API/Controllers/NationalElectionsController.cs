@@ -103,6 +103,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutNationalElection(int id, NationalElection nationalElection)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (id != nationalElection.Id)
             {
                 return BadRequest();
@@ -119,7 +120,7 @@ namespace Election.API.Controllers
             _context.Entry(electionDB).State = EntityState.Modified;
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -143,7 +144,7 @@ namespace Election.API.Controllers
                     _context.Entry(electionDB).State = EntityState.Modified;
                     try
                     {
-                        await _context.SaveChangesAsync();
+                        await _context.SaveChangesAsync(userName);
                     }
                     catch (DbUpdateConcurrencyException)
                     {
@@ -168,6 +169,7 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<NationalElection>> PostNationalElection(NationalElection nationalElection)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (nationalElection.Parties != null && nationalElection.Parties.Any())
             {
                 var parties = nationalElection.Parties.ToList();
@@ -176,7 +178,7 @@ namespace Election.API.Controllers
 
                 nationalElection.Parties = null;
                 _context.NationalElections.Add(nationalElection);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
 
                 var SavedElection = _context.NationalElections.FirstOrDefault(x => x.Id == nationalElection.Id);
                 SavedElection.Parties = new List<Party>();
@@ -185,7 +187,7 @@ namespace Election.API.Controllers
                     var partyDB = _context.Parties.FirstOrDefault(x => x.Id == party.Id);
                     SavedElection.Parties.Add(partyDB);
                     _context.Entry(SavedElection).State = EntityState.Modified;
-                    await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync(userName);
                 }
             }
 
@@ -196,6 +198,7 @@ namespace Election.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNationalElection(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var nationalElection = await _context.NationalElections.FindAsync(id);
             if (nationalElection == null)
             {
@@ -203,7 +206,7 @@ namespace Election.API.Controllers
             }
 
             _context.NationalElections.Remove(nationalElection);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return NoContent();
         }

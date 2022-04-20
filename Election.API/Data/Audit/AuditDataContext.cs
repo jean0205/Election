@@ -1,6 +1,12 @@
-﻿using Election.API.Data.Entities;
+﻿using Election.API.Data;
+using Election.API.Data.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Linq;
 
 namespace Election.API.Data.Audit
 {
@@ -8,11 +14,12 @@ namespace Election.API.Data.Audit
     {
         public AuditDataContext(DbContextOptions options) : base(options)
         {
+                       
         }
         public DbSet<Audit> AuditLogs { get; set; }
 
         public virtual async Task<int> SaveChangesAsync(string userId)
-        {
+        {            
 
             OnBeforeSaveChanges(userId);
             var result = await base.SaveChangesAsync();
@@ -40,7 +47,6 @@ namespace Election.API.Data.Audit
                         auditEntry.KeyValues[propertyName] = property.CurrentValue;
                         continue;
                     }
-
                     switch (entry.State)
                     {
                         case EntityState.Added:

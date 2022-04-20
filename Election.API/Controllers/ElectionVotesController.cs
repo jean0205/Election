@@ -10,6 +10,7 @@ using Election.API.Data;
 using Election.API.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
 
 namespace Election.API.Controllers
 {
@@ -76,6 +77,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutElectionVote(int id, ElectionVote electionVote)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (id != electionVote.Id)
             {
                 return BadRequest();
@@ -110,7 +112,7 @@ namespace Election.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -132,6 +134,7 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<ElectionVote>> PostElectionVote(ElectionVote electionVote)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             electionVote.Election = await _context.NationalElections.FindAsync(electionVote.Election.Id);
             electionVote.Voter = await _context.Voters.FindAsync(electionVote.Voter.Id);
             
@@ -147,7 +150,7 @@ namespace Election.API.Controllers
             }
             
             _context.ElectionVotes.Add(electionVote);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return CreatedAtAction("GetElectionVote", new { id = electionVote.Id }, electionVote);
         }
@@ -156,18 +159,16 @@ namespace Election.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteElectionVote(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var electionVote = await _context.ElectionVotes.FindAsync(id);
             if (electionVote == null)
             {
                 return NotFound();
             }
-
             _context.ElectionVotes.Remove(electionVote);
-            await _context.SaveChangesAsync();
-
+            await _context.SaveChangesAsync(userName);
             return NoContent();
         }
-
         private bool ElectionVoteExists(int id)
         {
             return _context.ElectionVotes.Any(e => e.Id == id);

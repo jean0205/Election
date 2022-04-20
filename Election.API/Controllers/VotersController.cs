@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Election.API.Controllers
 {
@@ -101,6 +102,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVoter(int id, Voter voter)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;            
             if (id != voter.Id)
             {
                 return BadRequest();
@@ -110,7 +112,7 @@ namespace Election.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -132,6 +134,7 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Voter>> PostVoter(Voter voter)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (voter.PollingDivision != null)
             {
                 PollingDivision pollingDivision = await _context.PollingDivisions.FirstOrDefaultAsync(p => p.Name == voter.PollingDivision.Name);
@@ -146,7 +149,7 @@ namespace Election.API.Controllers
             }
 
             _context.Voters.Add(voter);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return CreatedAtAction("GetVoter", new { id = voter.Id }, voter);
         }
@@ -154,6 +157,7 @@ namespace Election.API.Controllers
         [HttpPost("Range")]
         public async Task<ActionResult<Voter>> PostVoterList(List<Voter> voters)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             foreach (var voter in voters)
             {
                 if (voter.PollingDivision != null)
@@ -169,13 +173,14 @@ namespace Election.API.Controllers
                 }
             }
             await _context.Voters.AddRangeAsync(voters);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
             return NoContent();
         }
         // DELETE: api/Voters/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVoter(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var voter = await _context.Voters.FindAsync(id);
             if (voter == null)
             {
@@ -183,7 +188,7 @@ namespace Election.API.Controllers
             }
 
             _context.Voters.Remove(voter);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return NoContent();
         }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Election.API.Controllers
 {
@@ -47,6 +48,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPollingDivision(int id, PollingDivision pollingDivision)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (id != pollingDivision.Id)
             {
                 return BadRequest();
@@ -57,7 +59,7 @@ namespace Election.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -79,10 +81,11 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<PollingDivision>> PostPollingDivision(PollingDivision pollingDivision)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var consty= await _context.Constituencies.FirstOrDefaultAsync(c=>c.Id==pollingDivision.Constituency.Id);
             pollingDivision.Constituency = consty;
             _context.PollingDivisions.Add(pollingDivision);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return CreatedAtAction("GetPollingDivision", new { id = pollingDivision.Id }, pollingDivision);
         }
@@ -91,6 +94,7 @@ namespace Election.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePollingDivision(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var pollingDivision = await _context.PollingDivisions.FindAsync(id);
             if (pollingDivision == null)
             {
@@ -98,7 +102,7 @@ namespace Election.API.Controllers
             }
 
             _context.PollingDivisions.Remove(pollingDivision);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return NoContent();
         }

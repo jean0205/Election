@@ -1,4 +1,5 @@
-﻿using Election.API.Enum;
+﻿
+using Election.API.Enum;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
 

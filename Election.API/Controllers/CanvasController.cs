@@ -145,10 +145,11 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Canvas>> PostCanvas(Canvas canvas)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;            
             var canvasType = await _context.CanvasTypes.FirstOrDefaultAsync(c => c.Id == canvas.Type.Id);
             canvas.Type = canvasType;
             _context.Canvas.Add(canvas);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return CreatedAtAction("GetCanvas", new { id = canvas.Id }, canvas);
         }
@@ -157,6 +158,7 @@ namespace Election.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCanvas(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var canvas = await _context.Canvas.FindAsync(id);
             if (canvas == null)
             {
@@ -164,7 +166,7 @@ namespace Election.API.Controllers
             }
 
             _context.Canvas.Remove(canvas);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return NoContent();
         }

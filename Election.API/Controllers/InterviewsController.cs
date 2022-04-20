@@ -125,7 +125,8 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Interview>> PostInterview(Interview interview)
         {
-          
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+
             interview.Interviewer = await _context.Interviewers.FirstOrDefaultAsync(i => i.Id == interview.Interviewer.Id);
             interview.RecorderBy = await _context.Users.FirstOrDefaultAsync(u => u.Id == interview.RecorderBy.Id);
             if (interview.Comment != null)
@@ -137,7 +138,7 @@ namespace Election.API.Controllers
             interview.Voter = _context.Voters.FirstOrDefault(v => v.Id == interview.Voter.Id);
             interview.Canvas = _context.Canvas.FirstOrDefault(c => c.Id == interview.Canvas.Id);
             _context.Interviews.Add(interview);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return CreatedAtAction("GetInterview", new { id = interview.Id }, interview);
         }
@@ -146,6 +147,7 @@ namespace Election.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInterview(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var interview = await _context.Interviews.FindAsync(id);
             if (interview == null)
             {
@@ -153,7 +155,7 @@ namespace Election.API.Controllers
             }
 
             _context.Interviews.Remove(interview);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return NoContent();
         }

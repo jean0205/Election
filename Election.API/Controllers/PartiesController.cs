@@ -11,6 +11,7 @@ using Election.API.Data.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Election.API.Controllers
 {
@@ -52,6 +53,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutParty(int id, Party party)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (id != party.Id)
             {
                 return BadRequest();
@@ -61,7 +63,7 @@ namespace Election.API.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(userName);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -83,8 +85,9 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Party>> PostParty(Party party)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             _context.Parties.Add(party);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return CreatedAtAction("GetParty", new { id = party.Id }, party);
         }
@@ -93,6 +96,7 @@ namespace Election.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteParty(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var party = await _context.Parties.FindAsync(id);
             if (party == null)
             {
@@ -100,7 +104,7 @@ namespace Election.API.Controllers
             }
 
             _context.Parties.Remove(party);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return NoContent();
         }

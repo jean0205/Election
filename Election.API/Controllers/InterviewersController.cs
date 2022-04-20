@@ -70,6 +70,7 @@ namespace Election.API.Controllers
         public async Task<IActionResult> PutInterviewer(int id, Interviewer interviewer)
         {
             string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+
             if (id != interviewer.Id)
             {
                 return BadRequest();
@@ -101,9 +102,9 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Interviewer>> PostInterviewer(Interviewer interviewer)
         {
-           
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             _context.Interviewers.Add(interviewer);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return CreatedAtAction("GetInterviewer", new { id = interviewer.Id }, interviewer);
         }
@@ -112,6 +113,7 @@ namespace Election.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInterviewer(int id)
         {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var interviewer = await _context.Interviewers.FindAsync(id);
             if (interviewer == null)
             {
@@ -119,7 +121,7 @@ namespace Election.API.Controllers
             }
 
             _context.Interviewers.Remove(interviewer);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(userName);
 
             return NoContent();
         }
