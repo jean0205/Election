@@ -1,0 +1,700 @@
+﻿using Constituency.Desktop.Components;
+using Constituency.Desktop.Controls;
+using Constituency.Desktop.Entities;
+using Constituency.Desktop.Helpers;
+using Constituency.Desktop.Models;
+using Microsoft.AppCenter.Crashes;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Reflection;
+
+namespace Constituency.Desktop.Views
+{
+    public partial class Frm_Houses : Form
+    {
+        //Fields
+        private string token = string.Empty;
+
+        //objects
+        User user { get; set; }
+        Voter Voter { get; set; }
+        House House { get; set; }
+
+        WaitFormFunc waitForm = new WaitFormFunc();
+
+        private ObservableCollection<House> HousesList;
+        private List<ConstituencyC> ConstituenciesList;
+        private List<PollingDivision> PollingDivisionsList;
+
+
+        public Frm_Houses()
+        {
+            this.AutoScaleMode = AutoScaleMode.Dpi;
+            InitializeComponent();
+            token = Main.GetInstance().tokenResponse.Token;
+            user = Main.GetInstance().tokenResponse.User;
+        }
+
+        private async void Frm_ElectionVotes_Load(object sender, EventArgs e)
+        {
+            FildsValidations();
+            MandatoriesFilds();
+            UtilRecurrent.LockForm(waitForm, this);
+            await LoadConstituencies();
+            await LoadHouses();
+            UtilRecurrent.UnlockForm(waitForm, this);
+            ibtnUpdate.Visible = false;
+
+        }
+        #region Mandatories and Validations
+
+        private void FildsValidations()
+        {
+            try
+            {
+                //tag=2 para only numbers
+                UtilRecurrent.FindAllControlsIterative(tabPage1, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("2")).ToList().ForEach(x => x.KeyPress += UtilRecurrent.txtOnlyIntegersNumber_KeyPress);
+
+                //tag=3 para only letters
+                UtilRecurrent.FindAllControlsIterative(tabPage1, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("3")).ToList().ForEach(x => x.KeyPress += UtilRecurrent.txtOnlyLetters_KeyPress);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void MandatoriesFilds()
+        {//tag= 1 para campos obligados
+
+            try
+            {
+                UtilRecurrent.FindAllControlsIterative(tabPage1, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1")).ToList().ForEach(x => toolTip1.SetToolTip(x, "Mandatory Field"));
+                UtilRecurrent.FindAllControlsIterative(tabPage1, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1")).ToList().ForEach(x => toolTip1.SetToolTip(x, "Mandatory Field"));
+                toolTip1.SetToolTip(dtpDOB, "Mandatory Field");
+
+
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void FieldsWhite()
+        {
+            try
+            {
+                //todos en blanco antes de comprobar
+                UtilRecurrent.FindAllControlsIterative(tabPage1, "TextBox").Cast<TextBox>().ToList().ForEach(t => t.BackColor = Color.FromKnownColor(KnownColor.Window));
+
+                UtilRecurrent.FindAllControlsIterative(tabPage1, "ComboBox").Cast<ComboBox>().ToList().ForEach(t => t.BackColor = Color.FromKnownColor(KnownColor.Window));
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private bool PaintRequiredVoter()
+        {
+            bool missing = false;
+            try
+            {
+                FieldsWhite();
+                //validando textbox requeridos no vacios
+                if (UtilRecurrent.FindAllControlsIterative(tabPage1, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().Any())
+                {
+                    UtilRecurrent.FindAllControlsIterative(tabPage1, "TextBox").Cast<TextBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && (x.TextLength == 0 || string.IsNullOrWhiteSpace(x.Text))).ToList().ForEach(t => t.BackColor = Color.LightSalmon);
+                    missing = true;
+                }
+                if (UtilRecurrent.FindAllControlsIterative(tabPage1, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && x.Text == string.Empty).ToList().Any())
+                {
+                    UtilRecurrent.FindAllControlsIterative(tabPage1, "ComboBox").Cast<ComboBox>().Where(x => x.Tag != null && x.Tag.ToString().Split(',').ToList().Contains("1") && x.Text == string.Empty).ToList().ForEach(t => t.BackColor = Color.LightSalmon);
+                    missing = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+            return missing;
+        }
+        #endregion
+
+        #region Load Info
+        private async Task<List<string>> LoadUsersRoles(User user)
+        {
+            Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName, token);
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return null;
+            }
+            return (List<string>)response.Result;
+        }
+        private async Task LoadHouses()
+        {
+            try
+            {
+                Response response = await ApiServices.GetListAsync<House>("Houses", token);
+
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+                HousesList = new ObservableCollection<House>((List<House>)response.Result);
+                if (HousesList != null && HousesList.Any())
+                {
+                    RefreshTreeView(HousesList.ToList());
+
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+        private async Task LoadConstituencies()
+        {
+            Response response = await ApiServices.GetListAsync<ConstituencyC>("Constituencies", token);
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return;
+            }
+            ConstituenciesList = new((List<ConstituencyC>)response.Result);
+            if (ConstituenciesList.Any())
+            {
+                cmbConstituency.DataSource = null;
+                cmbConstituency.DataSource = ConstituenciesList;
+                cmbConstituency.ValueMember = "Id";
+                cmbConstituency.DisplayMember = "Name";
+                cmbConstituency.SelectedItem = null;
+            }
+        }
+        private void RefreshTreeView(List<House> houses)
+        {
+            try
+            {
+                tView1.Nodes.Clear();
+                //TreeNode node;
+                List<TreeNode> treeNodes = new List<TreeNode>();
+                List<TreeNode> childNodes = new List<TreeNode>();
+                List<TreeNode> childNodes2 = new List<TreeNode>();
+
+                foreach (ConstituencyC consty in houses.SelectMany(h => h.Voters.Select(v => v.PollingDivision.Constituency).Distinct().ToList()))
+                {
+                    //find the amount of houses that belongs to consty
+
+                    int cant2 = houses.Select(h => h.Voters.Select(v => v.PollingDivision.Constituency).Where(c => c.Id == consty.Id)).Count();
+                    foreach (PollingDivision division in consty.PollingDivisions.Distinct())
+                    {
+                        int cant = houses.Select(h => h.Voters.Select(v => v.PollingDivision.Id == division.Id)).Count();
+
+                        foreach (House house in houses.Select(h => h.Voters.Select(v => v.PollingDivision.Id == division.Id)))
+                        {
+                            TreeNode node2 = new TreeNode(house.Number, 2, 3);
+                            node2.Tag = house.Id;
+                            childNodes2.Add(node2);
+                        }
+
+                        if (childNodes2.Any())
+                        {
+                            childNodes.Add(new TreeNode(division.Name + " [" + cant + "]", 0, 1, childNodes2.ToArray()));
+                            childNodes[childNodes.Count - 1].Tag = division.Id;
+                            childNodes2 = new List<TreeNode>();
+                        }
+                    }
+                    treeNodes.Add(new TreeNode(consty.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
+                    treeNodes[treeNodes.Count - 1].Tag = consty.Id;
+                    childNodes = new List<TreeNode>();
+                }
+                foreach (House house in houses.Where(h => h.Voters != null && h.Voters.Any()))
+                {
+                    TreeNode node2 = new TreeNode(house.Number, 2, 3);
+                    node2.Tag = house.Id;
+                    childNodes2.Add(node2);
+                }
+
+                tView1.Nodes.AddRange(treeNodes.ToArray());
+                tView1.ExpandAll();
+                rjCollapseAll.Checked = true;
+                lblExpand.Text = "Collapse All";
+                tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+                groupBox1.Text = "Election Votes List: ( " + HousesList.Count.ToString("N0") + " )";
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private IEnumerable<TreeNode> CollectAllNodes(TreeNodeCollection nodes)
+        {
+            foreach (TreeNode node in nodes)
+            {
+                yield return node;
+                foreach (var child in CollectAllNodes(node.Nodes))
+                {
+                    yield return child;
+                }
+            }
+        }
+        private void cleanScreen()
+        {
+            try
+            {
+                UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "TextBox").Cast<TextBox>().ToList().ForEach(x => x.Clear());
+                //UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "ComboBox").Cast<ComboBox>().ToList().ForEach(x => x.SelectedIndex = -1);
+                UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "DateTimePicker").Cast<DateTimePicker>().ToList().ForEach(x => x.Value = DateTime.Now.Date);
+
+                cmbConstituency.SelectedIndex = -1;
+                cmbDivision.SelectedIndex = -1;
+                cmbSex.SelectedIndex = -1;
+                Voter = new Voter();
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<House> LoadHouseAsyncById(int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<ElectionVote>("Houses", id.ToString(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    if (response.Message == "Not Found")
+                    {
+                        UtilRecurrent.ErrorMessage(response.Message);
+                        return null;
+                    }
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return null;
+                }
+                return (House)response.Result;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private void tView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            try
+            {
+                if (e.Node != null)
+                {
+                    cleanScreen();
+                    if (NodeLevel(e.Node) == 0)
+                    {
+                        AfterSelectNodeElection((int)e.Node.Tag);
+                    }
+                    if (NodeLevel(e.Node) == 1)
+                    {
+                        AfterSelectNodeVote((int)e.Node.Tag);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void AfterSelectNodeElection(int nodeTag)
+        {
+            FieldsWhite();
+            try
+            {
+                if (nodeTag > 0)
+                {
+                    ibtnSave.Visible = true;
+                    ibtnUpdate.Visible = false;
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async void AfterSelectNodeVote(int nodeTag)
+        {
+            FieldsWhite();
+            try
+            {
+                if (nodeTag > 0)
+                {
+                    House = new();
+                    House = await LoadHouseAsyncById(nodeTag);
+                    ShowHouseInformation();
+                    ibtnSave.Visible = false;
+                    ibtnUpdate.Visible = true;
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void ShowHouseInformation()
+        {
+            try
+            {
+                // Voter = House.Voter;
+                ShowVoterInformation();
+
+                //cmbElection.SelectedValue = ElectionVote.Election.Id;
+                //if (ElectionVote.SupportedParty != null)
+                //{
+                //    cmbISupportedParty.SelectedValue = ElectionVote.SupportedParty.Id;
+                //}
+                //else
+                //{
+                //    cmbISupportedParty.SelectedIndex = -1;
+                //}
+                //txtIOtherComment.Text = ElectionVote.OtherComment;
+                //dtpIDate.Value = ElectionVote.VoteTime;
+                //labelUser.Text = ElectionVote.RecorderBy.FullName;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<Voter> LoadVoterByRegAsync(string route, string Id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<Voter>(route, Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    if (response.Message == "Not Found")
+                    {
+                        UtilRecurrent.ErrorMessage(response.Message);
+                        return null;
+                    }
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return null;
+                }
+                return (Voter)response.Result;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private void ShowVoterInformation()
+        {
+            try
+            {
+                if (Voter.Id > 0)
+                {
+                    List<PropertyInfo> properties = Voter.GetType().GetProperties().ToList();
+                    List<TextBox> VoterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
+                    foreach (TextBox txt in VoterTextBox)
+                    {
+                        if (properties.Where(p => p.GetValue(Voter) != null && p.Name == txt.Name.Replace("txt", string.Empty)).Any())
+                        {
+                            txt.Text = properties.Where(p => p.GetValue(Voter) != null && p.Name == txt.Name.Replace("txt", string.Empty)).First().GetValue(Voter).ToString();
+                        }
+                    }
+                    cmbSex.SelectedItem = Voter.Sex;
+                    dtpDOB.Value = Voter.DOB.HasValue ? (DateTime)Voter.DOB : DateTime.Today;
+                    cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
+                    FillUpdComboboxDivision();
+                    cmbDivision.SelectedValue = Voter.PollingDivision.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void FillUpdComboboxDivision()
+        {
+            try
+            {
+                if (ConstituenciesList.Where(p => p.Id == (int)cmbConstituency.SelectedValue).Select(p => p.PollingDivisions).Any())
+                {
+                    cmbDivision.DataSource = null;
+                    PollingDivisionsList = new List<PollingDivision>();
+                    PollingDivisionsList = ConstituenciesList.Where(p => p.Id == (int)cmbConstituency.SelectedValue).SelectMany(p => p.PollingDivisions).ToList();
+                    cmbDivision.DataSource = PollingDivisionsList;
+                    cmbDivision.ValueMember = "Id";
+                    cmbDivision.DisplayMember = "Name";
+                    cmbDivision.SelectedIndex = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Save update
+        private async void iconButton2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (PaintRequiredVoter())
+                {
+                    UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
+                    return;
+                }
+                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
+                {
+                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
+                    return;
+                }
+                if (await SaveHouse())
+                {
+                    await LoadHouses();
+                }
+
+                if (House != null && House.Id > 0)
+                {
+
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == House.Id);
+                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> SaveHouse()
+        {
+            try
+            {
+                var house = await BuildHouse(null);
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Houses", House, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+
+                House = (House)response.Result;
+                //UtilRecurrent.InformationMessage("Application sucessfully saved", "Application Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+        }
+        private async Task<House> BuildHouse(int? id)
+        {
+            try
+            {
+                House = new();
+                House.Active = true;
+                House.Number = txtNumber.Text;
+                House.NumberOfPersons = int.Parse(txtNumberOfPersons.Text);
+                House.Latitude = double.Parse(txtLatitude.Text);
+                House.Longitude = double.Parse(txtLongitue.Text);
+                if (id != null)
+                {
+                    House.Id = (int)id;
+                }
+                return House;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+
+        private async void ibtnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //TODO valorar si debo crear varios gets en los controladores unos q carguen todas las relaciones y otros
+                //que solo cargen la entidad principal como aqui en interview que estoy leyendo el voter con las interviews y despues tengo que hacerlas null
+                if (tView1.SelectedNode == null || (int)tView1.SelectedNode.Tag == 0)
+                {
+                    return;
+                }
+                if (PaintRequiredVoter())
+                {
+                    UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
+                    return;
+                }
+
+                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
+                {
+                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
+                    return;
+                }
+                if (await UpdateElectionVote((int)tView1.SelectedNode.Tag))
+                {
+                    await LoadHouses();
+                }
+                if (House != null && House.Id > 0)
+                {
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == House.Id);
+                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> UpdateElectionVote(int? id)
+        {
+            try
+            {
+
+                var electionVote = await BuildHouse(id);
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("ElectionVotes", electionVote, electionVote.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+        }
+        #endregion
+
+
+        private async void txtReg_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)13 && ((TextBox)sender).TextLength > 0)
+                {
+                    var vot = await LoadVoterByRegAsync("Voters/FindRegistration", ((TextBox)sender).Text);
+
+                    if (vot != null)
+                    {
+                        Voter = vot;
+                        ShowVoterInformation();
+                    }
+                    else
+                    {
+                        cleanScreen();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        public int NodeLevel(TreeNode node)
+        {
+            int level = 0;
+            while ((node = node.Parent) != null) level++;
+            return level;
+        }
+
+
+        private void cmbElection_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                //cmbISupportedParty.DataSource = null;
+                //if (cmbElection.SelectedItem != null && (cmbElection.SelectedItem as NationalElection).Parties != null && (cmbElection.SelectedItem as NationalElection).Parties.Any())
+                //{
+                //    var parties = (cmbElection.SelectedItem as NationalElection).Parties;
+                //    cmbISupportedParty.DataSource = null;
+                //    cmbISupportedParty.DataSource = parties;
+                //    cmbISupportedParty.ValueMember = "Id";
+                //    cmbISupportedParty.DisplayMember = "Name";
+                //    cmbISupportedParty.SelectedItem = null;
+                //}
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void rjCollapseAll_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (((RJToggleButton)sender).Checked)
+                {
+                    tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+                    tView1.ExpandAll();
+                    lblExpand.Text = "Collapse All";
+                }
+                else
+                {
+                    tView1.CollapseAll();
+                    tView1.Font = new Font("Courier New", 12, FontStyle.Regular);
+                    tView1.SelectedNode = tView1.Nodes[0];
+                    lblExpand.Text = "Expand All";
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+        private async void ibtnRefresh_Click(object sender, EventArgs e)
+        {
+            await LoadHouses();
+        }
+    }
+}

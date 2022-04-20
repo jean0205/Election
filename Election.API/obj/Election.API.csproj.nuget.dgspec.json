@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jcsoto\\Source\\Repos\\Election2.0\\Election.API\\Election.API.csproj": {}
+    "C:\\Users\\jcsoto\\source\\repos\\Election2.0\\Election.API\\Election.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jcsoto\\Source\\Repos\\Election2.0\\Election.API\\Election.API.csproj": {
+    "C:\\Users\\jcsoto\\source\\repos\\Election2.0\\Election.API\\Election.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jcsoto\\Source\\Repos\\Election2.0\\Election.API\\Election.API.csproj",
+        "projectUniqueName": "C:\\Users\\jcsoto\\source\\repos\\Election2.0\\Election.API\\Election.API.csproj",
         "projectName": "Election.API",
-        "projectPath": "C:\\Users\\jcsoto\\Source\\Repos\\Election2.0\\Election.API\\Election.API.csproj",
+        "projectPath": "C:\\Users\\jcsoto\\source\\repos\\Election2.0\\Election.API\\Election.API.csproj",
         "packagesPath": "C:\\Users\\jcsoto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jcsoto\\Source\\Repos\\Election2.0\\Election.API\\obj\\",
+        "outputPath": "C:\\Users\\jcsoto\\source\\repos\\Election2.0\\Election.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
