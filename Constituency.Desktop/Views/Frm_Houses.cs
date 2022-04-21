@@ -215,14 +215,24 @@ namespace Constituency.Desktop.Views
                     treeNodes[treeNodes.Count - 1].Tag = consty.Id;
                     childNodes = new List<TreeNode>();
                 }
-                foreach (House house in houses.Where(h => h.Voters != null && h.Voters.Any()))
+                List<TreeNode> treeNodesNoVoter = new List<TreeNode>();
+                List<TreeNode> childNodesNoVoter = new List<TreeNode>();                
+                foreach (House house in houses.Where(h => h.Voters == null || !h.Voters.Any()))
                 {
                     TreeNode node2 = new TreeNode(house.Number, 2, 3);
                     node2.Tag = house.Id;
-                    childNodes2.Add(node2);
+                    childNodesNoVoter.Add(node2);
+                   
                 }
+                treeNodesNoVoter.Add(new TreeNode("No Voters Hosues", 0, 1, childNodesNoVoter.ToArray()));
 
+                
                 tView1.Nodes.AddRange(treeNodes.ToArray());
+                
+                if (treeNodesNoVoter.Any())
+                {
+                    tView1.Nodes.AddRange(treeNodesNoVoter.ToArray());
+                }
                 tView1.ExpandAll();
                 rjCollapseAll.Checked = true;
                 lblExpand.Text = "Collapse All";
@@ -257,6 +267,7 @@ namespace Constituency.Desktop.Views
                 cmbDivision.SelectedIndex = -1;
                 cmbSex.SelectedIndex = -1;
                 Voter = new Voter();
+                tableLayoutPanel6.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -269,7 +280,7 @@ namespace Constituency.Desktop.Views
             try
             {
                 UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.FindAsync<ElectionVote>("Houses", id.ToString(), token);
+                Response response = await ApiServices.FindAsync<House>("Houses", id.ToString(), token);
                 UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
@@ -298,11 +309,11 @@ namespace Constituency.Desktop.Views
                 if (e.Node != null)
                 {
                     cleanScreen();
-                    if (NodeLevel(e.Node) == 0)
+                    if (NodeLevel(e.Node) == 0 && e.Node.Tag!=null)
                     {
                         AfterSelectNodeElection((int)e.Node.Tag);
                     }
-                    if (NodeLevel(e.Node) == 1)
+                    if (NodeLevel(e.Node) == 1 && e.Node.Tag != null)
                     {
                         AfterSelectNodeVote((int)e.Node.Tag);
                     }
@@ -363,21 +374,12 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                // Voter = House.Voter;
-                ShowVoterInformation();
-
-                //cmbElection.SelectedValue = ElectionVote.Election.Id;
-                //if (ElectionVote.SupportedParty != null)
-                //{
-                //    cmbISupportedParty.SelectedValue = ElectionVote.SupportedParty.Id;
-                //}
-                //else
-                //{
-                //    cmbISupportedParty.SelectedIndex = -1;
-                //}
-                //txtIOtherComment.Text = ElectionVote.OtherComment;
-                //dtpIDate.Value = ElectionVote.VoteTime;
-                //labelUser.Text = ElectionVote.RecorderBy.FullName;
+                txtNumber.Text = House.Number;
+                txtNumberOfPersons.Text = House.NumberOfPersons.ToString();
+                txtLongitue.Text = House.Longitude.ToString();
+                txtLatitude.Text = House.Latitude.ToString();
+                tableLayoutPanel6.Enabled = true;
+                //TODO MOSTRAS EN EL DATAGRID LOS VOTERSQ PERTENECEN A ESE HOUSE
             }
             catch (Exception ex)
             {
@@ -695,6 +697,11 @@ namespace Constituency.Desktop.Views
         private async void ibtnRefresh_Click(object sender, EventArgs e)
         {
             await LoadHouses();
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            //TODO MODIFICAR EL HOUSEPARA AGREGARLE EL VOTER Y VOLVER A LEER LAS HOUSES COMO EN LO DEMAS
         }
     }
 }

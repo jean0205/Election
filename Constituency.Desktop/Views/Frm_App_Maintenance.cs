@@ -31,7 +31,7 @@ namespace Constituency.Desktop.Views
             DGVFormats();
             FildsValidations();
             await LoadInfo();
-            tabControl1.TabPages.RemoveAt(8);
+           // tabControl1.TabPages.RemoveAt(8);
 
         }
         public async Task LoadInfo()
@@ -799,6 +799,7 @@ namespace Constituency.Desktop.Views
 
                 foreach (CanvasType canvasType in canvasTypes)
                 {
+                   
                     childNodes.Add(new TreeNode(canvasType.Type, 2, 1));
                     childNodes[childNodes.Count - 1].Tag = canvasType.Id;
                     addContextMenu(childNodes[childNodes.Count - 1], "Delete Canvas Type");
@@ -1400,14 +1401,15 @@ namespace Constituency.Desktop.Views
         }
         private Canvas BuildCanvas()
         {
-            return new Canvas()
+            var canva= new Canvas()
             {
                 Active = rjCanvasActive.Checked,
                 Open = rjCanvasOpen.Checked,
                 Name = txtCanvasName.Text,
-                Type = CanvasTypesList.Where(u => u.Id == (int)cmbCanvasTypes.SelectedValue).FirstOrDefault(),
-                Description = txtCanvasDescription.Text.ToUpper()
+                Type = CanvasTypesList.Where(u => u.Id == (int)cmbCanvasTypes.SelectedValue).FirstOrDefault(),                Description = txtCanvasDescription.Text.ToUpper()
             };
+            canva.Type.Canvas = null;
+            return canva;
         }
         private async Task DeleteCanvas(int id)
         {

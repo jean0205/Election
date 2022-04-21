@@ -422,7 +422,7 @@
             this.tableLayoutPanel16.Name = "tableLayoutPanel16";
             this.tableLayoutPanel16.RowCount = 1;
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(886, 33);
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(886, 34);
             this.tableLayoutPanel16.TabIndex = 9;
             // 
             // label14
@@ -854,6 +854,7 @@
             this.iconButton1.Text = "Save";
             this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // tableLayoutPanel14
             // 
