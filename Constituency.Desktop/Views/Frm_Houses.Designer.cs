@@ -96,7 +96,7 @@
             this.txtLatitude = new System.Windows.Forms.TextBox();
             this.txtLongitue = new System.Windows.Forms.TextBox();
             this.dgvInterviews = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tpanleHouse = new System.Windows.Forms.TableLayoutPanel();
             this.label20 = new System.Windows.Forms.Label();
             this.txtNumber = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -126,7 +126,7 @@
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInterviews)).BeginInit();
-            this.tableLayoutPanel5.SuspendLayout();
+            this.tpanleHouse.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -456,7 +456,7 @@
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(316, 29);
             this.cmbDivision.TabIndex = 34;
-            this.cmbDivision.Tag = "1";
+            this.cmbDivision.Tag = "";
             // 
             // cmbConstituency
             // 
@@ -467,7 +467,7 @@
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(310, 29);
             this.cmbConstituency.TabIndex = 33;
-            this.cmbConstituency.Tag = "1";
+            this.cmbConstituency.Tag = "";
             // 
             // tableLayoutPanel15
             // 
@@ -830,7 +830,7 @@
             this.txtReg.Name = "txtReg";
             this.txtReg.Size = new System.Drawing.Size(250, 29);
             this.txtReg.TabIndex = 17;
-            this.txtReg.Tag = "1,2";
+            this.txtReg.Tag = "2";
             this.txtReg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReg_KeyPress);
             // 
             // iconButton1
@@ -929,7 +929,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox2.Controls.Add(this.tableLayoutPanel5);
+            this.groupBox2.Controls.Add(this.tpanleHouse);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(3, 363);
             this.groupBox2.Name = "groupBox2";
@@ -1023,25 +1023,25 @@
             this.dgvInterviews.Size = new System.Drawing.Size(714, 160);
             this.dgvInterviews.TabIndex = 40;
             // 
-            // tableLayoutPanel5
+            // tpanleHouse
             // 
-            this.tableLayoutPanel5.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel5.ColumnCount = 4;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.58559F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.41441F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 182F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel5.Controls.Add(this.label20, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.txtNumber, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.txtNumberOfPersons, 3, 0);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 25);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 1;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(880, 35);
-            this.tableLayoutPanel5.TabIndex = 10;
+            this.tpanleHouse.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tpanleHouse.ColumnCount = 4;
+            this.tpanleHouse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.58559F));
+            this.tpanleHouse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.41441F));
+            this.tpanleHouse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 182F));
+            this.tpanleHouse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tpanleHouse.Controls.Add(this.label20, 0, 0);
+            this.tpanleHouse.Controls.Add(this.txtNumber, 0, 0);
+            this.tpanleHouse.Controls.Add(this.label5, 0, 0);
+            this.tpanleHouse.Controls.Add(this.txtNumberOfPersons, 3, 0);
+            this.tpanleHouse.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tpanleHouse.Location = new System.Drawing.Point(3, 25);
+            this.tpanleHouse.Name = "tpanleHouse";
+            this.tpanleHouse.RowCount = 1;
+            this.tpanleHouse.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tpanleHouse.Size = new System.Drawing.Size(880, 35);
+            this.tpanleHouse.TabIndex = 10;
             // 
             // label20
             // 
@@ -1192,8 +1192,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInterviews)).EndInit();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
+            this.tpanleHouse.ResumeLayout(false);
+            this.tpanleHouse.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1261,7 +1261,7 @@
         private Label label8;
         private Label label16;
         private Label label17;
-        private TableLayoutPanel tableLayoutPanel5;
+        private TableLayoutPanel tpanleHouse;
         private Label label5;
         private Panel panel1;
        

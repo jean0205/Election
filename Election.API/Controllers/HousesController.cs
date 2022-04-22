@@ -33,7 +33,7 @@ namespace Election.API.Controllers
                 .Include(h => h.Voters)
                 .ThenInclude(h => h.PollingDivision)
                 .ThenInclude(h=>h.Constituency)
-                
+                .ThenInclude(h => h.PollingDivisions)
                 .ToListAsync();
         }
 
@@ -61,8 +61,11 @@ namespace Election.API.Controllers
             {
                 return BadRequest();
             }
-
-            _context.Entry(house).State = EntityState.Modified;
+            var houseDB = await _context.Houses
+                .Include(h => h.Voters)
+                .FirstOrDefaultAsync(h => h.Id == id);
+            houseDB.Voters.Add(_context.Voters.FirstOrDefault(v => v.Id == house.Voters.FirstOrDefault().Id));
+            _context.Entry(houseDB).State = EntityState.Modified;
 
             try
             {

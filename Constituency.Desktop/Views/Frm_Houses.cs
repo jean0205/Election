@@ -93,7 +93,7 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private bool PaintRequiredVoter()
+        private bool PaintRequired()
         {
             bool missing = false;
             try
@@ -182,22 +182,27 @@ namespace Constituency.Desktop.Views
         {
             try
             {
+                //todo me esta mostrandotodas las constituencies incluso sino hay casa en ellas arreglar esto
                 tView1.Nodes.Clear();
                 //TreeNode node;
                 List<TreeNode> treeNodes = new List<TreeNode>();
                 List<TreeNode> childNodes = new List<TreeNode>();
                 List<TreeNode> childNodes2 = new List<TreeNode>();
 
-                foreach (ConstituencyC consty in houses.SelectMany(h => h.Voters.Select(v => v.PollingDivision.Constituency).Distinct().ToList()))
+                foreach (ConstituencyC consty in ConstituenciesList)
                 {
                     //find the amount of houses that belongs to consty
 
                     int cant2 = houses.Select(h => h.Voters.Select(v => v.PollingDivision.Constituency).Where(c => c.Id == consty.Id)).Count();
-                    foreach (PollingDivision division in consty.PollingDivisions.Distinct())
+                    foreach (PollingDivision division in consty.PollingDivisions)
                     {
                         int cant = houses.Select(h => h.Voters.Select(v => v.PollingDivision.Id == division.Id)).Count();
+                        //find the houses with voters in the same division 
+                        List<House> houses2 = houses.Where(h => h.Voters.Where(v => v.PollingDivision.Id == division.Id).Any()).ToList();
+                        //find the houses with voters in the same division that division
 
-                        foreach (House house in houses.Select(h => h.Voters.Select(v => v.PollingDivision.Id == division.Id)))
+
+                        foreach (House house in houses.Where(h => h.Voters.Where(v => v.PollingDivision.Id == division.Id).Any()).ToList())
                         {
                             TreeNode node2 = new TreeNode(house.Number, 2, 3);
                             node2.Tag = house.Id;
@@ -225,8 +230,9 @@ namespace Constituency.Desktop.Views
                    
                 }
                 treeNodesNoVoter.Add(new TreeNode("No Voters Hosues", 0, 1, childNodesNoVoter.ToArray()));
+                treeNodesNoVoter[treeNodesNoVoter.Count - 1].Tag = 0;
 
-                
+
                 tView1.Nodes.AddRange(treeNodes.ToArray());
                 
                 if (treeNodesNoVoter.Any())
@@ -244,6 +250,77 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
+        //private void RefreshTreeView(List<House> houses)
+        //{
+        //    try
+        //    {
+        //        tView1.Nodes.Clear();
+        //        //TreeNode node;
+        //        List<TreeNode> treeNodes = new List<TreeNode>();
+        //        List<TreeNode> childNodes = new List<TreeNode>();
+        //        List<TreeNode> childNodes2 = new List<TreeNode>();
+
+        //        foreach (ConstituencyC consty in houses.SelectMany(h => h.Voters.Select(v => v.PollingDivision.Constituency).Distinct().ToList()))
+        //        {
+        //            //find the amount of houses that belongs to consty
+
+        //            int cant2 = houses.Select(h => h.Voters.Select(v => v.PollingDivision.Constituency).Where(c => c.Id == consty.Id)).Count();
+        //            foreach (PollingDivision division in consty.PollingDivisions.Distinct())
+        //            {
+        //                int cant = houses.Select(h => h.Voters.Select(v => v.PollingDivision.Id == division.Id)).Count();
+        //                //find the houses with voters in the same division 
+        //                List<House> houses2 = houses.Where(h => h.Voters.Where(v => v.PollingDivision.Id == division.Id).Any()).ToList();
+        //                //find the houses with voters in the same division that division
+
+
+        //                foreach (House house in houses.Where(h => h.Voters.Where(v => v.PollingDivision.Id == division.Id).Any()).ToList())
+        //                {
+        //                    TreeNode node2 = new TreeNode(house.Number, 2, 3);
+        //                    node2.Tag = house.Id;
+        //                    childNodes2.Add(node2);
+        //                }
+
+        //                if (childNodes2.Any())
+        //                {
+        //                    childNodes.Add(new TreeNode(division.Name + " [" + cant + "]", 0, 1, childNodes2.ToArray()));
+        //                    childNodes[childNodes.Count - 1].Tag = division.Id;
+        //                    childNodes2 = new List<TreeNode>();
+        //                }
+        //            }
+        //            treeNodes.Add(new TreeNode(consty.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
+        //            treeNodes[treeNodes.Count - 1].Tag = consty.Id;
+        //            childNodes = new List<TreeNode>();
+        //        }
+        //        List<TreeNode> treeNodesNoVoter = new List<TreeNode>();
+        //        List<TreeNode> childNodesNoVoter = new List<TreeNode>();
+        //        foreach (House house in houses.Where(h => h.Voters == null || !h.Voters.Any()))
+        //        {
+        //            TreeNode node2 = new TreeNode(house.Number, 2, 3);
+        //            node2.Tag = house.Id;
+        //            childNodesNoVoter.Add(node2);
+
+        //        }
+        //        treeNodesNoVoter.Add(new TreeNode("No Voters Hosues", 0, 1, childNodesNoVoter.ToArray()));
+        //        treeNodesNoVoter[treeNodesNoVoter.Count - 1].Tag = 0;
+
+
+        //        tView1.Nodes.AddRange(treeNodes.ToArray());
+
+        //        if (treeNodesNoVoter.Any())
+        //        {
+        //            tView1.Nodes.AddRange(treeNodesNoVoter.ToArray());
+        //        }
+        //        tView1.ExpandAll();
+        //        rjCollapseAll.Checked = true;
+        //        lblExpand.Text = "Collapse All";
+        //        tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+        //        groupBox1.Text = "Election Votes List: ( " + HousesList.Count.ToString("N0") + " )";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+        //    }
+        //}
         private IEnumerable<TreeNode> CollectAllNodes(TreeNodeCollection nodes)
         {
             foreach (TreeNode node in nodes)
@@ -470,7 +547,7 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                if (PaintRequiredVoter())
+                if (PaintRequired())
                 {
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
@@ -553,24 +630,18 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                //TODO valorar si debo crear varios gets en los controladores unos q carguen todas las relaciones y otros
-                //que solo cargen la entidad principal como aqui en interview que estoy leyendo el voter con las interviews y despues tengo que hacerlas null
-                if (tView1.SelectedNode == null || (int)tView1.SelectedNode.Tag == 0)
+                
+                if (tView1.SelectedNode == null || tView1.SelectedNode.Tag==null ||(int)tView1.SelectedNode.Tag == 0)
                 {
                     return;
                 }
-                if (PaintRequiredVoter())
+                if (PaintRequired())
                 {
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
                 }
-
-                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
-                {
-                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
-                    return;
-                }
-                if (await UpdateElectionVote((int)tView1.SelectedNode.Tag))
+               
+                if (await UpdateHouse((int)tView1.SelectedNode.Tag))
                 {
                     await LoadHouses();
                 }
@@ -585,14 +656,43 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private async Task<bool> UpdateElectionVote(int? id)
+        private async Task<bool> UpdateHouse(int? id)
         {
             try
             {
 
-                var electionVote = await BuildHouse(id);
+                var house = await BuildHouse(id);
                 UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.PutAsync("ElectionVotes", electionVote, electionVote.Id, token);
+                Response response = await ApiServices.PutAsync("Houses", house, house.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+        }
+        private async Task<bool> AddHouseVoter(int? id)
+        {
+            try
+            {
+                House.Voters = new List<Voter>
+                {
+                    Voter
+                };
+                
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("Houses", House, House.Id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
 
                 UtilRecurrent.UnlockForm(waitForm, this);
@@ -617,7 +717,7 @@ namespace Constituency.Desktop.Views
         private async void txtReg_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
-            {
+            {//TODO SOLO CUANDO TENGA UN VOTANTE ACTIVAR ELBOTON DE ADICCIONAR A LA CASA
                 if (e.KeyChar == (char)13 && ((TextBox)sender).TextLength > 0)
                 {
                     var vot = await LoadVoterByRegAsync("Voters/FindRegistration", ((TextBox)sender).Text);
@@ -699,9 +799,28 @@ namespace Constituency.Desktop.Views
             await LoadHouses();
         }
 
-        private void iconButton1_Click(object sender, EventArgs e)
+        private async void iconButton1_Click(object sender, EventArgs e)
         {
             //TODO MODIFICAR EL HOUSEPARA AGREGARLE EL VOTER Y VOLVER A LEER LAS HOUSES COMO EN LO DEMAS
+            try
+            {
+               
+
+                if (await AddHouseVoter((int)tView1.SelectedNode.Tag))
+                {
+                    await LoadHouses();
+                }
+                if (House != null && House.Id > 0)
+                {
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == House.Id);
+                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
         }
     }
 }
