@@ -186,6 +186,10 @@
             this.imgListTreeView.Images.SetKeyName(1, "customers-icon-35912 (1).png");
             this.imgListTreeView.Images.SetKeyName(2, "person-icon-1680.png");
             this.imgListTreeView.Images.SetKeyName(3, "human-icon-png-1906.png");
+            this.imgListTreeView.Images.SetKeyName(4, "bank-icon-5969 (1).png");
+            this.imgListTreeView.Images.SetKeyName(5, "credit-card-icon-png-4424.png");
+            this.imgListTreeView.Images.SetKeyName(6, "Applicants.png");
+            this.imgListTreeView.Images.SetKeyName(7, "applicantsSelected.png");
             // 
             // tableLayoutPanel49
             // 
@@ -1046,7 +1050,6 @@
         private ToolTip toolTip1;
         private FontAwesome.Sharp.IconButton ibtnUpdate;
         private FontAwesome.Sharp.IconButton ibtnSave;
-        private ImageList imgListTreeView;
         private FontAwesome.Sharp.IconButton iconButton1;
         private TableLayoutPanel tableLayoutPanel1;
         private GroupBox groupBox2;
@@ -1061,5 +1064,6 @@
         private Label label20;
         private TextBox txtNumber;
         private Panel panel2;
+        private ImageList imgListTreeView;
     }
 }

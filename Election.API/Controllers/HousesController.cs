@@ -41,7 +41,13 @@ namespace Election.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<House>> GetHouse(int id)
         {
-            var house = await _context.Houses.FindAsync(id);
+            var house = await _context.Houses
+                .Include(h => h.Voters)
+                .ThenInclude(h=>h.Interviews)
+                .Include(h => h.Voters)
+                .ThenInclude(h => h.PollingDivision)
+                .ThenInclude(h => h.Constituency)                
+                .FirstOrDefaultAsync(h => h.Id == id);
 
             if (house == null)
             {
@@ -64,9 +70,15 @@ namespace Election.API.Controllers
             var houseDB = await _context.Houses
                 .Include(h => h.Voters)
                 .FirstOrDefaultAsync(h => h.Id == id);
-            houseDB.Voters.Add(_context.Voters.FirstOrDefault(v => v.Id == house.Voters.FirstOrDefault().Id));
+            if (house.Voters != null)
+            {
+                houseDB.Voters.Add(_context.Voters.FirstOrDefault(v => v.Id == house.Voters.FirstOrDefault().Id));
+            }
+            houseDB.Number = house.Number;
+            houseDB.NumberOfPersons = house.NumberOfPersons;
+            houseDB.Latitude = house.Latitude;
+            houseDB.Longitude = house.Longitude;
             _context.Entry(houseDB).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
