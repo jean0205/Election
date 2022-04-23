@@ -1,8 +1,11 @@
-﻿using Constituency.Desktop.Components;
+﻿using CefSharp;
+using CefSharp.WinForms;
+using Constituency.Desktop.Components;
 using Constituency.Desktop.Controls;
 using Constituency.Desktop.Entities;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
+using Constituency.Desktop.Properties;
 using Microsoft.AppCenter.Crashes;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -25,20 +28,34 @@ namespace Constituency.Desktop.Views
         private ObservableCollection<House> HousesList;
         private List<ConstituencyC> ConstituenciesList;
         private List<PollingDivision> PollingDivisionsList;
-
+        ChromiumWebBrowser browser;
 
         public Frm_Houses()
         {
             this.AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
+            InitializeChromium();
             token = Main.GetInstance().tokenResponse.Token;
             user = Main.GetInstance().tokenResponse.User;
+        }
+        public void InitializeChromium()
+        {
+            CefSettings settings = new CefSettings();
+            if (!Cef.IsInitialized)
+            {
+                Cef.Initialize(settings);
+            }
+
+            browser = new ChromiumWebBrowser("about:blank");
+            this.panel2.Controls.Add(browser);
+            browser.Dock = DockStyle.Fill;
         }
 
         private async void Frm_ElectionVotes_Load(object sender, EventArgs e)
         {
             FildsValidations();
             MandatoriesFilds();
+            DGVFormats();
             UtilRecurrent.LockForm(waitForm, this);
             await LoadConstituencies();
             await LoadHouses();
@@ -47,7 +64,45 @@ namespace Constituency.Desktop.Views
 
         }
         #region Mandatories and Validations
+        private void DGVFormats()
+        {//tag= 1 para campos obligados
 
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DefaultCellStyle.BackColor = Color.Beige);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.RowHeadersVisible = false);
+            UtilRecurrent.addBottomColumns(dgvIVoters, "DeleteCol", "Delete");
+            dgvIVoters.Columns[0].Frozen = true;
+
+        }
+        private void dgv1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            try
+            {
+                DataGridView senderGrid = (DataGridView)sender;
+                if (e.RowIndex < 0)
+                {
+                    return;
+                }
+                if (e.ColumnIndex >= 0)
+                {
+                    if (senderGrid.Columns[e.ColumnIndex].Name == "DeleteCol")
+                    {
+                        e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                        var w = Resources.sto.Width;
+                        var h = Resources.sto.Height;
+                        int x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                        int y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+                        e.Graphics.DrawImage(Resources.sto, new Rectangle(x, y, w, h));
+                        e.Handled = true;
+                    }                   
+                }
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }        
         private void FildsValidations()
         {
             try
@@ -182,7 +237,7 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                //todo me esta mostrandotodas las constituencies incluso sino hay casa en ellas arreglar esto
+                //todo me esta mostrando todas las constituencies incluso sino hay casa en ellas arreglar esto
                 tView1.Nodes.Clear();
                 //TreeNode node;
                 List<TreeNode> treeNodes = new List<TreeNode>();
@@ -191,50 +246,40 @@ namespace Constituency.Desktop.Views
 
                 foreach (ConstituencyC consty in ConstituenciesList)
                 {
-                    //find the amount of houses that belongs to consty
-
                     int cant2 = houses.Select(h => h.Voters.Select(v => v.PollingDivision.Constituency).Where(c => c.Id == consty.Id)).Count();
                     foreach (PollingDivision division in consty.PollingDivisions)
                     {
-                        int cant = houses.Select(h => h.Voters.Select(v => v.PollingDivision.Id == division.Id)).Count();
-                        //find the houses with voters in the same division 
-                        List<House> houses2 = houses.Where(h => h.Voters.Where(v => v.PollingDivision.Id == division.Id).Any()).ToList();
-                        //find the houses with voters in the same division that division
-
-
                         foreach (House house in houses.Where(h => h.Voters.Where(v => v.PollingDivision.Id == division.Id).Any()).ToList())
                         {
                             TreeNode node2 = new TreeNode(house.Number, 2, 3);
                             node2.Tag = house.Id;
                             childNodes2.Add(node2);
                         }
-
                         if (childNodes2.Any())
                         {
-                            childNodes.Add(new TreeNode(division.Name + " [" + cant + "]", 0, 1, childNodes2.ToArray()));
+                            childNodes.Add(new TreeNode(division.Name + " [" + childNodes2.Count + "]", 0, 1, childNodes2.ToArray()));
                             childNodes[childNodes.Count - 1].Tag = division.Id;
                             childNodes2 = new List<TreeNode>();
                         }
                     }
-                    treeNodes.Add(new TreeNode(consty.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
-                    treeNodes[treeNodes.Count - 1].Tag = consty.Id;
-                    childNodes = new List<TreeNode>();
+                    if (childNodes.Any())
+                    {
+                        treeNodes.Add(new TreeNode(consty.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
+                        treeNodes[treeNodes.Count - 1].Tag = consty.Id;
+                        childNodes = new List<TreeNode>();
+                    }
                 }
                 List<TreeNode> treeNodesNoVoter = new List<TreeNode>();
-                List<TreeNode> childNodesNoVoter = new List<TreeNode>();                
+                List<TreeNode> childNodesNoVoter = new List<TreeNode>();
                 foreach (House house in houses.Where(h => h.Voters == null || !h.Voters.Any()))
                 {
                     TreeNode node2 = new TreeNode(house.Number, 2, 3);
                     node2.Tag = house.Id;
                     childNodesNoVoter.Add(node2);
-                   
                 }
                 treeNodesNoVoter.Add(new TreeNode("No Voters Hosues", 0, 1, childNodesNoVoter.ToArray()));
-                treeNodesNoVoter[treeNodesNoVoter.Count - 1].Tag = 0;
-
-
+                treeNodesNoVoter[treeNodesNoVoter.Count - 1].Tag = int.MaxValue;
                 tView1.Nodes.AddRange(treeNodes.ToArray());
-                
                 if (treeNodesNoVoter.Any())
                 {
                     tView1.Nodes.AddRange(treeNodesNoVoter.ToArray());
@@ -345,6 +390,8 @@ namespace Constituency.Desktop.Views
                 cmbSex.SelectedIndex = -1;
                 Voter = new Voter();
                 tableLayoutPanel6.Enabled = false;
+                dgvIVoters.DataSource = null;               
+                browser.Load("about:blank");
             }
             catch (Exception ex)
             {
@@ -385,15 +432,22 @@ namespace Constituency.Desktop.Views
             {
                 if (e.Node != null)
                 {
+
                     cleanScreen();
-                    if (NodeLevel(e.Node) == 0 && e.Node.Tag!=null)
+                    if (NodeLevel(e.Node) == 2 || (NodeLevel(e.Node) == 1 && (int)e.Node.Parent.Tag == int.MaxValue))
                     {
-                        AfterSelectNodeElection((int)e.Node.Tag);
+                        AfterSelectNodeHouse((int)e.Node.Tag);
                     }
-                    if (NodeLevel(e.Node) == 1 && e.Node.Tag != null)
+                    if (NodeLevel(e.Node) == 0 && e.Node.Tag != null)
                     {
-                        AfterSelectNodeVote((int)e.Node.Tag);
+                        AfterSelectNodeConstituency((int)e.Node.Tag);
                     }
+                    if (NodeLevel(e.Node) == 1 && (int)e.Node.Parent.Tag < int.MaxValue)
+                    {
+                        AfterSelectNodeConstituency((int)e.Node.Tag);
+
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -402,12 +456,12 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private void AfterSelectNodeElection(int nodeTag)
+        private void AfterSelectNodeConstituency(int nodeTag)
         {
             FieldsWhite();
             try
             {
-                if (nodeTag > 0)
+                if (nodeTag >= 0)
                 {
                     ibtnSave.Visible = true;
                     ibtnUpdate.Visible = false;
@@ -423,7 +477,7 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private async void AfterSelectNodeVote(int nodeTag)
+        private async void AfterSelectNodeHouse(int nodeTag)
         {
             FieldsWhite();
             try
@@ -456,12 +510,48 @@ namespace Constituency.Desktop.Views
                 txtLongitue.Text = House.Longitude.ToString();
                 txtLatitude.Text = House.Latitude.ToString();
                 tableLayoutPanel6.Enabled = true;
-                //TODO MOSTRAS EN EL DATAGRID LOS VOTERSQ PERTENECEN A ESE HOUSE
+                ShowHouseInGoogleMap();
+                if (House.Voters == null)
+                {
+                    return;
+                }
+                if (!House.Voters.Any())
+                {
+                    return;
+                }
+                
+                dgvIVoters.DataSource = House.Voters.Select(x => new
+                {
+                    x.Reg,
+                    x.FullName,
+                    x.Sex,
+                    x.Address,
+                    Contact = x.Mobile1 + (x.Mobile1 == "" ? "" : "<>") + x.Mobile2 + (x.Mobile2 == "" ? "" : "<>") + x.HomePhone + (x.HomePhone == "" ? "" : "<>") + x.WorkPhone,
+                    x.Email,
+                    Interviews = x.Interviews.Count
+                }).ToList();               
             }
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void ShowHouseInGoogleMap()
+        {
+            try
+            {
+                if (House != null)
+                {
+                    string url = "https://www.google.com/maps/search/?api=1&query=" + House.Latitude + "," + House.Longitude;
+                    browser.Load(url);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+
             }
         }
         private async Task<Voter> LoadVoterByRegAsync(string route, string Id)
@@ -552,21 +642,13 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
                 }
-                if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
-                {
-                    UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
-                    return;
-                }
                 if (await SaveHouse())
                 {
                     await LoadHouses();
                 }
-
                 if (House != null && House.Id > 0)
                 {
-
                     tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == House.Id);
-                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
                 }
             }
             catch (Exception ex)
@@ -583,13 +665,11 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PostAsync("Houses", House, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
-
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
                     return response.IsSuccess;
                 }
-
                 House = (House)response.Result;
                 //UtilRecurrent.InformationMessage("Application sucessfully saved", "Application Saved");
                 return true;
@@ -630,8 +710,8 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                
-                if (tView1.SelectedNode == null || tView1.SelectedNode.Tag==null ||(int)tView1.SelectedNode.Tag == 0)
+
+                if (tView1.SelectedNode == null || tView1.SelectedNode.Tag == null || (int)tView1.SelectedNode.Tag == 0)
                 {
                     return;
                 }
@@ -640,7 +720,7 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
                 }
-               
+
                 if (await UpdateHouse((int)tView1.SelectedNode.Tag))
                 {
                     await LoadHouses();
@@ -690,7 +770,7 @@ namespace Constituency.Desktop.Views
                 {
                     Voter
                 };
-                
+
                 UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PutAsync("Houses", House, House.Id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
@@ -721,6 +801,9 @@ namespace Constituency.Desktop.Views
                 if (e.KeyChar == (char)13 && ((TextBox)sender).TextLength > 0)
                 {
                     var vot = await LoadVoterByRegAsync("Voters/FindRegistration", ((TextBox)sender).Text);
+                    vot.ElectionVotes = null;
+                    vot.Interviews = null;
+
 
                     if (vot != null)
                     {
@@ -804,7 +887,7 @@ namespace Constituency.Desktop.Views
             //TODO MODIFICAR EL HOUSEPARA AGREGARLE EL VOTER Y VOLVER A LEER LAS HOUSES COMO EN LO DEMAS
             try
             {
-               
+
 
                 if (await AddHouseVoter((int)tView1.SelectedNode.Tag))
                 {
@@ -823,4 +906,6 @@ namespace Constituency.Desktop.Views
             }
         }
     }
+
+
 }

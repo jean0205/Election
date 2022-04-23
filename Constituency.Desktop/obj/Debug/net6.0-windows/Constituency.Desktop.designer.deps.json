@@ -6,6 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
+      "CefSharp.WinForms/100.0.230": {
+        "runtime": {
+          "lib/net452/CefSharp.WinForms.dll": {
+            "assemblyVersion": "100.0.230.0",
+            "fileVersion": "100.0.230.0"
+          }
+        }
+      },
       "FontAwesome.Sharp/5.15.4": {
         "runtime": {
           "lib/net5.0-windows7.0/FontAwesome.Sharp.dll": {
@@ -540,6 +548,13 @@
     }
   },
   "libraries": {
+    "CefSharp.WinForms/100.0.230": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cITtB/ncqDPltKtsTOiOX+m7bDA2tynrin24/+DnqTsofhBP+iTOvCkdSCs4sLSAqJi4zFvaiuBWMaMvGi5nFw==",
+      "path": "cefsharp.winforms/100.0.230",
+      "hashPath": "cefsharp.winforms.100.0.230.nupkg.sha512"
+    },
     "FontAwesome.Sharp/5.15.4": {
       "type": "package",
       "serviceable": true,

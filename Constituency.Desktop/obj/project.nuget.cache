@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "FloybAaNhhEycr1G+lkpE5N0oQZ+E5IP8uTx8gzslu8pFa8/6/R4T/rBDGEtXCVmTa/PpLpAaVA2sx4H2a7L8Q==",
+  "dgSpecHash": "CFYir9ILQjxpVIhBrRQn/DWitgUAC/1++kPYpyf3lb616E/ljNtXgRuZm/JtMtFyBQ2KioVddDN+zlcjyr42pA==",
   "success": true,
   "projectFilePath": "C:\\Users\\jeanc\\source\\repos\\Election2.0\\Constituency.Desktop\\Constituency.Desktop.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\jeanc\\.nuget\\packages\\cefsharp.common\\100.0.230\\cefsharp.common.100.0.230.nupkg.sha512",
+    "C:\\Users\\jeanc\\.nuget\\packages\\cefsharp.winforms\\100.0.230\\cefsharp.winforms.100.0.230.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\fontawesome.sharp\\5.15.4\\fontawesome.sharp.5.15.4.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\microsoft.appcenter\\4.5.0\\microsoft.appcenter.4.5.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\microsoft.appcenter.analytics\\4.5.0\\microsoft.appcenter.analytics.4.5.0.nupkg.sha512",
@@ -43,5 +45,16 @@
     "C:\\Users\\jeanc\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'CefSharp.WinForms 100.0.230' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "CefSharp.WinForms",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
 }
