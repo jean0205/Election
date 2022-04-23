@@ -132,6 +132,185 @@
           "buildTransitive/chromiumembeddedframework.runtime.props": {}
         }
       },
+      "chromiumembeddedframework.runtime.win-arm64/100.0.23": {
+        "type": "package",
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/chrome_100_percent.pak": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/chrome_200_percent.pak": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/chrome_elf.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/icudtl.dat": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/libEGL.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/libGLESv2.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/libcef.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/resources.pak": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/snapshot_blob.bin": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/v8_context_snapshot.bin": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/vk_swiftshader.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/vk_swiftshader_icd.json": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-arm64/native/vulkan-1.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          }
+        }
+      },
+      "chromiumembeddedframework.runtime.win-x64/100.0.23": {
+        "type": "package",
+        "runtimeTargets": {
+          "runtimes/win-x64/native/chrome_100_percent.pak": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/chrome_200_percent.pak": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/chrome_elf.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/d3dcompiler_47.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/icudtl.dat": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/libEGL.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/libGLESv2.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/libcef.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/resources.pak": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/snapshot_blob.bin": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/v8_context_snapshot.bin": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/vk_swiftshader.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/vk_swiftshader_icd.json": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/vulkan-1.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "chromiumembeddedframework.runtime.win-x86/100.0.23": {
+        "type": "package",
+        "runtimeTargets": {
+          "runtimes/win-x86/native/chrome_100_percent.pak": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/chrome_200_percent.pak": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/chrome_elf.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/d3dcompiler_47.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/icudtl.dat": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/libEGL.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/libGLESv2.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/libcef.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/resources.pak": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/snapshot_blob.bin": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/v8_context_snapshot.bin": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/vk_swiftshader.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/vk_swiftshader_icd.json": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/vulkan-1.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
       "FontAwesome.Sharp/5.15.4": {
         "type": "package",
         "compile": {
@@ -987,6 +1166,89 @@
         "chromiumembeddedframework.runtime.nuspec",
         "images/cef128x128.png",
         "runtime.json"
+      ]
+    },
+    "chromiumembeddedframework.runtime.win-arm64/100.0.23": {
+      "sha512": "U/14W9dJ2Um/qIQdPhI/AeimiyyaraO0YN4L7CdE0Hsetsk3KkaMfGKgK5ZJW4qpAN6+9j4hDaLPRmK7Qzj7Xg==",
+      "type": "package",
+      "path": "chromiumembeddedframework.runtime.win-arm64/100.0.23",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.txt",
+        "chromiumembeddedframework.runtime.win-arm64.100.0.23.nupkg.sha512",
+        "chromiumembeddedframework.runtime.win-arm64.nuspec",
+        "images/cef128x128.png",
+        "runtimes/win-arm64/native/chrome_100_percent.pak",
+        "runtimes/win-arm64/native/chrome_200_percent.pak",
+        "runtimes/win-arm64/native/chrome_elf.dll",
+        "runtimes/win-arm64/native/icudtl.dat",
+        "runtimes/win-arm64/native/libEGL.dll",
+        "runtimes/win-arm64/native/libGLESv2.dll",
+        "runtimes/win-arm64/native/libcef.dll",
+        "runtimes/win-arm64/native/resources.pak",
+        "runtimes/win-arm64/native/snapshot_blob.bin",
+        "runtimes/win-arm64/native/v8_context_snapshot.bin",
+        "runtimes/win-arm64/native/vk_swiftshader.dll",
+        "runtimes/win-arm64/native/vk_swiftshader_icd.json",
+        "runtimes/win-arm64/native/vulkan-1.dll"
+      ]
+    },
+    "chromiumembeddedframework.runtime.win-x64/100.0.23": {
+      "sha512": "6KPprpFh1ZyJy46UXh5amL2WgJiP7a2KnBweb/XGKqfuG5DTbK4fdNGRl0/e0hRA5kFChev5w3TO9xBlhAYFpg==",
+      "type": "package",
+      "path": "chromiumembeddedframework.runtime.win-x64/100.0.23",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.txt",
+        "chromiumembeddedframework.runtime.win-x64.100.0.23.nupkg.sha512",
+        "chromiumembeddedframework.runtime.win-x64.nuspec",
+        "images/cef128x128.png",
+        "runtimes/win-x64/native/chrome_100_percent.pak",
+        "runtimes/win-x64/native/chrome_200_percent.pak",
+        "runtimes/win-x64/native/chrome_elf.dll",
+        "runtimes/win-x64/native/d3dcompiler_47.dll",
+        "runtimes/win-x64/native/icudtl.dat",
+        "runtimes/win-x64/native/libEGL.dll",
+        "runtimes/win-x64/native/libGLESv2.dll",
+        "runtimes/win-x64/native/libcef.dll",
+        "runtimes/win-x64/native/resources.pak",
+        "runtimes/win-x64/native/snapshot_blob.bin",
+        "runtimes/win-x64/native/v8_context_snapshot.bin",
+        "runtimes/win-x64/native/vk_swiftshader.dll",
+        "runtimes/win-x64/native/vk_swiftshader_icd.json",
+        "runtimes/win-x64/native/vulkan-1.dll"
+      ]
+    },
+    "chromiumembeddedframework.runtime.win-x86/100.0.23": {
+      "sha512": "RFndmPKN1zlYTlnA0mPXE8rZ97p8dCSeEk/rbeo4neTRJHzUADTRvCmXKT+PtLMVz09RTIe042ZGWMbk4ULqkQ==",
+      "type": "package",
+      "path": "chromiumembeddedframework.runtime.win-x86/100.0.23",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.txt",
+        "chromiumembeddedframework.runtime.win-x86.100.0.23.nupkg.sha512",
+        "chromiumembeddedframework.runtime.win-x86.nuspec",
+        "images/cef128x128.png",
+        "runtimes/win-x86/native/chrome_100_percent.pak",
+        "runtimes/win-x86/native/chrome_200_percent.pak",
+        "runtimes/win-x86/native/chrome_elf.dll",
+        "runtimes/win-x86/native/d3dcompiler_47.dll",
+        "runtimes/win-x86/native/icudtl.dat",
+        "runtimes/win-x86/native/libEGL.dll",
+        "runtimes/win-x86/native/libGLESv2.dll",
+        "runtimes/win-x86/native/libcef.dll",
+        "runtimes/win-x86/native/resources.pak",
+        "runtimes/win-x86/native/snapshot_blob.bin",
+        "runtimes/win-x86/native/v8_context_snapshot.bin",
+        "runtimes/win-x86/native/vk_swiftshader.dll",
+        "runtimes/win-x86/native/vk_swiftshader_icd.json",
+        "runtimes/win-x86/native/vulkan-1.dll"
       ]
     },
     "FontAwesome.Sharp/5.15.4": {
@@ -1992,7 +2254,10 @@
       "Microsoft.AppCenter.Crashes >= 4.5.0",
       "Microsoft.EntityFrameworkCore >= 6.0.3",
       "Newtonsoft.Json >= 13.0.1",
-      "System.Data.OleDb >= 6.0.0"
+      "System.Data.OleDb >= 6.0.0",
+      "chromiumembeddedframework.runtime.win-arm64 >= 100.0.23",
+      "chromiumembeddedframework.runtime.win-x64 >= 100.0.23",
+      "chromiumembeddedframework.runtime.win-x86 >= 100.0.23"
     ]
   },
   "packageFolders": {
@@ -2069,6 +2334,18 @@
           "System.Data.OleDb": {
             "target": "Package",
             "version": "[6.0.0, )"
+          },
+          "chromiumembeddedframework.runtime.win-arm64": {
+            "target": "Package",
+            "version": "[100.0.23, )"
+          },
+          "chromiumembeddedframework.runtime.win-x64": {
+            "target": "Package",
+            "version": "[100.0.23, )"
+          },
+          "chromiumembeddedframework.runtime.win-x86": {
+            "target": "Package",
+            "version": "[100.0.23, )"
           }
         },
         "imports": [

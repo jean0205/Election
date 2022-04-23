@@ -73,6 +73,18 @@
             "System.Data.OleDb": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "chromiumembeddedframework.runtime.win-arm64": {
+              "target": "Package",
+              "version": "[100.0.23, )"
+            },
+            "chromiumembeddedframework.runtime.win-x64": {
+              "target": "Package",
+              "version": "[100.0.23, )"
+            },
+            "chromiumembeddedframework.runtime.win-x86": {
+              "target": "Package",
+              "version": "[100.0.23, )"
             }
           },
           "imports": [

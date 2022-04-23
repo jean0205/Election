@@ -1,12 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "MD5K/ysVjZaZdzIx/ynjnpyF5dL6dXWVHEkRGC6CoyA4oVEg8z1XhKzDF2y9ArSI8bWc5g6YxsxCsBDDqKkf8g==",
+  "dgSpecHash": "FcxvBr1N6lbjumwN6L7Rv4DWkn9jqWcppQl0rm5Fi+4/B6wA7tgukFGG4Hn6uP/TCbzMy13Y4LqgRMr8BolrPg==",
   "success": true,
   "projectFilePath": "C:\\Users\\jeanc\\source\\repos\\Election2.0\\Constituency.Desktop\\Constituency.Desktop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jeanc\\.nuget\\packages\\cefsharp.common.netcore\\100.0.230\\cefsharp.common.netcore.100.0.230.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\cefsharp.winforms.netcore\\100.0.230\\cefsharp.winforms.netcore.100.0.230.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\chromiumembeddedframework.runtime\\100.0.23\\chromiumembeddedframework.runtime.100.0.23.nupkg.sha512",
+    "C:\\Users\\jeanc\\.nuget\\packages\\chromiumembeddedframework.runtime.win-arm64\\100.0.23\\chromiumembeddedframework.runtime.win-arm64.100.0.23.nupkg.sha512",
+    "C:\\Users\\jeanc\\.nuget\\packages\\chromiumembeddedframework.runtime.win-x64\\100.0.23\\chromiumembeddedframework.runtime.win-x64.100.0.23.nupkg.sha512",
+    "C:\\Users\\jeanc\\.nuget\\packages\\chromiumembeddedframework.runtime.win-x86\\100.0.23\\chromiumembeddedframework.runtime.win-x86.100.0.23.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\fontawesome.sharp\\5.15.4\\fontawesome.sharp.5.15.4.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\microsoft.appcenter\\4.5.0\\microsoft.appcenter.4.5.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\microsoft.appcenter.analytics\\4.5.0\\microsoft.appcenter.analytics.4.5.0.nupkg.sha512",
