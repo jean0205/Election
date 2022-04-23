@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O5g3SbhgsvMv03b3BcuNy/+Uvsd3oREj7xbNG7jWzOmHxAoq948d+2ebi7VPakCJDENA2kr/BysaGLxUZsaUXQ==",
+  "dgSpecHash": "GBAAdSLJXvon6DZnSJmQMlpa+DwSt9L32QEgYNFAJ2jwYpk7JtFP1TNzi6c/C8pV3/Q2USa6x8/XNbWZCgnJIQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jeanc\\Source\\Repos\\Election2.0\\Election.API\\Election.API.csproj",
+  "projectFilePath": "C:\\Users\\jeanc\\source\\repos\\Election2.0\\Election.API\\Election.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jeanc\\.nuget\\packages\\azure.core\\1.22.0\\azure.core.1.22.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\azure.identity\\1.4.0\\azure.identity.1.4.0.nupkg.sha512",

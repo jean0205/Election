@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iNBWmc+3Io3+fGB5/3OBMrAtYCxEQF/UU80uk6C8GmsrdmT37djFpn3RVFjIFX+KGmQeOLxjlIKNpqkkGWxhiQ==",
+  "dgSpecHash": "FloybAaNhhEycr1G+lkpE5N0oQZ+E5IP8uTx8gzslu8pFa8/6/R4T/rBDGEtXCVmTa/PpLpAaVA2sx4H2a7L8Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jeanc\\Source\\Repos\\Election2.0\\Constituency.Desktop\\Constituency.Desktop.csproj",
+  "projectFilePath": "C:\\Users\\jeanc\\source\\repos\\Election2.0\\Constituency.Desktop\\Constituency.Desktop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jeanc\\.nuget\\packages\\fontawesome.sharp\\5.15.4\\fontawesome.sharp.5.15.4.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\microsoft.appcenter\\4.5.0\\microsoft.appcenter.4.5.0.nupkg.sha512",
