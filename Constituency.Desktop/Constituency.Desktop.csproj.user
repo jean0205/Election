@@ -22,6 +22,9 @@
     <Compile Update="Views\Frm_EnterInterview.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\Frm_Houses.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Frm_Login.cs">
       <SubType>Form</SubType>
     </Compile>

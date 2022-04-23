@@ -46,11 +46,7 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
-            "CefSharp.Common": {
-              "target": "Package",
-              "version": "[100.0.230, )"
-            },
-            "CefSharp.WinForms": {
+            "CefSharp.WinForms.NETCore": {
               "target": "Package",
               "version": "[100.0.230, )"
             },

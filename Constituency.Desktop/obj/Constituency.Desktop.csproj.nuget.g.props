@@ -15,6 +15,6 @@
     <SourceRoot Include="C:\Program Files (x86)\Microsoft\Xamarin\NuGet\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)cefsharp.common\100.0.230\buildTransitive\CefSharp.Common.props" Condition="Exists('$(NuGetPackageRoot)cefsharp.common\100.0.230\buildTransitive\CefSharp.Common.props')" />
+    <Import Project="$(NuGetPackageRoot)chromiumembeddedframework.runtime\100.0.23\buildTransitive\chromiumembeddedframework.runtime.props" Condition="Exists('$(NuGetPackageRoot)chromiumembeddedframework.runtime\100.0.23\buildTransitive\chromiumembeddedframework.runtime.props')" />
   </ImportGroup>
 </Project>

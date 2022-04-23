@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "CFYir9ILQjxpVIhBrRQn/DWitgUAC/1++kPYpyf3lb616E/ljNtXgRuZm/JtMtFyBQ2KioVddDN+zlcjyr42pA==",
+  "dgSpecHash": "MD5K/ysVjZaZdzIx/ynjnpyF5dL6dXWVHEkRGC6CoyA4oVEg8z1XhKzDF2y9ArSI8bWc5g6YxsxCsBDDqKkf8g==",
   "success": true,
   "projectFilePath": "C:\\Users\\jeanc\\source\\repos\\Election2.0\\Constituency.Desktop\\Constituency.Desktop.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\jeanc\\.nuget\\packages\\cefsharp.common\\100.0.230\\cefsharp.common.100.0.230.nupkg.sha512",
-    "C:\\Users\\jeanc\\.nuget\\packages\\cefsharp.winforms\\100.0.230\\cefsharp.winforms.100.0.230.nupkg.sha512",
+    "C:\\Users\\jeanc\\.nuget\\packages\\cefsharp.common.netcore\\100.0.230\\cefsharp.common.netcore.100.0.230.nupkg.sha512",
+    "C:\\Users\\jeanc\\.nuget\\packages\\cefsharp.winforms.netcore\\100.0.230\\cefsharp.winforms.netcore.100.0.230.nupkg.sha512",
+    "C:\\Users\\jeanc\\.nuget\\packages\\chromiumembeddedframework.runtime\\100.0.23\\chromiumembeddedframework.runtime.100.0.23.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\fontawesome.sharp\\5.15.4\\fontawesome.sharp.5.15.4.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\microsoft.appcenter\\4.5.0\\microsoft.appcenter.4.5.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\microsoft.appcenter.analytics\\4.5.0\\microsoft.appcenter.analytics.4.5.0.nupkg.sha512",
@@ -45,16 +46,5 @@
     "C:\\Users\\jeanc\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'CefSharp.WinForms 100.0.230' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "CefSharp.WinForms",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    }
-  ]
+  "logs": []
 }
