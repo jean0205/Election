@@ -75,6 +75,66 @@ namespace Constituency.Desktop.Views
             dgvIVoters.Columns[0].Frozen = true;
 
         }
+        private async void dgv1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex < 0 | e.ColumnIndex < 0)
+                {
+                    return;
+                }
+
+                var senderGrid = (DataGridView)sender;
+                int rowId = System.Convert.ToInt32(senderGrid.Rows[e.RowIndex].Cells["Id"].Value);
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+                {
+                    if (senderGrid.Columns[e.ColumnIndex].Name == "DeleteCol")
+                    {
+                        if (UtilRecurrent.yesOrNot("Are you sure to remove the selected voter from this house?", "Remove Voter"))
+                        {
+                            if (await DeleteVoterFromHouse(rowId))
+                            {
+                                await LoadHouses();
+                                if (House != null && House.Id > 0)
+                                {
+                                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x =>x.Tag.ToString() == "H-"+House.Id);
+
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> DeleteVoterFromHouse(int id)
+        {
+            try
+            {
+
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("Houses/RemoveVoter", House, id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+        }
         private void dgv1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             try
@@ -95,14 +155,14 @@ namespace Constituency.Desktop.Views
                         int y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
                         e.Graphics.DrawImage(Resources.sto, new Rectangle(x, y, w, h));
                         e.Handled = true;
-                    }                   
+                    }
                 }
             }
             catch (Exception ex)
             {
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
-        }        
+        }
         private void FildsValidations()
         {
             try
@@ -252,20 +312,20 @@ namespace Constituency.Desktop.Views
                         foreach (House house in houses.Where(h => h.Voters.Where(v => v.PollingDivision.Id == division.Id).Any()).ToList())
                         {
                             TreeNode node2 = new TreeNode(house.Number, 2, 3);
-                            node2.Tag = house.Id;
+                            node2.Tag = "H-"+house.Id;
                             childNodes2.Add(node2);
                         }
                         if (childNodes2.Any())
                         {
                             childNodes.Add(new TreeNode(division.Name + " [" + childNodes2.Count + "]", 0, 1, childNodes2.ToArray()));
-                            childNodes[childNodes.Count - 1].Tag = division.Id;
+                            childNodes[childNodes.Count - 1].Tag ="D-"+ division.Id;
                             childNodes2 = new List<TreeNode>();
                         }
                     }
                     if (childNodes.Any())
                     {
                         treeNodes.Add(new TreeNode(consty.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
-                        treeNodes[treeNodes.Count - 1].Tag = consty.Id;
+                        treeNodes[treeNodes.Count - 1].Tag = "C-"+consty.Id;
                         childNodes = new List<TreeNode>();
                     }
                 }
@@ -274,11 +334,11 @@ namespace Constituency.Desktop.Views
                 foreach (House house in houses.Where(h => h.Voters == null || !h.Voters.Any()))
                 {
                     TreeNode node2 = new TreeNode(house.Number, 2, 3);
-                    node2.Tag = house.Id;
+                    node2.Tag = "H-"+house.Id;
                     childNodesNoVoter.Add(node2);
                 }
                 treeNodesNoVoter.Add(new TreeNode("No Voters Hosues", 0, 1, childNodesNoVoter.ToArray()));
-                treeNodesNoVoter[treeNodesNoVoter.Count - 1].Tag = int.MaxValue;
+                treeNodesNoVoter[treeNodesNoVoter.Count - 1].Tag = "X-"+int.MaxValue;
                 tView1.Nodes.AddRange(treeNodes.ToArray());
                 if (treeNodesNoVoter.Any())
                 {
@@ -377,6 +437,7 @@ namespace Constituency.Desktop.Views
                 }
             }
         }
+      
         private void cleanScreen()
         {
             try
@@ -390,7 +451,7 @@ namespace Constituency.Desktop.Views
                 cmbSex.SelectedIndex = -1;
                 Voter = new Voter();
                 tableLayoutPanel6.Enabled = false;
-                dgvIVoters.DataSource = null;               
+                dgvIVoters.DataSource = null;
                 browser.Load("about:blank");
             }
             catch (Exception ex)
@@ -434,17 +495,17 @@ namespace Constituency.Desktop.Views
                 {
 
                     cleanScreen();
-                    if (NodeLevel(e.Node) == 2 || (NodeLevel(e.Node) == 1 && (int)e.Node.Parent.Tag == int.MaxValue))
+                    if (NodeLevel(e.Node) == 2 || (NodeLevel(e.Node) == 1 && int.Parse(e.Node.Parent.Tag.ToString().Split('-')[1]) == int.MaxValue))
                     {
-                        AfterSelectNodeHouse((int)e.Node.Tag);
+                        AfterSelectNodeHouse(int.Parse(e.Node.Tag.ToString().Split('-')[1]));
                     }
                     if (NodeLevel(e.Node) == 0 && e.Node.Tag != null)
                     {
-                        AfterSelectNodeConstituency((int)e.Node.Tag);
+                        AfterSelectNodeConstituency(int.Parse(e.Node.Tag.ToString().Split('-')[1]));
                     }
-                    if (NodeLevel(e.Node) == 1 && (int)e.Node.Parent.Tag < int.MaxValue)
+                    if (NodeLevel(e.Node) == 1 && int.Parse(e.Node.Tag.ToString().Split('-')[1]) < int.MaxValue)
                     {
-                        AfterSelectNodeConstituency((int)e.Node.Tag);
+                        AfterSelectNodeConstituency(int.Parse(e.Node.Tag.ToString().Split('-')[1]));
 
                     }
 
@@ -485,7 +546,7 @@ namespace Constituency.Desktop.Views
                 if (nodeTag > 0)
                 {
                     House = new();
-                    House = await LoadHouseAsyncById(nodeTag);
+                    House = await LoadHouseAsyncById(nodeTag);                    
                     ShowHouseInformation();
                     ibtnSave.Visible = false;
                     ibtnUpdate.Visible = true;
@@ -519,9 +580,10 @@ namespace Constituency.Desktop.Views
                 {
                     return;
                 }
-                
+
                 dgvIVoters.DataSource = House.Voters.Select(x => new
                 {
+                    x.Id,
                     x.Reg,
                     x.FullName,
                     x.Sex,
@@ -529,7 +591,8 @@ namespace Constituency.Desktop.Views
                     Contact = x.Mobile1 + (x.Mobile1 == "" ? "" : "<>") + x.Mobile2 + (x.Mobile2 == "" ? "" : "<>") + x.HomePhone + (x.HomePhone == "" ? "" : "<>") + x.WorkPhone,
                     x.Email,
                     Interviews = x.Interviews.Count
-                }).ToList();               
+                }).ToList();
+                dgvIVoters.Columns[1].Visible = false;
             }
             catch (Exception ex)
             {
@@ -648,7 +711,7 @@ namespace Constituency.Desktop.Views
                 }
                 if (House != null && House.Id > 0)
                 {
-                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == House.Id);
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => x.Tag.ToString() == "H-" + House.Id);
                 }
             }
             catch (Exception ex)
@@ -721,14 +784,15 @@ namespace Constituency.Desktop.Views
                     return;
                 }
 
-                if (await UpdateHouse((int)tView1.SelectedNode.Tag))
+                if (await UpdateHouse(int.Parse(tView1.SelectedNode.Tag.ToString().Replace("H-", string.Empty))))
                 {
                     await LoadHouses();
                 }
+                
                 if (House != null && House.Id > 0)
                 {
-                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == House.Id);
-                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => x.Tag.ToString() == "H-" + House.Id);
+
                 }
             }
             catch (Exception ex)
@@ -801,12 +865,10 @@ namespace Constituency.Desktop.Views
                 if (e.KeyChar == (char)13 && ((TextBox)sender).TextLength > 0)
                 {
                     var vot = await LoadVoterByRegAsync("Voters/FindRegistration", ((TextBox)sender).Text);
-                    vot.ElectionVotes = null;
-                    vot.Interviews = null;
-
-
                     if (vot != null)
                     {
+                        //vot.ElectionVotes = null;
+                        //vot.Interviews = null;
                         Voter = vot;
                         ShowVoterInformation();
                     }
@@ -889,14 +951,16 @@ namespace Constituency.Desktop.Views
             {
 
 
-                if (await AddHouseVoter((int)tView1.SelectedNode.Tag))
+                if (await AddHouseVoter(int.Parse(tView1.SelectedNode.Tag.ToString().Replace("H-", string.Empty))))
+                {
+                    await LoadHouses();
+                }
                 {
                     await LoadHouses();
                 }
                 if (House != null && House.Id > 0)
                 {
-                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == House.Id);
-                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => x.Tag.ToString() == "H-" + House.Id);
                 }
 
             }

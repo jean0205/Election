@@ -6,15 +6,13 @@ namespace Election.API.Data.Entities
     {
         public int Id { get; set; }
         
-        public NationalElection Election { get; set; }
+        public NationalElection? Election { get; set; }
 
 
         [Required(ErrorMessage = "{0} is a required field.")]
         public DateTime VoteTime { get; set; }
-
-
-        [Required(ErrorMessage = "{0} is a required field.")]
-        public Voter Voter { get; set; }
+       
+        public Voter? Voter { get; set; }
 
         public bool Voted { get; set; }
 

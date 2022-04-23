@@ -4,6 +4,7 @@ using Election.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Election.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220423143050_removingrequired")]
+    partial class removingrequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,7 +181,7 @@ namespace Election.API.Migrations
                     b.Property<int?>("CommentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ElectionId")
+                    b.Property<int>("ElectionId")
                         .HasColumnType("int");
 
                     b.Property<int?>("InterviewerId")
@@ -793,7 +795,9 @@ namespace Election.API.Migrations
 
                     b.HasOne("Election.API.Data.Entities.NationalElection", "Election")
                         .WithMany("ElectionVotes")
-                        .HasForeignKey("ElectionId");
+                        .HasForeignKey("ElectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Election.API.Data.Entities.Interviewer", null)
                         .WithMany("ElectionVotes")

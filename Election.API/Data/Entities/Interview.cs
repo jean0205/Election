@@ -12,14 +12,14 @@ namespace Election.API.Data.Entities
         [Required(ErrorMessage = "{0} is a required field.")]       
         public DateTime Date { get; set; }
 
-        [Required(ErrorMessage = "{0} is a required field.")]
-        public Voter Voter { get; set; }
+        
+        public Voter? Voter { get; set; }
 
-        [Required(ErrorMessage = "{0} is a required field.")]
-        public Canvas Canvas { get; set; }
+       
+        public Canvas? Canvas { get; set; }
 
-        [Required(ErrorMessage = "{0} is a required field.")]
-        public Party SupportedParty { get; set; }    
+       
+        public Party? SupportedParty { get; set; }    
 
         public Comment? Comment { get; set; }
 

@@ -98,6 +98,34 @@ namespace Election.API.Controllers
             return NoContent();
         }
 
+        [HttpPut("RemoveVoter/{id}")]
+        public async Task<IActionResult> RemoveVoter(int id, House house)
+        {
+            
+            var houseDB = await _context.Houses
+                .Include(h => h.Voters.Where(v => v.Id == id))
+                .FirstOrDefaultAsync(h => h.Id == house.Id);
+            houseDB.Voters = null;
+            _context.Entry(houseDB).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!HouseExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // POST: api/Houses
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.

@@ -6,11 +6,11 @@
         public bool Active { get; set; }
         public DateTime Date { get; set; }
 
-        public Canvas Canvas { get; set; }
+        public Canvas? Canvas { get; set; }
 
-        public Voter Voter { get; set; }
+        public Voter? Voter { get; set; }
 
-        public Party SupportedParty { get; set; }
+        public Party? SupportedParty { get; set; }
 
         public Comment? Comment { get; set; }
 
