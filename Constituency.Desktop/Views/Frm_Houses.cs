@@ -97,7 +97,7 @@ namespace Constituency.Desktop.Views
                                 await LoadHouses();
                                 if (House != null && House.Id > 0)
                                 {
-                                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x =>x.Tag.ToString() == "H-"+House.Id);
+                                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => x.Tag.ToString() == "H-" + House.Id);
 
                                 }
                             }
@@ -312,20 +312,20 @@ namespace Constituency.Desktop.Views
                         foreach (House house in houses.Where(h => h.Voters.Where(v => v.PollingDivision.Id == division.Id).Any()).ToList())
                         {
                             TreeNode node2 = new TreeNode(house.Number, 2, 3);
-                            node2.Tag = "H-"+house.Id;
+                            node2.Tag = "H-" + house.Id;
                             childNodes2.Add(node2);
                         }
                         if (childNodes2.Any())
                         {
                             childNodes.Add(new TreeNode(division.Name + " [" + childNodes2.Count + "]", 0, 1, childNodes2.ToArray()));
-                            childNodes[childNodes.Count - 1].Tag ="D-"+ division.Id;
+                            childNodes[childNodes.Count - 1].Tag = "D-" + division.Id;
                             childNodes2 = new List<TreeNode>();
                         }
                     }
                     if (childNodes.Any())
                     {
                         treeNodes.Add(new TreeNode(consty.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
-                        treeNodes[treeNodes.Count - 1].Tag = "C-"+consty.Id;
+                        treeNodes[treeNodes.Count - 1].Tag = "C-" + consty.Id;
                         childNodes = new List<TreeNode>();
                     }
                 }
@@ -334,11 +334,11 @@ namespace Constituency.Desktop.Views
                 foreach (House house in houses.Where(h => h.Voters == null || !h.Voters.Any()))
                 {
                     TreeNode node2 = new TreeNode(house.Number, 2, 3);
-                    node2.Tag = "H-"+house.Id;
+                    node2.Tag = "H-" + house.Id;
                     childNodesNoVoter.Add(node2);
                 }
                 treeNodesNoVoter.Add(new TreeNode("No Voters Hosues", 0, 1, childNodesNoVoter.ToArray()));
-                treeNodesNoVoter[treeNodesNoVoter.Count - 1].Tag = "X-"+int.MaxValue;
+                treeNodesNoVoter[treeNodesNoVoter.Count - 1].Tag = "X-" + int.MaxValue;
                 tView1.Nodes.AddRange(treeNodes.ToArray());
                 if (treeNodesNoVoter.Any())
                 {
@@ -437,7 +437,7 @@ namespace Constituency.Desktop.Views
                 }
             }
         }
-      
+
         private void cleanScreen()
         {
             try
@@ -453,6 +453,7 @@ namespace Constituency.Desktop.Views
                 tableLayoutPanel6.Enabled = false;
                 dgvIVoters.DataSource = null;
                 browser.Load("about:blank");
+                iconButton1.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -546,7 +547,7 @@ namespace Constituency.Desktop.Views
                 if (nodeTag > 0)
                 {
                     House = new();
-                    House = await LoadHouseAsyncById(nodeTag);                    
+                    House = await LoadHouseAsyncById(nodeTag);
                     ShowHouseInformation();
                     ibtnSave.Visible = false;
                     ibtnUpdate.Visible = true;
@@ -774,7 +775,7 @@ namespace Constituency.Desktop.Views
             try
             {
 
-                if (tView1.SelectedNode == null || tView1.SelectedNode.Tag == null || (int)tView1.SelectedNode.Tag == 0)
+                if (tView1.SelectedNode == null || tView1.SelectedNode.Tag == null || tView1.SelectedNode.Tag.ToString() == "H-0")
                 {
                     return;
                 }
@@ -788,7 +789,7 @@ namespace Constituency.Desktop.Views
                 {
                     await LoadHouses();
                 }
-                
+
                 if (House != null && House.Id > 0)
                 {
                     tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => x.Tag.ToString() == "H-" + House.Id);
@@ -871,6 +872,7 @@ namespace Constituency.Desktop.Views
                         //vot.Interviews = null;
                         Voter = vot;
                         ShowVoterInformation();
+                        iconButton1.Enabled = true;
                     }
                     else
                     {
@@ -946,15 +948,41 @@ namespace Constituency.Desktop.Views
 
         private async void iconButton1_Click(object sender, EventArgs e)
         {
-            //TODO MODIFICAR EL HOUSEPARA AGREGARLE EL VOTER Y VOLVER A LEER LAS HOUSES COMO EN LO DEMAS
+
             try
             {
-
+                if (VoterInHouseAlready())
+                {
+                    UtilRecurrent.ErrorMessage("The Voter is in the House Already.");
+                    return;
+                }
+                if (VoterInOtherHouseAlready())
+                {
+                    if(UtilRecurrent.yesOrNot("The Voter is in another House. Do you want to move him to this House?","Move Voter")) 
+                    {
+                        if (await RemoveVoterHouse()) Voter.House = null;
+                        
+                    }
+                    else
+                    {
+                        return;
+                    }                   
+                }
+                if (!VoterSameHouseDivision())
+                {
+                    if (UtilRecurrent.yesOrNot("The Voter belongs to a diferent Polling Division than the other(s) Voter(s) in the house, if you continue, the Voter Polling Division will be updated to match the house division. Do you want to continue?", "Update Voter Polling Division"))
+                    {
+                        var division = House.Voters.First().PollingDivision;
+                        Voter.PollingDivision = division;
+                        await UpdateVoter();
+                    }
+                }
+                else
+                {
+                    return;
+                }
 
                 if (await AddHouseVoter(int.Parse(tView1.SelectedNode.Tag.ToString().Replace("H-", string.Empty))))
-                {
-                    await LoadHouses();
-                }
                 {
                     await LoadHouses();
                 }
@@ -962,11 +990,88 @@ namespace Constituency.Desktop.Views
                 {
                     tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => x.Tag.ToString() == "H-" + House.Id);
                 }
-
             }
             catch (Exception ex)
             {
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private bool VoterSameHouseDivision()
+        {
+            if (House.Voters != null && House.Voters.Any())
+            {
+                var division = House.Voters.First().PollingDivision;
+                if (Voter.PollingDivision != null && Voter.PollingDivision.Id == division.Id)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        }
+        private bool VoterInHouseAlready()
+        {
+            if (House.Voters != null && House.Voters.Any())
+            {
+                if (House.Voters.Any(x => x.Id == Voter.Id))
+                {
+                    return true;
+                }
+                return false;              
+            }
+            return false;
+        }
+        private bool VoterInOtherHouseAlready()
+        {
+            if (Voter.House != null && House.Voters.Any())
+            {
+                if (Voter.House.Id != House.Id)
+                {
+                    return true;
+                }               
+                return false;
+            }
+            return false;
+        }
+        private async Task UpdateVoter()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("Voters", Voter, Voter.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> RemoveVoterHouse()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.DeleteAsync("Voters/RemoveHouse", Voter.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
             }
         }
     }

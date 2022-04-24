@@ -107,8 +107,26 @@ namespace Election.API.Controllers
             {
                 return BadRequest();
             }
+            var voterToUpdate = await _context.Voters.FindAsync(id);
+            voterToUpdate.Reg = voter.Reg;
+            voterToUpdate.Active = voter.Active;
+            voterToUpdate.GivenNames = voter.GivenNames;
+            voterToUpdate.Address = voter.Address;
+            voterToUpdate.SurName = voter.SurName;
+            voterToUpdate.Sex = voter.Sex;
+            voterToUpdate.DOB = voter.DOB;
+            voterToUpdate.Address = voter.Address;
+            //assing every voter value to voterToUpdate
+            voterToUpdate.Mobile1 = voter.Mobile1;
+            voterToUpdate.Mobile2 = voter.Mobile2;
+            voterToUpdate.HomePhone = voter.HomePhone;
+            voterToUpdate.WorkPhone = voter.WorkPhone;
+            voterToUpdate.Email = voter.Email;
+            voterToUpdate.Mobile1 = voter.Mobile1;
+            var pollinDivision = await _context.PollingDivisions.FindAsync(voter.PollingDivision.Id);
+            voterToUpdate.PollingDivision = pollinDivision;
 
-            _context.Entry(voter).State = EntityState.Modified;
+            _context.Entry(voterToUpdate).State = EntityState.Modified;
 
             try
             {
@@ -196,6 +214,23 @@ namespace Election.API.Controllers
         private bool VoterExists(int id)
         {
             return _context.Voters.Any(e => e.Id == id);
+        }
+
+        [HttpDelete("RemoveHouse/{id}")]
+        public async Task<IActionResult> DeleteVoterHouse(int id)
+        {
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            var voter = await _context.Voters
+                .Include(v => v.House)
+                .FirstOrDefaultAsync(v => v.Id == id);
+            if (voter == null)
+            {
+                return NotFound();
+            }
+            voter.House = null;
+            _context.Entry(voter).State = EntityState.Modified;
+            await _context.SaveChangesAsync(userName);
+            return NoContent();
         }
     }
 }

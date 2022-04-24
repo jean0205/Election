@@ -437,7 +437,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(580, 9);
+            this.cmbDivision.Location = new System.Drawing.Point(580, 6);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(324, 29);
             this.cmbDivision.TabIndex = 34;
@@ -448,7 +448,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(129, 9);
+            this.cmbConstituency.Location = new System.Drawing.Point(129, 6);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(318, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -538,10 +538,10 @@
             // 
             this.tableLayoutPanel9.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel9.ColumnCount = 4;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.55172F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.44828F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 277F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 337F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 104F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
             this.tableLayoutPanel9.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.cmbSex, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.dtpDOB, 3, 0);
@@ -550,8 +550,7 @@
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 98);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(908, 34);
             this.tableLayoutPanel9.TabIndex = 6;
             // 
@@ -560,7 +559,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(69, 6);
+            this.label3.Location = new System.Drawing.Point(68, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 21);
             this.label3.TabIndex = 20;
@@ -576,7 +575,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "F",
             "M"});
-            this.cmbSex.Location = new System.Drawing.Point(110, 5);
+            this.cmbSex.Location = new System.Drawing.Point(109, 4);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -587,7 +586,7 @@
             this.dtpDOB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpDOB.CustomFormat = "dd-MMM-yyyy";
             this.dtpDOB.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDOB.Location = new System.Drawing.Point(572, 4);
+            this.dtpDOB.Location = new System.Drawing.Point(458, 4);
             this.dtpDOB.Name = "dtpDOB";
             this.dtpDOB.Size = new System.Drawing.Size(155, 29);
             this.dtpDOB.TabIndex = 31;
@@ -598,7 +597,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(465, 6);
+            this.label4.Location = new System.Drawing.Point(351, 6);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 21);
             this.label4.TabIndex = 21;

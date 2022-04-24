@@ -566,7 +566,6 @@ namespace Constituency.Desktop.Views
             {
                 var voter = BuildUpdateVoter();
                 voter.Interviews = null;
-
                 UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PutAsync("Voters", voter, voter.Id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
@@ -579,7 +578,8 @@ namespace Constituency.Desktop.Views
             catch (Exception ex)
             {
                 UtilRecurrent.UnlockForm(waitForm, this);                
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private Voter BuildUpdateVoter()
