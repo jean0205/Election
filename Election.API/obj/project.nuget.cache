@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GBAAdSLJXvon6DZnSJmQMlpa+DwSt9L32QEgYNFAJ2jwYpk7JtFP1TNzi6c/C8pV3/Q2USa6x8/XNbWZCgnJIQ==",
+  "dgSpecHash": "814IAsbbYuKUA/l8LB+IG/WT1dhwI39H7gm86f5uQeU5ldeA5EMdJFPlgX1z1ZtyKzuQMfd9n9LtGNzvldIwLA==",
   "success": true,
   "projectFilePath": "C:\\Users\\jeanc\\source\\repos\\Election2.0\\Election.API\\Election.API.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\jeanc\\.nuget\\packages\\azure.identity\\1.4.0\\azure.identity.1.4.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\azure.storage.blobs\\12.11.0\\azure.storage.blobs.12.11.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\azure.storage.common\\12.10.0\\azure.storage.common.12.10.0.nupkg.sha512",
+    "C:\\Users\\jeanc\\.nuget\\packages\\azure.storage.files.shares\\12.1.0\\azure.storage.files.shares.12.1.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\azure.storage.queues\\12.9.0\\azure.storage.queues.12.9.0.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jeanc\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

@@ -64,6 +64,20 @@
           "lib/netstandard2.0/Azure.Storage.Common.dll": {}
         }
       },
+      "Azure.Storage.Files.Shares/12.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Azure.Core": "1.0.2",
+          "Azure.Storage.Common": "12.2.0",
+          "System.Text.Json": "4.6.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Azure.Storage.Files.Shares.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Azure.Storage.Files.Shares.dll": {}
+        }
+      },
       "Azure.Storage.Queues/12.9.0": {
         "type": "package",
         "dependencies": {
@@ -3486,6 +3500,22 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Storage.Common.dll",
         "lib/netstandard2.0/Azure.Storage.Common.xml"
+      ]
+    },
+    "Azure.Storage.Files.Shares/12.1.0": {
+      "sha512": "qF0nsCNh+SqUvRyx0zG8teJsEImeFlO5uqpcWtursupvhyG+kBJOuSRjUQDoK1Uw4tS2IxkrTV1R5vXP03KGcA==",
+      "type": "package",
+      "path": "azure.storage.files.shares/12.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CHANGELOG.md",
+        "README.md",
+        "azure.storage.files.shares.12.1.0.nupkg.sha512",
+        "azure.storage.files.shares.nuspec",
+        "lib/netstandard2.0/Azure.Storage.Files.Shares.dll",
+        "lib/netstandard2.0/Azure.Storage.Files.Shares.xml",
+        "pkgicon.png"
       ]
     },
     "Azure.Storage.Queues/12.9.0": {
@@ -10389,6 +10419,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Azure.Storage.Blobs >= 12.11.0",
+      "Azure.Storage.Files.Shares >= 12.1.0",
       "Azure.Storage.Queues >= 12.9.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.3",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.3",
@@ -10410,11 +10441,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jeanc\\Source\\Repos\\Election2.0\\Election.API\\Election.API.csproj",
+      "projectUniqueName": "C:\\Users\\jeanc\\source\\repos\\Election2.0\\Election.API\\Election.API.csproj",
       "projectName": "Election.API",
-      "projectPath": "C:\\Users\\jeanc\\Source\\Repos\\Election2.0\\Election.API\\Election.API.csproj",
+      "projectPath": "C:\\Users\\jeanc\\source\\repos\\Election2.0\\Election.API\\Election.API.csproj",
       "packagesPath": "C:\\Users\\jeanc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jeanc\\Source\\Repos\\Election2.0\\Election.API\\obj\\",
+      "outputPath": "C:\\Users\\jeanc\\source\\repos\\Election2.0\\Election.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -10452,6 +10483,10 @@
           "Azure.Storage.Blobs": {
             "target": "Package",
             "version": "[12.11.0, )"
+          },
+          "Azure.Storage.Files.Shares": {
+            "target": "Package",
+            "version": "[12.1.0, )"
           },
           "Azure.Storage.Queues": {
             "target": "Package",

@@ -9,6 +9,7 @@
       "Election.API/1.0.0": {
         "dependencies": {
           "Azure.Storage.Blobs": "12.11.0",
+          "Azure.Storage.Files.Shares": "12.1.0",
           "Azure.Storage.Queues": "12.9.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.3",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.3",
@@ -80,6 +81,19 @@
           "lib/netstandard2.0/Azure.Storage.Common.dll": {
             "assemblyVersion": "12.10.0.0",
             "fileVersion": "12.1000.22.16003"
+          }
+        }
+      },
+      "Azure.Storage.Files.Shares/12.1.0": {
+        "dependencies": {
+          "Azure.Core": "1.22.0",
+          "Azure.Storage.Common": "12.10.0",
+          "System.Text.Json": "5.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Azure.Storage.Files.Shares.dll": {
+            "assemblyVersion": "12.1.0.0",
+            "fileVersion": "12.100.20.11104"
           }
         }
       },
@@ -2544,6 +2558,13 @@
       "sha512": "sha512-vYkHGzUkdZTace/cDPZLG+Mh/EoPqQuGxDIBOau9D+XWoDPmuUFGk325aXplkFE4JFGpSwoytNYzk/qBCaiHqg==",
       "path": "azure.storage.common/12.10.0",
       "hashPath": "azure.storage.common.12.10.0.nupkg.sha512"
+    },
+    "Azure.Storage.Files.Shares/12.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qF0nsCNh+SqUvRyx0zG8teJsEImeFlO5uqpcWtursupvhyG+kBJOuSRjUQDoK1Uw4tS2IxkrTV1R5vXP03KGcA==",
+      "path": "azure.storage.files.shares/12.1.0",
+      "hashPath": "azure.storage.files.shares.12.1.0.nupkg.sha512"
     },
     "Azure.Storage.Queues/12.9.0": {
       "type": "package",

@@ -65,7 +65,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAEZTeXN0ZW0uV2luZG93cy5Gb3JtcywgQ3VsdHVyZT1uZXV0cmFs
         LCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BQEAAAAmU3lzdGVtLldpbmRvd3MuRm9ybXMu
         SW1hZ2VMaXN0U3RyZWFtZXIBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAUlEAAAJNU0Z0AUkBTAIBAQgB
-        AAFYAQcBWAEHARkBAAEZAQAE/wEhAQAI/wFCAU0BNgcAATYDAAEoAwABZAMAAUsDAAEBAQABIAUAATAB
+        AAGAAQcBgAEHARkBAAEZAQAE/wEhAQAI/wFCAU0BNgcAATYDAAEoAwABZAMAAUsDAAEBAQABIAUAATAB
         df8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/
         AP8A/wD/AP8A/wD/AP8A/wD/AGkAAV0BAAGeAf8BXQEAAZ4B/wFdAQABngH/AV0BAAGeAf8BSgEAAX4B
         /wFKAQABfgH/AUoBAAF+Af8BSgEAAX4B/wFKAQABfgH/AUoBAAF+Af+UAAMJAQwDAwEExAABXQEAAZ4B
@@ -414,6 +414,9 @@
         AAFAAT8C/wHwAT8B4AoAAT8C/wH4AX8B4AoAAT8E/wHgCQABQAF/BP8B4AYACw==
 </value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>157, 17</value>
+  </metadata>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 17</value>
   </metadata>
