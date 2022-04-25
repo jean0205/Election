@@ -22,6 +22,7 @@ namespace Constituency.Desktop.Views
 
         WaitFormFunc waitForm = new WaitFormFunc();
 
+        bool newVoter = false;
 
         //list to load
         private ObservableCollection<Canvas> CanvasList;
@@ -309,6 +310,7 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "ComboBox").Cast<ComboBox>().Where(c => c.Name != "cmbInterviewers").ToList().ForEach(x => x.SelectedIndex = -1);
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "DateTimePicker").Cast<DateTimePicker>().ToList().ForEach(x => x.Value = DateTime.Now.Date);
                 Voter = new Voter();
+                newVoter = false;
 
             }
             catch (Exception ex)
@@ -560,6 +562,11 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
                 }
+                if (cmbISupportedParty.SelectedValue == null && cmbIComment.SelectedValue == null)
+                {
+                    UtilRecurrent.ErrorMessage("No supported party or comment selected.");
+                    return;
+                }
 
                 if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
                 {
@@ -570,6 +577,7 @@ namespace Constituency.Desktop.Views
                 {
                     await LoadCanvas();
                 }
+                else { return; }
 
                 if (Interview != null && Interview.Id > 0)
                 {
@@ -590,6 +598,11 @@ namespace Constituency.Desktop.Views
             try
             {
                 var voter = BuildVoter();
+                if (VoterInterviewedAlready(voter))
+                {
+                    UtilRecurrent.ErrorMessage("Voter already interviewed in the selected Canvas.");
+                    return false;
+                }
                 voter.Active = true;
                 var interview = await BuildInterview(null);
                 UtilRecurrent.LockForm(waitForm, this);
@@ -602,8 +615,7 @@ namespace Constituency.Desktop.Views
                     return response.IsSuccess;
                 }
 
-                Interview = (Interview)response.Result;
-                //UtilRecurrent.InformationMessage("Application sucessfully saved", "Application Saved");
+                Interview = (Interview)response.Result;               
                 return true;
             }
             catch (Exception ex)
@@ -655,6 +667,11 @@ namespace Constituency.Desktop.Views
         {
             try
             {
+                if (newVoter && VoterInterviewedAlready(BuildVoter()))
+                {
+                    UtilRecurrent.ErrorMessage("Voter already interviewed in the selected Canvas.");
+                    return false;
+                }
 
                 var interview = await BuildInterview(id);
                 UtilRecurrent.LockForm(waitForm, this);
@@ -795,6 +812,16 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
+        
+        private bool VoterInterviewedAlready(Voter voter)
+        {
+            var canvas = CanvasList.FirstOrDefault(p => p.Id == (int)cmbCanvas.SelectedValue);
+            if (canvas.Interviews!=null && canvas.Interviews.Any()&& canvas.Interviews.Where(p => p.Voter.Id == voter.Id).Any())
+            {
+                return true;
+            }
+            return false;
+        }
 
         private async void txtReg_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -806,16 +833,16 @@ namespace Constituency.Desktop.Views
 
                     if (vot != null)
                     {
+                        newVoter = true;
                         Voter = vot;
-
+                        ShowVoterInformation();
                     }
-                    ShowVoterInformation();
-
                 }
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); 
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
 
@@ -823,13 +850,17 @@ namespace Constituency.Desktop.Views
         {
             try
             {
+                UtilRecurrent.LockForm(waitForm, this);
                 await LoadCanvas();
                 tView1.SelectedNode = tView1.Nodes[0];
                 lblFiltering.Visible = false;
+                UtilRecurrent.UnlockForm(waitForm, this);
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                UtilRecurrent.UnlockForm(waitForm, this);
             }
         }
         public void addContextMenu(TreeNode tvw, string item)

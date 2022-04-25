@@ -510,7 +510,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(775, 29);
             this.txtEmail.TabIndex = 17;
-            this.txtEmail.Tag = "2,4";
+            this.txtEmail.Tag = "";
             // 
             // tableLayoutPanel13
             // 
@@ -1005,7 +1005,7 @@
             this.cmbISupportedParty.Name = "cmbISupportedParty";
             this.cmbISupportedParty.Size = new System.Drawing.Size(714, 29);
             this.cmbISupportedParty.TabIndex = 35;
-            this.cmbISupportedParty.Tag = "1";
+            this.cmbISupportedParty.Tag = "";
             // 
             // label16
             // 

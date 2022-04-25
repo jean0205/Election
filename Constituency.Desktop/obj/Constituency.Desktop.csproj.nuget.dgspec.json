@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jcsoto\\Source\\Repos\\Election4.0\\Constituency.Desktop\\Constituency.Desktop.csproj": {}
+    "C:\\Users\\jcsoto\\source\\repos\\Election4.0\\Constituency.Desktop\\Constituency.Desktop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jcsoto\\Source\\Repos\\Election4.0\\Constituency.Desktop\\Constituency.Desktop.csproj": {
+    "C:\\Users\\jcsoto\\source\\repos\\Election4.0\\Constituency.Desktop\\Constituency.Desktop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jcsoto\\Source\\Repos\\Election4.0\\Constituency.Desktop\\Constituency.Desktop.csproj",
+        "projectUniqueName": "C:\\Users\\jcsoto\\source\\repos\\Election4.0\\Constituency.Desktop\\Constituency.Desktop.csproj",
         "projectName": "Constituency.Desktop",
-        "projectPath": "C:\\Users\\jcsoto\\Source\\Repos\\Election4.0\\Constituency.Desktop\\Constituency.Desktop.csproj",
+        "projectPath": "C:\\Users\\jcsoto\\source\\repos\\Election4.0\\Constituency.Desktop\\Constituency.Desktop.csproj",
         "packagesPath": "C:\\Users\\jcsoto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jcsoto\\Source\\Repos\\Election4.0\\Constituency.Desktop\\obj\\",
+        "outputPath": "C:\\Users\\jcsoto\\source\\repos\\Election4.0\\Constituency.Desktop\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
