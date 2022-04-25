@@ -131,21 +131,18 @@ namespace Constituency.Desktop.Helpers
                 return new Response
                 {
                     IsSuccess = true,
-                    Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
+                    Message = result
                 };
 
             }
             catch (Exception ex)
             {
-
                 return new Response
                 {
                     IsSuccess = false,
                     Message = ex.Message
                 };
             }
-
-
         }
         public static async Task<Response> PutAsync<T>(string controller, T model, int id)
         {
@@ -170,7 +167,7 @@ namespace Constituency.Desktop.Helpers
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
+                        Message = result,
                     };
                 }
                 T item = JsonConvert.DeserializeObject<T>(result);

@@ -1117,3 +1117,5 @@ C:\Users\jeanc\Source\Repos\Election2.0\Election.API\obj\Debug\net6.0\Election.A
 C:\Users\jeanc\Source\Repos\Election2.0\Election.API\obj\Debug\net6.0\Election.API.genruntimeconfig.cache
 C:\Users\jeanc\Source\Repos\Election2.0\Election.API\obj\Debug\net6.0\ref\Election.API.dll
 C:\Users\jeanc\source\repos\Election2.0\Election.API\bin\Debug\net6.0\Azure.Storage.Files.Shares.dll
+C:\Users\jeanc\source\repos\Election2.0\Election.API\obj\Debug\net6.0\Election.API.RazorAssemblyInfo.cache
+C:\Users\jeanc\source\repos\Election2.0\Election.API\obj\Debug\net6.0\Election.API.RazorAssemblyInfo.cs

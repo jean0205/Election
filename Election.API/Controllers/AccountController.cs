@@ -147,12 +147,14 @@ namespace Election.API.Controllers
                 User user = await _userHelper.GetUserAsync(username);
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Email Not Found.");
+                   
+                    ModelState.AddModelError("Error", "Email Not Found.");
                     return BadRequest(ModelState);
                 }
                 else
                 {
                     string myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                    
                     string tokenLink = Url.Action("ConfirmEmail", "Account", new
                     {
                         userid = user.Id,
@@ -215,7 +217,7 @@ namespace Election.API.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "User Not Found.");
+                    ModelState.AddModelError("Error", "User Not Found.");
                 }
             }
             return BadRequest(ModelState);
@@ -230,18 +232,20 @@ namespace Election.API.Controllers
                 User user = await _userHelper.GetUserAsync(model.userName);
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "The user-name do not match with any user in the system.");
+                    ModelState.AddModelError("Error", "The user-name do not match with any user in the system.");
                     return BadRequest(ModelState);
                 }
 
-                string myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
-                string link = Url.Action(
-                    "ResetPassword",
+                string myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);                
+                
+                string tokenLink = Url.Action(
+                    "RecoverPassword",
                     "Account",
                     new { token = myToken }, protocol: HttpContext.Request.Scheme);
-                _mailHelper.SendMail(user.Email, "SBDF - Password Reset", $"<h1>SBDF - Password Reset</h1>" +
+
+                _mailHelper.SendMail(user.Email, "Contituencies Project - Password Reset", $"<h1>Contituencies Project - Password Reset</h1>" +
                     $"To set a new password click on the following link:</br></br>" +
-                    $"<a href = \"{link}\">Change password</a>");
+                    $"<a href = \"{tokenLink}\">Change password</a>");
                 return Ok("Instructions for change your password have been sent to your email.");
 
             }

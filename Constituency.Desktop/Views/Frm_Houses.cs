@@ -976,12 +976,11 @@ namespace Constituency.Desktop.Views
                         Voter.PollingDivision = division;
                         await UpdateVoter();
                     }
+                    else
+                    {
+                        return;
+                    }
                 }
-                else
-                {
-                    return;
-                }
-
                 if (await AddHouseVoter(int.Parse(tView1.SelectedNode.Tag.ToString().Replace("H-", string.Empty))))
                 {
                     await LoadHouses();

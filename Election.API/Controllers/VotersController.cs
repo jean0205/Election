@@ -123,6 +123,7 @@ namespace Election.API.Controllers
             voterToUpdate.WorkPhone = voter.WorkPhone;
             voterToUpdate.Email = voter.Email;
             voterToUpdate.Mobile1 = voter.Mobile1;
+            voterToUpdate.Occupation = voter.Occupation;
             var pollinDivision = await _context.PollingDivisions.FindAsync(voter.PollingDivision.Id);
             voterToUpdate.PollingDivision = pollinDivision;
 
