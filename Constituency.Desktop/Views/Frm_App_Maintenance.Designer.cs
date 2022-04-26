@@ -145,6 +145,15 @@ namespace Constituency.Desktop.Views
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.dgvInterviewerInterviews = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel31 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.tViewComments = new System.Windows.Forms.TreeView();
+            this.tableLayoutPanel32 = new System.Windows.Forms.TableLayoutPanel();
+            this.label39 = new System.Windows.Forms.Label();
+            this.ibtnSaveComment = new FontAwesome.Sharp.IconButton();
+            this.label40 = new System.Windows.Forms.Label();
+            this.txtCommentText = new System.Windows.Forms.TextBox();
+            this.rjCommentActive = new Constituency.Desktop.Controls.RJToggleButton();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -212,6 +221,10 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel21.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInterviewerInterviews)).BeginInit();
+            this.tabPage7.SuspendLayout();
+            this.tableLayoutPanel31.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.tableLayoutPanel32.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tableLayoutPanel22.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -617,7 +630,7 @@ namespace Constituency.Desktop.Views
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(180, 16);
+            this.cmbConstituency.Location = new System.Drawing.Point(180, 19);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(666, 29);
             this.cmbConstituency.TabIndex = 45;
@@ -1002,9 +1015,9 @@ namespace Constituency.Desktop.Views
             // 
             this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage5.Controls.Add(this.tableLayoutPanel9);
-            this.tabPage5.Location = new System.Drawing.Point(4, 33);
+            this.tabPage5.Location = new System.Drawing.Point(4, 27);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1206, 745);
+            this.tabPage5.Size = new System.Drawing.Size(1206, 751);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Canvas";
             // 
@@ -1020,7 +1033,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1206, 751);
             this.tableLayoutPanel9.TabIndex = 2;
             // 
             // groupBox5
@@ -1030,7 +1043,7 @@ namespace Constituency.Desktop.Views
             this.groupBox5.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox5.Location = new System.Drawing.Point(3, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(344, 739);
+            this.groupBox5.Size = new System.Drawing.Size(344, 745);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Canvas List:";
@@ -1043,7 +1056,7 @@ namespace Constituency.Desktop.Views
             this.TVCanvas.Location = new System.Drawing.Point(3, 25);
             this.TVCanvas.Name = "TVCanvas";
             this.TVCanvas.SelectedImageIndex = 0;
-            this.TVCanvas.Size = new System.Drawing.Size(338, 711);
+            this.TVCanvas.Size = new System.Drawing.Size(338, 717);
             this.TVCanvas.TabIndex = 2;
             this.TVCanvas.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVCanvas_AfterSelect);
             this.TVCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tView1_MouseClick);
@@ -1078,7 +1091,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 107F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 375F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(850, 745);
             this.tableLayoutPanel10.TabIndex = 4;
             // 
             // label17
@@ -1124,7 +1137,7 @@ namespace Constituency.Desktop.Views
             this.cmbCanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvasTypes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 19);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 16);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(666, 29);
             this.cmbCanvasTypes.TabIndex = 45;
@@ -1448,7 +1461,7 @@ namespace Constituency.Desktop.Views
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(119, 7);
+            this.cmbSex.Location = new System.Drawing.Point(119, 10);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -1798,11 +1811,146 @@ namespace Constituency.Desktop.Views
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage7.Location = new System.Drawing.Point(4, 27);
+            this.tabPage7.Controls.Add(this.tableLayoutPanel31);
+            this.tabPage7.Location = new System.Drawing.Point(4, 33);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1206, 751);
+            this.tabPage7.Size = new System.Drawing.Size(1206, 745);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Saved Comments";
+            // 
+            // tableLayoutPanel31
+            // 
+            this.tableLayoutPanel31.ColumnCount = 2;
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 850F));
+            this.tableLayoutPanel31.Controls.Add(this.groupBox10, 0, 0);
+            this.tableLayoutPanel31.Controls.Add(this.tableLayoutPanel32, 1, 0);
+            this.tableLayoutPanel31.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel31.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel31.Name = "tableLayoutPanel31";
+            this.tableLayoutPanel31.RowCount = 1;
+            this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel31.Size = new System.Drawing.Size(1206, 745);
+            this.tableLayoutPanel31.TabIndex = 2;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.tViewComments);
+            this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox10.ForeColor = System.Drawing.Color.Gainsboro;
+            this.groupBox10.Location = new System.Drawing.Point(3, 3);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(344, 739);
+            this.groupBox10.TabIndex = 1;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Comments List:";
+            // 
+            // tViewComments
+            // 
+            this.tViewComments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tViewComments.ImageIndex = 0;
+            this.tViewComments.ImageList = this.imgListTreeView;
+            this.tViewComments.Location = new System.Drawing.Point(3, 25);
+            this.tViewComments.Name = "tViewComments";
+            this.tViewComments.SelectedImageIndex = 0;
+            this.tViewComments.Size = new System.Drawing.Size(338, 711);
+            this.tViewComments.TabIndex = 1;
+            this.tViewComments.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvComments_AfterSelect);
+            // 
+            // tableLayoutPanel32
+            // 
+            this.tableLayoutPanel32.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel32.ColumnCount = 2;
+            this.tableLayoutPanel32.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
+            this.tableLayoutPanel32.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel32.Controls.Add(this.label39, 0, 0);
+            this.tableLayoutPanel32.Controls.Add(this.ibtnSaveComment, 1, 2);
+            this.tableLayoutPanel32.Controls.Add(this.label40, 0, 1);
+            this.tableLayoutPanel32.Controls.Add(this.txtCommentText, 1, 1);
+            this.tableLayoutPanel32.Controls.Add(this.rjCommentActive, 1, 0);
+            this.tableLayoutPanel32.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel32.Location = new System.Drawing.Point(353, 3);
+            this.tableLayoutPanel32.Name = "tableLayoutPanel32";
+            this.tableLayoutPanel32.RowCount = 3;
+            this.tableLayoutPanel32.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel32.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 152F));
+            this.tableLayoutPanel32.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 156F));
+            this.tableLayoutPanel32.Size = new System.Drawing.Size(850, 739);
+            this.tableLayoutPanel32.TabIndex = 4;
+            // 
+            // label39
+            // 
+            this.label39.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label39.Location = new System.Drawing.Point(118, 20);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(55, 21);
+            this.label39.TabIndex = 35;
+            this.label39.Text = "Active:";
+            // 
+            // ibtnSaveComment
+            // 
+            this.ibtnSaveComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ibtnSaveComment.AutoSize = true;
+            this.ibtnSaveComment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnSaveComment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(159)))), ((int)(((byte)(148)))));
+            this.ibtnSaveComment.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnSaveComment.FlatAppearance.BorderSize = 2;
+            this.ibtnSaveComment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnSaveComment.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.ibtnSaveComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnSaveComment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnSaveComment.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.ibtnSaveComment.IconColor = System.Drawing.Color.Black;
+            this.ibtnSaveComment.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnSaveComment.IconSize = 40;
+            this.ibtnSaveComment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnSaveComment.Location = new System.Drawing.Point(683, 218);
+            this.ibtnSaveComment.Name = "ibtnSaveComment";
+            this.ibtnSaveComment.Size = new System.Drawing.Size(163, 50);
+            this.ibtnSaveComment.TabIndex = 4;
+            this.ibtnSaveComment.Text = "Save/Update";
+            this.ibtnSaveComment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnSaveComment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnSaveComment.UseVisualStyleBackColor = false;
+            this.ibtnSaveComment.Click += new System.EventHandler(this.ibtnSaveComment_Click);
+            // 
+            // label40
+            // 
+            this.label40.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label40.Location = new System.Drawing.Point(61, 127);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(112, 21);
+            this.label40.TabIndex = 36;
+            this.label40.Text = "Comment Text:";
+            // 
+            // txtCommentText
+            // 
+            this.txtCommentText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtCommentText.Location = new System.Drawing.Point(180, 65);
+            this.txtCommentText.Multiline = true;
+            this.txtCommentText.Name = "txtCommentText";
+            this.txtCommentText.Size = new System.Drawing.Size(666, 146);
+            this.txtCommentText.TabIndex = 40;
+            this.txtCommentText.Tag = "1";
+            // 
+            // rjCommentActive
+            // 
+            this.rjCommentActive.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rjCommentActive.AutoSize = true;
+            this.rjCommentActive.Location = new System.Drawing.Point(180, 18);
+            this.rjCommentActive.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjCommentActive.Name = "rjCommentActive";
+            this.rjCommentActive.OffBackColor = System.Drawing.Color.Gray;
+            this.rjCommentActive.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjCommentActive.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.rjCommentActive.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjCommentActive.Size = new System.Drawing.Size(50, 25);
+            this.rjCommentActive.TabIndex = 42;
+            this.rjCommentActive.UseVisualStyleBackColor = true;
             // 
             // tabPage8
             // 
@@ -2317,6 +2465,11 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel21.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvInterviewerInterviews)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            this.tableLayoutPanel31.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.tableLayoutPanel32.ResumeLayout(false);
+            this.tableLayoutPanel32.PerformLayout();
             this.tabPage8.ResumeLayout(false);
             this.tableLayoutPanel22.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
@@ -2494,5 +2647,14 @@ namespace Constituency.Desktop.Views
         private FontAwesome.Sharp.IconButton iconButton2;
         private FontAwesome.Sharp.IconButton iconButton1;
         private DataGridView dataGridView1;
+        private TableLayoutPanel tableLayoutPanel31;
+        private GroupBox groupBox10;
+        private TreeView tViewComments;
+        private TableLayoutPanel tableLayoutPanel32;
+        private Label label39;
+        private FontAwesome.Sharp.IconButton ibtnSaveComment;
+        private Label label40;
+        private TextBox txtCommentText;
+        private Controls.RJToggleButton rjCommentActive;
     }
 }

@@ -46,7 +46,7 @@ namespace Constituency.Desktop.Views
             UtilRecurrent.LockForm(waitForm, this);
             await LoadCanvas();
             await LoadConstituencies();
-            //await LoadComments();
+            await LoadComments();
             await LoadInterviewers();
             await LoadParties();
             UtilRecurrent.UnlockForm(waitForm, this);
@@ -245,7 +245,7 @@ namespace Constituency.Desktop.Views
             if (CommentsList.Any())
             {
                 cmbIComment.DataSource = null;
-                cmbIComment.DataSource = PartiesList;
+                cmbIComment.DataSource = CommentsList;
                 cmbIComment.ValueMember = "Id";
                 cmbIComment.DisplayMember = "Text";
                 cmbIComment.SelectedItem = null;
@@ -434,9 +434,15 @@ namespace Constituency.Desktop.Views
                 Voter = Interview.Voter;
                 ShowVoterInformation();
                 cmbCanvas.SelectedValue = Interview.Canvas.Id;
-                cmbISupportedParty.SelectedValue = Interview.SupportedParty.Id;
+                if (Interview.SupportedParty != null)
+                {
+                    cmbISupportedParty.SelectedValue = Interview.SupportedParty.Id;
+                }               
                 cmbInterviewers.SelectedValue = Interview.Interviewer.Id;
-                // cmbIComment.SelectedValue = Interview.Comment.Id;
+                if (Interview.Comment!=null)
+                {
+                    cmbIComment.SelectedValue = Interview.Comment.Id;
+                }                
                 txtIOtherComment.Text = Interview.OtherComment;
                 dtpIDate.Value = Interview.Date;
             }

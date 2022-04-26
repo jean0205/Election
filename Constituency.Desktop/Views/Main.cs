@@ -49,7 +49,7 @@ namespace Constituency.Desktop.Views
             {
                 Analytics.TrackEvent("Frm_EnterInterview  " + tokenResponse.User.FullName);
                 Frm_EnterInterview frm = new();
-                frm.ShowDialog();
+                frm.Show(this);
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace Constituency.Desktop.Views
             {
                 Analytics.TrackEvent("Frm_ReviewApplications " + tokenResponse.User.FullName);
                 Frm_Houses frm = new Frm_Houses();
-                frm.ShowDialog();
+                frm.Show(this);
             }
             catch (Exception ex)
             {
@@ -116,7 +116,7 @@ namespace Constituency.Desktop.Views
             {
                 Analytics.TrackEvent("Frm_ElectionVotes " + tokenResponse.User.FullName);
                 Frm_ElectionVotes frm = new Frm_ElectionVotes();
-                frm.ShowDialog();
+                frm.Show(this);
             }
             catch (Exception ex)
             {

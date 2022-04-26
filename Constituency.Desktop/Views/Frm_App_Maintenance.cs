@@ -45,6 +45,7 @@ namespace Constituency.Desktop.Views
                 await LoadCanvas();
                 await LoadInterviewers();
                 await LoadNationalElections();
+                await LoadComments();
                 UtilRecurrent.UnlockForm(waitForm, this);
             }
             catch (Exception ex)
@@ -55,6 +56,7 @@ namespace Constituency.Desktop.Views
             }
         }
 
+       
 
         #region General events
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -569,6 +571,185 @@ namespace Constituency.Desktop.Views
                 Active = rjPActive.Checked,
                 Name = txtPName.Text.ToUpper(),
                 Constituency = ConstituenciesList.FirstOrDefault(c => c.Id == (int)cmbConstituency.SelectedValue)
+            };
+        }
+        #endregion
+
+        #region Comments
+
+        private ObservableCollection<Comment> CommentsList;
+        Comment comment;
+
+        private async Task LoadComments()
+        {
+            //UtilRecurrent.LockForm(waitForm, this);
+            Response response = await ApiServices.GetListAsync<Comment>("Comments", token);
+            //UtilRecurrent.UnlockForm(waitForm, this);
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return;
+            }
+            CommentsList = new ObservableCollection<Comment>((List<Comment>)response.Result);
+            if (CommentsList != null && CommentsList.Any())
+            {
+                RefreshTreeViewComments(CommentsList.ToList());                
+                chkElectionParties.Items.Clear();
+                chkElectionParties.Items.AddRange(PartiesList.Select(p => p.Name).ToArray());
+            }
+            else
+            {
+                cleanScreen();
+                tViewComments.Nodes.Clear();
+            }
+        }
+        private void RefreshTreeViewComments(List<Comment> comments)
+        {
+            try
+            {
+                tViewComments.Nodes.Clear();
+                List<TreeNode> treeNodes = new List<TreeNode>();
+                List<TreeNode> childNodes = new List<TreeNode>();
+                foreach (Comment comment in comments)
+                {
+                    childNodes.Add(new TreeNode(comment.Text, 2, 1));
+                    childNodes[childNodes.Count - 1].Tag = comment.Id;
+                    addContextMenu(childNodes[childNodes.Count - 1], "Delete Comment");
+                }
+                treeNodes.Add(new TreeNode("Comments", 0, 0, childNodes.ToArray()));
+                treeNodes[treeNodes.Count - 1].Tag = 0;
+                childNodes = new List<TreeNode>();
+                tViewComments.Nodes.AddRange(treeNodes.ToArray());
+                tViewComments.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void tvComments_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            AfterSelectNodeTVComments(e.Node);
+        }
+        private void AfterSelectNodeTVComments(TreeNode node)
+        {
+            try
+            {
+                int nodeTag = (int)node.Tag;
+                if (nodeTag > 0)
+                {
+                    comment = CommentsList.Where(p => p.Id == nodeTag).FirstOrDefault();
+                    showCommentInfo(comment);
+                }
+                else
+                {
+                    cleanScreen();
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void showCommentInfo(Comment comment)
+        {
+            try
+            {
+                rjCommentActive.Checked = comment.Active;
+                txtCommentText.Text = comment.Text;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+
+        private async void ibtnSaveComment_Click(object sender, EventArgs e)
+        {
+            if (txtCommentText.TextLength == 0 )
+            {
+                UtilRecurrent.ErrorMessage("Comment text is a required field.");
+                return;
+            }
+            try
+            {
+                if (tViewComments.SelectedNode == null || (tViewComments.SelectedNode != null && (int)tViewComments.SelectedNode.Tag == 0))
+                {
+                    if (await SaveComment())
+                    {
+                        //await LoadParties();
+                        await LoadInfo();
+                    }
+                }
+                else
+                {
+                    await UpdateComment((int)tViewComments.SelectedNode.Tag);
+                    // await LoadParties();
+                    await LoadInfo();
+                }
+                if (comment != null && comment.Id > 0)
+                {
+                    tViewComments.SelectedNode = CollectAllNodes(tViewComments.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == comment.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private async Task<bool> SaveComment()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Comments", BuildComment(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return response.IsSuccess;
+                }
+
+                comment = (Comment)response.Result;
+                UtilRecurrent.InformationMessage("Comment sucessfully saved", "Comment Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
+            }
+        }
+        private async Task UpdateComment(int id)
+        {
+            try
+            {
+                var comment = BuildComment();
+                comment.Id = id;
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PutAsync("Comments", comment, comment.Id, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex); 
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private Comment BuildComment()
+        {
+            return new Comment()
+            {
+                Active = rjCommentActive.Checked,
+                Text = txtCommentText.Text,
             };
         }
         #endregion
@@ -1801,6 +1982,25 @@ namespace Constituency.Desktop.Views
                         }
                         break;
                     }
+                case "Delete Comment":
+                    {
+                        if (await LoadInterviewAsyncByComment("Interviews/FindByComment", comment.Id) == null)
+                        {
+                            await DeleteAsyncGeneric("Comments", comment.Id);
+                            // await LoadConstituencies();
+                            await LoadInfo();
+                            if (tViewComments.Nodes.Count > 0)
+                            {
+                                tViewComments.SelectedNode = tViewComments.Nodes[0];
+                            }
+                            UtilRecurrent.UnlockForm(waitForm, this);
+                        }
+                        else
+                        {
+                            UtilRecurrent.ErrorMessage("The selected Comment can not be deleted. Interviews associated to the Comment in the database.");
+                        }
+                        break;
+                    }
             }
         }
         #region FindRelations before delete
@@ -1836,6 +2036,26 @@ namespace Constituency.Desktop.Views
                     return null;
                 }
                 return (Party)response.Result;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
+        private async Task<Interview> LoadInterviewAsyncByComment(string controller, int id)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<Interview>(controller, id.ToString(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    return null;
+                }
+                return (Interview)response.Result;
             }
             catch (Exception ex)
             {

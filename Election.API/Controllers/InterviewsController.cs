@@ -63,6 +63,20 @@ namespace Election.API.Controllers
 
             return interview;
         }
+        [HttpGet("FindByComment/{id}")]
+        public async Task<ActionResult<Interview>> GetInterviewByComment(int id)
+        {
+            var interview = await _context.Interviews
+                .Include(i => i.Comment)
+                .FirstOrDefaultAsync(i => i.Comment.Id == id);
+
+            if (interview == null)
+            {
+                return NotFound();
+            }
+
+            return interview;
+        }
 
         // PUT: api/Interviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -87,8 +101,16 @@ namespace Election.API.Controllers
             }
             interviewDB.Voter = _context.Voters.FirstOrDefault(v => v.Id == interview.Voter.Id);
             interviewDB.Interviewer = _context.Interviewers.FirstOrDefault(i => i.Id == interview.Interviewer.Id);
-            interviewDB.SupportedParty = _context.Parties.FirstOrDefault(s => s.Id == interview.SupportedParty.Id);            
+           
             interviewDB.Canvas = _context.Canvas.FirstOrDefault(c => c.Id == interview.Canvas.Id);
+            if (interview.SupportedParty == null)
+            {
+                interviewDB.SupportedParty = null;
+            }
+            else
+            {
+                interviewDB.SupportedParty = _context.Parties.FirstOrDefault(s => s.Id == interview.SupportedParty.Id);
+            }
             if (interview.Comment==null)
             {
                 interviewDB.Comment = null;
