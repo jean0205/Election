@@ -145,8 +145,8 @@ namespace Constituency.Desktop.Views
             try
             {
                 Analytics.TrackEvent("Frm_Reports " + tokenResponse.User.FullName);
-                //Frm_Reports frm = new Frm_Reports();
-                //frm.Show(this);
+                Frm_Reports frm = new Frm_Reports();
+                frm.Show(this);
             }
             catch (Exception ex)
             {
