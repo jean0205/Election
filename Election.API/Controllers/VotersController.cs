@@ -241,14 +241,30 @@ namespace Election.API.Controllers
         }
 
         #region Reports
-        [HttpGet("ByDivisionsAndCanvas/{divisionId}")]
-        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisionAndCanvas(int divisionId)
+        [HttpGet("ByDivisionsAndCanvas/{divisionId}/{canvasId}")]
+        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisionAndCanvas(int divisionId,int canvasId)
         {
-            return await _context.Voters
+            if (canvasId > 0) 
+            {
+                return await _context.Voters
                 .Include(v => v.PollingDivision)
                 .ThenInclude(v => v.Constituency)
-                .Where(v => v.PollingDivision.Id == divisionId)
+                .Include(v=>v.Interviews)
+                .ThenInclude(v => v.Canvas)
+                .Where(v => v.PollingDivision.Id == divisionId && v.Active && !v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId))
                 .ToListAsync();
+            }
+            else
+            {
+                return await _context.Voters
+               .Include(v => v.PollingDivision)
+               .ThenInclude(v => v.Constituency)
+               .Include(v => v.Interviews)
+               .ThenInclude(v => v.Canvas)
+               .Where(v => v.PollingDivision.Id == divisionId && v.Active && v.Interviews.Count==0)
+               .ToListAsync();
+            }
+            
         }
         #endregion
     }

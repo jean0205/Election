@@ -788,3 +788,5 @@ C:\Users\jcsoto\source\repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-w
 C:\Users\jcsoto\source\repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_VotersOldScreen.resources
 C:\Users\jcsoto\source\repos\Election4.0\Constituency.Desktop\bin\Debug\net6.0-windows\CefSharp.BrowserSubprocess.exe
 C:\Users\jcsoto\source\repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_Reports.resources
+C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\bin\Debug\net6.0-windows\CefSharp.BrowserSubprocess.exe
+C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_Reports.resources
