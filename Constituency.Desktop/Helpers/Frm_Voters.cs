@@ -399,8 +399,11 @@ namespace Constituency.Desktop.Helpers
                     UtilRecurrent.ErrorMessage(response.Message);
                     return;
                 }
-                VoterList.AddRange((List<Voter>)response.Result);
-                
+                List<Voter> voters = (List<Voter>)response.Result;
+                if(voters!=null && voters.Any())
+                {
+                    VoterList.AddRange(voters.Where(x => !VoterList.Any(y => y.Id == x.Id)));
+                }                
                 if (VoterList.Any())
                 {
                     RefreshTreeViewByDivision(VoterList);
@@ -546,15 +549,13 @@ namespace Constituency.Desktop.Helpers
                     UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
                     return;
                 }
-                if (await SaveVoter())
-                {
-                    await LoadVoters();
-                }
-
+                await SaveVoter();
+               
                 if (Voter != null && Voter.Id > 0)
                 {
-                    tView1.SelectedNode = FindNode(tView1, Voter.Id.ToString());
-                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
+                    VoterList.Add(Voter);
+                    RefreshTreeViewByDivision(VoterList);
+                    tView1.SelectedNode = FindNode(tView1, Voter.Id.ToString());                   
                 }
             }
             catch (Exception ex)
@@ -606,7 +607,7 @@ namespace Constituency.Desktop.Helpers
                 }
 
                 Voter = (Voter)response.Result;
-                //UtilRecurrent.InformationMessage("Application sucessfully saved", "Application Saved");
+                Voter.PollingDivision.Constituency = ConstituenciesList.FirstOrDefault(x => x.PollingDivisions.Any(y => y.Id == Voter.PollingDivision.Id));                
                 return true;
             }
             catch (Exception ex)
@@ -685,20 +686,23 @@ namespace Constituency.Desktop.Helpers
                     return;
                 }
                 await UpdateVoter();
-                await LoadVoters();
-                Voter = VoterList.FirstOrDefault(v => v.Id == Voter.Id);
-                if (Voter.Id > 0)
+
+                if (Voter != null && Voter.Id > 0)
                 {
+                    var oldVoter = VoterList.FirstOrDefault(v => v.Id == Voter.Id);
+                    VoterList.Remove(oldVoter);
+                    VoterList.Add(Voter);
+                    RefreshTreeViewByDivision(VoterList);
                     tView1.SelectedNode = FindNode(tView1, Voter.Id.ToString());
-                    // await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
                 }
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); 
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private async Task UpdateVoter()
+        private async Task<bool> UpdateVoter()
         {
             try
             {
@@ -710,14 +714,18 @@ namespace Constituency.Desktop.Helpers
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
-                    return;
+                    return false;
                 }
+                Voter = (Voter)response.Result;
+                Voter.PollingDivision.Constituency = ConstituenciesList.FirstOrDefault(x => x.PollingDivisions.Any(y => y.Id == Voter.PollingDivision.Id));
+                return true;
             }
             catch (Exception ex)
             {
                 UtilRecurrent.UnlockForm(waitForm, this);
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
+                return false;
             }
         }
         private Voter BuildUpdateVoter()

@@ -151,7 +151,7 @@ namespace Election.API.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetVoter", new { id = voterToUpdate.Id }, voterToUpdate);
         }
 
         // POST: api/Voters
