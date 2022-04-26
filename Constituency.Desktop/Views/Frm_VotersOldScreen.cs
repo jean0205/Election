@@ -19,7 +19,7 @@ using System.Reflection;
 
 namespace Constituency.Desktop.Views
 {
-    public partial class Frm_Voters : Form
+    public partial class Frm_VotersOldScreen : Form
     {
         //Fields
         private string token = string.Empty;
@@ -35,7 +35,7 @@ namespace Constituency.Desktop.Views
         private List<ConstituencyC> ConstituenciesList;
         private List<PollingDivision> PollingDivisionsList;
         private List<PollingDivision> PollingDivisionsListBatch;
-        public Frm_Voters()
+        public Frm_VotersOldScreen()
         {
             this.AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
