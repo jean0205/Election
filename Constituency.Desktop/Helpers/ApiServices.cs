@@ -268,8 +268,49 @@ namespace Constituency.Desktop.Helpers
                     Message = ex.Message
                 };
             }
+        }
+        public static async Task<Response> GetListAsync<T>(string controller, int id, string token)
+        {
+            try
+            {
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
 
+                string url = Settings.GetApiUrl();
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(url)
+                };
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                HttpResponseMessage response = await client.GetAsync($"api/{controller}/{id}");
+                string result = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
+                    };
+                }
+                List<T> list = JsonConvert.DeserializeObject<List<T>>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = list,
+                };
 
+            }
+            catch (Exception ex)
+            {
+
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
         }
         public static async Task<Response> GetListAsync<T>(string controller, string statuses, string token)
         {

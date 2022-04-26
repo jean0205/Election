@@ -630,7 +630,7 @@ namespace Constituency.Desktop.Views
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(180, 19);
+            this.cmbConstituency.Location = new System.Drawing.Point(180, 16);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(666, 29);
             this.cmbConstituency.TabIndex = 45;
@@ -1137,7 +1137,7 @@ namespace Constituency.Desktop.Views
             this.cmbCanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvasTypes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 16);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 19);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(666, 29);
             this.cmbCanvasTypes.TabIndex = 45;
@@ -1461,7 +1461,7 @@ namespace Constituency.Desktop.Views
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(119, 10);
+            this.cmbSex.Location = new System.Drawing.Point(119, 7);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;

@@ -70,7 +70,8 @@ namespace Constituency.Desktop.Views
             try
             {
                 Analytics.TrackEvent("Frm_Voters " + tokenResponse.User.FullName);
-                Frm_Voters frm = new Frm_Voters();
+                //Frm_Voters frm = new Frm_Voters();
+                Frm_Voters2 frm = new Frm_Voters2();
                 frm.Show(this);
             }
             catch (Exception ex)

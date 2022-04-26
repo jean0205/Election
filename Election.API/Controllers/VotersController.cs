@@ -29,6 +29,15 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Constituency)
                 .ToListAsync();
         }
+        [HttpGet("InDivisions/{id}")]
+        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersInDivision(int id)
+        {
+            return await _context.Voters
+                .Include(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
+                .Where(v => v.PollingDivision.Id == id)
+                .ToListAsync();
+        }
         [HttpGet("ByDivisions/{id}")]
         public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisions(int id)
         {
@@ -102,7 +111,7 @@ namespace Election.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVoter(int id, Voter voter)
         {
-            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;            
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (id != voter.Id)
             {
                 return BadRequest();
@@ -116,7 +125,6 @@ namespace Election.API.Controllers
             voterToUpdate.Sex = voter.Sex;
             voterToUpdate.DOB = voter.DOB;
             voterToUpdate.Address = voter.Address;
-            //assing every voter value to voterToUpdate
             voterToUpdate.Mobile1 = voter.Mobile1;
             voterToUpdate.Mobile2 = voter.Mobile2;
             voterToUpdate.HomePhone = voter.HomePhone;
@@ -126,9 +134,7 @@ namespace Election.API.Controllers
             voterToUpdate.Occupation = voter.Occupation;
             var pollinDivision = await _context.PollingDivisions.FindAsync(voter.PollingDivision.Id);
             voterToUpdate.PollingDivision = pollinDivision;
-
             _context.Entry(voterToUpdate).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync(userName);
@@ -172,7 +178,7 @@ namespace Election.API.Controllers
 
             return CreatedAtAction("GetVoter", new { id = voter.Id }, voter);
         }
-        
+
         [HttpPost("Range")]
         public async Task<ActionResult<Voter>> PostVoterList(List<Voter> voters)
         {
