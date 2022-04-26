@@ -85,7 +85,7 @@ namespace Constituency.Desktop.Views
             // 
             this.iconButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
             this.iconButton1.FlatAppearance.BorderSize = 2;
             this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -119,7 +119,7 @@ namespace Constituency.Desktop.Views
             // 
             this.iconButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.iconButton2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.iconButton2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
             this.iconButton2.FlatAppearance.BorderSize = 2;
             this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iconButton2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);

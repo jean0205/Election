@@ -317,7 +317,7 @@ namespace Constituency.Desktop.Views
                         }
                         if (childNodes2.Any())
                         {
-                            childNodes.Add(new TreeNode(division.Name + " [" + childNodes2.Count + "]", 0, 1, childNodes2.ToArray()));
+                            childNodes.Add(new TreeNode(division.Name + " [" + childNodes2.Count + "]", 4, 1, childNodes2.ToArray()));
                             childNodes[childNodes.Count - 1].Tag = "D-" + division.Id;
                             childNodes2 = new List<TreeNode>();
                         }
@@ -503,10 +503,12 @@ namespace Constituency.Desktop.Views
                     if (NodeLevel(e.Node) == 0 && e.Node.Tag != null)
                     {
                         AfterSelectNodeConstituency(int.Parse(e.Node.Tag.ToString().Split('-')[1]));
+                        e.Node.ExpandAll();
                     }
                     if (NodeLevel(e.Node) == 1 && int.Parse(e.Node.Tag.ToString().Split('-')[1]) < int.MaxValue)
                     {
                         AfterSelectNodeConstituency(int.Parse(e.Node.Tag.ToString().Split('-')[1]));
+                        e.Node.ExpandAll();
 
                     }
 

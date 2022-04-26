@@ -303,7 +303,7 @@ namespace Constituency.Desktop.Views
                             childNodes.Add(node);
                         }
                     }
-                    treeNodes.Add(new TreeNode(election.ElectionDate.ToString("MMMM-yyyy") + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
+                    treeNodes.Add(new TreeNode(election.ElectionDate.ToString("MMMM-yyyy") + " [" + cant2 + "]", 0, 0, childNodes.ToArray()));
                     treeNodes[treeNodes.Count - 1].Tag = election.Id;
                     childNodes = new List<TreeNode>();
                 }

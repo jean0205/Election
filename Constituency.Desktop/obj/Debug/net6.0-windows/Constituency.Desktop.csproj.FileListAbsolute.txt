@@ -471,7 +471,6 @@ C:\Users\jcsoto\Source\Repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-w
 C:\Users\jcsoto\Source\Repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_EnterInterview.resources
 C:\Users\jcsoto\Source\Repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_Houses.resources
 C:\Users\jcsoto\Source\Repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_Login.resources
-C:\Users\jcsoto\Source\Repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_Voters.resources
 C:\Users\jcsoto\Source\Repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Main.resources
 C:\Users\jcsoto\Source\Repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.csproj.GenerateResource.cache
 C:\Users\jcsoto\Source\Repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.GeneratedMSBuildEditorConfig.editorconfig
@@ -785,3 +784,5 @@ C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\obj\Debug\net6.0-wi
 C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.genruntimeconfig.cache
 C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\obj\Debug\net6.0-windows\ref\Constituency.Desktop.dll
 C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_VotersOldScreen.resources
+C:\Users\jcsoto\source\repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_Voters2.resources
+C:\Users\jcsoto\source\repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_VotersOldScreen.resources

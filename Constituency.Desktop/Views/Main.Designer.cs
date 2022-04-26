@@ -146,7 +146,7 @@ namespace Constituency.Desktop.Views
             this.ibtnEnterApp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ibtnEnterApp.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ibtnEnterApp.ForeColor = System.Drawing.Color.Gainsboro;
-            this.ibtnEnterApp.IconChar = FontAwesome.Sharp.IconChar.FileImport;
+            this.ibtnEnterApp.IconChar = FontAwesome.Sharp.IconChar.IdCardAlt;
             this.ibtnEnterApp.IconColor = System.Drawing.Color.DeepSkyBlue;
             this.ibtnEnterApp.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnEnterApp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -172,7 +172,7 @@ namespace Constituency.Desktop.Views
             this.ibtnReview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ibtnReview.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ibtnReview.ForeColor = System.Drawing.Color.Gainsboro;
-            this.ibtnReview.IconChar = FontAwesome.Sharp.IconChar.CheckDouble;
+            this.ibtnReview.IconChar = FontAwesome.Sharp.IconChar.Home;
             this.ibtnReview.IconColor = System.Drawing.Color.DeepSkyBlue;
             this.ibtnReview.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnReview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -198,7 +198,7 @@ namespace Constituency.Desktop.Views
             this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.iconButton1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Artstation;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Poll;
             this.iconButton1.IconColor = System.Drawing.Color.DeepSkyBlue;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

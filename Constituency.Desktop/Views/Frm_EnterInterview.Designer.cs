@@ -202,10 +202,12 @@
             this.imgListTreeView.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.imgListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTreeView.ImageStream")));
             this.imgListTreeView.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgListTreeView.Images.SetKeyName(0, "customers-icon-35908.jpg");
-            this.imgListTreeView.Images.SetKeyName(1, "customers-icon-35912 (1).png");
+            this.imgListTreeView.Images.SetKeyName(0, "Sample ballots-01.png");
+            this.imgListTreeView.Images.SetKeyName(1, "imageedit_2_8360456927.png");
             this.imgListTreeView.Images.SetKeyName(2, "person-icon-1680.png");
             this.imgListTreeView.Images.SetKeyName(3, "human-icon-png-1906.png");
+            this.imgListTreeView.Images.SetKeyName(4, "customers-icon-35908.jpg");
+            this.imgListTreeView.Images.SetKeyName(5, "customers-icon-35912 (1).png");
             // 
             // tableLayoutPanel49
             // 
@@ -1183,6 +1185,7 @@
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.White;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_EnterInterview";
             this.Text = "Enter Interview";

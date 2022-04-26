@@ -257,7 +257,7 @@ namespace Constituency.Desktop.Views
                             }
                         }
                     }
-                    treeNodes.Add(new TreeNode(contituency.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
+                    treeNodes.Add(new TreeNode(contituency.Name + " [" + cant2 + "]",8, 1, childNodes.ToArray()));
                     treeNodes[treeNodes.Count - 1].Tag = contituency.Id;
                     childNodes = new List<TreeNode>();
                 }
@@ -307,7 +307,7 @@ namespace Constituency.Desktop.Views
                         childNodes[childNodes.Count - 1].Tag = division.Id;
                         childNodes2 = new List<TreeNode>();
                     }
-                    treeNodes.Add(new TreeNode(contituency.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
+                    treeNodes.Add(new TreeNode(contituency.Name + " [" + cant2 + "]", 8, 1, childNodes.ToArray()));
                     treeNodes[treeNodes.Count - 1].Tag = contituency.Id;
                     childNodes = new List<TreeNode>();
                 }
@@ -345,6 +345,7 @@ namespace Constituency.Desktop.Views
                         FillUpdComboboxDivision();
                         ibtnSaveVoter.Visible = true;
                         ibtnUpdate.Visible = false;
+                        e.Node.ExpandAll();
                     }
                     if (NodeLevel(e.Node) == 1)
                     {
@@ -362,6 +363,7 @@ namespace Constituency.Desktop.Views
                             tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => x.Tag.ToString() == e.Node.Tag.ToString());
                             tView1.SelectedNode.Expand();
                         }
+                        e.Node.ExpandAll();
 
 
                     }
@@ -390,7 +392,7 @@ namespace Constituency.Desktop.Views
             try
             {
                 UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.GetListAsync<Voter>("Voters/InDivisions", divisionId, token);
+                Response response = await ApiServices.GetListAsync<Voter>("Voters/InDivisions", divisionId.ToString(), token);
                 UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {

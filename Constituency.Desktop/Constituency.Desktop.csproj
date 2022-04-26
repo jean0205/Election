@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>kindpng_312759.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="kindpng_312759.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CefSharp.WinForms.NETCore" Version="100.0.230" />

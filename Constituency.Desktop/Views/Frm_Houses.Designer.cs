@@ -182,14 +182,17 @@
             this.imgListTreeView.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.imgListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTreeView.ImageStream")));
             this.imgListTreeView.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgListTreeView.Images.SetKeyName(0, "customers-icon-35908.jpg");
+            this.imgListTreeView.Images.SetKeyName(0, "polling.png");
             this.imgListTreeView.Images.SetKeyName(1, "customers-icon-35912 (1).png");
-            this.imgListTreeView.Images.SetKeyName(2, "person-icon-1680.png");
-            this.imgListTreeView.Images.SetKeyName(3, "human-icon-png-1906.png");
-            this.imgListTreeView.Images.SetKeyName(4, "bank-icon-5969 (1).png");
-            this.imgListTreeView.Images.SetKeyName(5, "credit-card-icon-png-4424.png");
-            this.imgListTreeView.Images.SetKeyName(6, "Applicants.png");
-            this.imgListTreeView.Images.SetKeyName(7, "applicantsSelected.png");
+            this.imgListTreeView.Images.SetKeyName(2, "house-11563063398wnvlfdkx7m.png");
+            this.imgListTreeView.Images.SetKeyName(3, "simple-house-NxE5a78-600 (1).jpg");
+            this.imgListTreeView.Images.SetKeyName(4, "customers-icon-35908.jpg");
+            this.imgListTreeView.Images.SetKeyName(5, "person-icon-1680.png");
+            this.imgListTreeView.Images.SetKeyName(6, "human-icon-png-1906.png");
+            this.imgListTreeView.Images.SetKeyName(7, "bank-icon-5969 (1).png");
+            this.imgListTreeView.Images.SetKeyName(8, "credit-card-icon-png-4424.png");
+            this.imgListTreeView.Images.SetKeyName(9, "Applicants.png");
+            this.imgListTreeView.Images.SetKeyName(10, "applicantsSelected.png");
             // 
             // tableLayoutPanel49
             // 
@@ -437,7 +440,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(580, 6);
+            this.cmbDivision.Location = new System.Drawing.Point(580, 9);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(324, 29);
             this.cmbDivision.TabIndex = 34;
@@ -448,7 +451,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(129, 6);
+            this.cmbConstituency.Location = new System.Drawing.Point(129, 9);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(318, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -575,7 +578,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "F",
             "M"});
-            this.cmbSex.Location = new System.Drawing.Point(109, 4);
+            this.cmbSex.Location = new System.Drawing.Point(109, 5);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -962,6 +965,7 @@
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.White;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Houses";
             this.Text = "Houses";

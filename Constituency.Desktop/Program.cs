@@ -1,5 +1,7 @@
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Views;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 
@@ -24,6 +26,9 @@ namespace Constituency.Desktop
                 Formatting = Newtonsoft.Json.Formatting.Indented,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             };
+            Analytics.SetEnabledAsync(true);
+            AppCenter.Start("96a279ba-75f9-485c-b7fd-bb555d6432d1",
+                   typeof(Analytics), typeof(Crashes));
 
             Application.Run(new Frm_Login());
         }

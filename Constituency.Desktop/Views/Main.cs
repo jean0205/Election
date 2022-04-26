@@ -84,16 +84,16 @@ namespace Constituency.Desktop.Views
 
         private async void iconButton2_Click(object sender, EventArgs e)
         {
-            //if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
-            //{
-            //    Analytics.TrackEvent("Frm_ReviewApplications NO ACCESS " + tokenResponse.User.FullName);
-            //    UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
-            //    return;
-            //}
-           
+            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+            {
+                Analytics.TrackEvent("Frm_Houses NO ACCESS " + tokenResponse.User.FullName);
+                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+                return;
+            }
+
             try
             {
-                Analytics.TrackEvent("Frm_ReviewApplications " + tokenResponse.User.FullName);
+                Analytics.TrackEvent("Frm_Houses " + tokenResponse.User.FullName);
                 Frm_Houses frm = new Frm_Houses();
                 frm.Show(this);
             }
@@ -200,55 +200,8 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
                 return;
             }
-        }
-        private async void iconButton5_Click_1(object sender, EventArgs e)
-        {
-            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
-            {
-                Analytics.TrackEvent("Frm_AllApplications NO ACCESS " + tokenResponse.User.FullName);
-                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
-                return;
-            }
-
-           
-            try
-            {
-                Analytics.TrackEvent("Frm_AllApplications  " + tokenResponse.User.FullName);
-                //Frm_AllApplications frm = new Frm_AllApplications();
-                //frm.Show(this);
-            }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);
-                UtilRecurrent.ErrorMessage(ex.Message);
-               
-                return;
-            }
-        }
-        private async void iconButton7_Click(object sender, EventArgs e)
-        {
-            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
-            {
-                Analytics.TrackEvent("Frm_MasterFile NO ACCESS " + tokenResponse.User.FullName);
-                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
-                return;
-            }           
-            try
-            {
-                Analytics.TrackEvent("Frm_MasterFile " + tokenResponse.User.FullName);
-                waitForm.Show(this);
-                //Frm_MasterFile frm = new Frm_MasterFile();
-                //frm.Show(this);
-             UtilRecurrent.UnlockForm(waitForm, this);
-               
-            }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);
-                UtilRecurrent.ErrorMessage(ex.Message);
-                return;
-            }
-        }
+        }      
+       
         private async void ibtnChangePassword_Click(object sender, EventArgs e)
         {
             if (ValidatePasswordChange())
@@ -282,7 +235,6 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-
                 if (mtxtOldPassw.TextLength<6)
                 {
                     UtilRecurrent.InformationMessage("The old password must have at least 6 characters.", "Change Password");
@@ -337,7 +289,6 @@ namespace Constituency.Desktop.Views
                     return true;
                 }
                 return false;
-
             }
             catch (Exception ex)
             {
@@ -479,7 +430,6 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-
 
         private AddUserViewModel UserPicture(string path)
         {

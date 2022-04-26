@@ -243,6 +243,7 @@
             this.imgListTreeView.Images.SetKeyName(5, "credit-card-icon-png-4424.png");
             this.imgListTreeView.Images.SetKeyName(6, "Applicants.png");
             this.imgListTreeView.Images.SetKeyName(7, "applicantsSelected.png");
+            this.imgListTreeView.Images.SetKeyName(8, "polling.png");
             // 
             // tableLayoutPanel49
             // 
@@ -494,7 +495,7 @@
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(565, 5);
+            this.cmbDivision.Location = new System.Drawing.Point(565, 8);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(313, 29);
             this.cmbDivision.TabIndex = 34;
@@ -506,7 +507,7 @@
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(309, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -732,7 +733,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(105, 5);
+            this.cmbSex.Location = new System.Drawing.Point(105, 8);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -1333,6 +1334,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Voters2";
             this.Text = "Voters";
