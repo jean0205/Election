@@ -239,5 +239,17 @@ namespace Election.API.Controllers
             await _context.SaveChangesAsync(userName);
             return NoContent();
         }
+
+        #region Reports
+        [HttpGet("ByDivisionsAndCanvas/{divisionId}")]
+        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisionAndCanvas(int divisionId)
+        {
+            return await _context.Voters
+                .Include(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
+                .Where(v => v.PollingDivision.Id == divisionId)
+                .ToListAsync();
+        }
+        #endregion
     }
 }
