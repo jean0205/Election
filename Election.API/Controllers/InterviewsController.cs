@@ -155,8 +155,10 @@ namespace Election.API.Controllers
             {
                 interview.Comment = _context.Comments.FirstOrDefault(c => c.Id == interview.Comment.Id);
             }
-
-            interview.SupportedParty = _context.Parties.FirstOrDefault(s => s.Id == interview.SupportedParty.Id);
+            if (interview.SupportedParty !=null)
+            {
+                interview.SupportedParty = _context.Parties.FirstOrDefault(s => s.Id == interview.SupportedParty.Id);
+            }            
             interview.Voter = _context.Voters.FirstOrDefault(v => v.Id == interview.Voter.Id);
             interview.Canvas = _context.Canvas.FirstOrDefault(c => c.Id == interview.Canvas.Id);
             _context.Interviews.Add(interview);
