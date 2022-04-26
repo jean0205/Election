@@ -440,7 +440,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(580, 9);
+            this.cmbDivision.Location = new System.Drawing.Point(580, 6);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(324, 29);
             this.cmbDivision.TabIndex = 34;
@@ -451,7 +451,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(129, 9);
+            this.cmbConstituency.Location = new System.Drawing.Point(129, 6);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(318, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -578,7 +578,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "F",
             "M"});
-            this.cmbSex.Location = new System.Drawing.Point(109, 5);
+            this.cmbSex.Location = new System.Drawing.Point(109, 4);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
