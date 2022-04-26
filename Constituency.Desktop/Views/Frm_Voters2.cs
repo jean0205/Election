@@ -3,9 +3,7 @@ using Constituency.Desktop.Controls;
 using Constituency.Desktop.Entities;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
-using Constituency.Desktop.Views;
 using Microsoft.AppCenter.Crashes;
-using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Reflection;
@@ -18,7 +16,7 @@ using System.Reflection;
 //hacer table para salvar los duplicados
 
 
-namespace Constituency.Desktop.Helpers
+namespace Constituency.Desktop.Views
 {
     public partial class Frm_Voters2 : Form
     {
@@ -52,7 +50,7 @@ namespace Constituency.Desktop.Helpers
             await LoadConstituencies();
             //await LoadVoters();
             await LoadDivisionsBatch();
-            VoterList =new();
+            VoterList = new();
 
         }
 
@@ -186,7 +184,7 @@ namespace Constituency.Desktop.Helpers
                     UtilRecurrent.ErrorMessage(response.Message);
                     return;
                 }
-                VoterList = new ((List<Voter>)response.Result);
+                VoterList = new((List<Voter>)response.Result);
                 if (VoterList.Any())
                 {
                     RefreshTreeView(VoterList.ToList());
@@ -245,7 +243,7 @@ namespace Constituency.Desktop.Helpers
                         int cant = VoterList.Where(v => v.PollingDivision.Id == division.Id).Count();
                         if (VoterList.Where(v => v.PollingDivision.Id == division.Id).Any())
                         {
-                            foreach (Voter voter in VoterList.Where(v => v.PollingDivision.Id == division.Id))
+                            foreach (Voter voter in VoterList.OrderBy(v => v.FullName).Where(v => v.PollingDivision.Id == division.Id))
                             {
                                 TreeNode node2 = new TreeNode(voter.FullName, 2, 3);
                                 node2.Tag = voter.Id;
@@ -298,7 +296,7 @@ namespace Constituency.Desktop.Helpers
                         int cant = Voters.Where(v => v.PollingDivision.Id == division.Id).Count();
                         if (Voters.Where(v => v.PollingDivision.Id == division.Id).Any())
                         {
-                            foreach (Voter voter in VoterList.Where(v => v.PollingDivision.Id == division.Id))
+                            foreach (Voter voter in VoterList.Where(v => v.PollingDivision.Id == division.Id).OrderBy(v => v.SurName))
                             {
                                 TreeNode node2 = new TreeNode(voter.FullName, 2, 3);
                                 node2.Tag = voter.Id;
@@ -315,7 +313,7 @@ namespace Constituency.Desktop.Helpers
                 }
                 tView1.Nodes.AddRange(treeNodes.ToArray());
                 //tView1.ExpandAll();
-               // tView1.CollapseAll();
+                // tView1.CollapseAll();
                 rjCollapseAll.Checked = false;
                 lblExpand.Text = "EXPAND All";
                 tView1.Font = new Font("Segoe UI", 12, FontStyle.Regular);
@@ -324,11 +322,11 @@ namespace Constituency.Desktop.Helpers
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); 
+                Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private async  void tView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private async void tView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             try
             {
@@ -358,13 +356,13 @@ namespace Constituency.Desktop.Helpers
                         ibtnSaveVoter.Visible = true;
                         ibtnUpdate.Visible = false;
                         //leer losvoter theladivision y agregarlos a la lista de voters
-                        if (e.Node.Nodes.Count == 0) 
+                        if (e.Node.Nodes.Count == 0)
                         {
                             await LoadVotersInDivision((int)e.Node.Tag);
                             tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => x.Tag.ToString() == e.Node.Tag.ToString());
                             tView1.SelectedNode.Expand();
                         }
-                       
+
 
                     }
                 }
@@ -392,7 +390,7 @@ namespace Constituency.Desktop.Helpers
             try
             {
                 UtilRecurrent.LockForm(waitForm, this);
-                Response response = await ApiServices.GetListAsync<Voter>("Voters/InDivisions",divisionId, token);
+                Response response = await ApiServices.GetListAsync<Voter>("Voters/InDivisions", divisionId, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
@@ -400,10 +398,10 @@ namespace Constituency.Desktop.Helpers
                     return;
                 }
                 List<Voter> voters = (List<Voter>)response.Result;
-                if(voters!=null && voters.Any())
+                if (voters != null && voters.Any())
                 {
                     VoterList.AddRange(voters.Where(x => !VoterList.Any(y => y.Id == x.Id)));
-                }                
+                }
                 if (VoterList.Any())
                 {
                     RefreshTreeViewByDivision(VoterList);
@@ -550,12 +548,12 @@ namespace Constituency.Desktop.Helpers
                     return;
                 }
                 await SaveVoter();
-               
+
                 if (Voter != null && Voter.Id > 0)
                 {
                     VoterList.Add(Voter);
                     RefreshTreeViewByDivision(VoterList);
-                    tView1.SelectedNode = FindNode(tView1, Voter.Id.ToString());                   
+                    tView1.SelectedNode = FindNode(tView1, Voter.Id.ToString());
                 }
             }
             catch (Exception ex)
@@ -607,7 +605,7 @@ namespace Constituency.Desktop.Helpers
                 }
 
                 Voter = (Voter)response.Result;
-                Voter.PollingDivision.Constituency = ConstituenciesList.FirstOrDefault(x => x.PollingDivisions.Any(y => y.Id == Voter.PollingDivision.Id));                
+                Voter.PollingDivision.Constituency = ConstituenciesList.FirstOrDefault(x => x.PollingDivisions.Any(y => y.Id == Voter.PollingDivision.Id));
                 return true;
             }
             catch (Exception ex)
@@ -698,7 +696,7 @@ namespace Constituency.Desktop.Helpers
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); 
+                Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
