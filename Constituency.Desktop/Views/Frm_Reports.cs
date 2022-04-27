@@ -1,6 +1,8 @@
-﻿using Constituency.Desktop.Entities;
+﻿using Constituency.Desktop.Components;
+using Constituency.Desktop.Entities;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
+using FontAwesome.Sharp;
 using Microsoft.AppCenter.Crashes;
 using System.Data;
 
@@ -10,6 +12,7 @@ namespace Constituency.Desktop.Views
     {
         //Fields
         private string token = string.Empty;
+        WaitFormFunc waitForm = new WaitFormFunc();
 
         //objects
         User user { get; set; }
@@ -20,7 +23,6 @@ namespace Constituency.Desktop.Views
         private List<Canvas> CanvasList;
         public Frm_Reports()
         {
-
             this.AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
             token = Main.GetInstance().tokenResponse.Token;
@@ -32,7 +34,37 @@ namespace Constituency.Desktop.Views
             await LoadConstituencies();
             await LoadCanvasTypes();
             DGVFormats();
-
+        }
+        private async Task<bool> ValidateAccess(string requiredAccess)
+        {
+            try
+            {
+                var roles = await LoadUsersRoles(user);
+                if (roles != null && roles.Contains(requiredAccess))
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                return false;
+            }
+        }
+        private async Task<List<string>> LoadUsersRoles(User user)
+        {
+            UtilRecurrent.LockForm(waitForm, this);
+            Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName,token);
+            UtilRecurrent.UnlockForm(waitForm, this);
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return null;
+            }
+            return (List<string>)response.Result;
         }
 
         #region Tab1
@@ -215,17 +247,32 @@ namespace Constituency.Desktop.Views
                 v.WorkPhone,
                 v.Email
             }).ToList();
+            lblTotal1.Text = result.Count.ToString();
 
         }
         private async Task<List<Voter>> LoadCanvasReport(string controller, int divisionId, int canvasId, bool interviewed)
         {
-            Response response = await ApiServices.GetListAsyncReportsVotersByCanvas<Voter>(controller, divisionId, canvasId, interviewed, token);
-            if (!response.IsSuccess)
+            try
             {
-                UtilRecurrent.ErrorMessage(response.Message);
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.GetListAsyncReportsVotersByCanvas<Voter>(controller, divisionId, canvasId, interviewed, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return null;
+                }
+                return new((List<Voter>)response.Result);
+
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
                 return null;
             }
-            return new((List<Voter>)response.Result);
+           
         }
 
         private void rjCanvasActive_CheckedChanged(object sender, EventArgs e)
@@ -234,5 +281,20 @@ namespace Constituency.Desktop.Views
             cmbCanvasTypes.SelectedIndex = -1;
             cmbCanvas.SelectedIndex = -1;
         }
+        
+        private async void ibtnRefresh_Click(object sender, EventArgs e)
+        {
+            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+            {
+                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+                return;
+            }
+            dgv1Interviews.MultiSelect = true;
+            UtilRecurrent.ExportToExcel(dgv1Interviews);
+            dgv1Interviews.MultiSelect = false;
+            dgv1Interviews.CurrentCell = null;
+        }
+   
+       
     }
 }

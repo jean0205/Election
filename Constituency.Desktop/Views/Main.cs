@@ -299,10 +299,8 @@ namespace Constituency.Desktop.Views
         }
         private async Task<List<string>> LoadUsersRoles(User user)
         {
-            UtilRecurrent.LockForm(waitForm, this);
-          
+            UtilRecurrent.LockForm(waitForm, this);          
             Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName, tokenResponse.Token);
-
          UtilRecurrent.UnlockForm(waitForm, this);
             
             if (!response.IsSuccess)
