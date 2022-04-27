@@ -33,16 +33,16 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rbtnNotInterviewed = new System.Windows.Forms.RadioButton();
             this.label14 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rbtnInterviewed = new System.Windows.Forms.RadioButton();
             this.cmbConstituency = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.cmbDivision = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.rjCanvasActive = new Constituency.Desktop.Controls.RJToggleButton();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tPanelCanvas = new System.Windows.Forms.TableLayoutPanel();
             this.cmbCanvas = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.cmbCanvasTypes = new System.Windows.Forms.ComboBox();
@@ -54,7 +54,7 @@
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
+            this.tPanelCanvas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1Interviews)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,14 +111,14 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.315257F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.90889F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.218366F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.038322F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.44685F));
-            this.tableLayoutPanel1.Controls.Add(this.radioButton2, 1, 1);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.48875F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.71382F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.82637F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.97106F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 722F));
+            this.tableLayoutPanel1.Controls.Add(this.rbtnNotInterviewed, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label14, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.radioButton1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.rbtnInterviewed, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.cmbConstituency, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label15, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.cmbDivision, 3, 0);
@@ -127,55 +127,55 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.84211F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.15789F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1383, 94);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // radioButton2
+            // rbtnNotInterviewed
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(118, 56);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(139, 25);
-            this.radioButton2.TabIndex = 48;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Not Interviewed";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.Click += new System.EventHandler(this.radioButton1_Click);
+            this.rbtnNotInterviewed.AutoSize = true;
+            this.rbtnNotInterviewed.Location = new System.Drawing.Point(125, 56);
+            this.rbtnNotInterviewed.Name = "rbtnNotInterviewed";
+            this.rbtnNotInterviewed.Size = new System.Drawing.Size(139, 25);
+            this.rbtnNotInterviewed.TabIndex = 48;
+            this.rbtnNotInterviewed.TabStop = true;
+            this.rbtnNotInterviewed.Text = "Not Interviewed";
+            this.rbtnNotInterviewed.UseVisualStyleBackColor = true;
+            this.rbtnNotInterviewed.Click += new System.EventHandler(this.radioButton1_Click);
             // 
             // label14
             // 
             this.label14.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(9, 16);
+            this.label14.Location = new System.Drawing.Point(16, 16);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(103, 21);
             this.label14.TabIndex = 35;
             this.label14.Text = "Constituency:";
             // 
-            // radioButton1
+            // rbtnInterviewed
             // 
-            this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(3, 56);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(109, 25);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Interviewed";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.Click += new System.EventHandler(this.radioButton1_Click);
+            this.rbtnInterviewed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbtnInterviewed.AutoSize = true;
+            this.rbtnInterviewed.Location = new System.Drawing.Point(10, 56);
+            this.rbtnInterviewed.Name = "rbtnInterviewed";
+            this.rbtnInterviewed.Size = new System.Drawing.Size(109, 25);
+            this.rbtnInterviewed.TabIndex = 1;
+            this.rbtnInterviewed.TabStop = true;
+            this.rbtnInterviewed.Text = "Interviewed";
+            this.rbtnInterviewed.UseVisualStyleBackColor = true;
+            this.rbtnInterviewed.Click += new System.EventHandler(this.radioButton1_Click);
             // 
             // cmbConstituency
             // 
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(118, 15);
+            this.cmbConstituency.Location = new System.Drawing.Point(125, 15);
             this.cmbConstituency.Name = "cmbConstituency";
-            this.cmbConstituency.Size = new System.Drawing.Size(297, 29);
+            this.cmbConstituency.Size = new System.Drawing.Size(315, 29);
             this.cmbConstituency.TabIndex = 37;
             this.cmbConstituency.Tag = "1";
             this.cmbConstituency.SelectionChangeCommitted += new System.EventHandler(this.cmbConstituency_SelectionChangeCommitted);
@@ -185,7 +185,7 @@
             this.label15.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(432, 16);
+            this.label15.Location = new System.Drawing.Point(462, 16);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(69, 21);
             this.label15.TabIndex = 36;
@@ -196,7 +196,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(507, 15);
+            this.cmbDivision.Location = new System.Drawing.Point(537, 15);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(119, 29);
             this.cmbDivision.TabIndex = 38;
@@ -207,17 +207,17 @@
             this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.31472F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.68528F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 587F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.41085F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.58915F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 558F));
             this.tableLayoutPanel4.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.rjCanvasActive, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel3, 2, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(632, 3);
+            this.tableLayoutPanel4.Controls.Add(this.tPanelCanvas, 2, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(662, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(748, 47);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(718, 47);
             this.tableLayoutPanel4.TabIndex = 50;
             // 
             // label1
@@ -225,9 +225,9 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(90, 2);
+            this.label1.Location = new System.Drawing.Point(72, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 42);
+            this.label1.Size = new System.Drawing.Size(70, 42);
             this.label1.TabIndex = 51;
             this.label1.Text = "Filter By Canvas";
             // 
@@ -245,38 +245,40 @@
             this.rjCanvasActive.Size = new System.Drawing.Size(50, 25);
             this.rjCanvasActive.TabIndex = 50;
             this.rjCanvasActive.UseVisualStyleBackColor = true;
+            this.rjCanvasActive.CheckedChanged += new System.EventHandler(this.rjCanvasActive_CheckedChanged);
             // 
-            // tableLayoutPanel3
+            // tPanelCanvas
             // 
-            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tPanelCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.ColumnCount = 4;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.88979F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.97559F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.71617F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.41845F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Controls.Add(this.cmbCanvas, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label20, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.cmbCanvasTypes, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label18, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(163, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(582, 41);
-            this.tableLayoutPanel3.TabIndex = 49;
+            this.tPanelCanvas.ColumnCount = 4;
+            this.tPanelCanvas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.88065F));
+            this.tPanelCanvas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.68897F));
+            this.tPanelCanvas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.92405F));
+            this.tPanelCanvas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.50633F));
+            this.tPanelCanvas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tPanelCanvas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tPanelCanvas.Controls.Add(this.cmbCanvas, 3, 0);
+            this.tPanelCanvas.Controls.Add(this.label20, 2, 0);
+            this.tPanelCanvas.Controls.Add(this.cmbCanvasTypes, 1, 0);
+            this.tPanelCanvas.Controls.Add(this.label18, 0, 0);
+            this.tPanelCanvas.Enabled = false;
+            this.tPanelCanvas.Location = new System.Drawing.Point(162, 3);
+            this.tPanelCanvas.Name = "tPanelCanvas";
+            this.tPanelCanvas.RowCount = 1;
+            this.tPanelCanvas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tPanelCanvas.Size = new System.Drawing.Size(553, 41);
+            this.tPanelCanvas.TabIndex = 49;
             // 
             // cmbCanvas
             // 
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(383, 9);
+            this.cmbCanvas.Location = new System.Drawing.Point(331, 9);
             this.cmbCanvas.Name = "cmbCanvas";
-            this.cmbCanvas.Size = new System.Drawing.Size(196, 29);
+            this.cmbCanvas.Size = new System.Drawing.Size(219, 29);
             this.cmbCanvas.TabIndex = 40;
             this.cmbCanvas.Tag = "1";
             // 
@@ -285,7 +287,7 @@
             this.label20.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label20.Location = new System.Drawing.Point(314, 10);
+            this.label20.Location = new System.Drawing.Point(262, 10);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(63, 21);
             this.label20.TabIndex = 39;
@@ -296,9 +298,9 @@
             this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(147, 9);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(123, 9);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
-            this.cmbCanvasTypes.Size = new System.Drawing.Size(156, 29);
+            this.cmbCanvasTypes.Size = new System.Drawing.Size(125, 29);
             this.cmbCanvasTypes.TabIndex = 47;
             this.cmbCanvasTypes.Tag = "1";
             this.cmbCanvasTypes.SelectionChangeCommitted += new System.EventHandler(this.cmbCanvasType_SelectionChangeCommitted);
@@ -308,7 +310,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label18.Location = new System.Drawing.Point(35, 10);
+            this.label18.Location = new System.Drawing.Point(11, 10);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(106, 21);
             this.label18.TabIndex = 46;
@@ -344,8 +346,8 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
+            this.tPanelCanvas.ResumeLayout(false);
+            this.tPanelCanvas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1Interviews)).EndInit();
             this.ResumeLayout(false);
 
@@ -366,10 +368,10 @@
         private ComboBox cmbCanvas;
         private ComboBox cmbCanvasTypes;
         private Label label18;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
+        private RadioButton rbtnNotInterviewed;
+        private RadioButton rbtnInterviewed;
         private DataGridView dgv1Interviews;
-        private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel tPanelCanvas;
         private TableLayoutPanel tableLayoutPanel4;
         private Label label1;
         private Controls.RJToggleButton rjCanvasActive;

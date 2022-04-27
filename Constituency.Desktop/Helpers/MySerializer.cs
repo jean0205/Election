@@ -22,7 +22,7 @@ namespace Constituency.Desktop.Helpers
 
         public static bool VoterEquealtoVpter2(Voter v1, Voter v2)
         {
-            if (v1.DOB == v2.DOB && v1.Occupation == v2.Occupation && v1.Address == v2.Address && v1.Email==v2.Email && v1.FullName == v2.FullName && v1.HomePhone==v2.HomePhone && v1.Mobile1==v2.Mobile1 && v1.Mobile2 == v2.Mobile2 && v1.WorkPhone == v2.WorkPhone && v1.PollingDivision.Id== v2.PollingDivision.Id && v1.Reg == v2.Reg && v1.Sex==v2.Sex)
+            if (v1.DOB == v2.DOB && v1.Occupation == v2.Occupation && v1.Address == v2.Address && v1.Email==v2.Email && v1.FullName == v2.FullName && v1.HomePhone==v2.HomePhone && v1.Mobile1==v2.Mobile1 && v1.Mobile2 == v2.Mobile2 && v1.WorkPhone == v2.WorkPhone && v1.PollingDivision.Id== v2.PollingDivision.Id && v1.Reg == v2.Reg && v1.Sex==v2.Sex && v1.Dead==v2.Dead)
             {
                 return true;
             }

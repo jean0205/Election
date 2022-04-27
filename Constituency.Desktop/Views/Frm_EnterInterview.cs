@@ -473,6 +473,7 @@ namespace Constituency.Desktop.Views
                     cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
                     FillUpdComboboxDivision();
                     cmbDivision.SelectedValue = Voter.PollingDivision.Id;
+                    rjDeceased.Checked = Voter.Dead;
 
                 }
             }
@@ -568,12 +569,11 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
                 }
-                if (cmbISupportedParty.SelectedValue == null && cmbIComment.SelectedValue == null)
+                if (cmbISupportedParty.SelectedValue == null && cmbIComment.SelectedValue == null && rjDeceased.Checked==false)
                 {
-                    UtilRecurrent.ErrorMessage("No supported party or comment selected.");
+                    UtilRecurrent.ErrorMessage("Not supported party or comment selected, for alive voter.");
                     return;
                 }
-
                 if (txtEmail.TextLength > 0 && !UtilRecurrent.IsValidEmail(txtEmail.Text.Trim()))
                 {
                     UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
@@ -705,6 +705,7 @@ namespace Constituency.Desktop.Views
             try
             {
                 var voter = new Voter();
+                voter.Active = true;
                 voter.Id = Voter.Id;
                 List<PropertyInfo> properties = Voter.GetType().GetProperties().ToList();
                 List<TextBox> voterTextBox = UtilRecurrent.FindAllTextBoxIterative(tpanelVoter);
@@ -718,6 +719,7 @@ namespace Constituency.Desktop.Views
                 voter.Sex = cmbSex.SelectedItem.ToString();
                 Voter.DOB = dtpDOB.Value.Date == DateTime.Today ? null : dtpDOB.Value;
                 voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
+                voter.Dead = rjDeceased.Checked;
                 return voter;
             }
 
@@ -745,6 +747,7 @@ namespace Constituency.Desktop.Views
                     Interview.Comment = new Comment();
                     Interview.Comment = (Comment)cmbIComment.SelectedItem;
                 }
+                
                 Interview.Date = dtpIDate.Value;
                 Interview.OtherComment = txtIOtherComment.Text.ToUpper();
                 var voter2 = BuildVoter();

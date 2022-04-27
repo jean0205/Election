@@ -490,7 +490,7 @@ namespace Constituency.Desktop.Views
                     cmbConstituency.SelectedValue = Voter.PollingDivision.Constituency.Id;
                     FillUpdComboboxDivision();
                     cmbDivision.SelectedValue = Voter.PollingDivision.Id;
-
+                    rjDeceased.Checked = Voter.Dead;
 
 
                     if (Voter.Interviews != null && Voter.Interviews.Any())
@@ -517,6 +517,7 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "ComboBox").Cast<ComboBox>().ToList().ForEach(x => x.SelectedIndex = -1);
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "DateTimePicker").Cast<DateTimePicker>().ToList().ForEach(x => x.Value = DateTime.Now.Date);
                 UtilRecurrent.FindAllControlsIterative(this.tpanelVoter, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DataSource = null);
+                rjDeceased.Checked = false;
                 Voter = new Voter();
             }
             catch (Exception ex)
@@ -633,6 +634,7 @@ namespace Constituency.Desktop.Views
                 Voter.Sex = cmbSex.SelectedItem.ToString();
                 Voter.DOB = dtpDOB.Value.Date == DateTime.Today ? null : dtpDOB.Value;
                 Voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
+                Voter.Dead = rjDeceased.Checked;
                 return Voter;
             }
 
@@ -744,6 +746,7 @@ namespace Constituency.Desktop.Views
                 Voter.Sex = cmbSex.SelectedItem.ToString();
                 Voter.DOB = dtpDOB.Value.Date == DateTime.Today ? null : dtpDOB.Value;
                 Voter.PollingDivision = PollingDivisionsList.FirstOrDefault(p => p.Id == (int)cmbDivision.SelectedValue);
+                Voter.Dead = rjDeceased.Checked;
 
                 return Voter;
             }
@@ -923,6 +926,7 @@ namespace Constituency.Desktop.Views
                     voter.Email = String.Empty;
                     voter.HomePhone = String.Empty;
                     voter.WorkPhone = String.Empty;
+                    voter.Dead = false;
                     voters.Add(voter);
 
                 }

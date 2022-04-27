@@ -55,6 +55,7 @@ namespace Election.API.Data.Entities
 
         [MaxLength(100)]      
         public string? Email { get; set; }
+        public bool Dead { get; set; }
 
         public PollingDivision? PollingDivision { get; set; }
         public House? House { get; set; }

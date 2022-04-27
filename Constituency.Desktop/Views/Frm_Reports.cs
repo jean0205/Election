@@ -2,15 +2,7 @@
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
 using Microsoft.AppCenter.Crashes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Constituency.Desktop.Views
 {
@@ -28,7 +20,7 @@ namespace Constituency.Desktop.Views
         private List<Canvas> CanvasList;
         public Frm_Reports()
         {
-           
+
             this.AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
             token = Main.GetInstance().tokenResponse.Token;
@@ -39,10 +31,19 @@ namespace Constituency.Desktop.Views
         {
             await LoadConstituencies();
             await LoadCanvasTypes();
+            DGVFormats();
 
         }
 
         #region Tab1
+        private void DGVFormats()
+        {//tag= 1 para campos obligados
+
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.DefaultCellStyle.BackColor = Color.Beige);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells);
+            UtilRecurrent.FindAllControlsIterative(tabControl1, "DataGridView").Cast<DataGridView>().ToList().ForEach(x => x.RowHeadersVisible = false);
+        }
         private async Task LoadConstituencies()
         {
             Response response = await ApiServices.GetListAsync<ConstituencyC>("Constituencies", token);
@@ -58,9 +59,9 @@ namespace Constituency.Desktop.Views
                 cmbConstituency.DataSource = ConstituenciesList;
                 cmbConstituency.ValueMember = "Id";
                 cmbConstituency.DisplayMember = "Name";
-                cmbConstituency.SelectedItem = null;               
+                cmbConstituency.SelectedItem = null;
             }
-        }        
+        }
         private void cmbConstituency_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
@@ -98,14 +99,14 @@ namespace Constituency.Desktop.Views
             }
         }
         private async Task LoadCanvasTypes()
-        {           
+        {
             Response response = await ApiServices.GetListAsync<CanvasType>("CanvasTypes", token);
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
                 return;
             }
-            CanvasTypeList = new ((List<CanvasType>)response.Result);
+            CanvasTypeList = new((List<CanvasType>)response.Result);
             if (CanvasTypeList.Any())
             {
                 cmbCanvasTypes.DataSource = null;
@@ -113,7 +114,7 @@ namespace Constituency.Desktop.Views
                 cmbCanvasTypes.ValueMember = "Id";
                 cmbCanvasTypes.DisplayMember = "Type";
                 cmbCanvasTypes.SelectedItem = null;
-            }            
+            }
         }
         private void cmbCanvasType_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -151,12 +152,87 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        private void radioButton1_Click(object sender, EventArgs e)
+        private async void radioButton1_Click(object sender, EventArgs e)
         {
+            if ( cmbDivision.SelectedItem == null)
+            {
+                UtilRecurrent.ErrorMessage("Division is required.");
+                return;
+            }
+            if (rjCanvasActive.Checked&& cmbCanvas.SelectedItem==null)
+            {
+                UtilRecurrent.ErrorMessage("Canvas is required when you are filtering by Canvas.");
+                return;
+            }
+            int divisionId = (cmbDivision.SelectedItem as PollingDivision).Id;
+            if (rbtnInterviewed.Checked)
+            {
+                //voy a filtrar por canvasD
+                if (rjCanvasActive.Checked)
+                {
+                    int canvasId = (cmbCanvas.SelectedItem as Canvas).Id;
+                    FillUpDGV("Voters/ByDivisionsAndCanvas", divisionId, canvasId,true);                   
+                }
+                else
+                {
+                    FillUpDGV("Voters/ByDivisionsAndAllOpenCanvas", divisionId, 0, true);
+                }
+            }
+            if (rbtnNotInterviewed.Checked)
+            {
+                //voy a filtrar por canvasD
+                if (rjCanvasActive.Checked)
+                {
+                    int canvasId = (cmbCanvas.SelectedItem as Canvas).Id;
+                    FillUpDGV("Voters/ByDivisionsAndCanvas", divisionId, canvasId, false);
+                }
+                else
+                {
+                    FillUpDGV("Voters/ByDivisionsAndAllOpenCanvas", divisionId, 0, false);
+                }
 
+            }
         }
+
         #endregion
 
+        private  async void FillUpDGV(string route, int divisionId, int canvasId, bool interviewd)
+        {
+            dgv1Interviews.DataSource = null;
+            var result = await  LoadCanvasReport(route, divisionId, canvasId, interviewd);
+            dgv1Interviews.DataSource = result.Select(v => new
+            {               
+                Div = v.PollingDivision.Name,
+                v.Reg,
+                v.FullName,
+                DateOfBirth = v.DOB,
+                v.Sex,
+                v.Occupation,
+                v.Address,
+                v.Mobile1,
+                v.Mobile2,
+                v.HomePhone,
+                v.WorkPhone,
+                v.Email
+            }).ToList();
 
+        }
+        private async Task<List<Voter>> LoadCanvasReport(string controller, int divisionId, int canvasId, bool interviewed)
+        {
+            Response response = await ApiServices.GetListAsyncReportsVotersByCanvas<Voter>(controller, divisionId, canvasId, interviewed, token);
+            if (!response.IsSuccess)
+            {
+                UtilRecurrent.ErrorMessage(response.Message);
+                return null;
+            }
+            return new((List<Voter>)response.Result);
+        }
+
+        private void rjCanvasActive_CheckedChanged(object sender, EventArgs e)
+        {
+            tPanelCanvas.Enabled = rjCanvasActive.Checked;
+            cmbCanvasTypes.SelectedIndex = -1;
+            cmbCanvas.SelectedIndex = -1;
+        }
     }
 }

@@ -27,6 +27,7 @@
         public string? WorkPhone { get; set; }
 
         public string? Email { get; set; }
+        public bool Dead { get; set; }
 
         public PollingDivision? PollingDivision { get; set; }
         public House? House { get; set; }

@@ -42,10 +42,7 @@ namespace Constituency.Desktop.Helpers
                     IsSuccess = true,
                     Result = tokenResponse,
                 };
-
             }
-
-
             catch (Exception ex)
             {
                 return new Response
@@ -896,7 +893,6 @@ namespace Constituency.Desktop.Helpers
                 };
             }
         }
-
         public static async Task<Response> PostMasterFileAsync<T>(string controller, T model, string token)
         {
             try
@@ -943,6 +939,52 @@ namespace Constituency.Desktop.Helpers
                 };
             }
         }
+
+        //REPORTS
+        public static async Task<Response> GetListAsyncReportsVotersByCanvas<T>(string controller, int divisionId, int canvasId, bool interviewed, string token)
+        {
+            try
+            {
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+
+                string url = Settings.GetApiUrl();
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(url)
+                };
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                HttpResponseMessage response = await client.GetAsync($"api/{controller}/{divisionId}/{canvasId}/{interviewed}");
+                string result = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
+                    };
+                }
+                List<T> list = JsonConvert.DeserializeObject<List<T>>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = list,
+                };
+            }
+            catch (Exception ex)
+            {
+
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        
         //public static async Task<Response> GetListAsyncMasterFile<T>(string controller, string token)
         //{
         //    try

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Security.Claims;
 
 namespace Election.API.Controllers
@@ -132,6 +133,7 @@ namespace Election.API.Controllers
             voterToUpdate.Email = voter.Email;
             voterToUpdate.Mobile1 = voter.Mobile1;
             voterToUpdate.Occupation = voter.Occupation;
+            voterToUpdate.Dead = voter.Dead;
             var pollinDivision = await _context.PollingDivisions.FindAsync(voter.PollingDivision.Id);
             voterToUpdate.PollingDivision = pollinDivision;
             _context.Entry(voterToUpdate).State = EntityState.Modified;
@@ -241,10 +243,11 @@ namespace Election.API.Controllers
         }
 
         #region Reports
-        [HttpGet("ByDivisionsAndCanvas/{divisionId}/{canvasId}")]
-        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisionAndCanvas(int divisionId,int canvasId)
+        //passing the canvasID
+        [HttpGet("ByDivisionsAndCanvas/{divisionId}/{canvasId}/{interviewed}")]
+        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisionAndCanvas(int divisionId,int canvasId,bool interviewed)
         {
-            if (canvasId > 0) 
+            if (!interviewed) 
             {
                 return await _context.Voters
                 .Include(v => v.PollingDivision)
@@ -261,10 +264,37 @@ namespace Election.API.Controllers
                .ThenInclude(v => v.Constituency)
                .Include(v => v.Interviews)
                .ThenInclude(v => v.Canvas)
-               .Where(v => v.PollingDivision.Id == divisionId && v.Active && v.Interviews.Count==0)
+               .Where(v => v.Active && v.PollingDivision.Id == divisionId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId))
+               .ToListAsync();               
+            }
+            
+        }
+        [HttpGet("ByDivisionsAndAllOpenCanvas/{divisionId}/{canvasId}/{interviewed}")]
+        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisionAndCanvas(int divisionId, bool interviewed)
+        {
+            var openCanvas = await _context.Canvas.Where(c => c.Open).ToListAsync();
+            if (!interviewed)
+            {
+                return await _context.Voters
+               .Include(v => v.PollingDivision)
+               .ThenInclude(v => v.Constituency)
+               .Include(v => v.Interviews)
+               .ThenInclude(v => v.Canvas)
+               .Where(v => v.Active && v.PollingDivision.Id == divisionId && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count ==0)
+               .ToListAsync();
+            }
+            else
+            {
+                return await _context.Voters
+               .Include(v => v.PollingDivision)
+               .ThenInclude(v => v.Constituency)
+               .Include(v => v.Interviews)
+               .ThenInclude(v => v.Canvas)
+               .Where(v => v.Active && v.PollingDivision.Id == divisionId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0)
                .ToListAsync();
             }
             
+
         }
         #endregion
     }
