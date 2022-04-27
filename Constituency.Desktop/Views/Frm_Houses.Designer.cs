@@ -39,6 +39,7 @@
             this.imgListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
             this.lblExpand = new System.Windows.Forms.Label();
+            this.rjCollapseAll = new Constituency.Desktop.Controls.RJToggleButton();
             this.ibtnRefresh = new FontAwesome.Sharp.IconButton();
             this.lblFiltering = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -46,6 +47,7 @@
             this.label39 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label41 = new System.Windows.Forms.Label();
+            this.rjToggleButton2 = new Constituency.Desktop.Controls.RJToggleButton();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.tpanelVoter = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
@@ -198,6 +200,7 @@
             this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.55665F));
             this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.44335F));
             this.tableLayoutPanel49.Controls.Add(this.lblExpand, 1, 0);
+            this.tableLayoutPanel49.Controls.Add(this.rjCollapseAll, 0, 0);
             this.tableLayoutPanel49.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel49.Location = new System.Drawing.Point(3, 699);
             this.tableLayoutPanel49.Name = "tableLayoutPanel49";
@@ -216,6 +219,21 @@
             this.lblExpand.Size = new System.Drawing.Size(91, 21);
             this.lblExpand.TabIndex = 52;
             this.lblExpand.Text = "Collapse All";
+            // 
+            // rjCollapseAll
+            // 
+            this.rjCollapseAll.AutoSize = true;
+            this.rjCollapseAll.Location = new System.Drawing.Point(3, 3);
+            this.rjCollapseAll.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjCollapseAll.Name = "rjCollapseAll";
+            this.rjCollapseAll.OffBackColor = System.Drawing.Color.Gray;
+            this.rjCollapseAll.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjCollapseAll.OnBackColor = System.Drawing.Color.MediumSlateBlue;
+            this.rjCollapseAll.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjCollapseAll.Size = new System.Drawing.Size(50, 25);
+            this.rjCollapseAll.TabIndex = 53;
+            this.rjCollapseAll.UseVisualStyleBackColor = true;
+            this.rjCollapseAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rjCollapseAll_MouseClick);
             // 
             // ibtnRefresh
             // 
@@ -304,6 +322,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.40367F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.59633F));
             this.tableLayoutPanel4.Controls.Add(this.label41, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.rjToggleButton2, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(687, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -320,6 +339,20 @@
             this.label41.Size = new System.Drawing.Size(87, 21);
             this.label41.TabIndex = 47;
             this.label41.Text = "Reset Filter";
+            // 
+            // rjToggleButton2
+            // 
+            this.rjToggleButton2.AutoSize = true;
+            this.rjToggleButton2.Location = new System.Drawing.Point(3, 3);
+            this.rjToggleButton2.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjToggleButton2.Name = "rjToggleButton2";
+            this.rjToggleButton2.OffBackColor = System.Drawing.Color.Gray;
+            this.rjToggleButton2.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjToggleButton2.OnBackColor = System.Drawing.Color.MediumSlateBlue;
+            this.rjToggleButton2.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjToggleButton2.Size = new System.Drawing.Size(50, 25);
+            this.rjToggleButton2.TabIndex = 48;
+            this.rjToggleButton2.UseVisualStyleBackColor = true;
             // 
             // txtFilter
             // 
@@ -980,7 +1013,7 @@
         private GroupBox groupBox1;
         private TreeView tView1;
         private TableLayoutPanel tableLayoutPanel49;
-        private Controls.RJToggleButton rjCollapseAll;
+       
         private Label lblExpand;
         private FontAwesome.Sharp.IconButton ibtnRefresh;
         private Label lblFiltering;
@@ -1037,5 +1070,7 @@
         private TextBox txtNumber;
         private Panel panel2;
         private ImageList imgListTreeView;
+        private Controls.RJToggleButton rjCollapseAll;
+        private Controls.RJToggleButton rjToggleButton2;
     }
 }
