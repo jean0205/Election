@@ -1393,8 +1393,6 @@ C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.csproj.CoreCompileInputs.cache
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.RazorAssemblyInfo.cache
-C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.RazorAssemblyInfo.cs
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\scopedcss\bundle\Election.API.styles.css
@@ -1404,3 +1402,5 @@ C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\refint\El
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.pdb
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.genruntimeconfig.cache
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\ref\Election.API.dll
+C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.RazorAssemblyInfo.cache
+C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.RazorAssemblyInfo.cs

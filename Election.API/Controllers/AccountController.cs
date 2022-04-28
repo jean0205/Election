@@ -239,7 +239,7 @@ namespace Election.API.Controllers
                 string myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);                
                 
                 string tokenLink = Url.Action(
-                    "RecoverPassword",
+                    "ResetPassword",
                     "Account",
                     new { token = myToken }, protocol: HttpContext.Request.Scheme);
 

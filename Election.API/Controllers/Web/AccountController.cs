@@ -65,6 +65,7 @@ namespace Election.API.Controllers.Web
             return View(model);
         }
 
+        [HttpGet("ResetPassword")]
         public IActionResult ResetPassword(string token)
         {
             return View();
