@@ -293,7 +293,73 @@ namespace Election.API.Controllers
                .Where(v => v.Active && v.PollingDivision.Id == divisionId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0)
                .ToListAsync();
             }
-            
+        }
+        [HttpGet("ByConstituencyDivisionsCanvasAndParty/{contituencyId}{divisionId}/{canvasId}/{partyId}")]
+        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisionCanvasAndParty(int contituencyId, int divisionId, int canvasId, int partyId)
+        {
+            if (contituencyId==0 && canvasId==0)
+            {
+                return await _context.Voters
+                .Include(v => v.Interviews)
+                .ThenInclude(v => v.SupportedParty)
+                .Where(v =>  !v.Dead && v.Interviews.Any() && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
+                .ToListAsync();
+            }
+            if (contituencyId > 0  && divisionId==0 && canvasId == 0)
+            {
+                return await _context.Voters
+                  .Include(v => v.PollingDivision)
+               .ThenInclude(v => v.Constituency)
+                .Include(v => v.Interviews)
+                .ThenInclude(v => v.SupportedParty)
+                .Where(v => !v.Dead &&  v.PollingDivision.Constituency.Id==contituencyId &&v.Interviews.Any() && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
+                .ToListAsync();
+            }
+            if (contituencyId > 0 && divisionId> 0 && canvasId == 0)
+            {
+                return await _context.Voters
+                  .Include(v => v.PollingDivision)
+               .ThenInclude(v => v.Constituency)
+                .Include(v => v.Interviews)
+                .ThenInclude(v => v.SupportedParty)
+                .Where(v => !v.Dead && v.PollingDivision.Id == divisionId && v.Interviews.Any() && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
+                .ToListAsync();
+            }
+            if (contituencyId > 0 && divisionId > 0 && canvasId > 0)
+            {
+                return await _context.Voters
+                  .Include(v => v.PollingDivision)
+               .ThenInclude(v => v.Constituency)
+                .Include(v => v.Interviews)
+                 .ThenInclude(v => v.Canvas)
+                 .Include(v => v.Interviews)
+                .ThenInclude(v => v.SupportedParty)
+                .Where(v => !v.Dead && v.PollingDivision.Id == divisionId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId)  && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
+                .ToListAsync();
+            }
+            if (contituencyId > 0 && divisionId == 0 && canvasId > 0)
+            {
+                return await _context.Voters
+                  .Include(v => v.PollingDivision)
+               .ThenInclude(v => v.Constituency)
+                .Include(v => v.Interviews)
+                 .ThenInclude(v => v.Canvas)
+                 .Include(v => v.Interviews)
+                .ThenInclude(v => v.SupportedParty)
+                .Where(v => !v.Dead && v.PollingDivision.Constituency.Id == contituencyId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId) && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
+                .ToListAsync();
+            }
+            if (contituencyId == 0 && divisionId == 0 && canvasId > 0)
+            {
+                return await _context.Voters                  
+                .Include(v => v.Interviews)
+                 .ThenInclude(v => v.Canvas)
+                 .Include(v => v.Interviews)
+                .ThenInclude(v => v.SupportedParty)
+                .Where(v => !v.Dead && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId) && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
+                .ToListAsync();
+            }
+            return null;
 
         }
         #endregion

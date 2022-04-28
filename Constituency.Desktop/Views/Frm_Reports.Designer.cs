@@ -216,7 +216,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 12);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 15);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(313, 29);
             this.cmbConstituency.TabIndex = 37;
@@ -239,7 +239,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(537, 12);
+            this.cmbDivision.Location = new System.Drawing.Point(537, 15);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(118, 29);
             this.cmbDivision.TabIndex = 38;
@@ -321,7 +321,7 @@
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(331, 4);
+            this.cmbCanvas.Location = new System.Drawing.Point(331, 7);
             this.cmbCanvas.Name = "cmbCanvas";
             this.cmbCanvas.Size = new System.Drawing.Size(218, 29);
             this.cmbCanvas.TabIndex = 40;
@@ -343,7 +343,7 @@
             this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(124, 4);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(124, 7);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(123, 29);
             this.cmbCanvasTypes.TabIndex = 47;
@@ -583,7 +583,7 @@
             this.cmb2Division.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Division.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Division.FormattingEnabled = true;
-            this.cmb2Division.Location = new System.Drawing.Point(796, 14);
+            this.cmb2Division.Location = new System.Drawing.Point(796, 17);
             this.cmb2Division.Name = "cmb2Division";
             this.cmb2Division.Size = new System.Drawing.Size(154, 29);
             this.cmb2Division.TabIndex = 38;
@@ -605,7 +605,7 @@
             this.cmb2Contituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Contituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Contituency.FormattingEnabled = true;
-            this.cmb2Contituency.Location = new System.Drawing.Point(125, 14);
+            this.cmb2Contituency.Location = new System.Drawing.Point(125, 17);
             this.cmb2Contituency.Name = "cmb2Contituency";
             this.cmb2Contituency.Size = new System.Drawing.Size(472, 29);
             this.cmb2Contituency.TabIndex = 39;
@@ -682,7 +682,7 @@
             this.cmb2Canvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Canvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Canvas.FormattingEnabled = true;
-            this.cmb2Canvas.Location = new System.Drawing.Point(757, 9);
+            this.cmb2Canvas.Location = new System.Drawing.Point(757, 12);
             this.cmb2Canvas.Name = "cmb2Canvas";
             this.cmb2Canvas.Size = new System.Drawing.Size(247, 29);
             this.cmb2Canvas.TabIndex = 40;
@@ -704,7 +704,7 @@
             this.Cmb2CanvasType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Cmb2CanvasType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Cmb2CanvasType.FormattingEnabled = true;
-            this.Cmb2CanvasType.Location = new System.Drawing.Point(255, 9);
+            this.Cmb2CanvasType.Location = new System.Drawing.Point(255, 12);
             this.Cmb2CanvasType.Name = "Cmb2CanvasType";
             this.Cmb2CanvasType.Size = new System.Drawing.Size(244, 29);
             this.Cmb2CanvasType.TabIndex = 47;

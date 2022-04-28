@@ -151,8 +151,7 @@ namespace Constituency.Desktop.Views
                 cmbCanvasTypes.DataSource = CanvasTypeList.Where(x => x.Active).ToList();
                 cmbCanvasTypes.ValueMember = "Id";
                 cmbCanvasTypes.DisplayMember = "Type";
-                cmbCanvasTypes.SelectedItem = null;
-                
+                cmbCanvasTypes.SelectedItem = null;               
                
             }
         }
