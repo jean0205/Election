@@ -92,6 +92,12 @@ namespace Constituency.Desktop.Views
                 cmbConstituency.ValueMember = "Id";
                 cmbConstituency.DisplayMember = "Name";
                 cmbConstituency.SelectedItem = null;
+
+                cmb2Contituency.DataSource = null;
+                cmb2Contituency.DataSource = ConstituenciesList;
+                cmb2Contituency.ValueMember = "Id";
+                cmb2Contituency.DisplayMember = "Name";
+                cmb2Contituency.SelectedItem = null;
             }
         }
         private void cmbConstituency_SelectionChangeCommitted(object sender, EventArgs e)
@@ -146,6 +152,8 @@ namespace Constituency.Desktop.Views
                 cmbCanvasTypes.ValueMember = "Id";
                 cmbCanvasTypes.DisplayMember = "Type";
                 cmbCanvasTypes.SelectedItem = null;
+                
+               
             }
         }
         private void cmbCanvasType_SelectionChangeCommitted(object sender, EventArgs e)

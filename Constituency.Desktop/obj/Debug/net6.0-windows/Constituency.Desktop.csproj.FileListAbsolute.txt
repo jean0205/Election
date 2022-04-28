@@ -792,3 +792,5 @@ C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\bin\Debug\net6.0-wi
 C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.Views.Frm_Reports.resources
 C:\Users\jcsoto\source\repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Interop.Microsoft.Office.Interop.Excel.dll
 C:\Users\jcsoto\source\repos\Election4.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.csproj.ResolveComReference.cache
+C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\obj\Debug\net6.0-windows\Interop.Microsoft.Office.Interop.Excel.dll
+C:\Users\jeanc\source\repos\Election2.0\Constituency.Desktop\obj\Debug\net6.0-windows\Constituency.Desktop.csproj.ResolveComReference.cache
