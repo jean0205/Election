@@ -327,11 +327,11 @@ namespace Constituency.Desktop.Views
 
             tPanelCanvas2.Enabled = rjFCanvas.Checked;
             cmb2CanvasTypes.SelectedIndex = !rjFCanvas.Checked?-1: cmb2CanvasTypes.SelectedIndex;
-            cmb2Division.SelectedIndex = !rjFCanvas.Checked ? -1 : cmb2Division.SelectedIndex;
+            cmb2Canvas.SelectedIndex = !rjFCanvas.Checked ? -1 : cmb2Canvas.SelectedIndex;
 
             tPanelConstituency2.Enabled = rjFConstituency.Checked;
             cmb2Constituency.SelectedIndex = !rjFConstituency.Checked ? -1 : cmb2Constituency.SelectedIndex;
-            cmb2Constituency.SelectedIndex = !rjFConstituency.Checked ? -1 : cmb2Constituency.SelectedIndex;
+            cmb2Division.SelectedIndex = !rjFConstituency.Checked ? -1 : cmb2Division.SelectedIndex;
         }
 
         private async void ibtnExport1_Click(object sender, EventArgs e)
@@ -456,6 +456,14 @@ namespace Constituency.Desktop.Views
             {
                 FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", constituency.Id, 0, canvas.Id, 0);
             }
+            if (constituency != null && division == null && canvas != null && party != null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", constituency.Id, 0, canvas.Id, party.Id);
+            }
+            if (constituency == null && division == null && canvas != null && party != null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", 0, 0, canvas.Id, party.Id);
+            }            
 
         }
         private async Task<List<Voter>> LoadCanvasReport2(string controller, int constituencyId, int divisionId, int canvasId, int partyId)
@@ -501,11 +509,16 @@ namespace Constituency.Desktop.Views
             }).ToList();
             lblTotal2.Text = result.Count.ToString();
         }
-        
+
+
 
 
         #endregion
 
-       
+        private void rjToggleButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            cmb2Party.Enabled = rjToggleButton1.Checked;
+            cmb2Party.SelectedItem = rjToggleButton1.Checked ? cmb2Party.SelectedItem : null;
+        }
     }
 }
