@@ -59,22 +59,22 @@
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.label23 = new System.Windows.Forms.Label();
             this.rjFConstituency = new Constituency.Desktop.Controls.RJToggleButton();
-            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.tPanelConstituency2 = new System.Windows.Forms.TableLayoutPanel();
             this.label16 = new System.Windows.Forms.Label();
             this.cmb2Division = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.cmb2Contituency = new System.Windows.Forms.ComboBox();
+            this.cmb2Constituency = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.label19 = new System.Windows.Forms.Label();
             this.rjFCanvas = new Constituency.Desktop.Controls.RJToggleButton();
-            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+            this.tPanelCanvas2 = new System.Windows.Forms.TableLayoutPanel();
             this.cmb2Canvas = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.Cmb2CanvasType = new System.Windows.Forms.ComboBox();
+            this.cmb2CanvasTypes = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cmb2Party = new System.Windows.Forms.ComboBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgv2 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -88,11 +88,11 @@
             this.groupBox4.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
             this.tableLayoutPanel15.SuspendLayout();
-            this.tableLayoutPanel16.SuspendLayout();
+            this.tPanelConstituency2.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
-            this.tableLayoutPanel14.SuspendLayout();
+            this.tPanelCanvas2.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -216,12 +216,12 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 15);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 12);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(313, 29);
             this.cmbConstituency.TabIndex = 37;
             this.cmbConstituency.Tag = "1";
-            this.cmbConstituency.SelectionChangeCommitted += new System.EventHandler(this.cmbConstituency_SelectionChangeCommitted);
+            this.cmbConstituency.SelectionChangeCommitted += new System.EventHandler(this.cmbConstituency1_SelectionChangeCommitted);
             // 
             // label15
             // 
@@ -239,7 +239,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(537, 15);
+            this.cmbDivision.Location = new System.Drawing.Point(537, 12);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(118, 29);
             this.cmbDivision.TabIndex = 38;
@@ -321,7 +321,7 @@
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(331, 7);
+            this.cmbCanvas.Location = new System.Drawing.Point(331, 4);
             this.cmbCanvas.Name = "cmbCanvas";
             this.cmbCanvas.Size = new System.Drawing.Size(218, 29);
             this.cmbCanvas.TabIndex = 40;
@@ -343,7 +343,7 @@
             this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(124, 7);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(124, 4);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(123, 29);
             this.cmbCanvasTypes.TabIndex = 47;
@@ -407,7 +407,7 @@
             this.ibtnRefresh.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.ibtnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnRefresh.UseVisualStyleBackColor = false;
-            this.ibtnRefresh.Click += new System.EventHandler(this.ibtnRefresh_Click);
+            this.ibtnRefresh.Click += new System.EventHandler(this.ibtnExport1_Click);
             // 
             // dgv1Interviews
             // 
@@ -434,7 +434,7 @@
             this.tableLayoutPanel11.ColumnCount = 1;
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel11.Controls.Add(this.groupBox4, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.dataGridView2, 0, 1);
+            this.tableLayoutPanel11.Controls.Add(this.dgv2, 0, 1);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(4);
@@ -497,7 +497,7 @@
             this.ibtnUpdate.Text = "Update";
             this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ibtnUpdate.UseVisualStyleBackColor = false;
-            this.ibtnUpdate.Visible = false;
+            this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
             // 
             // tableLayoutPanel15
             // 
@@ -508,7 +508,7 @@
             this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 959F));
             this.tableLayoutPanel15.Controls.Add(this.label23, 1, 0);
             this.tableLayoutPanel15.Controls.Add(this.rjFConstituency, 0, 0);
-            this.tableLayoutPanel15.Controls.Add(this.tableLayoutPanel16, 2, 0);
+            this.tableLayoutPanel15.Controls.Add(this.tPanelConstituency2, 2, 0);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
@@ -542,30 +542,32 @@
             this.rjFConstituency.Size = new System.Drawing.Size(50, 25);
             this.rjFConstituency.TabIndex = 50;
             this.rjFConstituency.UseVisualStyleBackColor = true;
+            this.rjFConstituency.CheckedChanged += new System.EventHandler(this.rjCanvasActive_CheckedChanged);
             // 
-            // tableLayoutPanel16
+            // tPanelConstituency2
             // 
-            this.tableLayoutPanel16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tPanelConstituency2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel16.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel16.ColumnCount = 4;
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.69675F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.26233F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.1469F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6362F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel16.Controls.Add(this.label16, 0, 0);
-            this.tableLayoutPanel16.Controls.Add(this.cmb2Division, 3, 0);
-            this.tableLayoutPanel16.Controls.Add(this.label17, 2, 0);
-            this.tableLayoutPanel16.Controls.Add(this.cmb2Contituency, 1, 0);
-            this.tableLayoutPanel16.Location = new System.Drawing.Point(242, 4);
-            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
-            this.tableLayoutPanel16.RowCount = 1;
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(954, 57);
-            this.tableLayoutPanel16.TabIndex = 49;
+            this.tPanelConstituency2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tPanelConstituency2.ColumnCount = 4;
+            this.tPanelConstituency2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.69675F));
+            this.tPanelConstituency2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.26233F));
+            this.tPanelConstituency2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.1469F));
+            this.tPanelConstituency2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6362F));
+            this.tPanelConstituency2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tPanelConstituency2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tPanelConstituency2.Controls.Add(this.label16, 0, 0);
+            this.tPanelConstituency2.Controls.Add(this.cmb2Division, 3, 0);
+            this.tPanelConstituency2.Controls.Add(this.label17, 2, 0);
+            this.tPanelConstituency2.Controls.Add(this.cmb2Constituency, 1, 0);
+            this.tPanelConstituency2.Enabled = false;
+            this.tPanelConstituency2.Location = new System.Drawing.Point(242, 4);
+            this.tPanelConstituency2.Name = "tPanelConstituency2";
+            this.tPanelConstituency2.RowCount = 1;
+            this.tPanelConstituency2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tPanelConstituency2.Size = new System.Drawing.Size(954, 57);
+            this.tPanelConstituency2.TabIndex = 49;
             // 
             // label16
             // 
@@ -583,7 +585,7 @@
             this.cmb2Division.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Division.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Division.FormattingEnabled = true;
-            this.cmb2Division.Location = new System.Drawing.Point(796, 17);
+            this.cmb2Division.Location = new System.Drawing.Point(796, 14);
             this.cmb2Division.Name = "cmb2Division";
             this.cmb2Division.Size = new System.Drawing.Size(154, 29);
             this.cmb2Division.TabIndex = 38;
@@ -600,15 +602,16 @@
             this.label17.TabIndex = 36;
             this.label17.Text = "Division:";
             // 
-            // cmb2Contituency
+            // cmb2Constituency
             // 
-            this.cmb2Contituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb2Contituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb2Contituency.FormattingEnabled = true;
-            this.cmb2Contituency.Location = new System.Drawing.Point(125, 17);
-            this.cmb2Contituency.Name = "cmb2Contituency";
-            this.cmb2Contituency.Size = new System.Drawing.Size(472, 29);
-            this.cmb2Contituency.TabIndex = 39;
+            this.cmb2Constituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb2Constituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb2Constituency.FormattingEnabled = true;
+            this.cmb2Constituency.Location = new System.Drawing.Point(125, 14);
+            this.cmb2Constituency.Name = "cmb2Constituency";
+            this.cmb2Constituency.Size = new System.Drawing.Size(472, 29);
+            this.cmb2Constituency.TabIndex = 39;
+            this.cmb2Constituency.SelectionChangeCommitted += new System.EventHandler(this.cmbConstituency2_SelectionChangeCommitted);
             // 
             // tableLayoutPanel13
             // 
@@ -619,7 +622,7 @@
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel13.Controls.Add(this.label19, 1, 0);
             this.tableLayoutPanel13.Controls.Add(this.rjFCanvas, 0, 0);
-            this.tableLayoutPanel13.Controls.Add(this.tableLayoutPanel14, 2, 0);
+            this.tableLayoutPanel13.Controls.Add(this.tPanelCanvas2, 2, 0);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 74);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
@@ -653,36 +656,37 @@
             this.rjFCanvas.Size = new System.Drawing.Size(50, 25);
             this.rjFCanvas.TabIndex = 50;
             this.rjFCanvas.UseVisualStyleBackColor = true;
+            this.rjFCanvas.CheckedChanged += new System.EventHandler(this.rjCanvasActive_CheckedChanged);
             // 
-            // tableLayoutPanel14
+            // tPanelCanvas2
             // 
-            this.tableLayoutPanel14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tPanelCanvas2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel14.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel14.ColumnCount = 4;
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel14.Controls.Add(this.cmb2Canvas, 3, 0);
-            this.tableLayoutPanel14.Controls.Add(this.label21, 2, 0);
-            this.tableLayoutPanel14.Controls.Add(this.Cmb2CanvasType, 1, 0);
-            this.tableLayoutPanel14.Controls.Add(this.label22, 0, 0);
-            this.tableLayoutPanel14.Enabled = false;
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(188, 4);
-            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
-            this.tableLayoutPanel14.RowCount = 1;
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(1008, 48);
-            this.tableLayoutPanel14.TabIndex = 49;
+            this.tPanelCanvas2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tPanelCanvas2.ColumnCount = 4;
+            this.tPanelCanvas2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tPanelCanvas2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tPanelCanvas2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tPanelCanvas2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tPanelCanvas2.Controls.Add(this.cmb2Canvas, 3, 0);
+            this.tPanelCanvas2.Controls.Add(this.label21, 2, 0);
+            this.tPanelCanvas2.Controls.Add(this.cmb2CanvasTypes, 1, 0);
+            this.tPanelCanvas2.Controls.Add(this.label22, 0, 0);
+            this.tPanelCanvas2.Enabled = false;
+            this.tPanelCanvas2.Location = new System.Drawing.Point(188, 4);
+            this.tPanelCanvas2.Name = "tPanelCanvas2";
+            this.tPanelCanvas2.RowCount = 1;
+            this.tPanelCanvas2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tPanelCanvas2.Size = new System.Drawing.Size(1008, 48);
+            this.tPanelCanvas2.TabIndex = 49;
             // 
             // cmb2Canvas
             // 
             this.cmb2Canvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Canvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Canvas.FormattingEnabled = true;
-            this.cmb2Canvas.Location = new System.Drawing.Point(757, 12);
+            this.cmb2Canvas.Location = new System.Drawing.Point(757, 9);
             this.cmb2Canvas.Name = "cmb2Canvas";
             this.cmb2Canvas.Size = new System.Drawing.Size(247, 29);
             this.cmb2Canvas.TabIndex = 40;
@@ -699,16 +703,17 @@
             this.label21.TabIndex = 39;
             this.label21.Text = "Canvas:";
             // 
-            // Cmb2CanvasType
+            // cmb2CanvasTypes
             // 
-            this.Cmb2CanvasType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmb2CanvasType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cmb2CanvasType.FormattingEnabled = true;
-            this.Cmb2CanvasType.Location = new System.Drawing.Point(255, 12);
-            this.Cmb2CanvasType.Name = "Cmb2CanvasType";
-            this.Cmb2CanvasType.Size = new System.Drawing.Size(244, 29);
-            this.Cmb2CanvasType.TabIndex = 47;
-            this.Cmb2CanvasType.Tag = "1";
+            this.cmb2CanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb2CanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb2CanvasTypes.FormattingEnabled = true;
+            this.cmb2CanvasTypes.Location = new System.Drawing.Point(255, 9);
+            this.cmb2CanvasTypes.Name = "cmb2CanvasTypes";
+            this.cmb2CanvasTypes.Size = new System.Drawing.Size(244, 29);
+            this.cmb2CanvasTypes.TabIndex = 47;
+            this.cmb2CanvasTypes.Tag = "1";
+            this.cmb2CanvasTypes.SelectionChangeCommitted += new System.EventHandler(this.cmbCanvasType2_SelectionChangeCommitted);
             // 
             // label22
             // 
@@ -744,15 +749,15 @@
             this.cmb2Party.TabIndex = 39;
             this.cmb2Party.Tag = "1";
             // 
-            // dataGridView2
+            // dgv2
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 170);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(1397, 604);
-            this.dataGridView2.TabIndex = 1;
+            this.dgv2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv2.Location = new System.Drawing.Point(3, 170);
+            this.dgv2.Name = "dgv2";
+            this.dgv2.RowTemplate.Height = 25;
+            this.dgv2.Size = new System.Drawing.Size(1397, 604);
+            this.dgv2.TabIndex = 1;
             // 
             // Frm_Reports
             // 
@@ -783,14 +788,14 @@
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel15.ResumeLayout(false);
             this.tableLayoutPanel15.PerformLayout();
-            this.tableLayoutPanel16.ResumeLayout(false);
-            this.tableLayoutPanel16.PerformLayout();
+            this.tPanelConstituency2.ResumeLayout(false);
+            this.tPanelConstituency2.PerformLayout();
             this.tableLayoutPanel13.ResumeLayout(false);
             this.tableLayoutPanel13.PerformLayout();
-            this.tableLayoutPanel14.ResumeLayout(false);
-            this.tableLayoutPanel14.PerformLayout();
+            this.tPanelCanvas2.ResumeLayout(false);
+            this.tPanelCanvas2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -828,21 +833,21 @@
         private TableLayoutPanel tableLayoutPanel15;
         private Label label23;
         private Controls.RJToggleButton rjFConstituency;
-        private TableLayoutPanel tableLayoutPanel16;
+        private TableLayoutPanel tPanelConstituency2;
         private Label label16;
         private ComboBox cmb2Division;
         private Label label17;
-        private ComboBox cmb2Contituency;
+        private ComboBox cmb2Constituency;
         private TableLayoutPanel tableLayoutPanel13;
         private Label label19;
         private Controls.RJToggleButton rjFCanvas;
-        private TableLayoutPanel tableLayoutPanel14;
+        private TableLayoutPanel tPanelCanvas2;
         private ComboBox cmb2Canvas;
         private Label label21;
-        private ComboBox Cmb2CanvasType;
+        private ComboBox cmb2CanvasTypes;
         private Label label22;
         private GroupBox groupBox5;
         private ComboBox cmb2Party;
-        private DataGridView dataGridView2;
+        private DataGridView dgv2;
     }
 }
