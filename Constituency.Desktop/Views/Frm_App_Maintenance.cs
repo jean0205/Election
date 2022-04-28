@@ -1271,7 +1271,6 @@ namespace Constituency.Desktop.Views
                     {
                         dgvInterviewerInterviews.DataSource = interviewer.Interviews.Select(u => new { Registration = u.Voter.Reg, u.Voter.FullName, PD = u.Voter.PollingDivision.Name, Party = u.SupportedParty.Name, u.Date }).ToList();
                     }
-
                 }
             }
             catch (Exception ex)

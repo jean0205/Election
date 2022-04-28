@@ -51,6 +51,7 @@ namespace Constituency.Desktop.Views
             //await LoadVoters();
             await LoadDivisionsBatch();
             VoterList = new();
+            //tabControl1.TabPages.Remove(tabPage2);
 
         }
 

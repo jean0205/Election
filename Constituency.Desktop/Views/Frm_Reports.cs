@@ -463,7 +463,19 @@ namespace Constituency.Desktop.Views
             if (constituency == null && division == null && canvas != null && party != null)
             {
                 FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", 0, 0, canvas.Id, party.Id);
-            }            
+            }
+            if (constituency != null && division == null && canvas == null && party == null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", constituency.Id, 0, 0, 0);
+            }
+            if (constituency != null && division != null && canvas == null && party == null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", constituency.Id, division.Id, 0, 0);
+            }
+            if (constituency== null && division == null && canvas != null && party == null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", 0, 0, canvas.Id, 0);
+            }
 
         }
         private async Task<List<Voter>> LoadCanvasReport2(string controller, int constituencyId, int divisionId, int canvasId, int partyId)
@@ -506,6 +518,7 @@ namespace Constituency.Desktop.Views
                 v.HomePhone,
                 v.WorkPhone,
                 v.Email
+                
             }).ToList();
             lblTotal2.Text = result.Count.ToString();
         }
@@ -519,6 +532,19 @@ namespace Constituency.Desktop.Views
         {
             cmb2Party.Enabled = rjToggleButton1.Checked;
             cmb2Party.SelectedItem = rjToggleButton1.Checked ? cmb2Party.SelectedItem : null;
+        }
+
+        private async void iconButton1_Click(object sender, EventArgs e)
+        {
+            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+            {
+                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+                return;
+            }
+            dgv2.MultiSelect = true;
+            UtilRecurrent.ExportToExcel(dgv2);
+            dgv2.MultiSelect = false;
+            dgv2.CurrentCell = null;
         }
     }
 }

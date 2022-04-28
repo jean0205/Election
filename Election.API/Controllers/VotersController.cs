@@ -301,6 +301,33 @@ namespace Election.API.Controllers
             {
                 return NotFound();
             }
+            //interviews in canvas
+            if (contituencyId == 0 && canvasId > 0 && partyId == 0 && divisionId == 0)
+            {
+                return await _context.Voters
+                    .Include(v => v.PollingDivision)
+                .Include(v => v.Interviews)
+                .Where(v => !v.Dead  && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId))
+                .ToListAsync();
+            }
+            //interviews in Constituencies
+            if (contituencyId > 0 && canvasId == 0 && partyId == 0 && divisionId == 0)
+            {
+                return await _context.Voters
+                    .Include(v => v.PollingDivision)
+                .Include(v => v.Interviews)                
+                .Where(v => !v.Dead && v.PollingDivision.Constituency.Id == contituencyId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0)
+                .ToListAsync();
+            }
+            //interviews in Constituencies
+            if (contituencyId > 0 && canvasId == 0 && partyId == 0 && divisionId > 0)
+            {
+                return await _context.Voters
+                    .Include(v => v.PollingDivision)
+                .Include(v => v.Interviews)
+                .Where(v => !v.Dead && v.PollingDivision.Id == divisionId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0)
+                .ToListAsync();
+            }
 
             //todatas las interviews en open canvas
             if (contituencyId == 0 && canvasId == 0 && partyId == 0 && divisionId==0)
