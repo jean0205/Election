@@ -294,7 +294,7 @@ namespace Election.API.Controllers
                .ToListAsync();
             }
         }
-        [HttpGet("ByConstituencyDivisionsCanvasAndParty/{contituencyId}{divisionId}/{canvasId}/{partyId}")]
+        [HttpGet("ByConstituencyDivisionsCanvasAndParty/{contituencyId}/{divisionId}/{canvasId}/{partyId}")]
         public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisionCanvasAndParty(int contituencyId, int divisionId, int canvasId, int partyId)
         {
             var openCanvas = await _context.Canvas.Where(c => c.Open).ToListAsync();
@@ -307,6 +307,7 @@ namespace Election.API.Controllers
             if (contituencyId == 0 && canvasId == 0 && partyId==0)
             {
                 return await _context.Voters
+                    .Include(v => v.PollingDivision)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
                 .Where(v => !v.Dead && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0)
@@ -316,9 +317,10 @@ namespace Election.API.Controllers
             if (contituencyId==0 && canvasId==0)
             {
                 return await _context.Voters
+                    .Include(v => v.PollingDivision)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
-                .Where(v =>  !v.Dead && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0  && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
+                .Where(v =>  !v.Dead && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0  &&  v.Interviews.Where(i=>i.SupportedParty!=null).Select(i => i.SupportedParty.Id).Contains(partyId))
                 .ToListAsync();
             }
             //en constituency y partido
@@ -372,7 +374,8 @@ namespace Election.API.Controllers
             //colo canvas y partido
             if (contituencyId == 0 && divisionId == 0 && canvasId > 0)
             {
-                return await _context.Voters                  
+                return await _context.Voters
+                    .Include(v => v.PollingDivision)
                 .Include(v => v.Interviews)
                  .ThenInclude(v => v.Canvas)
                  .Include(v => v.Interviews)

@@ -427,15 +427,34 @@ namespace Constituency.Desktop.Views
 
         private void ibtnUpdate_Click(object sender, EventArgs e)
         {
-            var constituency = cmb2Constituency.SelectedItem;
-            var division = cmb2Division.SelectedItem;
-            var canvas = cmb2Canvas.SelectedItem;
-            var party = cmb2Party.SelectedItem;
+            var constituency = cmb2Constituency.SelectedItem as ConstituencyC;
+            var division = cmb2Division.SelectedItem as PollingDivision;
+            var canvas = cmb2Canvas.SelectedItem as Canvas;
+            var party = cmb2Party.SelectedItem as Party;
             //todas las entrevistas en open canvas
             if (constituency==null && division==null&& canvas==null && party==null)
             {
                 FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", 0, 0, 0, 0);
-
+            }
+            if (constituency == null && division == null && canvas == null && party != null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", 0, 0, 0, party.Id);
+            }
+            if (constituency != null && division == null && canvas == null && party != null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", constituency.Id, 0, 0, party.Id);
+            }
+            if (constituency != null && division != null && canvas == null && party != null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", constituency.Id, division.Id, 0, party.Id);
+            }
+            if (constituency != null && division != null && canvas != null && party != null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", constituency.Id, division.Id, canvas.Id, party.Id);
+            }
+            if (constituency != null && division == null && canvas != null && party == null)
+            {
+                FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", constituency.Id, 0, canvas.Id, 0);
             }
 
         }
@@ -480,7 +499,7 @@ namespace Constituency.Desktop.Views
                 v.WorkPhone,
                 v.Email
             }).ToList();
-            lblTotal1.Text = result.Count.ToString();
+            lblTotal2.Text = result.Count.ToString();
         }
         
 

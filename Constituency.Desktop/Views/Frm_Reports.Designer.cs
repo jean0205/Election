@@ -75,6 +75,8 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cmb2Party = new System.Windows.Forms.ComboBox();
             this.dgv2 = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTotal2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -93,6 +95,7 @@
             this.tPanelCanvas2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv2)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -216,7 +219,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 12);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 15);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(313, 29);
             this.cmbConstituency.TabIndex = 37;
@@ -239,7 +242,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(537, 12);
+            this.cmbDivision.Location = new System.Drawing.Point(537, 15);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(118, 29);
             this.cmbDivision.TabIndex = 38;
@@ -321,7 +324,7 @@
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(331, 4);
+            this.cmbCanvas.Location = new System.Drawing.Point(331, 7);
             this.cmbCanvas.Name = "cmbCanvas";
             this.cmbCanvas.Size = new System.Drawing.Size(218, 29);
             this.cmbCanvas.TabIndex = 40;
@@ -343,7 +346,7 @@
             this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(124, 4);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(124, 7);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(123, 29);
             this.cmbCanvasTypes.TabIndex = 47;
@@ -435,13 +438,15 @@
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel11.Controls.Add(this.groupBox4, 0, 0);
             this.tableLayoutPanel11.Controls.Add(this.dgv2, 0, 1);
+            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 2;
+            this.tableLayoutPanel11.RowCount = 3;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 167F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(1403, 777);
             this.tableLayoutPanel11.TabIndex = 3;
             // 
@@ -585,7 +590,7 @@
             this.cmb2Division.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Division.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Division.FormattingEnabled = true;
-            this.cmb2Division.Location = new System.Drawing.Point(796, 14);
+            this.cmb2Division.Location = new System.Drawing.Point(796, 17);
             this.cmb2Division.Name = "cmb2Division";
             this.cmb2Division.Size = new System.Drawing.Size(154, 29);
             this.cmb2Division.TabIndex = 38;
@@ -607,7 +612,7 @@
             this.cmb2Constituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Constituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Constituency.FormattingEnabled = true;
-            this.cmb2Constituency.Location = new System.Drawing.Point(125, 14);
+            this.cmb2Constituency.Location = new System.Drawing.Point(125, 17);
             this.cmb2Constituency.Name = "cmb2Constituency";
             this.cmb2Constituency.Size = new System.Drawing.Size(472, 29);
             this.cmb2Constituency.TabIndex = 39;
@@ -686,7 +691,7 @@
             this.cmb2Canvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Canvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Canvas.FormattingEnabled = true;
-            this.cmb2Canvas.Location = new System.Drawing.Point(757, 9);
+            this.cmb2Canvas.Location = new System.Drawing.Point(757, 12);
             this.cmb2Canvas.Name = "cmb2Canvas";
             this.cmb2Canvas.Size = new System.Drawing.Size(247, 29);
             this.cmb2Canvas.TabIndex = 40;
@@ -708,7 +713,7 @@
             this.cmb2CanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2CanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2CanvasTypes.FormattingEnabled = true;
-            this.cmb2CanvasTypes.Location = new System.Drawing.Point(255, 9);
+            this.cmb2CanvasTypes.Location = new System.Drawing.Point(255, 12);
             this.cmb2CanvasTypes.Name = "cmb2CanvasTypes";
             this.cmb2CanvasTypes.Size = new System.Drawing.Size(244, 29);
             this.cmb2CanvasTypes.TabIndex = 47;
@@ -756,8 +761,34 @@
             this.dgv2.Location = new System.Drawing.Point(3, 170);
             this.dgv2.Name = "dgv2";
             this.dgv2.RowTemplate.Height = 25;
-            this.dgv2.Size = new System.Drawing.Size(1397, 604);
+            this.dgv2.Size = new System.Drawing.Size(1397, 565);
             this.dgv2.TabIndex = 1;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.67001F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.32999F));
+            this.tableLayoutPanel3.Controls.Add(this.lblTotal2, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 741);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1397, 33);
+            this.tableLayoutPanel3.TabIndex = 2;
+            // 
+            // lblTotal2
+            // 
+            this.lblTotal2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblTotal2.AutoSize = true;
+            this.lblTotal2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTotal2.ForeColor = System.Drawing.Color.White;
+            this.lblTotal2.Location = new System.Drawing.Point(3, 6);
+            this.lblTotal2.Name = "lblTotal2";
+            this.lblTotal2.Size = new System.Drawing.Size(120, 21);
+            this.lblTotal2.TabIndex = 52;
+            this.lblTotal2.Text = "Filter By Canvas";
             // 
             // Frm_Reports
             // 
@@ -796,6 +827,8 @@
             this.tPanelCanvas2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv2)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -849,5 +882,7 @@
         private GroupBox groupBox5;
         private ComboBox cmb2Party;
         private DataGridView dgv2;
+        private TableLayoutPanel tableLayoutPanel3;
+        private Label lblTotal2;
     }
 }

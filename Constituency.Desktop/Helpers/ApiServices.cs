@@ -998,7 +998,7 @@ namespace Constituency.Desktop.Helpers
                     BaseAddress = new Uri(url)
                 };
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
-                HttpResponseMessage response = await client.GetAsync($"api/{controller}/{constituencyId}{divisionId}/{canvasId}/{partyId}");
+                HttpResponseMessage response = await client.GetAsync($"api/{controller}/{constituencyId}/{divisionId}/{canvasId}/{partyId}");
                 string result = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
                 {

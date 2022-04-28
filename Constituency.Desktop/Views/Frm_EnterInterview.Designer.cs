@@ -697,7 +697,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(107, 4);
+            this.cmbSex.Location = new System.Drawing.Point(107, 7);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -1005,7 +1005,7 @@
             this.cmbISupportedParty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbISupportedParty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbISupportedParty.FormattingEnabled = true;
-            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 15);
+            this.cmbISupportedParty.Location = new System.Drawing.Point(162, 12);
             this.cmbISupportedParty.Name = "cmbISupportedParty";
             this.cmbISupportedParty.Size = new System.Drawing.Size(714, 29);
             this.cmbISupportedParty.TabIndex = 35;
@@ -1039,7 +1039,7 @@
             this.cmbIComment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIComment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbIComment.FormattingEnabled = true;
-            this.cmbIComment.Location = new System.Drawing.Point(162, 67);
+            this.cmbIComment.Location = new System.Drawing.Point(162, 64);
             this.cmbIComment.Name = "cmbIComment";
             this.cmbIComment.Size = new System.Drawing.Size(714, 29);
             this.cmbIComment.TabIndex = 38;
@@ -1090,7 +1090,7 @@
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(562, 12);
+            this.cmbCanvas.Location = new System.Drawing.Point(562, 9);
             this.cmbCanvas.Name = "cmbCanvas";
             this.cmbCanvas.Size = new System.Drawing.Size(314, 29);
             this.cmbCanvas.TabIndex = 34;
