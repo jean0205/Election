@@ -1405,3 +1405,4 @@ C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\ref\Elect
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.RazorAssemblyInfo.cache
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\obj\Debug\net6.0\Election.API.RazorAssemblyInfo.cs
 C:\Users\jcsoto\source\repos\Election4.0\Election.API\bin\Debug\net6.0\Election.API.staticwebassets.runtime.json
+C:\Users\jeanc\source\repos\Election2.0\Election.API\bin\Debug\net6.0\Election.API.staticwebassets.runtime.json
