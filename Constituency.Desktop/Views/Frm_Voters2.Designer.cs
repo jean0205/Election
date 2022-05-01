@@ -361,11 +361,11 @@
             this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label39.Location = new System.Drawing.Point(24, 0);
+            this.label39.Location = new System.Drawing.Point(44, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(178, 21);
+            this.label39.Size = new System.Drawing.Size(158, 21);
             this.label39.TabIndex = 17;
-            this.label39.Text = "Filter the Applicants List:";
+            this.label39.Text = "Filter the Veoters List:";
             // 
             // tableLayoutPanel4
             // 
@@ -495,7 +495,7 @@
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(565, 8);
+            this.cmbDivision.Location = new System.Drawing.Point(565, 5);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(313, 29);
             this.cmbDivision.TabIndex = 34;
@@ -507,7 +507,7 @@
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(309, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -733,7 +733,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(105, 8);
+            this.cmbSex.Location = new System.Drawing.Point(105, 5);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -1099,10 +1099,10 @@
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage2.Controls.Add(this.tableLayoutPanel5);
-            this.tabPage2.Location = new System.Drawing.Point(4, 30);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1170, 735);
+            this.tabPage2.Size = new System.Drawing.Size(1170, 741);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Batch Import";
             // 
@@ -1118,7 +1118,7 @@
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.36214F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.63786F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1164, 729);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1164, 735);
             this.tableLayoutPanel5.TabIndex = 6;
             // 
             // dataGridView1
@@ -1132,7 +1132,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1158, 608);
+            this.dataGridView1.Size = new System.Drawing.Size(1158, 614);
             this.dataGridView1.TabIndex = 0;
             // 
             // tableLayoutPanel17
@@ -1149,7 +1149,7 @@
             this.tableLayoutPanel17.Controls.Add(this.label19, 1, 0);
             this.tableLayoutPanel17.Controls.Add(this.label20, 1, 1);
             this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 617);
+            this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 623);
             this.tableLayoutPanel17.Name = "tableLayoutPanel17";
             this.tableLayoutPanel17.RowCount = 2;
             this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
