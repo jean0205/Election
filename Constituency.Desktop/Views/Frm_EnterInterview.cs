@@ -752,10 +752,10 @@ namespace Constituency.Desktop.Views
             {
                 Interview = new Interview();
                 Interview.Canvas = (Canvas)cmbCanvas.SelectedItem;
-               // Interview.Canvas.Type.Canvas = null;
-                //Interview.Canvas.Interviews = null;
+                Interview.Canvas.Type.Canvas = null;
+                Interview.Canvas.Interviews = null;
                 Interview.Interviewer = (Interviewer)cmbInterviewers.SelectedItem;
-                //Interview.Interviewer.Interviews = null;
+                Interview.Interviewer.Interviews = null;
 
                 Interview.SupportedParty = (Party)cmbISupportedParty.SelectedItem;
                 if (cmbIComment.SelectedItem != null)
@@ -770,16 +770,16 @@ namespace Constituency.Desktop.Views
                 if (MySerializer.VoterEquealtoVpter2(Voter, voter2))
                 {
                     Interview.Voter = Voter;
-                    //Voter.Interviews = null;
-                    //Voter.ElectionVotes = null;
+                    Voter.Interviews = null;
+                    Voter.ElectionVotes = null;
                     Interview.Voter = Voter;
                 }
                 else
                 {
                     await UpdateVoter();
                     Voter = await LoadVoterAsyncById(Voter.Id);
-                    //Voter.Interviews = null;
-                    //Voter.ElectionVotes = null;
+                    Voter.Interviews = null;
+                    Voter.ElectionVotes = null;
                     Interview.Voter = Voter;
                 }
                 if (id != null)
