@@ -1491,7 +1491,7 @@ namespace Constituency.Desktop.Views
                 dgvCanvasInterviews.DataSource = null;
                 if (canvas.Interviews != null && canvas.Interviews.Any())
                 {
-                    dgvCanvasInterviews.DataSource = canvas.Interviews.Select(u => new { Registration = u.Voter.Reg, u.Voter.FullName, PD = u.Voter.PollingDivision.Name, Party = u.SupportedParty.Name, u.Date, Interviewer = u.Interviewer.FullName }).ToList();
+                    dgvCanvasInterviews.DataSource = canvas.Interviews.Select(u => new { Registration = u.Voter.Reg, u.Voter.FullName, PD = u.Voter.PollingDivision.Name, Party = u.SupportedParty!=null? u.SupportedParty.Name:"", u.Date, Interviewer = u.Interviewer.FullName }).ToList();
                 }
             }
             catch (Exception ex)

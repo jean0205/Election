@@ -579,17 +579,30 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
                     return;
                 }
-                if (await SaveInterview())
-                {
-                    await LoadCanvas();
-                }
-                else { return; }
 
-                if (Interview != null && Interview.Id > 0)
-                {
+                //if (await SaveInterview())
+                //{
+                //    await LoadCanvas();
+                //}
+                //else { return; }
+                
+                if (!await SaveInterview()) { return; }
 
+                //if (Interview != null && Interview.Id > 0)
+                {
+                    var canvas = Interview.Canvas;
+                    if (CanvasList.Any(c=>c.Id==canvas.Id))
+                    {
+                        CanvasList.FirstOrDefault(c => c.Id == canvas.Id).Interviews.Add(Interview);
+                    }
+                    else
+                    {
+                        
+                        CanvasList.Add(canvas);
+                        CanvasList.FirstOrDefault(c => c.Id == canvas.Id).Interviews.Add(Interview);
+                    }                   
+                    RefreshTreeView(CanvasList.ToList());
                     tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);
-                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
                 }
             }
             catch (Exception ex)
@@ -653,20 +666,25 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("You must provide a valid Email address.");
                     return;
                 }
-                if (await UpdateInterview((int)tView1.SelectedNode.Tag))
-                {
-                    await LoadCanvas();
+                if (!await UpdateInterview((int)tView1.SelectedNode.Tag)) { return; }
 
-                }
                 if (Interview != null && Interview.Id > 0)
                 {
-                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).Where(n => NodeLevel(n) == 1).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);
-                    //await AfterSelectNodeTVw1((int)tView1.SelectedNode.Tag);
+                    var oldInterview = CanvasList.Where(c=>c.Interviews.Any(i=>i.Id==Interview.Id)).FirstOrDefault().Interviews.FirstOrDefault(i => i.Id == Interview.Id);
+
+                   
+                    CanvasList.Where(c => c.Interviews.Any(i => i.Id == Interview.Id)).FirstOrDefault().Interviews.Remove(oldInterview);
+                    CanvasList.FirstOrDefault(c => c.Id == Interview.Canvas.Id).Interviews.Add(Interview);
+                    
+                    
+                    RefreshTreeView(CanvasList.ToList());
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).Where(n => NodeLevel(n) == 1).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);                    
                 }
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); 
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private async Task<bool> UpdateInterview(int? id)
@@ -682,9 +700,7 @@ namespace Constituency.Desktop.Views
                 var interview = await BuildInterview(id);
                 UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PutAsync("Interviews", interview, interview.Id, token);
-                UtilRecurrent.UnlockForm(waitForm, this);
-
-                UtilRecurrent.UnlockForm(waitForm, this);
+                UtilRecurrent.UnlockForm(waitForm, this);                
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -736,10 +752,10 @@ namespace Constituency.Desktop.Views
             {
                 Interview = new Interview();
                 Interview.Canvas = (Canvas)cmbCanvas.SelectedItem;
-                Interview.Canvas.Type.Canvas = null;
-                Interview.Canvas.Interviews = null;
+               // Interview.Canvas.Type.Canvas = null;
+                //Interview.Canvas.Interviews = null;
                 Interview.Interviewer = (Interviewer)cmbInterviewers.SelectedItem;
-                Interview.Interviewer.Interviews = null;
+                //Interview.Interviewer.Interviews = null;
 
                 Interview.SupportedParty = (Party)cmbISupportedParty.SelectedItem;
                 if (cmbIComment.SelectedItem != null)
@@ -754,16 +770,16 @@ namespace Constituency.Desktop.Views
                 if (MySerializer.VoterEquealtoVpter2(Voter, voter2))
                 {
                     Interview.Voter = Voter;
-                    Voter.Interviews = null;
-                    Voter.ElectionVotes = null;
+                    //Voter.Interviews = null;
+                    //Voter.ElectionVotes = null;
                     Interview.Voter = Voter;
                 }
                 else
                 {
                     await UpdateVoter();
                     Voter = await LoadVoterAsyncById(Voter.Id);
-                    Voter.Interviews = null;
-                    Voter.ElectionVotes = null;
+                    //Voter.Interviews = null;
+                    //Voter.ElectionVotes = null;
                     Interview.Voter = Voter;
                 }
                 if (id != null)
