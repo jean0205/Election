@@ -749,7 +749,7 @@ namespace Constituency.Desktop.Views
         private async Task<Interview> BuildInterview(int? id)
         {
             try
-            {
+            {//TODO nopuedo enviar el interview con lascanvas pq seva toda la lista de interviews tambien. pensaresta mierda mejormanana
                 Interview = new Interview();
                 Interview.Canvas = (Canvas)cmbCanvas.SelectedItem;
                 Interview.Canvas.Type.Canvas = null;
