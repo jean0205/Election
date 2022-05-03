@@ -630,7 +630,7 @@ namespace Constituency.Desktop.Views
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(180, 16);
+            this.cmbConstituency.Location = new System.Drawing.Point(180, 19);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(666, 29);
             this.cmbConstituency.TabIndex = 45;
@@ -1084,13 +1084,13 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel10.Location = new System.Drawing.Point(353, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 7;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 107F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 375F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel10.Size = new System.Drawing.Size(850, 739);
             this.tableLayoutPanel10.TabIndex = 4;
             // 
@@ -1099,7 +1099,7 @@ namespace Constituency.Desktop.Views
             this.label17.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label17.Location = new System.Drawing.Point(118, 74);
+            this.label17.Location = new System.Drawing.Point(118, 66);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(55, 21);
             this.label17.TabIndex = 35;
@@ -1109,7 +1109,7 @@ namespace Constituency.Desktop.Views
             // 
             this.rjCanvasActive.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.rjCanvasActive.AutoSize = true;
-            this.rjCanvasActive.Location = new System.Drawing.Point(180, 72);
+            this.rjCanvasActive.Location = new System.Drawing.Point(180, 64);
             this.rjCanvasActive.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjCanvasActive.Name = "rjCanvasActive";
             this.rjCanvasActive.OffBackColor = System.Drawing.Color.Gray;
@@ -1125,7 +1125,7 @@ namespace Constituency.Desktop.Views
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label18.Location = new System.Drawing.Point(67, 20);
+            this.label18.Location = new System.Drawing.Point(67, 15);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(106, 21);
             this.label18.TabIndex = 44;
@@ -1137,7 +1137,7 @@ namespace Constituency.Desktop.Views
             this.cmbCanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvasTypes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 19);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(180, 11);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(666, 29);
             this.cmbCanvasTypes.TabIndex = 45;
@@ -1148,7 +1148,7 @@ namespace Constituency.Desktop.Views
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label16.Location = new System.Drawing.Point(118, 166);
+            this.label16.Location = new System.Drawing.Point(118, 168);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(55, 21);
             this.label16.TabIndex = 36;
@@ -1157,7 +1157,7 @@ namespace Constituency.Desktop.Views
             // txtCanvasName
             // 
             this.txtCanvasName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCanvasName.Location = new System.Drawing.Point(180, 162);
+            this.txtCanvasName.Location = new System.Drawing.Point(180, 164);
             this.txtCanvasName.Name = "txtCanvasName";
             this.txtCanvasName.Size = new System.Drawing.Size(666, 29);
             this.txtCanvasName.TabIndex = 40;
@@ -1168,7 +1168,7 @@ namespace Constituency.Desktop.Views
             this.label19.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label19.Location = new System.Drawing.Point(122, 120);
+            this.label19.Location = new System.Drawing.Point(122, 117);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(51, 21);
             this.label19.TabIndex = 46;
@@ -1178,7 +1178,7 @@ namespace Constituency.Desktop.Views
             // 
             this.rjCanvasOpen.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.rjCanvasOpen.AutoSize = true;
-            this.rjCanvasOpen.Location = new System.Drawing.Point(180, 118);
+            this.rjCanvasOpen.Location = new System.Drawing.Point(180, 115);
             this.rjCanvasOpen.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjCanvasOpen.Name = "rjCanvasOpen";
             this.rjCanvasOpen.OffBackColor = System.Drawing.Color.Gray;
@@ -1192,10 +1192,10 @@ namespace Constituency.Desktop.Views
             // txtCanvasDescription
             // 
             this.txtCanvasDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCanvasDescription.Location = new System.Drawing.Point(180, 210);
+            this.txtCanvasDescription.Location = new System.Drawing.Point(180, 208);
             this.txtCanvasDescription.Multiline = true;
             this.txtCanvasDescription.Name = "txtCanvasDescription";
-            this.txtCanvasDescription.Size = new System.Drawing.Size(666, 86);
+            this.txtCanvasDescription.Size = new System.Drawing.Size(666, 74);
             this.txtCanvasDescription.TabIndex = 48;
             this.txtCanvasDescription.Tag = "";
             // 
@@ -1204,7 +1204,7 @@ namespace Constituency.Desktop.Views
             this.label20.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label20.Location = new System.Drawing.Point(81, 243);
+            this.label20.Location = new System.Drawing.Point(81, 234);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(92, 21);
             this.label20.TabIndex = 49;
@@ -1227,7 +1227,7 @@ namespace Constituency.Desktop.Views
             this.ibtnCanvasSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnCanvasSave.IconSize = 40;
             this.ibtnCanvasSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnCanvasSave.Location = new System.Drawing.Point(683, 693);
+            this.ibtnCanvasSave.Location = new System.Drawing.Point(683, 685);
             this.ibtnCanvasSave.Name = "ibtnCanvasSave";
             this.ibtnCanvasSave.Size = new System.Drawing.Size(163, 50);
             this.ibtnCanvasSave.TabIndex = 4;
@@ -1242,7 +1242,7 @@ namespace Constituency.Desktop.Views
             this.label21.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label21.Location = new System.Drawing.Point(89, 485);
+            this.label21.Location = new System.Drawing.Point(89, 471);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(84, 21);
             this.label21.TabIndex = 51;
@@ -1254,12 +1254,12 @@ namespace Constituency.Desktop.Views
             this.dgvCanvasInterviews.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCanvasInterviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCanvasInterviews.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCanvasInterviews.Location = new System.Drawing.Point(180, 311);
+            this.dgvCanvasInterviews.Location = new System.Drawing.Point(180, 289);
             this.dgvCanvasInterviews.Name = "dgvCanvasInterviews";
             this.dgvCanvasInterviews.RowHeadersVisible = false;
             this.dgvCanvasInterviews.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dgvCanvasInterviews.RowTemplate.Height = 25;
-            this.dgvCanvasInterviews.Size = new System.Drawing.Size(666, 369);
+            this.dgvCanvasInterviews.Size = new System.Drawing.Size(666, 385);
             this.dgvCanvasInterviews.TabIndex = 52;
             // 
             // tabPage6
@@ -1461,7 +1461,7 @@ namespace Constituency.Desktop.Views
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(119, 7);
+            this.cmbSex.Location = new System.Drawing.Point(119, 10);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;

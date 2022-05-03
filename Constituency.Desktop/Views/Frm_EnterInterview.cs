@@ -384,6 +384,7 @@ namespace Constituency.Desktop.Views
                     cmbCanvas.SelectedValue = nodeTag;
                     ibtnSaveVoter.Visible = true;
                     ibtnUpdate.Visible = false;
+                    ibtnNew.Visible = false;
                 }
                 else
                 {
@@ -514,9 +515,9 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                UtilRecurrent.LockForm(waitForm, this);
+               // UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.FindAsync<Voter>("Voters", id.ToString(), token);
-                UtilRecurrent.UnlockForm(waitForm, this);
+               // UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     if (response.Message == "Not Found")
@@ -541,9 +542,9 @@ namespace Constituency.Desktop.Views
             try
             {
                 var voter = BuildVoter();
-                UtilRecurrent.LockForm(waitForm, this);
+               // UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PutAsync("Voters", voter, voter.Id, token);
-                UtilRecurrent.UnlockForm(waitForm, this);
+                //UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -588,7 +589,7 @@ namespace Constituency.Desktop.Views
                 
                 if (!await SaveInterview()) { return; }
 
-                //if (Interview != null && Interview.Id > 0)
+                if (Interview != null && Interview.Id > 0)
                 {
                     var canvas = Interview.Canvas;
                     if (CanvasList.Any(c=>c.Id==canvas.Id))
@@ -603,6 +604,7 @@ namespace Constituency.Desktop.Views
                     }                   
                     RefreshTreeView(CanvasList.ToList());
                     tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);
+                    ibtnNew.Visible = true;
                 }
             }
             catch (Exception ex)
@@ -678,7 +680,8 @@ namespace Constituency.Desktop.Views
                     
                     
                     RefreshTreeView(CanvasList.ToList());
-                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).Where(n => NodeLevel(n) == 1).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);                    
+                    tView1.SelectedNode = CollectAllNodes(tView1.Nodes).Where(n => NodeLevel(n) == 1).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);
+                    ibtnNew.Visible = true;
                 }
             }
             catch (Exception ex)
@@ -990,6 +993,26 @@ namespace Constituency.Desktop.Views
             {
                 Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
+        }
+
+        private void cmbInterviewers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ibtnNew_Click(object sender, EventArgs e)
+        {
+            if (cmbCanvas.SelectedItem != null)
+            {
+                var canvas= cmbCanvas.SelectedItem as Canvas;
+                tView1.SelectedNode = CollectAllNodes(tView1.Nodes).Where(n => NodeLevel(n) == 0).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == canvas.Id);
+            }
+            else
+            {
+                tView1.SelectedNode = tView1.Nodes[0];
+            }
+
+           
         }
     }
 }

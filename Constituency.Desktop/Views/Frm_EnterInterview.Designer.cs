@@ -105,6 +105,7 @@
             this.dtpIDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ibtnNew = new FontAwesome.Sharp.IconButton();
             this.ibtnSaveVoter = new FontAwesome.Sharp.IconButton();
             this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -976,6 +977,7 @@
             this.cmbInterviewers.Size = new System.Drawing.Size(714, 29);
             this.cmbInterviewers.TabIndex = 41;
             this.cmbInterviewers.Tag = "1";
+            this.cmbInterviewers.SelectedIndexChanged += new System.EventHandler(this.cmbInterviewers_SelectedIndexChanged);
             // 
             // label18
             // 
@@ -1121,6 +1123,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ibtnNew);
             this.panel1.Controls.Add(this.ibtnSaveVoter);
             this.panel1.Controls.Add(this.ibtnUpdate);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1128,6 +1131,31 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(892, 41);
             this.panel1.TabIndex = 10;
+            // 
+            // ibtnNew
+            // 
+            this.ibtnNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnNew.BackColor = System.Drawing.Color.Orange;
+            this.ibtnNew.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ibtnNew.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnNew.FlatAppearance.BorderSize = 2;
+            this.ibtnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnNew.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnNew.IconChar = FontAwesome.Sharp.IconChar.AngleRight;
+            this.ibtnNew.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnNew.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnNew.IconSize = 33;
+            this.ibtnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnNew.Location = new System.Drawing.Point(427, 0);
+            this.ibtnNew.Name = "ibtnNew";
+            this.ibtnNew.Size = new System.Drawing.Size(155, 41);
+            this.ibtnNew.TabIndex = 6;
+            this.ibtnNew.Text = "New";
+            this.ibtnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnNew.UseVisualStyleBackColor = false;
+            this.ibtnNew.Visible = false;
+            this.ibtnNew.Click += new System.EventHandler(this.ibtnNew_Click);
             // 
             // ibtnSaveVoter
             // 
@@ -1314,5 +1342,6 @@
         private Label label19;
         private Controls.RJToggleButton rjDeceased;
         private ImageList imgListTreeView;
+        private FontAwesome.Sharp.IconButton ibtnNew;
     }
 }

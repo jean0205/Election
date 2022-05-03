@@ -346,7 +346,7 @@ namespace Constituency.Desktop.Views
                         FillUpdComboboxDivision();
                         ibtnSaveVoter.Visible = true;
                         ibtnUpdate.Visible = false;
-                        e.Node.ExpandAll();
+                        //e.Node.ExpandAll();
                     }
                     if (NodeLevel(e.Node) == 1)
                     {
@@ -362,9 +362,9 @@ namespace Constituency.Desktop.Views
                         {
                             await LoadVotersInDivision((int)e.Node.Tag);
                             tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => x.Tag.ToString() == e.Node.Tag.ToString());
-                            tView1.SelectedNode.Expand();
+                            //tView1.SelectedNode.Expand();
                         }
-                        e.Node.ExpandAll();
+                        //e.Node.ExpandAll();
 
 
                     }
@@ -496,7 +496,7 @@ namespace Constituency.Desktop.Views
 
                     if (Voter.Interviews != null && Voter.Interviews.Any())
                     {
-                        dgvInterviews.DataSource = Voter.Interviews.Select(u => new { u.Canvas.Type.Type, u.Canvas.Name, u.Date, Party = u.SupportedParty.Name, u.Interviewer.FullName }).ToList();
+                        dgvInterviews.DataSource = Voter.Interviews.Select(u => new { u.Canvas.Type.Type, u.Canvas.Name, u.Date, Party = u.SupportedParty != null ? u.SupportedParty.Name : "", u.Interviewer.FullName }).ToList();
                     }
                     if (Voter.ElectionVotes != null && Voter.ElectionVotes.Any())
                     {

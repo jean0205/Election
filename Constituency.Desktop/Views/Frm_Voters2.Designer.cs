@@ -361,11 +361,11 @@
             this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label39.Location = new System.Drawing.Point(44, 0);
+            this.label39.Location = new System.Drawing.Point(52, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(158, 21);
+            this.label39.Size = new System.Drawing.Size(150, 21);
             this.label39.TabIndex = 17;
-            this.label39.Text = "Filter the Veoters List:";
+            this.label39.Text = "Filter the Voters List:";
             // 
             // tableLayoutPanel4
             // 
