@@ -60,15 +60,21 @@ namespace Election.API.Controllers
         [HttpGet("OpenAll")]
         public async Task<ActionResult<IEnumerable<Canvas>>> GetCanvasOpen()
         {
+            //return await _context.Canvas
+            //    .Include(c => c.Type)
+            //    .Include(c => c.Interviews)
+            //    .ThenInclude(i => i.Voter)
+            //    .ThenInclude(i => i.PollingDivision)
+            //    .Include(c => c.Interviews)
+            //    .ThenInclude(i => i.Interviewer)
+            //    .Include(c => c.Interviews)
+            //    .ThenInclude(c => c.SupportedParty)
+            //    .Where(c => c.Open)
+            //    .ToListAsync();
             return await _context.Canvas
                 .Include(c => c.Type)
                 .Include(c => c.Interviews)
-                .ThenInclude(i => i.Voter)
-                .ThenInclude(i => i.PollingDivision)
-                .Include(c => c.Interviews)
-                .ThenInclude(i => i.Interviewer)
-                .Include(c => c.Interviews)
-                .ThenInclude(c => c.SupportedParty)
+                .ThenInclude(i => i.Voter)                
                 .Where(c => c.Open)
                 .ToListAsync();
         }
@@ -76,19 +82,26 @@ namespace Election.API.Controllers
         public async Task<ActionResult<IEnumerable<Canvas>>> GetCanvasOpenByUser()
         {
             string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            //return await _context.Canvas
+            //    .Include(c => c.Type)
+            //    .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
+            //    .ThenInclude(i => i.Voter)
+            //    .ThenInclude(i => i.PollingDivision)
+            //    .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
+            //    .ThenInclude(i => i.Interviewer)
+            //   .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
+            //    .ThenInclude(c => c.SupportedParty)
+            //    .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
+            //    .ThenInclude(c => c.RecorderBy)
+            //    .Where(c => c.Open)
+            //    .ToListAsync();
+
             return await _context.Canvas
-                .Include(c => c.Type)
-                .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
-                .ThenInclude(i => i.Voter)
-                .ThenInclude(i => i.PollingDivision)
-                .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
-                .ThenInclude(i => i.Interviewer)
+               .Include(c => c.Type)
                .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
-                .ThenInclude(c => c.SupportedParty)
-                .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
-                .ThenInclude(c => c.RecorderBy)
-                .Where(c => c.Open)
-                .ToListAsync();
+               .ThenInclude(i => i.Voter)                
+               .Where(c => c.Open)
+               .ToListAsync();
         }
 
         // GET: api/Canvas/5

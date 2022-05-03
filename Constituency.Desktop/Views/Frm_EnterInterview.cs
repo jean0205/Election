@@ -4,6 +4,7 @@ using Constituency.Desktop.Entities;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
 using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Reflection;
@@ -160,7 +161,6 @@ namespace Constituency.Desktop.Views
                 if (CanvasList.Any())
                 {
                     RefreshTreeView(CanvasList.ToList());
-
                     cmbCanvas.DataSource = null;
                     cmbCanvas.DataSource = CanvasList.ToList();
                     cmbCanvas.ValueMember = "Id";
@@ -622,9 +622,9 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("Voter already interviewed in the selected Canvas.");
                     return false;
                 }
-                voter.Active = true;
-                var interview = await BuildInterview(null);
                 UtilRecurrent.LockForm(waitForm, this);
+                voter.Active = true;
+                var interview = await BuildInterview(null);               
                 Response response = await ApiServices.PostAsync("Interviews", interview, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
 
@@ -696,9 +696,8 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("Voter already interviewed in the selected Canvas.");
                     return false;
                 }
-
-                var interview = await BuildInterview(id);
                 UtilRecurrent.LockForm(waitForm, this);
+                var interview = await BuildInterview(id);               
                 Response response = await ApiServices.PutAsync("Interviews", interview, interview.Id, token);
                 UtilRecurrent.UnlockForm(waitForm, this);                
                 if (!response.IsSuccess)
@@ -750,8 +749,10 @@ namespace Constituency.Desktop.Views
         {
             try
             {//TODO nopuedo enviar el interview con lascanvas pq seva toda la lista de interviews tambien. pensaresta mierda mejormanana
+                var canvas = JsonConvert.DeserializeObject<Canvas>(JsonConvert.SerializeObject((Canvas)cmbCanvas.SelectedItem));
                 Interview = new Interview();
-                Interview.Canvas = (Canvas)cmbCanvas.SelectedItem;
+                //Interview.Canvas = (Canvas)cmbCanvas.SelectedItem;
+                Interview.Canvas = canvas;
                 Interview.Canvas.Type.Canvas = null;
                 Interview.Canvas.Interviews = null;
                 Interview.Interviewer = (Interviewer)cmbInterviewers.SelectedItem;
@@ -911,6 +912,7 @@ namespace Constituency.Desktop.Views
                     {
                         if (UtilRecurrent.yesOrNot("Are you sure you want to delete this interview?", "Delete Interview"))
                         {
+                            UtilRecurrent.LockForm(waitForm, this);
                             await DeleteAsyncGeneric("Interviews", Interview.Id);
                             await LoadCanvas();
                             if (tView1.Nodes.Count > 0)
@@ -927,9 +929,9 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                UtilRecurrent.LockForm(waitForm, this);
+               // UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.DeleteAsync(controller, id, token);
-                UtilRecurrent.UnlockForm(waitForm, this);
+                //UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
