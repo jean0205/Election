@@ -17,6 +17,7 @@ namespace Constituency.Desktop.Views
 {
     public partial class Frm_Configuration : Form
     {
+
         WaitFormFunc waitForm = new WaitFormFunc();
 
         //Fields
