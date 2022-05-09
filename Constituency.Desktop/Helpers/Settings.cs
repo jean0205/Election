@@ -8,7 +8,7 @@
         public static string GetApiUrl()
         {
             //return "https://localhost:7235/";
-             return "https://constituencygnd.azurewebsites.net/";
+            return "https://constituencygnd.azurewebsites.net/";
 
         }
     }

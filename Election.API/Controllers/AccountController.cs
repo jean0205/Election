@@ -212,7 +212,7 @@ namespace Election.API.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
+                        ModelState.AddModelError("Error", result.Errors.FirstOrDefault().Description);
                     }
                 }
                 else
@@ -252,6 +252,25 @@ namespace Election.API.Controllers
             return BadRequest(ModelState);
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            User user = await _userHelper.GetUserAsync(model.UserName);
+            if (user != null)
+            {
+                string myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
+                
+                IdentityResult result = await _userHelper.ResetPasswordAsync(user, myToken, model.Password);
+                if (result.Succeeded)
+                {
+                    return CreatedAtAction("ResetPassword", model);
+                }
+                ModelState.AddModelError("Error", "Error updating password.");               
+            }
+            ModelState.AddModelError("Error", "User not found.");
+            return BadRequest(ModelState);
+        }
     }
 
 

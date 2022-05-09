@@ -4,14 +4,8 @@ using Constituency.Desktop.Entities;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
 using Microsoft.AppCenter.Crashes;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Constituency.Desktop.Views
 {
@@ -120,7 +114,7 @@ namespace Constituency.Desktop.Views
                         childNodes.Add(new TreeNode(user.FullName, 2, 3));
                         childNodes[childNodes.Count - 1].Tag = user.Id;
                         addContextMenu(childNodes[childNodes.Count - 1], "Delete User");
-                        childNodes[childNodes.Count - 1].BackColor= user.Online? Color.Yellow : Color.White;
+                        childNodes[childNodes.Count - 1].BackColor = user.Online ? Color.Yellow : Color.White;
                     }
                     treeNodes.Add(new TreeNode(letter, 0, 1, childNodes.ToArray()));
                     treeNodes[treeNodes.Count - 1].Tag = Guid.Empty;
@@ -131,7 +125,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private void tView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -148,7 +142,7 @@ namespace Constituency.Desktop.Views
                     showUserInfo(user);
                     Roles = await LoadUsersRoles(user);
                     UtilRecurrent.FindAllControlsIterative(gbAccess, "RJToggleButton").Cast<RJToggleButton>().ToList().ForEach(x => x.Checked = Roles.Contains(x.Name.Replace("rj", string.Empty)));
-                                      
+
                     txtUserName.ReadOnly = true;
                     lblLogin.Text = user.LogInTime.ToLocalTime().ToString("dd-MMM-yyyy hh:mm:ss");
                     lblLogOut.Text = user.LogOutTime.ToLocalTime().ToString("dd-MMM-yyyy hh:mm:ss");
@@ -163,7 +157,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private async Task<List<string>> LoadUsersRoles(User user)
@@ -196,7 +190,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private async void ibtnSave_Click(object sender, EventArgs e)
@@ -230,7 +224,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private IEnumerable<TreeNode> CollectAllNodes(TreeNodeCollection nodes)
@@ -260,7 +254,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
                 return null;
             }
 
@@ -283,7 +277,8 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
                 return new Response
                 {
                     IsSuccess = false
@@ -321,11 +316,9 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                waitForm.Show(this);
-                Cursor.Hide();
+                UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.DeleteAsync("Users", id, token);
-                waitForm.Close();
-                Cursor.Show();
+                UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -334,9 +327,33 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                UtilRecurrent.UnlockForm(waitForm, this);
             }
         }
+        private async Task<bool> ResetPassword(ResetPasswordViewModel model)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.PostAsync("Account/ResetPassword", model, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                return false;
+            }
+        }        
         private async void rjToggle_ClickAsync(object sender, EventArgs e)
         {
             try
@@ -376,7 +393,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private void tView1_MouseClick(object sender, MouseEventArgs e)
@@ -413,7 +430,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
                 return null;
             }
         }
@@ -455,10 +472,37 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                 Crashes.TrackError(ex);  UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
 
-        
+        private async void iconButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UtilRecurrent.yesOrNot("Do you want to Reset the password for this user?", "Reset Password"))
+                {
+                    ResetPasswordViewModel model = new ResetPasswordViewModel();
+                    model.UserName = user.UserName;
+                    model.Password = "Welcome1";
+                    model.ConfirmPassword = "Welcome1";
+                    model.Token = token;
+
+                    if (await ResetPassword(model))
+                    {
+                        UtilRecurrent.InformationMessage("Password reset successfully.", "Reset Password");
+                    }
+                    else { UtilRecurrent.ErrorMessage("Password reset failed."); }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
     }
 }

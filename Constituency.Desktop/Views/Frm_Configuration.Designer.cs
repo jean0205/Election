@@ -46,6 +46,7 @@ namespace Constituency.Desktop.Views
             this.lblLogin = new System.Windows.Forms.Label();
             this.gbActions = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.rjActive = new Constituency.Desktop.Controls.RJToggleButton();
@@ -93,6 +94,7 @@ namespace Constituency.Desktop.Views
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label17 = new System.Windows.Forms.Label();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -102,6 +104,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel5.SuspendLayout();
             this.gbActions.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.gbAccess.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -298,6 +301,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.21115F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.51394F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.68526F));
+            this.tableLayoutPanel4.Controls.Add(this.panel4, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.panel3, 3, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 25);
@@ -307,6 +311,15 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1002, 61);
             this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.iconButton1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(270, 55);
+            this.panel4.TabIndex = 7;
             // 
             // panel3
             // 
@@ -949,6 +962,30 @@ namespace Constituency.Desktop.Views
             this.label17.TabIndex = 21;
             this.label17.Text = "Phone Number:";
             // 
+            // iconButton1
+            // 
+            this.iconButton1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.iconButton1.BackColor = System.Drawing.Color.IndianRed;
+            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.iconButton1.FlatAppearance.BorderSize = 2;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Eraser;
+            this.iconButton1.IconColor = System.Drawing.Color.Black;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(16, 3);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(238, 49);
+            this.iconButton1.TabIndex = 5;
+            this.iconButton1.Text = "Reset Password";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
             // Frm_Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -974,6 +1011,7 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel5.PerformLayout();
             this.gbActions.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.gbAccess.ResumeLayout(false);
@@ -1052,5 +1090,7 @@ namespace Constituency.Desktop.Views
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label19;
         private Controls.RJToggleButton rjSee_Reports;
+        private Panel panel4;
+        private FontAwesome.Sharp.IconButton iconButton1;
     }
 }
