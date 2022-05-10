@@ -24,6 +24,9 @@ namespace Election.MVC.Data.Entities
         [Display(Name = "Given Names")]
         [MaxLength(100)]
         public string GivenNames { get; set; }
+        
+        public string FullName => $"{SurName} {GivenNames}";
+
 
         [Required(ErrorMessage = "{0} is a required field.")]
         [MaxLength(10)]

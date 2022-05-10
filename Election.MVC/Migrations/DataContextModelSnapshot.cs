@@ -17,50 +17,12 @@ namespace Election.MVC.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Election.API.Data.Audit.Audit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AffectedColumns")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NewValues")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OldValues")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrimaryKey")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TableName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AuditLogs");
-                });
-
-            modelBuilder.Entity("Election.API.Data.Entities.Canvas", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Canvas", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,7 +56,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("Canvas");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.CanvasType", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.CanvasType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -119,7 +81,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("CanvasTypes");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Comment", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -140,7 +102,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Constituency", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Constituency", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -168,7 +130,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("Constituencies");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.ElectionVote", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.ElectionVote", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,7 +190,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("ElectionVotes");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.House", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.House", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -256,7 +218,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("Houses");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Interview", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Interview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -316,7 +278,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("Interviews");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Interviewer", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Interviewer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -377,7 +339,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("Interviewers");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.NationalElection", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.NationalElection", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -399,7 +361,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("NationalElections");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Party", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Party", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -427,7 +389,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("Parties");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.PollingDivision", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.PollingDivision", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -455,7 +417,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("PollingDivisions");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.User", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -547,7 +509,7 @@ namespace Election.MVC.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Voter", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Voter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -777,9 +739,9 @@ namespace Election.MVC.Migrations
                     b.ToTable("NationalElectionParty");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Canvas", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Canvas", b =>
                 {
-                    b.HasOne("Election.API.Data.Entities.CanvasType", "Type")
+                    b.HasOne("Election.MVC.Data.Entities.CanvasType", "Type")
                         .WithMany("Canvas")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -788,33 +750,33 @@ namespace Election.MVC.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.ElectionVote", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.ElectionVote", b =>
                 {
-                    b.HasOne("Election.API.Data.Entities.Comment", "Comment")
+                    b.HasOne("Election.MVC.Data.Entities.Comment", "Comment")
                         .WithMany()
                         .HasForeignKey("CommentId");
 
-                    b.HasOne("Election.API.Data.Entities.NationalElection", "Election")
+                    b.HasOne("Election.MVC.Data.Entities.NationalElection", "Election")
                         .WithMany("ElectionVotes")
                         .HasForeignKey("ElectionId");
 
-                    b.HasOne("Election.API.Data.Entities.Interviewer", null)
+                    b.HasOne("Election.MVC.Data.Entities.Interviewer", null)
                         .WithMany("ElectionVotes")
                         .HasForeignKey("InterviewerId");
 
-                    b.HasOne("Election.API.Data.Entities.User", "LockedBy")
+                    b.HasOne("Election.MVC.Data.Entities.User", "LockedBy")
                         .WithMany()
                         .HasForeignKey("LockedById");
 
-                    b.HasOne("Election.API.Data.Entities.User", "RecorderBy")
+                    b.HasOne("Election.MVC.Data.Entities.User", "RecorderBy")
                         .WithMany()
                         .HasForeignKey("RecorderById");
 
-                    b.HasOne("Election.API.Data.Entities.Party", "SupportedParty")
+                    b.HasOne("Election.MVC.Data.Entities.Party", "SupportedParty")
                         .WithMany()
                         .HasForeignKey("SupportedPartyId");
 
-                    b.HasOne("Election.API.Data.Entities.Voter", "Voter")
+                    b.HasOne("Election.MVC.Data.Entities.Voter", "Voter")
                         .WithMany("ElectionVotes")
                         .HasForeignKey("VoterId");
 
@@ -831,33 +793,33 @@ namespace Election.MVC.Migrations
                     b.Navigation("Voter");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Interview", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Interview", b =>
                 {
-                    b.HasOne("Election.API.Data.Entities.Canvas", "Canvas")
+                    b.HasOne("Election.MVC.Data.Entities.Canvas", "Canvas")
                         .WithMany("Interviews")
                         .HasForeignKey("CanvasId");
 
-                    b.HasOne("Election.API.Data.Entities.Comment", "Comment")
+                    b.HasOne("Election.MVC.Data.Entities.Comment", "Comment")
                         .WithMany()
                         .HasForeignKey("CommentId");
 
-                    b.HasOne("Election.API.Data.Entities.Interviewer", "Interviewer")
+                    b.HasOne("Election.MVC.Data.Entities.Interviewer", "Interviewer")
                         .WithMany("Interviews")
                         .HasForeignKey("InterviewerId");
 
-                    b.HasOne("Election.API.Data.Entities.User", "LockedBy")
+                    b.HasOne("Election.MVC.Data.Entities.User", "LockedBy")
                         .WithMany()
                         .HasForeignKey("LockedById");
 
-                    b.HasOne("Election.API.Data.Entities.User", "RecorderBy")
+                    b.HasOne("Election.MVC.Data.Entities.User", "RecorderBy")
                         .WithMany()
                         .HasForeignKey("RecorderById");
 
-                    b.HasOne("Election.API.Data.Entities.Party", "SupportedParty")
+                    b.HasOne("Election.MVC.Data.Entities.Party", "SupportedParty")
                         .WithMany()
                         .HasForeignKey("SupportedPartyId");
 
-                    b.HasOne("Election.API.Data.Entities.Voter", "Voter")
+                    b.HasOne("Election.MVC.Data.Entities.Voter", "Voter")
                         .WithMany("Interviews")
                         .HasForeignKey("VoterId");
 
@@ -876,22 +838,22 @@ namespace Election.MVC.Migrations
                     b.Navigation("Voter");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.PollingDivision", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.PollingDivision", b =>
                 {
-                    b.HasOne("Election.API.Data.Entities.Constituency", "Constituency")
+                    b.HasOne("Election.MVC.Data.Entities.Constituency", "Constituency")
                         .WithMany("PollingDivisions")
                         .HasForeignKey("ConstituencyId");
 
                     b.Navigation("Constituency");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Voter", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Voter", b =>
                 {
-                    b.HasOne("Election.API.Data.Entities.House", "House")
+                    b.HasOne("Election.MVC.Data.Entities.House", "House")
                         .WithMany("Voters")
                         .HasForeignKey("HouseId");
 
-                    b.HasOne("Election.API.Data.Entities.PollingDivision", "PollingDivision")
+                    b.HasOne("Election.MVC.Data.Entities.PollingDivision", "PollingDivision")
                         .WithMany()
                         .HasForeignKey("PollingDivisionId");
 
@@ -911,7 +873,7 @@ namespace Election.MVC.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Election.API.Data.Entities.User", null)
+                    b.HasOne("Election.MVC.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -920,7 +882,7 @@ namespace Election.MVC.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Election.API.Data.Entities.User", null)
+                    b.HasOne("Election.MVC.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -935,7 +897,7 @@ namespace Election.MVC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Election.API.Data.Entities.User", null)
+                    b.HasOne("Election.MVC.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -944,7 +906,7 @@ namespace Election.MVC.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Election.API.Data.Entities.User", null)
+                    b.HasOne("Election.MVC.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -953,52 +915,52 @@ namespace Election.MVC.Migrations
 
             modelBuilder.Entity("NationalElectionParty", b =>
                 {
-                    b.HasOne("Election.API.Data.Entities.NationalElection", null)
+                    b.HasOne("Election.MVC.Data.Entities.NationalElection", null)
                         .WithMany()
                         .HasForeignKey("NationalElectionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Election.API.Data.Entities.Party", null)
+                    b.HasOne("Election.MVC.Data.Entities.Party", null)
                         .WithMany()
                         .HasForeignKey("PartiesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Canvas", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Canvas", b =>
                 {
                     b.Navigation("Interviews");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.CanvasType", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.CanvasType", b =>
                 {
                     b.Navigation("Canvas");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Constituency", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Constituency", b =>
                 {
                     b.Navigation("PollingDivisions");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.House", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.House", b =>
                 {
                     b.Navigation("Voters");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Interviewer", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Interviewer", b =>
                 {
                     b.Navigation("ElectionVotes");
 
                     b.Navigation("Interviews");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.NationalElection", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.NationalElection", b =>
                 {
                     b.Navigation("ElectionVotes");
                 });
 
-            modelBuilder.Entity("Election.API.Data.Entities.Voter", b =>
+            modelBuilder.Entity("Election.MVC.Data.Entities.Voter", b =>
                 {
                     b.Navigation("ElectionVotes");
 
