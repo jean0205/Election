@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Election.WEB", "Election.WEB\Election.WEB.csproj", "{AFB7903C-7626-466F-A7F0-FED438FC7435}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Election.MVC", "Election.MVC\Election.MVC.csproj", "{391F0BF4-EB22-45A1-8F34-ED7CDB7C2707}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +28,10 @@ Global
 		{0DBA0630-D494-4E24-A8C2-58BC428DA198}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DBA0630-D494-4E24-A8C2-58BC428DA198}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DBA0630-D494-4E24-A8C2-58BC428DA198}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFB7903C-7626-466F-A7F0-FED438FC7435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFB7903C-7626-466F-A7F0-FED438FC7435}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFB7903C-7626-466F-A7F0-FED438FC7435}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFB7903C-7626-466F-A7F0-FED438FC7435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{391F0BF4-EB22-45A1-8F34-ED7CDB7C2707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{391F0BF4-EB22-45A1-8F34-ED7CDB7C2707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{391F0BF4-EB22-45A1-8F34-ED7CDB7C2707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{391F0BF4-EB22-45A1-8F34-ED7CDB7C2707}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
