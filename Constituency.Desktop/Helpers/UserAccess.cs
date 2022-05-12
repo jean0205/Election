@@ -11,6 +11,7 @@
         All_Interviews,
         All_Elections,
         See_Reports,
+        General_Reports,
         App_Maintenance,
         App_Configuration,
         Manage_Users,

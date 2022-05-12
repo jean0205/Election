@@ -190,7 +190,8 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private async void ibtnSave_Click(object sender, EventArgs e)
@@ -361,9 +362,9 @@ namespace Constituency.Desktop.Views
                 string access = ((RJToggleButton)sender).Name.Replace("rj", string.Empty);
                 if (((RJToggleButton)sender).Checked)
                 {
-                    if (access == UserAccess.App_Configuration.ToString() || access == UserAccess.Manage_Users.ToString())
+                    if (access == UserAccess.App_Configuration.ToString() || access == UserAccess.Manage_Users.ToString() || access==UserAccess.General_Reports.ToString())
                     {
-                        if (!UtilRecurrent.yesOrNot("Do you want to grant access to the App configuration for the selected user?", "Critical Access"))
+                        if (!UtilRecurrent.yesOrNot("Do you want to grant access this access for the selected user?", "Critical Access"))
                         {
                             ((RJToggleButton)sender).Checked = false;
                             return;

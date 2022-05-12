@@ -47,6 +47,7 @@ namespace Constituency.Desktop.Views
             this.gbActions = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.rjActive = new Constituency.Desktop.Controls.RJToggleButton();
@@ -94,7 +95,8 @@ namespace Constituency.Desktop.Views
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label17 = new System.Windows.Forms.Label();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.label21 = new System.Windows.Forms.Label();
+            this.rjGeneral_Reports = new Constituency.Desktop.Controls.RJToggleButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -321,6 +323,30 @@ namespace Constituency.Desktop.Views
             this.panel4.Size = new System.Drawing.Size(270, 55);
             this.panel4.TabIndex = 7;
             // 
+            // iconButton1
+            // 
+            this.iconButton1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.iconButton1.BackColor = System.Drawing.Color.IndianRed;
+            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.iconButton1.FlatAppearance.BorderSize = 2;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Eraser;
+            this.iconButton1.IconColor = System.Drawing.Color.Black;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(16, 3);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(238, 49);
+            this.iconButton1.TabIndex = 5;
+            this.iconButton1.Text = "Reset Password";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label6);
@@ -378,8 +404,8 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.88811F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.27872F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 1);
@@ -399,10 +425,12 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel3.Controls.Add(this.rjAll_Elections, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.label19, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.rjSee_Reports, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label16, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.rjExport_Reports, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.rjApp_Maintenance, 5, 2);
             this.tableLayoutPanel3.Controls.Add(this.label13, 4, 2);
+            this.tableLayoutPanel3.Controls.Add(this.rjExport_Reports, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label16, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label21, 4, 3);
+            this.tableLayoutPanel3.Controls.Add(this.rjGeneral_Reports, 5, 3);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -421,7 +449,7 @@ namespace Constituency.Desktop.Views
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(46, 1);
+            this.label5.Location = new System.Drawing.Point(47, 1);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(117, 21);
             this.label5.TabIndex = 21;
@@ -432,7 +460,7 @@ namespace Constituency.Desktop.Views
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(39, 36);
+            this.label7.Location = new System.Drawing.Point(40, 36);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(124, 21);
             this.label7.TabIndex = 22;
@@ -443,7 +471,7 @@ namespace Constituency.Desktop.Views
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(19, 71);
+            this.label8.Location = new System.Drawing.Point(20, 71);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(144, 21);
             this.label8.TabIndex = 23;
@@ -454,7 +482,7 @@ namespace Constituency.Desktop.Views
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(99, 106);
+            this.label9.Location = new System.Drawing.Point(100, 106);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 21);
             this.label9.TabIndex = 24;
@@ -465,7 +493,7 @@ namespace Constituency.Desktop.Views
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(14, 141);
+            this.label10.Location = new System.Drawing.Point(15, 141);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(149, 21);
             this.label10.TabIndex = 25;
@@ -474,7 +502,7 @@ namespace Constituency.Desktop.Views
             // rjVoters
             // 
             this.rjVoters.AutoSize = true;
-            this.rjVoters.Location = new System.Drawing.Point(170, 4);
+            this.rjVoters.Location = new System.Drawing.Point(171, 4);
             this.rjVoters.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjVoters.Name = "rjVoters";
             this.rjVoters.OffBackColor = System.Drawing.Color.Gray;
@@ -489,7 +517,7 @@ namespace Constituency.Desktop.Views
             // rjInterviews
             // 
             this.rjInterviews.AutoSize = true;
-            this.rjInterviews.Location = new System.Drawing.Point(170, 39);
+            this.rjInterviews.Location = new System.Drawing.Point(171, 39);
             this.rjInterviews.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjInterviews.Name = "rjInterviews";
             this.rjInterviews.OffBackColor = System.Drawing.Color.Gray;
@@ -504,7 +532,7 @@ namespace Constituency.Desktop.Views
             // rjAll_Interviews
             // 
             this.rjAll_Interviews.AutoSize = true;
-            this.rjAll_Interviews.Location = new System.Drawing.Point(170, 74);
+            this.rjAll_Interviews.Location = new System.Drawing.Point(171, 74);
             this.rjAll_Interviews.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjAll_Interviews.Name = "rjAll_Interviews";
             this.rjAll_Interviews.OffBackColor = System.Drawing.Color.Gray;
@@ -519,7 +547,7 @@ namespace Constituency.Desktop.Views
             // rjHosues
             // 
             this.rjHosues.AutoSize = true;
-            this.rjHosues.Location = new System.Drawing.Point(170, 109);
+            this.rjHosues.Location = new System.Drawing.Point(171, 109);
             this.rjHosues.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjHosues.Name = "rjHosues";
             this.rjHosues.OffBackColor = System.Drawing.Color.Gray;
@@ -534,7 +562,7 @@ namespace Constituency.Desktop.Views
             // rjElections
             // 
             this.rjElections.AutoSize = true;
-            this.rjElections.Location = new System.Drawing.Point(170, 144);
+            this.rjElections.Location = new System.Drawing.Point(171, 144);
             this.rjElections.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjElections.Name = "rjElections";
             this.rjElections.OffBackColor = System.Drawing.Color.Gray;
@@ -551,7 +579,7 @@ namespace Constituency.Desktop.Views
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(686, 1);
+            this.label12.Location = new System.Drawing.Point(689, 1);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(141, 21);
             this.label12.TabIndex = 53;
@@ -562,7 +590,7 @@ namespace Constituency.Desktop.Views
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(715, 36);
+            this.label11.Location = new System.Drawing.Point(718, 36);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(112, 21);
             this.label11.TabIndex = 26;
@@ -571,7 +599,7 @@ namespace Constituency.Desktop.Views
             // rjManage_Users
             // 
             this.rjManage_Users.AutoSize = true;
-            this.rjManage_Users.Location = new System.Drawing.Point(834, 39);
+            this.rjManage_Users.Location = new System.Drawing.Point(837, 39);
             this.rjManage_Users.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjManage_Users.Name = "rjManage_Users";
             this.rjManage_Users.OffBackColor = System.Drawing.Color.Gray;
@@ -586,7 +614,7 @@ namespace Constituency.Desktop.Views
             // rjApp_Configuration
             // 
             this.rjApp_Configuration.AutoSize = true;
-            this.rjApp_Configuration.Location = new System.Drawing.Point(834, 4);
+            this.rjApp_Configuration.Location = new System.Drawing.Point(837, 4);
             this.rjApp_Configuration.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjApp_Configuration.Name = "rjApp_Configuration";
             this.rjApp_Configuration.OffBackColor = System.Drawing.Color.Gray;
@@ -603,7 +631,7 @@ namespace Constituency.Desktop.Views
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(35, 176);
+            this.label15.Location = new System.Drawing.Point(36, 176);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(128, 37);
             this.label15.TabIndex = 57;
@@ -612,7 +640,7 @@ namespace Constituency.Desktop.Views
             // rjAll_Elections
             // 
             this.rjAll_Elections.AutoSize = true;
-            this.rjAll_Elections.Location = new System.Drawing.Point(170, 179);
+            this.rjAll_Elections.Location = new System.Drawing.Point(171, 179);
             this.rjAll_Elections.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjAll_Elections.Name = "rjAll_Elections";
             this.rjAll_Elections.OffBackColor = System.Drawing.Color.Gray;
@@ -629,7 +657,7 @@ namespace Constituency.Desktop.Views
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label19.Location = new System.Drawing.Point(399, 1);
+            this.label19.Location = new System.Drawing.Point(402, 1);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(96, 21);
             this.label19.TabIndex = 61;
@@ -638,7 +666,7 @@ namespace Constituency.Desktop.Views
             // rjSee_Reports
             // 
             this.rjSee_Reports.AutoSize = true;
-            this.rjSee_Reports.Location = new System.Drawing.Point(502, 4);
+            this.rjSee_Reports.Location = new System.Drawing.Point(505, 4);
             this.rjSee_Reports.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjSee_Reports.Name = "rjSee_Reports";
             this.rjSee_Reports.OffBackColor = System.Drawing.Color.Gray;
@@ -655,7 +683,7 @@ namespace Constituency.Desktop.Views
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label16.Location = new System.Drawing.Point(380, 36);
+            this.label16.Location = new System.Drawing.Point(383, 36);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(115, 21);
             this.label16.TabIndex = 60;
@@ -664,7 +692,7 @@ namespace Constituency.Desktop.Views
             // rjExport_Reports
             // 
             this.rjExport_Reports.AutoSize = true;
-            this.rjExport_Reports.Location = new System.Drawing.Point(502, 39);
+            this.rjExport_Reports.Location = new System.Drawing.Point(505, 39);
             this.rjExport_Reports.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjExport_Reports.Name = "rjExport_Reports";
             this.rjExport_Reports.OffBackColor = System.Drawing.Color.Gray;
@@ -679,7 +707,7 @@ namespace Constituency.Desktop.Views
             // rjApp_Maintenance
             // 
             this.rjApp_Maintenance.AutoSize = true;
-            this.rjApp_Maintenance.Location = new System.Drawing.Point(834, 74);
+            this.rjApp_Maintenance.Location = new System.Drawing.Point(837, 74);
             this.rjApp_Maintenance.MinimumSize = new System.Drawing.Size(50, 25);
             this.rjApp_Maintenance.Name = "rjApp_Maintenance";
             this.rjApp_Maintenance.OffBackColor = System.Drawing.Color.Gray;
@@ -696,7 +724,7 @@ namespace Constituency.Desktop.Views
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(693, 71);
+            this.label13.Location = new System.Drawing.Point(696, 71);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(134, 21);
             this.label13.TabIndex = 54;
@@ -962,29 +990,32 @@ namespace Constituency.Desktop.Views
             this.label17.TabIndex = 21;
             this.label17.Text = "Phone Number:";
             // 
-            // iconButton1
+            // label21
             // 
-            this.iconButton1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.iconButton1.BackColor = System.Drawing.Color.IndianRed;
-            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
-            this.iconButton1.FlatAppearance.BorderSize = 2;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
-            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Eraser;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(16, 3);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(238, 49);
-            this.iconButton1.TabIndex = 5;
-            this.iconButton1.Text = "Reset Password";
-            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = false;
-            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label21.ForeColor = System.Drawing.Color.Red;
+            this.label21.Location = new System.Drawing.Point(637, 106);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(193, 21);
+            this.label21.TabIndex = 63;
+            this.label21.Text = "Supported Party Report:";
+            // 
+            // rjGeneral_Reports
+            // 
+            this.rjGeneral_Reports.AutoSize = true;
+            this.rjGeneral_Reports.Location = new System.Drawing.Point(837, 109);
+            this.rjGeneral_Reports.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjGeneral_Reports.Name = "rjGeneral_Reports";
+            this.rjGeneral_Reports.OffBackColor = System.Drawing.Color.Gray;
+            this.rjGeneral_Reports.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjGeneral_Reports.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjGeneral_Reports.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjGeneral_Reports.Size = new System.Drawing.Size(50, 25);
+            this.rjGeneral_Reports.TabIndex = 64;
+            this.rjGeneral_Reports.Tag = "1";
+            this.rjGeneral_Reports.UseVisualStyleBackColor = true;
             // 
             // Frm_Configuration
             // 
@@ -1092,5 +1123,7 @@ namespace Constituency.Desktop.Views
         private Controls.RJToggleButton rjSee_Reports;
         private Panel panel4;
         private FontAwesome.Sharp.IconButton iconButton1;
+        private Label label21;
+        private Controls.RJToggleButton rjGeneral_Reports;
     }
 }
