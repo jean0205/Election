@@ -4,9 +4,9 @@ namespace Election.MVC.Models
 {
     public class LoginViewModel
     {
-        [Display(Name = "Email")]
+        [Display(Name = "UserName")]
         [Required(ErrorMessage = "{0} is a required field.")]
-        [EmailAddress(ErrorMessage = "Invalid Email")]
+        //[EmailAddress(ErrorMessage = "Invalid Email")]
         public string Username { get; set; }
 
         [DataType(DataType.Password)]

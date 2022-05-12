@@ -6,7 +6,7 @@ namespace Election.API.Data.Entities
 {
     public class User : IdentityUser
     {
-        public static object Claims { get; internal set; }
+       
         [Required]
         public bool Active { get; set; }
         [Required]
