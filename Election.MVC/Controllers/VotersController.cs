@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Election.MVC.Data;
 using Election.MVC.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Election.MVC.Controllers
 {
+    [Authorize]
     public class VotersController : Controller
     {
         private readonly DataContext _context;

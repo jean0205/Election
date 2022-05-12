@@ -22,7 +22,6 @@ namespace Election.MVC.Data
             await CheckRolesAsync();
             await CheckUserAsync("Jean", "Soto", "jean0205", "jeanc.soto0205@gmail.com", "4734170097");
 
-
         }
         private async Task<User> CheckUserAsync(string firstName, string lastName, string username, string email, string phone)
         {

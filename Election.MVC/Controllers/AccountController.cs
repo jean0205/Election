@@ -18,7 +18,7 @@ namespace Election.MVC.Controllers
             _userHelper = userHelper;
             _context = context;
             //_combosHelper = combosHelper;
-           // _blobHelper = blobHelper;
+            // _blobHelper = blobHelper;
         }
         public IActionResult Login()
         {
@@ -33,7 +33,7 @@ namespace Election.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-           
+
             if (ModelState.IsValid)
             {
                 Microsoft.AspNetCore.Identity.SignInResult result = await _userHelper.LoginAsync(model);
@@ -52,6 +52,11 @@ namespace Election.MVC.Controllers
         {
             await _userHelper.LogoutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult NotAuthorized()
+        {
+            return View();
         }
     }
 }
