@@ -7,25 +7,25 @@ namespace Election.MVC.Models
     {
         [Display(Name = "Username")]       
         [MaxLength(100, ErrorMessage = "El campo {0} debe tener máximo {1} caractéres.")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [Required(ErrorMessage = "{0} is a required field.")]
         public string Username { get; set; }
 
         [Display(Name = "Email")]
-        [EmailAddress(ErrorMessage = "Debes ingresar un correo válido.")]
+        [EmailAddress(ErrorMessage = "Email not valid.")]
         [MaxLength(100, ErrorMessage = "El campo {0} debe tener máximo {1} caractéres.")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [Required(ErrorMessage = "{0} is a required field.")]
         public string Email { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Contraseña")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "{0} is a required field.")]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "El campo {0} debe tener entre {2} y {1} carácteres.")]
         public string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "La contraseña y la confirmación no son iguales.")]
-        [Display(Name = "Confirmación de contraseña")]
+        [Compare("Password", ErrorMessage = "The password and the comfirmation do not match.")]
+        [Display(Name = "Confirmation")]
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [Required(ErrorMessage = "{0} is a required field.")]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "El campo {0} debe tener entre {2} y {1} carácteres.")]
         public string PasswordConfirm { get; set; }
 
