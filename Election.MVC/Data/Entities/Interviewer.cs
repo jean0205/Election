@@ -20,6 +20,9 @@ namespace Election.MVC.Data.Entities
         public string GivenNames { get; set; }
 
 
+        public string FullName => $"{SurName} {GivenNames}";
+        
+
         [MaxLength(10)]
         public string? Sex { get; set; }
 
