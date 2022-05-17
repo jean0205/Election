@@ -49,6 +49,21 @@ namespace Election.API.Controllers
 
             return interview;
         }
+        [HttpGet("FindByVoter/{canvasId}/{voterId}")]
+        public async Task<ActionResult<Interview>> GetInterviewByVoterId(int canvasId, int voterId)
+        {
+            var interview = await _context.Interviews
+                .Include(i => i.Voter)
+                .Include(i=>i.Canvas)
+                .FirstOrDefaultAsync(i => i.Voter.Id == voterId && i.Canvas.Id == canvasId);
+
+            if (interview == null)
+            {
+                return NotFound();
+            }
+            return interview;
+        }
+        
         [HttpGet("FindByParty/{id}")]
         public async Task<ActionResult<Interview>> GetInterviewByParty(int id)
         {

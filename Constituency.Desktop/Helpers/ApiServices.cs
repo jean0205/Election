@@ -940,6 +940,63 @@ namespace Constituency.Desktop.Helpers
             }
         }
 
+        public static async Task<Response> FindAsync<T>(string controller, string canvasId, string voterId,string token)
+        {
+            try
+            {
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+                string url = Settings.GetApiUrl();
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(url)
+                };
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                string address;
+
+                address = $"api/{controller}/{canvasId}/{voterId}";
+
+                HttpResponseMessage response = await client.GetAsync(address);
+                string result = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        return new Response
+                        {
+                            IsSuccess = false,
+                            Message = "Not Found",
+                        };
+                    }
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = JsonConvert.DeserializeObject<ErrorMessage>(result).Error.FirstOrDefault(),
+                    };
+                }
+                var element = JsonConvert.DeserializeObject<T>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = element,
+                };
+
+            }
+            catch (Exception ex)
+            {
+
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+
+
+        }
+
         //REPORTS
         public static async Task<Response> GetListAsyncReportsVotersByCanvas<T>(string controller, int divisionId, int canvasId, bool interviewed, string token)
         {

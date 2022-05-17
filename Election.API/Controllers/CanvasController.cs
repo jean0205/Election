@@ -1,15 +1,10 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Election.API.Data;
 using Election.API.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Election.API.Controllers
@@ -41,7 +36,7 @@ namespace Election.API.Controllers
             //    .ThenInclude(c=>c.SupportedParty)
             //    .ToListAsync();
             return await _context.Canvas
-                .Include(c => c.Type)                
+                .Include(c => c.Type)
                 .ToListAsync();
         }
         // GET: api/Canvas
@@ -57,7 +52,7 @@ namespace Election.API.Controllers
                 .ThenInclude(i => i.Interviewer)
                 .Include(c => c.Interviews)
                 .ThenInclude(c => c.SupportedParty)
-                .Where(c=>c.Active)
+                .Where(c => c.Active)
                 .ToListAsync();
         }
         [HttpGet("OpenAll")]
@@ -77,7 +72,7 @@ namespace Election.API.Controllers
             return await _context.Canvas
                 .Include(c => c.Type)
                 .Include(c => c.Interviews)
-                .ThenInclude(i => i.Voter)                
+                .ThenInclude(i => i.Voter)
                 .Where(c => c.Open)
                 .ToListAsync();
         }
@@ -102,7 +97,7 @@ namespace Election.API.Controllers
             return await _context.Canvas
                .Include(c => c.Type)
                .Include(c => c.Interviews.Where(i => i.RecorderBy.UserName == userName))
-               .ThenInclude(i => i.Voter)                
+               .ThenInclude(i => i.Voter)
                .Where(c => c.Open)
                .ToListAsync();
         }
@@ -161,7 +156,7 @@ namespace Election.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Canvas>> PostCanvas(Canvas canvas)
         {
-            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;            
+            string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var canvasType = await _context.CanvasTypes.FirstOrDefaultAsync(c => c.Id == canvas.Type.Id);
             canvas.Type = canvasType;
             _context.Canvas.Add(canvas);

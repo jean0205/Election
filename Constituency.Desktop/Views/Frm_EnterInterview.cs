@@ -129,7 +129,7 @@ namespace Constituency.Desktop.Views
         #region load Information
         private async Task<List<string>> LoadUsersRoles(User user)
         {
-            Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName, token);          
+            Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName, token);
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
@@ -145,12 +145,12 @@ namespace Constituency.Desktop.Views
                 var roles = await LoadUsersRoles(user);
                 if (roles != null && roles.Contains(UserAccess.All_Interviews.ToString()))
                 {
-                     response = await ApiServices.GetListAsync<Canvas>("Canvas/OpenAll", token);
+                    response = await ApiServices.GetListAsync<Canvas>("Canvas/OpenAll", token);
                 }
                 else
                 {
-                     response = await ApiServices.GetListAsync<Canvas>("Canvas/OpenByUser", token);
-                }              
+                    response = await ApiServices.GetListAsync<Canvas>("Canvas/OpenByUser", token);
+                }
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -266,7 +266,7 @@ namespace Constituency.Desktop.Views
                     {
                         int cant2 = canva.Interviews.Count();
 
-                        foreach (Interview interview in canva.Interviews)
+                        foreach (Interview interview in canva.Interviews.OrderBy(i=>i.Voter.SurName).ThenBy(i=>i.Voter.GivenNames))
                         {
                             TreeNode node = new TreeNode(interview.Voter.FullName, 2, 3);
                             node.Tag = interview.Id;
@@ -275,7 +275,7 @@ namespace Constituency.Desktop.Views
                         }
                         treeNodes.Add(new TreeNode(canva.Name + " [" + cant2 + "]", 0, 1, childNodes.ToArray()));
                         treeNodes[treeNodes.Count - 1].Tag = canva.Id;
-                        childNodes = new List<TreeNode>();                       
+                        childNodes = new List<TreeNode>();
                     }
                 }
                 tView1.Nodes.AddRange(treeNodes.ToArray());
@@ -438,12 +438,12 @@ namespace Constituency.Desktop.Views
                 if (Interview.SupportedParty != null)
                 {
                     cmbISupportedParty.SelectedValue = Interview.SupportedParty.Id;
-                }               
+                }
                 cmbInterviewers.SelectedValue = Interview.Interviewer.Id;
-                if (Interview.Comment!=null)
+                if (Interview.Comment != null)
                 {
                     cmbIComment.SelectedValue = Interview.Comment.Id;
-                }                
+                }
                 txtIOtherComment.Text = Interview.OtherComment;
                 dtpIDate.Value = Interview.Date;
             }
@@ -515,9 +515,9 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-               // UtilRecurrent.LockForm(waitForm, this);
+                // UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.FindAsync<Voter>("Voters", id.ToString(), token);
-               // UtilRecurrent.UnlockForm(waitForm, this);
+                // UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     if (response.Message == "Not Found")
@@ -537,12 +537,36 @@ namespace Constituency.Desktop.Views
                 return null;
             }
         }
+        private async Task<Interview> LoadInterviewByCnavasandVoter(int voterId, int canvasId)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.FindAsync<Interview>("Interviews/FindByVoter", voterId.ToString(), canvasId.ToString(), token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    if (response.Message == "Not Found")
+                    {
+                        return null;
+                    }
+                    return null;
+                }
+                return (Interview)response.Result;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
         private async Task UpdateVoter()
         {
             try
             {
                 var voter = BuildVoter();
-               // UtilRecurrent.LockForm(waitForm, this);
+                // UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PutAsync("Voters", voter, voter.Id, token);
                 //UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
@@ -570,7 +594,7 @@ namespace Constituency.Desktop.Views
                     UtilRecurrent.ErrorMessage("Requireds fields missing. Find them highlighted in red.");
                     return;
                 }
-                if (cmbISupportedParty.SelectedValue == null && cmbIComment.SelectedValue == null && rjDeceased.Checked==false)
+                if (cmbISupportedParty.SelectedValue == null && cmbIComment.SelectedValue == null && rjDeceased.Checked == false)
                 {
                     UtilRecurrent.ErrorMessage("Not supported party or comment selected, for alive voter.");
                     return;
@@ -586,22 +610,21 @@ namespace Constituency.Desktop.Views
                 //    await LoadCanvas();
                 //}
                 //else { return; }
-                
+
                 if (!await SaveInterview()) { return; }
 
                 if (Interview != null && Interview.Id > 0)
                 {
                     var canvas = Interview.Canvas;
-                    if (CanvasList.Any(c=>c.Id==canvas.Id))
+                    if (CanvasList.Any(c => c.Id == canvas.Id))
                     {
                         CanvasList.FirstOrDefault(c => c.Id == canvas.Id).Interviews.Add(Interview);
                     }
                     else
                     {
-                        
                         CanvasList.Add(canvas);
                         CanvasList.FirstOrDefault(c => c.Id == canvas.Id).Interviews.Add(Interview);
-                    }                   
+                    }
                     RefreshTreeView(CanvasList.ToList());
                     tView1.SelectedNode = CollectAllNodes(tView1.Nodes).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);
                     ibtnNew.Visible = true;
@@ -612,31 +635,28 @@ namespace Constituency.Desktop.Views
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
-
         }
         private async Task<bool> SaveInterview()
         {
             try
             {
                 var voter = BuildVoter();
-                if (VoterInterviewedAlready(voter))
+                if (await VoterInterviewedAlready(voter))
                 {
                     UtilRecurrent.ErrorMessage("Voter already interviewed in the selected Canvas.");
                     return false;
                 }
                 UtilRecurrent.LockForm(waitForm, this);
                 voter.Active = true;
-                var interview = await BuildInterview(null);               
+                var interview = await BuildInterview(null);
                 Response response = await ApiServices.PostAsync("Interviews", interview, token);
                 UtilRecurrent.UnlockForm(waitForm, this);
-
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
                     return response.IsSuccess;
                 }
-
-                Interview = (Interview)response.Result;               
+                Interview = (Interview)response.Result;
                 return true;
             }
             catch (Exception ex)
@@ -672,13 +692,13 @@ namespace Constituency.Desktop.Views
 
                 if (Interview != null && Interview.Id > 0)
                 {
-                    var oldInterview = CanvasList.Where(c=>c.Interviews.Any(i=>i.Id==Interview.Id)).FirstOrDefault().Interviews.FirstOrDefault(i => i.Id == Interview.Id);
+                    var oldInterview = CanvasList.Where(c => c.Interviews.Any(i => i.Id == Interview.Id)).FirstOrDefault().Interviews.FirstOrDefault(i => i.Id == Interview.Id);
 
-                   
+
                     CanvasList.Where(c => c.Interviews.Any(i => i.Id == Interview.Id)).FirstOrDefault().Interviews.Remove(oldInterview);
                     CanvasList.FirstOrDefault(c => c.Id == Interview.Canvas.Id).Interviews.Add(Interview);
-                    
-                    
+
+
                     RefreshTreeView(CanvasList.ToList());
                     tView1.SelectedNode = CollectAllNodes(tView1.Nodes).Where(n => NodeLevel(n) == 1).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == Interview.Id);
                     ibtnNew.Visible = true;
@@ -686,7 +706,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); 
+                Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
@@ -694,15 +714,15 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                if (newVoter && VoterInterviewedAlready(BuildVoter()))
+                if (newVoter && await VoterInterviewedAlready(BuildVoter()))
                 {
                     UtilRecurrent.ErrorMessage("Voter already interviewed in the selected Canvas.");
                     return false;
                 }
                 UtilRecurrent.LockForm(waitForm, this);
-                var interview = await BuildInterview(id);               
+                var interview = await BuildInterview(id);
                 Response response = await ApiServices.PutAsync("Interviews", interview, interview.Id, token);
-                UtilRecurrent.UnlockForm(waitForm, this);                
+                UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -767,7 +787,7 @@ namespace Constituency.Desktop.Views
                     Interview.Comment = new Comment();
                     Interview.Comment = (Comment)cmbIComment.SelectedItem;
                 }
-                
+
                 Interview.Date = dtpIDate.Value;
                 Interview.OtherComment = txtIOtherComment.Text.ToUpper();
                 var voter2 = BuildVoter();
@@ -794,7 +814,7 @@ namespace Constituency.Desktop.Views
                 {
                     //creating the interview for first time, I don't want to update the user, just the one who created
                     Interview.RecorderBy = user;
-                }               
+                }
                 return Interview;
             }
             catch (Exception ex)
@@ -817,7 +837,8 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); UtilRecurrent.ErrorMessage(ex.Message);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
         private void FillUpdComboboxDivision()
@@ -841,11 +862,18 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
-        
-        private bool VoterInterviewedAlready(Voter voter)
+
+        private async Task<bool> VoterInterviewedAlready(Voter voter)
         {
             var canvas = CanvasList.FirstOrDefault(p => p.Id == (int)cmbCanvas.SelectedValue);
-            if (canvas.Interviews!=null && canvas.Interviews.Any()&& canvas.Interviews.Where(p => p.Voter.Id == voter.Id).Any())
+
+            //if (canvas.Interviews!=null && canvas.Interviews.Any()&& canvas.Interviews.Where(p => p.Voter.Id == voter.Id).Any())
+            //{
+            //    return true;
+            //}
+            //return false;
+
+            if (await LoadInterviewByCnavasandVoter(canvas.Id, voter.Id) != null)
             {
                 return true;
             }
@@ -870,7 +898,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex); 
+                Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
         }
@@ -932,7 +960,7 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-               // UtilRecurrent.LockForm(waitForm, this);
+                // UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.DeleteAsync(controller, id, token);
                 //UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
@@ -1004,7 +1032,7 @@ namespace Constituency.Desktop.Views
         {
             if (cmbCanvas.SelectedItem != null)
             {
-                var canvas= cmbCanvas.SelectedItem as Canvas;
+                var canvas = cmbCanvas.SelectedItem as Canvas;
                 tView1.SelectedNode = CollectAllNodes(tView1.Nodes).Where(n => NodeLevel(n) == 0).FirstOrDefault(x => int.Parse(x.Tag.ToString()) == canvas.Id);
             }
             else
@@ -1012,7 +1040,7 @@ namespace Constituency.Desktop.Views
                 tView1.SelectedNode = tView1.Nodes[0];
             }
 
-           
+
         }
     }
 }

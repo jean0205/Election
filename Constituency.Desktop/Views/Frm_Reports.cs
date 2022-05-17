@@ -480,6 +480,7 @@ namespace Constituency.Desktop.Views
                 if (cmb2CanvasTypes.SelectedIndex > -1)
                 {
                     FillUpdComboboxCanvas2();
+                    cmb2Canvas.SelectedIndex = 0;
                 }
             }
             catch (Exception ex)
