@@ -30,15 +30,18 @@ namespace Election.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Canvas>>> GetCanvas()
         {
+            //return await _context.Canvas
+            //    .Include(c=>c.Type)
+            //    .Include(c=>c.Interviews)
+            //    .ThenInclude(i=>i.Voter)
+            //    .ThenInclude(i => i.PollingDivision)                
+            //    .Include(c => c.Interviews)
+            //    .ThenInclude(i => i.Interviewer)                
+            //    .Include(c => c.Interviews)
+            //    .ThenInclude(c=>c.SupportedParty)
+            //    .ToListAsync();
             return await _context.Canvas
-                .Include(c=>c.Type)
-                .Include(c=>c.Interviews)
-                .ThenInclude(i=>i.Voter)
-                .ThenInclude(i => i.PollingDivision)                
-                .Include(c => c.Interviews)
-                .ThenInclude(i => i.Interviewer)                
-                .Include(c => c.Interviews)
-                .ThenInclude(c=>c.SupportedParty)
+                .Include(c => c.Type)                
                 .ToListAsync();
         }
         // GET: api/Canvas
