@@ -24,25 +24,30 @@ namespace Election.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Interviewer>>> GetInterviewers()
         {
-            return await _context.Interviewers
-                .Include(i => i.Interviews)
-                .ThenInclude(i => i.Voter)
-                .ThenInclude(v=>v.PollingDivision)
-                .Include(c => c.Interviews)
-                .ThenInclude(c => c.SupportedParty)
-                .ToListAsync();            
+            //return await _context.Interviewers
+            //    .Include(i => i.Interviews)
+            //    .ThenInclude(i => i.Voter)
+            //    .ThenInclude(v=>v.PollingDivision)
+            //    .Include(c => c.Interviews)
+            //    .ThenInclude(c => c.SupportedParty)
+            //    .ToListAsync();
+            return await _context.Interviewers              
+               .ToListAsync();
         }
        
         
         [HttpGet("Actives")]
         public async Task<ActionResult<IEnumerable<Interviewer>>> GetInterviewersActives()
         {
+            //return await _context.Interviewers
+            //    .Include(i => i.Interviews)
+            //    .ThenInclude(i => i.Voter)
+            //    .ThenInclude(v => v.PollingDivision)
+            //    .Include(c => c.Interviews)
+            //    .ThenInclude(c => c.SupportedParty).Where(c => c.Active)
+            //    .ToListAsync();
             return await _context.Interviewers
-                .Include(i => i.Interviews)
-                .ThenInclude(i => i.Voter)
-                .ThenInclude(v => v.PollingDivision)
-                .Include(c => c.Interviews)
-                .ThenInclude(c => c.SupportedParty).Where(c => c.Active)
+                .Where(c => c.Active)
                 .ToListAsync();
 
         }

@@ -43,7 +43,7 @@ namespace Constituency.Desktop.Views
                 await LoadParties();
                 await LoadCanvasTypes();
                 await LoadCanvas();
-                await LoadInterviewers();
+               await LoadInterviewers();
                 await LoadNationalElections();
                 await LoadComments();
                 UtilRecurrent.UnlockForm(waitForm, this);
@@ -1269,7 +1269,7 @@ namespace Constituency.Desktop.Views
                     dgvInterviewerInterviews.DataSource = null;
                     if (interviewer.Interviews != null && interviewer.Interviews.Any())
                     {
-                        dgvInterviewerInterviews.DataSource = interviewer.Interviews.Select(u => new { Registration = u.Voter.Reg, u.Voter.FullName, PD = u.Voter.PollingDivision.Name, Party = u.SupportedParty != null ? u.SupportedParty.Name : "", u.Date }).ToList();
+                        dgvInterviewerInterviews.DataSource = interviewer.Interviews.Select(u => new { Registration = u.Voter.Reg, u.Voter.FullName, PD = u.Voter.PollingDivision.Name, Party = u.SupportedParty!=null? u.SupportedParty.Name:"", u.Date }).ToList();
                     }
                 }
             }
