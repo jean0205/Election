@@ -48,10 +48,11 @@ namespace Constituency.Desktop.Views
             MandatoriesFilds();
             DGVFormats();
             await LoadConstituencies();
-            //await LoadVoters();
-            await LoadDivisionsBatch();
             VoterList = new();
-            tabControl1.TabPages.Remove(tabPage2);
+            await LoadVoters();
+            await LoadDivisionsBatch();
+          
+            //tabControl1.TabPages.Remove(tabPage2);
 
         }
 
@@ -931,7 +932,9 @@ namespace Constituency.Desktop.Views
                     voters.Add(voter);
 
                 }
-                return voters;
+                var newVoters = voters.Where(v => !VoterList.Select(c => c.Reg).ToList().Contains(v.Reg)).ToList();
+                
+                return newVoters;
 
             }
             catch (Exception ex)
