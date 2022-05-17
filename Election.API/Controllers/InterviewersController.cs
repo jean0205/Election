@@ -20,8 +20,7 @@ namespace Election.API.Controllers
         {
             _context = context;
         }
-
-        // GET: api/Interviewers
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Interviewer>>> GetInterviewers()
         {
@@ -31,10 +30,10 @@ namespace Election.API.Controllers
                 .ThenInclude(v=>v.PollingDivision)
                 .Include(c => c.Interviews)
                 .ThenInclude(c => c.SupportedParty)
-                .ToListAsync();
-            
+                .ToListAsync();            
         }
-        // GET: api/Interviewers
+       
+        
         [HttpGet("Actives")]
         public async Task<ActionResult<IEnumerable<Interviewer>>> GetInterviewersActives()
         {

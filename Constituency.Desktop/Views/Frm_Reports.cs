@@ -6,6 +6,7 @@ using FontAwesome.Sharp;
 using Microsoft.AppCenter.Crashes;
 using System.Data;
 
+
 namespace Constituency.Desktop.Views
 {
     public partial class Frm_Reports : Form
@@ -32,12 +33,18 @@ namespace Constituency.Desktop.Views
 
         private async void Frm_Reports_Load(object sender, EventArgs e)
         {
-            UtilRecurrent.LockForm(waitForm, this);           
+            // UtilRecurrent.LockForm(waitForm, this);
+            if (!await ValidateAccess("General_Reports"))
+            {
+                tabControl1.TabPages.RemoveAt(1);
+            }
             await LoadConstituencies();
             await LoadCanvasTypes();
             await LoadParties();
             UtilRecurrent.UnlockForm(waitForm, this);
             DGVFormats();
+
+
         }
         private async Task<bool> ValidateAccess(string requiredAccess)
         {
@@ -61,7 +68,7 @@ namespace Constituency.Desktop.Views
         private async Task<List<string>> LoadUsersRoles(User user)
         {
             UtilRecurrent.LockForm(waitForm, this);
-            Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName,token);
+            Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName, token);
             UtilRecurrent.UnlockForm(waitForm, this);
             if (!response.IsSuccess)
             {
@@ -232,12 +239,12 @@ namespace Constituency.Desktop.Views
         }
         private async void radioButton1_Click(object sender, EventArgs e)
         {
-            if ( cmbDivision.SelectedItem == null)
+            if (cmbDivision.SelectedItem == null)
             {
                 UtilRecurrent.ErrorMessage("Division is required.");
                 return;
             }
-            if (rjCanvasActive.Checked&& cmbCanvas.SelectedItem==null)
+            if (rjCanvasActive.Checked && cmbCanvas.SelectedItem == null)
             {
                 UtilRecurrent.ErrorMessage("Canvas is required when you are filtering by Canvas.");
                 return;
@@ -249,7 +256,7 @@ namespace Constituency.Desktop.Views
                 if (rjCanvasActive.Checked)
                 {
                     int canvasId = (cmbCanvas.SelectedItem as Canvas).Id;
-                    FillUpDGV1("Voters/ByDivisionsAndCanvas", divisionId, canvasId,true);                   
+                    FillUpDGV1("Voters/ByDivisionsAndCanvas", divisionId, canvasId, true);
                 }
                 else
                 {
@@ -280,8 +287,8 @@ namespace Constituency.Desktop.Views
             {
                 Div = v.PollingDivision.Name,
                 v.Reg,
-                v.FullName,
-                DateOfBirth = v.DOB,
+                v.SurName,
+                v.GivenNames,
                 v.Sex,
                 v.Occupation,
                 v.Address,
@@ -290,7 +297,7 @@ namespace Constituency.Desktop.Views
                 v.HomePhone,
                 v.WorkPhone,
                 v.Email
-            }).ToList();
+            }).OrderBy(v => v.SurName).ThenBy(v => v.GivenNames).ToList();
             lblTotal1.Text = result.Count.ToString();
 
         }
@@ -316,7 +323,6 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.ErrorMessage(ex.Message);
                 return null;
             }
-
         }
 
         private void rjCanvasActive_CheckedChanged(object sender, EventArgs e)
@@ -326,7 +332,7 @@ namespace Constituency.Desktop.Views
             cmbCanvas.SelectedIndex = -1;
 
             tPanelCanvas2.Enabled = rjFCanvas.Checked;
-            cmb2CanvasTypes.SelectedIndex = !rjFCanvas.Checked?-1: cmb2CanvasTypes.SelectedIndex;
+            cmb2CanvasTypes.SelectedIndex = !rjFCanvas.Checked ? -1 : cmb2CanvasTypes.SelectedIndex;
             cmb2Canvas.SelectedIndex = !rjFCanvas.Checked ? -1 : cmb2Canvas.SelectedIndex;
 
             tPanelConstituency2.Enabled = rjFConstituency.Checked;
@@ -341,13 +347,93 @@ namespace Constituency.Desktop.Views
                 UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
                 return;
             }
-            dgv1Interviews.MultiSelect = true;
-            UtilRecurrent.ExportToExcel(dgv1Interviews);
-            dgv1Interviews.MultiSelect = false;
-            dgv1Interviews.CurrentCell = null;
+
+            gbReport.Visible = true;
+            gbReport.BringToFront();
+            chkColumnsExport.Items.AddRange(dgv1Interviews.Columns.Cast<DataGridViewColumn>().Select(p => p.Name).ToArray());
+            //chkColumnsExport.Items.Add("--------------------------------------");            
+            chkColumnsExport.Items.AddRange(new List<string> { "RE-Reg (Y/N)", "Party Support", "Contact Number", "Comments" }.ToArray());
+            for (int i = 0; i < chkColumnsExport.Items.Count; i++)
+            {
+                chkColumnsExport.SetItemChecked(i, true);
+            }
         }
+        private void ImportDataGridViewDataToExcelSheet(DataGridView dgv, List<string> columns)
+        {
+
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlApp = new Microsoft.Office.Interop.Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Add(misValue);
+            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+            int cont = 1;
+            foreach (string name in columns)
+            {
+                xlWorkSheet.Cells[1, cont] = name.ToUpper();
+                xlWorkSheet.Cells[1, cont].Interior.Color = Microsoft.Office.Interop.Excel.XlRgbColor.rgbLightGreen;
+                xlWorkSheet.Cells[1, cont].Font.Bold = true;
+                xlWorkSheet.Cells[1, cont].Font.Size = 14;
+                xlWorkSheet.Cells[1, cont].Font.Color = System.Drawing.Color.DarkGreen;
+                cont++;
+            }
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                for (int j = 0; j < dgv.Columns.Count; j++)
+                {
+                    if (columns.Contains(dgv.Columns[j].Name))
+                    {
+                        xlWorkSheet.Cells[i + 2, j + 1] = dgv.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+            }
+            xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[dgv.RowCount, columns.Count]].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[dgv.RowCount, columns.Count]].Borders.Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin;
+
+            xlWorkSheet.Rows.RowHeight = 50;
+
+            xlWorkSheet.Columns.AutoFit();
+            //xlWorkSheet.Rows.AutoFit();
+            xlApp.Visible = true;
+
+            //usar esto si quiero salvarlo en alguna ruta
+            //var saveFileDialoge = new SaveFileDialog();
+            //saveFileDialoge.FileName = "ReportView";
+            //saveFileDialoge.DefaultExt = ".xlsx";
+            //if (saveFileDialoge.ShowDialog() == DialogResult.OK)
+            //{
+            //    xlWorkBook.SaveAs(saveFileDialoge.FileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            //}
+            //xlWorkBook.Close(true, misValue, misValue);
+            //xlApp.Quit();
+            //releaseObject(xlWorkSheet);
+            //releaseObject(xlWorkBook);
+            //releaseObject(xlApp);
+        }
+
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
+
         #endregion
-        
+
         #region Tab2
 
         private void cmbConstituency2_SelectionChangeCommitted(object sender, EventArgs e)
@@ -432,7 +518,7 @@ namespace Constituency.Desktop.Views
             var canvas = cmb2Canvas.SelectedItem as Canvas;
             var party = cmb2Party.SelectedItem as Party;
             //todas las entrevistas en open canvas
-            if (constituency==null && division==null&& canvas==null && party==null)
+            if (constituency == null && division == null && canvas == null && party == null)
             {
                 FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", 0, 0, 0, 0);
             }
@@ -472,7 +558,7 @@ namespace Constituency.Desktop.Views
             {
                 FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", constituency.Id, division.Id, 0, 0);
             }
-            if (constituency== null && division == null && canvas != null && party == null)
+            if (constituency == null && division == null && canvas != null && party == null)
             {
                 FillUpDGV2("Voters/ByConstituencyDivisionsCanvasAndParty", 0, 0, canvas.Id, 0);
             }
@@ -500,10 +586,10 @@ namespace Constituency.Desktop.Views
                 return null;
             }
         }
-        private async void FillUpDGV2(string route,int constituencyId, int divisionId, int canvasId, int partyId)
+        private async void FillUpDGV2(string route, int constituencyId, int divisionId, int canvasId, int partyId)
         {
             dgv2.DataSource = null;
-            var result = await LoadCanvasReport2(route, constituencyId,divisionId, canvasId, partyId);
+            var result = await LoadCanvasReport2(route, constituencyId, divisionId, canvasId, partyId);
             dgv2.DataSource = result.Select(v => new
             {
                 Div = v.PollingDivision.Name,
@@ -518,7 +604,7 @@ namespace Constituency.Desktop.Views
                 v.HomePhone,
                 v.WorkPhone,
                 v.Email
-                
+
             }).ToList();
             lblTotal2.Text = result.Count.ToString();
         }
@@ -545,6 +631,33 @@ namespace Constituency.Desktop.Views
             UtilRecurrent.ExportToExcel(dgv2);
             dgv2.MultiSelect = false;
             dgv2.CurrentCell = null;
+        }
+
+        private void iconButton2_Click(object sender, EventArgs e)
+        {
+            List<string> columns = chkColumnsExport.CheckedItems.OfType<object>().Select(li => li.ToString()).ToList();
+            if (columns.Count == 0)
+            {
+                UtilRecurrent.InformationMessage("Please select at least one column to export", "Export");
+                return;
+            }
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                ImportDataGridViewDataToExcelSheet(dgv1Interviews, columns);
+                UtilRecurrent.UnlockForm(waitForm, this);
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);               
+            }
+        }
+
+        private void iconButton3_Click(object sender, EventArgs e)
+        {
+            gbReport.Visible = false;
         }
     }
 }
