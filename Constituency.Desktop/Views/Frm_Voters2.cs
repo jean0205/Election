@@ -49,10 +49,10 @@ namespace Constituency.Desktop.Views
             DGVFormats();
             await LoadConstituencies();
             VoterList = new();
-            await LoadVoters();
+            //await LoadVoters();
             await LoadDivisionsBatch();
           
-            //tabControl1.TabPages.Remove(tabPage2);
+            tabControl1.TabPages.Remove(tabPage2);
 
         }
 
