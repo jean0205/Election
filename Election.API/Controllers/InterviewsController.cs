@@ -33,7 +33,7 @@ namespace Election.API.Controllers
         public async Task<ActionResult<Interview>> GetInterview(int id)
         {
             var interview = await _context.Interviews.AsNoTracking()
-                .Include(i=>i.Canvas)
+                .Include(i => i.Canvas)
                 .Include(i => i.Interviewer)
                 .Include(i => i.Comment)
                 .Include(i => i.SupportedParty)
@@ -54,7 +54,7 @@ namespace Election.API.Controllers
         {
             var interview = await _context.Interviews
                 .Include(i => i.Voter)
-                .Include(i=>i.Canvas)
+                .Include(i => i.Canvas)
                 .FirstOrDefaultAsync(i => i.Voter.Id == voterId && i.Canvas.Id == canvasId);
 
             if (interview == null)
@@ -63,11 +63,11 @@ namespace Election.API.Controllers
             }
             return interview;
         }
-        
+
         [HttpGet("FindByParty/{id}")]
         public async Task<ActionResult<Interview>> GetInterviewByParty(int id)
         {
-            var interview = await _context.Interviews                
+            var interview = await _context.Interviews
                 .Include(i => i.SupportedParty)
                 .FirstOrDefaultAsync(i => i.SupportedParty.Id == id);
 
@@ -103,11 +103,11 @@ namespace Election.API.Controllers
             {
                 return BadRequest();
             }
-            var interviewDB = await  _context.Interviews
+            var interviewDB = await _context.Interviews
                 .Include(i => i.Interviewer)
                 .Include(i => i.SupportedParty)
                 .Include(i => i.Voter)
-                .Include(i=>i.Canvas)
+                .Include(i => i.Canvas)
                 .Include(i => i.Comment)
                 .FirstOrDefaultAsync(i => i.Id == id);
             if (interviewDB == null)
@@ -116,7 +116,7 @@ namespace Election.API.Controllers
             }
             interviewDB.Voter = _context.Voters.FirstOrDefault(v => v.Id == interview.Voter.Id);
             interviewDB.Interviewer = _context.Interviewers.FirstOrDefault(i => i.Id == interview.Interviewer.Id);
-           
+
             interviewDB.Canvas = _context.Canvas.FirstOrDefault(c => c.Id == interview.Canvas.Id);
             if (interview.SupportedParty == null)
             {
@@ -126,7 +126,7 @@ namespace Election.API.Controllers
             {
                 interviewDB.SupportedParty = _context.Parties.FirstOrDefault(s => s.Id == interview.SupportedParty.Id);
             }
-            if (interview.Comment==null)
+            if (interview.Comment == null)
             {
                 interviewDB.Comment = null;
             }
@@ -170,10 +170,10 @@ namespace Election.API.Controllers
             {
                 interview.Comment = _context.Comments.FirstOrDefault(c => c.Id == interview.Comment.Id);
             }
-            if (interview.SupportedParty !=null)
+            if (interview.SupportedParty != null)
             {
                 interview.SupportedParty = _context.Parties.FirstOrDefault(s => s.Id == interview.SupportedParty.Id);
-            }            
+            }
             interview.Voter = _context.Voters.FirstOrDefault(v => v.Id == interview.Voter.Id);
             interview.Canvas = _context.Canvas.FirstOrDefault(c => c.Id == interview.Canvas.Id);
             _context.Interviews.Add(interview);
@@ -203,5 +203,51 @@ namespace Election.API.Controllers
         {
             return _context.Interviews.Any(e => e.Id == id);
         }
+
+        #region Reports
+
+        //passing the canvasID
+        [HttpGet("GeneralReport/{canvasTypeId}/{canvasId}")]
+        public async Task<ActionResult<IEnumerable<Interview>>> GetVotersByDivisionAndCanvas(int canvasTypeId, int canvasId)
+        {
+            var openCanvas = await _context.Canvas.Where(c => c.Open).ToListAsync();
+
+
+            if (canvasTypeId == 0 && canvasId == 0)
+            {
+                return await _context.Interviews.AsNoTracking()
+                .Include(v => v.Voter)
+                .ThenInclude(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
+                .Include(v => v.Canvas)
+                .Include(v => v.SupportedParty)
+                .Where(v => v.Canvas.Open).ToListAsync();
+            }
+            if (canvasTypeId > 0 && canvasId == 0)
+            {
+                return await _context.Interviews.AsNoTracking()
+                .Include(v => v.Voter)
+                .ThenInclude(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
+                .Include(v => v.Canvas)
+                .ThenInclude(v => v.Type)
+                .Include(v => v.SupportedParty)
+                .Where(v => v.Canvas.Type.Id == canvasId).ToListAsync();
+            }
+            if (canvasTypeId > 0 && canvasId > 0)
+            {
+                return await _context.Interviews.AsNoTracking()
+                .Include(v => v.Voter)
+                .ThenInclude(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
+                .Include(v => v.Canvas)
+                .ThenInclude(v => v.Type)
+                .Include(v => v.SupportedParty)
+                .Where(v => v.Canvas.Type.Id == canvasTypeId && v.Canvas.Id == canvasId).ToListAsync();
+            }
+            return null;
+        }
+        #endregion
     }
+
 }

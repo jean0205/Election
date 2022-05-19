@@ -37,6 +37,7 @@ namespace Constituency.Desktop.Views
             if (!await ValidateAccess("General_Reports"))
             {
                 tabControl1.TabPages.RemoveAt(1);
+                tabControl1.TabPages.RemoveAt(1);
             }
             await LoadConstituencies();
             await LoadCanvasTypes();
@@ -198,6 +199,14 @@ namespace Constituency.Desktop.Views
                 cmb2CanvasTypes.ValueMember = "Id";
                 cmb2CanvasTypes.DisplayMember = "Type";
                 cmb2CanvasTypes.SelectedItem = null;
+                
+                cmbGCanvasType.BindingContext = new BindingContext();
+                cmbGCanvasType.DataSource = null;
+                CanvasTypeList.Insert(0, new CanvasType() { Id = 0, Type = "Select", Active = true });
+                cmbGCanvasType.DataSource = CanvasTypeList.Where(x => x.Active).ToList();
+                cmbGCanvasType.ValueMember = "Id";
+                cmbGCanvasType.DisplayMember = "Type";
+                
             }
         }
         private void cmbCanvasType_SelectionChangeCommitted(object sender, EventArgs e)
@@ -655,6 +664,179 @@ namespace Constituency.Desktop.Views
         private void iconButton3_Click(object sender, EventArgs e)
         {
             gbReport.Visible = false;
+        }
+
+        #region tab 3
+
+        private void cmbGCanvasType_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbGCanvasType.SelectedIndex > 0)
+                {
+                    FillUpdComboboxCanvasG();
+                    cmbGCanvas.SelectedIndex = 0;
+                }
+                else
+                {
+                    cmbGCanvas.BindingContext = new BindingContext();
+                    cmbGCanvas.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        private void FillUpdComboboxCanvasG()
+        {
+            try
+            {
+                if (CanvasTypeList.Where(p => p.Id == (int)cmbGCanvasType.SelectedValue).Select(p => p.Canvas).Any())
+                {
+                    cmbGCanvas.BindingContext = new BindingContext();
+                    cmbGCanvas.DataSource = null;
+                    CanvasList = new List<Canvas>();
+                    CanvasList = CanvasTypeList.Where(p => p.Id == (int)cmbGCanvasType.SelectedValue).SelectMany(p => p.Canvas).ToList();
+                    
+                    cmbGCanvas.DataSource = CanvasList;
+                    cmbGCanvas.ValueMember = "Id";
+                    cmbGCanvas.DisplayMember = "Name";                   
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+        }
+        #endregion
+        
+        private void iconButton5_Click(object sender, EventArgs e)
+        {
+            int canvasType = (int)cmbGCanvasType.SelectedValue;
+            int canvas = 0;         
+            if (cmbGCanvas.SelectedItem!=null)
+            {
+                canvas = (int)cmbGCanvas.SelectedValue;
+            } 
+            if (canvasType == 0 && canvas == 0 )
+            {
+                FillUpDGVGeneral("Interviews/GeneralReport", 0, 0);
+            }
+            if (canvasType >0 && canvas ==0)
+            {
+                FillUpDGVGeneral("Interviews/GeneralReport", 0, canvas);
+            }
+            if (canvasType > 0 && canvas > 0)
+            {
+                FillUpDGVGeneral("Interviews/GeneralReport", canvasType,canvas);
+            }
+        }
+
+        private async void FillUpDGVGeneral(string route, int canvasTypeId, int canvasId)
+        {
+            dgvG1.DataSource = null;
+            dgvG2.DataSource = null;
+            List<Interview> result = await LoadCanvasReportGeneral(route,canvasTypeId, canvasId);
+            
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Constituency");
+            foreach (var item in PartiesList)
+            {
+                dt.Columns.Add(item.Name);
+            }
+            dt.Columns.Add("Total");
+
+
+            foreach (string constituency in result.Select(i => i.Voter.PollingDivision.Constituency.Name).Distinct())
+            {
+                DataRow dr = dt.NewRow();
+                dr["Constituency"] = constituency;
+                dt.Rows.Add(dr);
+            }
+            DataRow drT = dt.NewRow();
+            drT["Constituency"] = "Total";
+            dt.Rows.Add(drT);
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (var item in PartiesList)
+                {
+                    row[item.Name] = result.Where(i => i.Voter.PollingDivision.Constituency.Name == row["Constituency"].ToString() && i.SupportedParty!=null && i.SupportedParty.Id == item.Id).Count();
+                }
+                row["Total"] = result.Where(i => i.Voter.PollingDivision.Constituency.Name == row["Constituency"].ToString()).Count();
+                
+                if (row["Constituency"].ToString() == "Total")
+                {
+                    foreach (var item in PartiesList)
+                    {
+                        row[item.Name] = result.Where(i => i.SupportedParty != null && i.SupportedParty.Id == item.Id).Count();
+                    }
+                    row["Total"] = result.Count;
+                }
+            }
+            dgvG1.DataSource = dt;
+
+
+            DataTable dt2 = new DataTable();
+            dt2.Columns.Add("Polling_Division");
+            foreach (var item in PartiesList)
+            {
+                dt2.Columns.Add(item.Name);
+            }
+            dt2.Columns.Add("Total");
+
+            foreach (string pollingDivision in result.Select(i => i.Voter.PollingDivision.Name).Distinct())
+            {
+                DataRow dr = dt2.NewRow();
+                dr["Polling_Division"] = pollingDivision;
+                dt2.Rows.Add(dr);
+            }
+            DataRow drT2 = dt2.NewRow();
+            drT2["Polling_Division"] = "Total";
+            dt2.Rows.Add(drT2);
+            foreach (DataRow row in dt2.Rows)
+            {
+                foreach (var item in PartiesList)
+                {
+                    row[item.Name] = result.Where(i => i.Voter.PollingDivision.Name == row["Polling_Division"].ToString() && i.SupportedParty != null && i.SupportedParty.Id == item.Id).Count();
+                }
+                row["Total"] = result.Where(i => i.Voter.PollingDivision.Name == row["Polling_Division"].ToString()).Count();
+
+                if (row["Polling_Division"].ToString() == "Total")
+                {
+                    foreach (var item in PartiesList)
+                    {
+                        row[item.Name] = result.Where(i => i.SupportedParty != null && i.SupportedParty.Id == item.Id).Count();
+                    }
+                    row["Total"] = result.Count;
+                }
+            }
+            dgvG2.DataSource = dt2;
+
+        }
+        private async Task<List<Interview>> LoadCanvasReportGeneral(string controller,int canvasTypeId, int canvasId)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.GetListAsyncReportsGeneral<Interview>(controller,canvasTypeId, canvasId, token);
+                UtilRecurrent.UnlockForm(waitForm, this);
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return null;
+                }
+                return new((List<Interview>)response.Result);
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
         }
     }
 }

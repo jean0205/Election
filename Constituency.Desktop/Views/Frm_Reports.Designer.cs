@@ -81,15 +81,22 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblTotal2 = new System.Windows.Forms.Label();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbGCanvas = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbGCanvasType = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.iconButton5 = new FontAwesome.Sharp.IconButton();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvG1 = new System.Windows.Forms.DataGridView();
+            this.dgvG2 = new System.Windows.Forms.DataGridView();
             this.gbReport = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.chkColumnsExport = new System.Windows.Forms.CheckedListBox();
             this.iconButton2 = new FontAwesome.Sharp.IconButton();
             this.iconButton3 = new FontAwesome.Sharp.IconButton();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.iconButton4 = new FontAwesome.Sharp.IconButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -109,11 +116,14 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv2)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
-            this.gbReport.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvG1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvG2)).BeginInit();
+            this.gbReport.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -239,7 +249,7 @@
             this.cmbConstituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 12);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 15);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(313, 29);
             this.cmbConstituency.TabIndex = 37;
@@ -262,7 +272,7 @@
             this.cmbDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(537, 12);
+            this.cmbDivision.Location = new System.Drawing.Point(537, 15);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(118, 29);
             this.cmbDivision.TabIndex = 38;
@@ -344,7 +354,7 @@
             this.cmbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvas.FormattingEnabled = true;
-            this.cmbCanvas.Location = new System.Drawing.Point(331, 4);
+            this.cmbCanvas.Location = new System.Drawing.Point(331, 7);
             this.cmbCanvas.Name = "cmbCanvas";
             this.cmbCanvas.Size = new System.Drawing.Size(218, 29);
             this.cmbCanvas.TabIndex = 40;
@@ -366,7 +376,7 @@
             this.cmbCanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCanvasTypes.FormattingEnabled = true;
-            this.cmbCanvasTypes.Location = new System.Drawing.Point(124, 4);
+            this.cmbCanvasTypes.Location = new System.Drawing.Point(124, 7);
             this.cmbCanvasTypes.Name = "cmbCanvasTypes";
             this.cmbCanvasTypes.Size = new System.Drawing.Size(123, 29);
             this.cmbCanvasTypes.TabIndex = 47;
@@ -446,9 +456,9 @@
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage2.Controls.Add(this.tableLayoutPanel11);
-            this.tabPage2.Location = new System.Drawing.Point(4, 30);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1403, 777);
+            this.tabPage2.Size = new System.Drawing.Size(1403, 783);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "General Reports";
             // 
@@ -467,7 +477,7 @@
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 153F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(1403, 777);
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(1403, 783);
             this.tableLayoutPanel11.TabIndex = 3;
             // 
             // groupBox4
@@ -610,7 +620,7 @@
             this.cmb2Division.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Division.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Division.FormattingEnabled = true;
-            this.cmb2Division.Location = new System.Drawing.Point(744, 10);
+            this.cmb2Division.Location = new System.Drawing.Point(744, 13);
             this.cmb2Division.Name = "cmb2Division";
             this.cmb2Division.Size = new System.Drawing.Size(202, 29);
             this.cmb2Division.TabIndex = 38;
@@ -632,7 +642,7 @@
             this.cmb2Constituency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Constituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Constituency.FormattingEnabled = true;
-            this.cmb2Constituency.Location = new System.Drawing.Point(124, 10);
+            this.cmb2Constituency.Location = new System.Drawing.Point(124, 13);
             this.cmb2Constituency.Name = "cmb2Constituency";
             this.cmb2Constituency.Size = new System.Drawing.Size(444, 29);
             this.cmb2Constituency.TabIndex = 39;
@@ -711,7 +721,7 @@
             this.cmb2Canvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2Canvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2Canvas.FormattingEnabled = true;
-            this.cmb2Canvas.Location = new System.Drawing.Point(715, 6);
+            this.cmb2Canvas.Location = new System.Drawing.Point(715, 9);
             this.cmb2Canvas.Name = "cmb2Canvas";
             this.cmb2Canvas.Size = new System.Drawing.Size(232, 29);
             this.cmb2Canvas.TabIndex = 40;
@@ -733,7 +743,7 @@
             this.cmb2CanvasTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb2CanvasTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb2CanvasTypes.FormattingEnabled = true;
-            this.cmb2CanvasTypes.Location = new System.Drawing.Point(241, 6);
+            this.cmb2CanvasTypes.Location = new System.Drawing.Point(241, 9);
             this.cmb2CanvasTypes.Name = "cmb2CanvasTypes";
             this.cmb2CanvasTypes.Size = new System.Drawing.Size(230, 29);
             this.cmb2CanvasTypes.TabIndex = 47;
@@ -799,7 +809,7 @@
             this.dgv2.Location = new System.Drawing.Point(3, 156);
             this.dgv2.Name = "dgv2";
             this.dgv2.RowTemplate.Height = 25;
-            this.dgv2.Size = new System.Drawing.Size(1397, 570);
+            this.dgv2.Size = new System.Drawing.Size(1397, 576);
             this.dgv2.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -813,7 +823,7 @@
             this.tableLayoutPanel3.Controls.Add(this.lblTotal2, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.iconButton1, 3, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 732);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 738);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -869,6 +879,175 @@
             this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton1.UseVisualStyleBackColor = false;
             this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
+            this.tabPage3.Controls.Add(this.tableLayoutPanel6);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1403, 783);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "General View";
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.72844F));
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel9, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel7, 0, 1);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 3;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.916667F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.08334F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1403, 783);
+            this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel9.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel9.ColumnCount = 5;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.Controls.Add(this.cmbGCanvas, 3, 0);
+            this.tableLayoutPanel9.Controls.Add(this.label5, 2, 0);
+            this.tableLayoutPanel9.Controls.Add(this.cmbGCanvasType, 1, 0);
+            this.tableLayoutPanel9.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.iconButton5, 4, 0);
+            this.tableLayoutPanel9.ForeColor = System.Drawing.Color.White;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 1;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1397, 51);
+            this.tableLayoutPanel9.TabIndex = 57;
+            // 
+            // cmbGCanvas
+            // 
+            this.cmbGCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbGCanvas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGCanvas.FormattingEnabled = true;
+            this.cmbGCanvas.Location = new System.Drawing.Point(841, 14);
+            this.cmbGCanvas.Name = "cmbGCanvas";
+            this.cmbGCanvas.Size = new System.Drawing.Size(272, 29);
+            this.cmbGCanvas.TabIndex = 40;
+            this.cmbGCanvas.Tag = "1";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(771, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 21);
+            this.label5.TabIndex = 39;
+            this.label5.Text = "Canvas:";
+            // 
+            // cmbGCanvasType
+            // 
+            this.cmbGCanvasType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbGCanvasType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGCanvasType.FormattingEnabled = true;
+            this.cmbGCanvasType.Location = new System.Drawing.Point(283, 14);
+            this.cmbGCanvasType.Name = "cmbGCanvasType";
+            this.cmbGCanvasType.Size = new System.Drawing.Size(272, 29);
+            this.cmbGCanvasType.TabIndex = 47;
+            this.cmbGCanvasType.Tag = "1";
+            this.cmbGCanvasType.SelectionChangeCommitted += new System.EventHandler(this.cmbGCanvasType_SelectionChangeCommitted);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(170, 15);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 21);
+            this.label6.TabIndex = 46;
+            this.label6.Text = "Canvas Types:";
+            // 
+            // iconButton5
+            // 
+            this.iconButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconButton5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.iconButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.iconButton5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.iconButton5.FlatAppearance.BorderSize = 2;
+            this.iconButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton5.IconChar = FontAwesome.Sharp.IconChar.CloudUploadAlt;
+            this.iconButton5.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton5.IconSize = 35;
+            this.iconButton5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton5.Location = new System.Drawing.Point(1258, 4);
+            this.iconButton5.Name = "iconButton5";
+            this.iconButton5.Size = new System.Drawing.Size(135, 43);
+            this.iconButton5.TabIndex = 57;
+            this.iconButton5.Text = "Accept";
+            this.iconButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton5.UseVisualStyleBackColor = false;
+            this.iconButton5.Click += new System.EventHandler(this.iconButton5_Click);
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 2;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Controls.Add(this.dgvG1, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.dgvG2, 1, 1);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 60);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 2;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1397, 663);
+            this.tableLayoutPanel7.TabIndex = 56;
+            // 
+            // dgvG1
+            // 
+            this.dgvG1.AllowUserToAddRows = false;
+            this.dgvG1.AllowUserToDeleteRows = false;
+            this.dgvG1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvG1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvG1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvG1.Location = new System.Drawing.Point(3, 43);
+            this.dgvG1.Name = "dgvG1";
+            this.dgvG1.ReadOnly = true;
+            this.dgvG1.RowTemplate.Height = 25;
+            this.dgvG1.Size = new System.Drawing.Size(692, 617);
+            this.dgvG1.TabIndex = 2;
+            // 
+            // dgvG2
+            // 
+            this.dgvG2.AllowUserToAddRows = false;
+            this.dgvG2.AllowUserToDeleteRows = false;
+            this.dgvG2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvG2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvG2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvG2.Location = new System.Drawing.Point(701, 43);
+            this.dgvG2.Name = "dgvG2";
+            this.dgvG2.ReadOnly = true;
+            this.dgvG2.RowTemplate.Height = 25;
+            this.dgvG2.Size = new System.Drawing.Size(693, 617);
+            this.dgvG2.TabIndex = 3;
             // 
             // gbReport
             // 
@@ -956,68 +1135,6 @@
             this.iconButton3.UseVisualStyleBackColor = true;
             this.iconButton3.Click += new System.EventHandler(this.iconButton3_Click);
             // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
-            this.tabPage3.Controls.Add(this.tableLayoutPanel6);
-            this.tabPage3.Location = new System.Drawing.Point(4, 30);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1403, 777);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "General View";
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 1;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.72844F));
-            this.tableLayoutPanel6.Controls.Add(this.iconButton4, 0, 2);
-            this.tableLayoutPanel6.Controls.Add(this.dataGridView1, 0, 1);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 3;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.258503F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.74149F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(1403, 777);
-            this.tableLayoutPanel6.TabIndex = 0;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 48);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1397, 669);
-            this.dataGridView1.TabIndex = 2;
-            // 
-            // iconButton4
-            // 
-            this.iconButton4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.iconButton4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.iconButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(214)))), ((int)(((byte)(98)))));
-            this.iconButton4.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.iconButton4.FlatAppearance.BorderSize = 2;
-            this.iconButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton4.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.iconButton4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton4.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
-            this.iconButton4.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton4.IconSize = 28;
-            this.iconButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton4.Location = new System.Drawing.Point(1269, 727);
-            this.iconButton4.Name = "iconButton4";
-            this.iconButton4.Size = new System.Drawing.Size(131, 42);
-            this.iconButton4.TabIndex = 55;
-            this.iconButton4.Tag = "Export_Reports";
-            this.iconButton4.Text = "Export";
-            this.iconButton4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.iconButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton4.UseVisualStyleBackColor = false;
-            // 
             // Frm_Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -1030,7 +1147,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Reports";
-            this.Text = "Frm_Reports";
+            this.Text = "Reports";
             this.Load += new System.EventHandler(this.Frm_Reports_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1060,11 +1177,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv2)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.gbReport.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel9.PerformLayout();
+            this.tableLayoutPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvG1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvG2)).EndInit();
+            this.gbReport.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1130,7 +1251,14 @@
         private FontAwesome.Sharp.IconButton iconButton3;
         private TabPage tabPage3;
         private TableLayoutPanel tableLayoutPanel6;
-        private FontAwesome.Sharp.IconButton iconButton4;
-        private DataGridView dataGridView1;
+        private DataGridView dgvG1;
+        private TableLayoutPanel tableLayoutPanel7;
+        private DataGridView dgvG2;
+        private TableLayoutPanel tableLayoutPanel9;
+        private ComboBox cmbGCanvas;
+        private Label label5;
+        private ComboBox cmbGCanvasType;
+        private Label label6;
+        private FontAwesome.Sharp.IconButton iconButton5;
     }
 }
