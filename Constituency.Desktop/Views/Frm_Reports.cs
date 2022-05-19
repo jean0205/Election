@@ -609,10 +609,6 @@ namespace Constituency.Desktop.Views
             }).ToList();
             lblTotal2.Text = result.Count.ToString();
         }
-
-
-
-
         #endregion
 
         private void rjToggleButton1_CheckedChanged(object sender, EventArgs e)

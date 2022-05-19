@@ -32,7 +32,7 @@ namespace Election.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Interview>> GetInterview(int id)
         {
-            var interview = await _context.Interviews
+            var interview = await _context.Interviews.AsNoTracking()
                 .Include(i=>i.Canvas)
                 .Include(i => i.Interviewer)
                 .Include(i => i.Comment)
