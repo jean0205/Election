@@ -294,18 +294,18 @@ namespace Constituency.Desktop.Views
             var result = await LoadCanvasReport1(route, divisionId, canvasId, interviewd);
             dgv1Interviews.DataSource = result.Select(v => new
             {
-                Div = v.PollingDivision.Name,
-                v.Reg,
                 v.SurName,
                 v.GivenNames,
                 v.Sex,
-                v.Occupation,
                 v.Address,
-                v.Mobile1,
-                v.Mobile2,
-                HPhone=v.HomePhone,
-                WPhone=v.WorkPhone,
-                v.Email
+                v.Occupation,
+                v.Reg,
+                PD = v.PollingDivision.Name,
+                //v.Mobile1,
+                //v.Mobile2,
+                // HPhone=v.HomePhone,
+                // WPhone=v.WorkPhone,
+                //v.Email
             }).OrderBy(v => v.SurName).ThenBy(v => v.GivenNames).ToList();
             lblTotal1.Text = result.Count.ToString();
 
@@ -362,7 +362,7 @@ namespace Constituency.Desktop.Views
             chkColumnsExport.Items.Clear();
             chkColumnsExport.Items.AddRange(dgv1Interviews.Columns.Cast<DataGridViewColumn>().Select(p => p.Name).ToArray());
             //chkColumnsExport.Items.Add("--------------------------------------");            
-            chkColumnsExport.Items.AddRange(new List<string> { "RE-Reg (Y/N)", "Party Support", "Contact Number", "Comments" }.ToArray());
+            chkColumnsExport.Items.AddRange(new List<string> { "RE-Reg (Y/N)", "Party", "Contact Number", "Comments" }.ToArray());
             for (int i = 0; i < chkColumnsExport.Items.Count; i++)
             {
                 chkColumnsExport.SetItemChecked(i, true);
@@ -397,6 +397,7 @@ namespace Constituency.Desktop.Views
                     if (columns.Contains(dgv.Columns[j].Name))
                     {
                         xlWorkSheet.Cells[i + 2, j + 1] = dgv.Rows[i].Cells[j].Value.ToString();
+                        xlWorkSheet.Cells[i + 2, j + 1].Font.Size = 18;
                     }
                 }
             }
@@ -406,10 +407,28 @@ namespace Constituency.Desktop.Views
             xlWorkSheet.Rows.RowHeight = 50;
 
             xlWorkSheet.Columns.AutoFit();
-            xlWorkSheet.Columns[12].ColumnWidth = 25;
-            xlWorkSheet.Columns[6].ColumnWidth = 25;
-            xlWorkSheet.Columns[6].Style.WrapText = true;
-            
+
+            xlWorkSheet.Columns[1].ColumnWidth = 23;
+            xlWorkSheet.Columns[2].ColumnWidth = 30;
+
+            xlWorkSheet.Columns[3].ColumnWidth = 5;
+            xlWorkSheet.Columns[4].ColumnWidth = 23;
+
+            xlWorkSheet.Columns[5].ColumnWidth = 38;
+            xlWorkSheet.Columns[6].ColumnWidth = 13;
+
+            xlWorkSheet.Columns[7].ColumnWidth = 10;
+            xlWorkSheet.Columns[8].ColumnWidth = 10;
+            xlWorkSheet.Columns[9].ColumnWidth = 8;
+            xlWorkSheet.Columns[10].ColumnWidth = 13;
+            xlWorkSheet.Columns[11].ColumnWidth = 53;
+
+
+            xlWorkSheet.Columns[4].Style.WrapText = true;
+            xlWorkSheet.Columns[5].Style.WrapText = true;
+
+            //xlWorkSheet.Columns[1].Style.Font.Size = 18;
+
             //xlWorkSheet.Rows.AutoFit();
             xlApp.Visible = true;
 
