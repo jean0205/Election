@@ -418,7 +418,8 @@
             // 
             // ibtnRefresh
             // 
-            this.ibtnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.ibtnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ibtnRefresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ibtnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(214)))), ((int)(((byte)(98)))));
             this.ibtnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Black;
@@ -431,9 +432,9 @@
             this.ibtnRefresh.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnRefresh.IconSize = 28;
             this.ibtnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnRefresh.Location = new System.Drawing.Point(1248, 56);
+            this.ibtnRefresh.Location = new System.Drawing.Point(1233, 56);
             this.ibtnRefresh.Name = "ibtnRefresh";
-            this.ibtnRefresh.Size = new System.Drawing.Size(131, 33);
+            this.ibtnRefresh.Size = new System.Drawing.Size(146, 33);
             this.ibtnRefresh.TabIndex = 53;
             this.ibtnRefresh.Tag = "Export_Reports";
             this.ibtnRefresh.Text = "Export";
@@ -525,9 +526,9 @@
             this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ibtnUpdate.IconSize = 35;
             this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnUpdate.Location = new System.Drawing.Point(1253, 67);
+            this.ibtnUpdate.Location = new System.Drawing.Point(1233, 67);
             this.ibtnUpdate.Name = "ibtnUpdate";
-            this.ibtnUpdate.Size = new System.Drawing.Size(135, 50);
+            this.ibtnUpdate.Size = new System.Drawing.Size(155, 50);
             this.ibtnUpdate.TabIndex = 56;
             this.ibtnUpdate.Text = "Accept";
             this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -884,9 +885,9 @@
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage3.Controls.Add(this.tableLayoutPanel6);
-            this.tabPage3.Location = new System.Drawing.Point(4, 30);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1403, 777);
+            this.tabPage3.Size = new System.Drawing.Size(1403, 783);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "General View";
             // 
@@ -904,7 +905,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.08334F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(1403, 777);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1403, 783);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // tableLayoutPanel9
@@ -1014,7 +1015,7 @@
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1397, 657);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1397, 663);
             this.tableLayoutPanel7.TabIndex = 56;
             // 
             // dgvG1
@@ -1030,7 +1031,7 @@
             this.dgvG1.Name = "dgvG1";
             this.dgvG1.ReadOnly = true;
             this.dgvG1.RowTemplate.Height = 25;
-            this.dgvG1.Size = new System.Drawing.Size(692, 611);
+            this.dgvG1.Size = new System.Drawing.Size(692, 617);
             this.dgvG1.TabIndex = 2;
             // 
             // dgvG2
@@ -1046,7 +1047,7 @@
             this.dgvG2.Name = "dgvG2";
             this.dgvG2.ReadOnly = true;
             this.dgvG2.RowTemplate.Height = 25;
-            this.dgvG2.Size = new System.Drawing.Size(693, 611);
+            this.dgvG2.Size = new System.Drawing.Size(693, 617);
             this.dgvG2.TabIndex = 3;
             // 
             // gbReport
@@ -1072,7 +1073,7 @@
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 3;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -1084,10 +1085,10 @@
             this.chkColumnsExport.CheckOnClick = true;
             this.chkColumnsExport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkColumnsExport.FormattingEnabled = true;
-            this.chkColumnsExport.Location = new System.Drawing.Point(3, 38);
+            this.chkColumnsExport.Location = new System.Drawing.Point(3, 45);
             this.chkColumnsExport.MultiColumn = true;
             this.chkColumnsExport.Name = "chkColumnsExport";
-            this.chkColumnsExport.Size = new System.Drawing.Size(468, 248);
+            this.chkColumnsExport.Size = new System.Drawing.Size(468, 241);
             this.chkColumnsExport.TabIndex = 37;
             // 
             // iconButton2
@@ -1105,9 +1106,9 @@
             this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton2.IconSize = 28;
             this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton2.Location = new System.Drawing.Point(340, 292);
+            this.iconButton2.Location = new System.Drawing.Point(324, 292);
             this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(131, 39);
+            this.iconButton2.Size = new System.Drawing.Size(147, 39);
             this.iconButton2.TabIndex = 54;
             this.iconButton2.Tag = "Export_Reports";
             this.iconButton2.Text = "Export";
@@ -1118,7 +1119,8 @@
             // 
             // iconButton3
             // 
-            this.iconButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconButton3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.iconButton3.FlatAppearance.BorderSize = 0;
             this.iconButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iconButton3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -1126,9 +1128,9 @@
             this.iconButton3.IconColor = System.Drawing.Color.WhiteSmoke;
             this.iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton3.IconSize = 25;
-            this.iconButton3.Location = new System.Drawing.Point(376, 3);
+            this.iconButton3.Location = new System.Drawing.Point(342, 3);
             this.iconButton3.Name = "iconButton3";
-            this.iconButton3.Size = new System.Drawing.Size(95, 29);
+            this.iconButton3.Size = new System.Drawing.Size(129, 36);
             this.iconButton3.TabIndex = 55;
             this.iconButton3.Text = "Close";
             this.iconButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -1141,8 +1143,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.ClientSize = new System.Drawing.Size(1411, 811);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.gbReport);
+            this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);

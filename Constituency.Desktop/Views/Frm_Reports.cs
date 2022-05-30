@@ -303,8 +303,8 @@ namespace Constituency.Desktop.Views
                 v.Address,
                 v.Mobile1,
                 v.Mobile2,
-                v.HomePhone,
-                v.WorkPhone,
+                HPhone=v.HomePhone,
+                WPhone=v.WorkPhone,
                 v.Email
             }).OrderBy(v => v.SurName).ThenBy(v => v.GivenNames).ToList();
             lblTotal1.Text = result.Count.ToString();
@@ -359,6 +359,7 @@ namespace Constituency.Desktop.Views
 
             gbReport.Visible = true;
             gbReport.BringToFront();
+            chkColumnsExport.Items.Clear();
             chkColumnsExport.Items.AddRange(dgv1Interviews.Columns.Cast<DataGridViewColumn>().Select(p => p.Name).ToArray());
             //chkColumnsExport.Items.Add("--------------------------------------");            
             chkColumnsExport.Items.AddRange(new List<string> { "RE-Reg (Y/N)", "Party Support", "Contact Number", "Comments" }.ToArray());
@@ -405,6 +406,10 @@ namespace Constituency.Desktop.Views
             xlWorkSheet.Rows.RowHeight = 50;
 
             xlWorkSheet.Columns.AutoFit();
+            xlWorkSheet.Columns[12].ColumnWidth = 25;
+            xlWorkSheet.Columns[6].ColumnWidth = 25;
+            xlWorkSheet.Columns[6].Style.WrapText = true;
+            
             //xlWorkSheet.Rows.AutoFit();
             xlApp.Visible = true;
 
@@ -604,7 +609,8 @@ namespace Constituency.Desktop.Views
             {
                 Div = v.PollingDivision.Name,
                 v.Reg,
-                v.FullName,
+                v.SurName,
+                v.GivenNames,
                 DateOfBirth = v.DOB,
                 v.Sex,
                 v.Occupation,
@@ -613,7 +619,9 @@ namespace Constituency.Desktop.Views
                 v.Mobile2,
                 v.HomePhone,
                 v.WorkPhone,
-                v.Email
+                v.Email,
+                Comment=v.Interviews.Last().Comment!=null? v.Interviews.Select(i=>i.Comment.Text).Last() : string.Empty,
+                Party = v.Interviews.Last().SupportedParty != null ? v.Interviews.Select(i => i.SupportedParty.Name).Last() : string.Empty,
 
             }).ToList();
             lblTotal2.Text = result.Count.ToString();
@@ -765,7 +773,7 @@ namespace Constituency.Desktop.Views
                 {
                     row[item.Name] = result.Where(i => i.Voter.PollingDivision.Constituency.Name == row["Constituency"].ToString() && i.SupportedParty!=null && i.SupportedParty.Id == item.Id).Count();
                 }
-                row["Total"] = result.Where(i => i.Voter.PollingDivision.Constituency.Name == row["Constituency"].ToString()).Count();
+                row["Total"] = result.Where(i => i.Voter.PollingDivision.Constituency.Name == row["Constituency"].ToString() &&  i.SupportedParty != null).Count();
                 
                 if (row["Constituency"].ToString() == "Total")
                 {
@@ -773,7 +781,7 @@ namespace Constituency.Desktop.Views
                     {
                         row[item.Name] = result.Where(i => i.SupportedParty != null && i.SupportedParty.Id == item.Id).Count();
                     }
-                    row["Total"] = result.Count;
+                    row["Total"] = result.Where(i => i.SupportedParty != null).Count();
                 }
             }
             dgvG1.DataSource = dt;
@@ -802,7 +810,7 @@ namespace Constituency.Desktop.Views
                 {
                     row[item.Name] = result.Where(i => i.Voter.PollingDivision.Name == row["Polling_Division"].ToString() && i.SupportedParty != null && i.SupportedParty.Id == item.Id).Count();
                 }
-                row["Total"] = result.Where(i => i.Voter.PollingDivision.Name == row["Polling_Division"].ToString()).Count();
+                row["Total"] = result.Where(i => i.Voter.PollingDivision.Name == row["Polling_Division"].ToString() && i.SupportedParty != null).Count();
 
                 if (row["Polling_Division"].ToString() == "Total")
                 {
@@ -810,7 +818,7 @@ namespace Constituency.Desktop.Views
                     {
                         row[item.Name] = result.Where(i => i.SupportedParty != null && i.SupportedParty.Id == item.Id).Count();
                     }
-                    row["Total"] = result.Count;
+                    row["Total"] = result.Where(i => i.SupportedParty != null).Count();
                 }
             }
             dgvG2.DataSource = dt2;
