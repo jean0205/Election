@@ -71,10 +71,12 @@ namespace Constituency.Desktop.Views
             this.rjAll_Elections = new Constituency.Desktop.Controls.RJToggleButton();
             this.label19 = new System.Windows.Forms.Label();
             this.rjSee_Reports = new Constituency.Desktop.Controls.RJToggleButton();
-            this.label16 = new System.Windows.Forms.Label();
-            this.rjExport_Reports = new Constituency.Desktop.Controls.RJToggleButton();
             this.rjApp_Maintenance = new Constituency.Desktop.Controls.RJToggleButton();
             this.label13 = new System.Windows.Forms.Label();
+            this.rjExport_Reports = new Constituency.Desktop.Controls.RJToggleButton();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.rjGeneral_Reports = new Constituency.Desktop.Controls.RJToggleButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label14 = new System.Windows.Forms.Label();
@@ -95,8 +97,8 @@ namespace Constituency.Desktop.Views
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label17 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.rjGeneral_Reports = new Constituency.Desktop.Controls.RJToggleButton();
+            this.label22 = new System.Windows.Forms.Label();
+            this.rjSave_Votes = new Constituency.Desktop.Controls.RJToggleButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -431,6 +433,8 @@ namespace Constituency.Desktop.Views
             this.tableLayoutPanel3.Controls.Add(this.label16, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.label21, 4, 3);
             this.tableLayoutPanel3.Controls.Add(this.rjGeneral_Reports, 5, 3);
+            this.tableLayoutPanel3.Controls.Add(this.label22, 2, 5);
+            this.tableLayoutPanel3.Controls.Add(this.rjSave_Votes, 3, 5);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -678,32 +682,6 @@ namespace Constituency.Desktop.Views
             this.rjSee_Reports.Tag = "1";
             this.rjSee_Reports.UseVisualStyleBackColor = true;
             // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label16.Location = new System.Drawing.Point(383, 36);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(115, 21);
-            this.label16.TabIndex = 60;
-            this.label16.Text = "Export Reports:";
-            // 
-            // rjExport_Reports
-            // 
-            this.rjExport_Reports.AutoSize = true;
-            this.rjExport_Reports.Location = new System.Drawing.Point(505, 39);
-            this.rjExport_Reports.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjExport_Reports.Name = "rjExport_Reports";
-            this.rjExport_Reports.OffBackColor = System.Drawing.Color.Gray;
-            this.rjExport_Reports.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjExport_Reports.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.rjExport_Reports.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjExport_Reports.Size = new System.Drawing.Size(50, 25);
-            this.rjExport_Reports.TabIndex = 59;
-            this.rjExport_Reports.Tag = "1";
-            this.rjExport_Reports.UseVisualStyleBackColor = true;
-            // 
             // rjApp_Maintenance
             // 
             this.rjApp_Maintenance.AutoSize = true;
@@ -729,6 +707,59 @@ namespace Constituency.Desktop.Views
             this.label13.Size = new System.Drawing.Size(134, 21);
             this.label13.TabIndex = 54;
             this.label13.Text = "App Maintenance:";
+            // 
+            // rjExport_Reports
+            // 
+            this.rjExport_Reports.AutoSize = true;
+            this.rjExport_Reports.Location = new System.Drawing.Point(505, 39);
+            this.rjExport_Reports.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjExport_Reports.Name = "rjExport_Reports";
+            this.rjExport_Reports.OffBackColor = System.Drawing.Color.Gray;
+            this.rjExport_Reports.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjExport_Reports.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjExport_Reports.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjExport_Reports.Size = new System.Drawing.Size(50, 25);
+            this.rjExport_Reports.TabIndex = 59;
+            this.rjExport_Reports.Tag = "1";
+            this.rjExport_Reports.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label16.Location = new System.Drawing.Point(383, 36);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(115, 21);
+            this.label16.TabIndex = 60;
+            this.label16.Text = "Export Reports:";
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label21.ForeColor = System.Drawing.Color.Red;
+            this.label21.Location = new System.Drawing.Point(637, 106);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(193, 21);
+            this.label21.TabIndex = 63;
+            this.label21.Text = "Supported Party Report:";
+            // 
+            // rjGeneral_Reports
+            // 
+            this.rjGeneral_Reports.AutoSize = true;
+            this.rjGeneral_Reports.Location = new System.Drawing.Point(837, 109);
+            this.rjGeneral_Reports.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjGeneral_Reports.Name = "rjGeneral_Reports";
+            this.rjGeneral_Reports.OffBackColor = System.Drawing.Color.Gray;
+            this.rjGeneral_Reports.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjGeneral_Reports.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjGeneral_Reports.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjGeneral_Reports.Size = new System.Drawing.Size(50, 25);
+            this.rjGeneral_Reports.TabIndex = 64;
+            this.rjGeneral_Reports.Tag = "1";
+            this.rjGeneral_Reports.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -990,32 +1021,31 @@ namespace Constituency.Desktop.Views
             this.label17.TabIndex = 21;
             this.label17.Text = "Phone Number:";
             // 
-            // label21
+            // label22
             // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label21.ForeColor = System.Drawing.Color.Red;
-            this.label21.Location = new System.Drawing.Point(637, 106);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(193, 21);
-            this.label21.TabIndex = 63;
-            this.label21.Text = "Supported Party Report:";
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label22.Location = new System.Drawing.Point(410, 176);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(88, 21);
+            this.label22.TabIndex = 65;
+            this.label22.Text = "Save Votes:";
             // 
-            // rjGeneral_Reports
+            // rjSave_Votes
             // 
-            this.rjGeneral_Reports.AutoSize = true;
-            this.rjGeneral_Reports.Location = new System.Drawing.Point(837, 109);
-            this.rjGeneral_Reports.MinimumSize = new System.Drawing.Size(50, 25);
-            this.rjGeneral_Reports.Name = "rjGeneral_Reports";
-            this.rjGeneral_Reports.OffBackColor = System.Drawing.Color.Gray;
-            this.rjGeneral_Reports.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.rjGeneral_Reports.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.rjGeneral_Reports.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.rjGeneral_Reports.Size = new System.Drawing.Size(50, 25);
-            this.rjGeneral_Reports.TabIndex = 64;
-            this.rjGeneral_Reports.Tag = "1";
-            this.rjGeneral_Reports.UseVisualStyleBackColor = true;
+            this.rjSave_Votes.AutoSize = true;
+            this.rjSave_Votes.Location = new System.Drawing.Point(505, 179);
+            this.rjSave_Votes.MinimumSize = new System.Drawing.Size(50, 25);
+            this.rjSave_Votes.Name = "rjSave_Votes";
+            this.rjSave_Votes.OffBackColor = System.Drawing.Color.Gray;
+            this.rjSave_Votes.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.rjSave_Votes.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.rjSave_Votes.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.rjSave_Votes.Size = new System.Drawing.Size(50, 25);
+            this.rjSave_Votes.TabIndex = 66;
+            this.rjSave_Votes.Tag = "1";
+            this.rjSave_Votes.UseVisualStyleBackColor = true;
             // 
             // Frm_Configuration
             // 
@@ -1125,5 +1155,7 @@ namespace Constituency.Desktop.Views
         private FontAwesome.Sharp.IconButton iconButton1;
         private Label label21;
         private Controls.RJToggleButton rjGeneral_Reports;
+        private Label label22;
+        private Controls.RJToggleButton rjSave_Votes;
     }
 }

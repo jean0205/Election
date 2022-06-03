@@ -29,6 +29,16 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Constituency)
                 .ToListAsync();
         }
+
+        [HttpGet("NotTrack")]
+        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersNoTrack()
+        {
+            return await _context.Voters.AsNoTracking()
+                .Include(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
+                .ToListAsync();
+        }
+        
         [HttpGet("InDivisions/{id}")]
         public async Task<ActionResult<IEnumerable<Voter>>> GetVotersInDivision(int id)
         {
@@ -36,6 +46,16 @@ namespace Election.API.Controllers
                 .Include(v => v.PollingDivision)
                 .ThenInclude(v => v.Constituency)
                 .Where(v => v.PollingDivision.Id == id)
+                .ToListAsync();
+        }
+        [HttpGet("InDivisions/{divisionId}/{electionId}")]
+        public async Task<ActionResult<IEnumerable<Voter>>> GetVotersInDivisionWithVotes(int divisionId,int electionId)
+        {
+            return await _context.Voters.AsNoTracking()
+                .Include(v => v.PollingDivision)
+                .ThenInclude(v => v.Constituency)
+                .Include(v => v.ElectionVotes.Where(ev => ev.Election.Id == electionId))                
+                .Where(v => v.PollingDivision.Id == divisionId)
                 .ToListAsync();
         }
         [HttpGet("ByDivisions/{id}")]

@@ -30,10 +30,19 @@ namespace Election.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ElectionVote>>> GetElectionVotes()
         {
-            return await _context.ElectionVotes
+            return await _context.ElectionVotes.AsNoTracking()
                 .Include(e=>e.Election)
                 .Include(e=>e.Voter)
                 .ToListAsync();
+        }
+        [HttpGet("ByUser/{userId}")]
+        public async Task<ActionResult<int>> GetElectionVotesByUser(string userId)
+        {
+            var votes= await _context.ElectionVotes.AsNoTracking()
+                .Include(e => e.RecorderBy)
+                .Where(e => e.RecorderBy.Id == userId)
+                .ToListAsync();
+            return votes.Count;
         }
 
         // GET: api/ElectionVotes/5

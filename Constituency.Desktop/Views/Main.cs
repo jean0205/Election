@@ -34,7 +34,31 @@ namespace Constituency.Desktop.Views
             ReadUserInfo();            
               
         }
-       
+
+        private async void iconButton5_Click_1(object sender, EventArgs e)
+        {
+            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+            {
+                Analytics.TrackEvent("Frm_Votes NO ACCESS " + tokenResponse.User.FullName);
+                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+                return;
+            }
+
+            try
+            {
+                Analytics.TrackEvent("Frm_Votes " + tokenResponse.User.FullName);
+                Frm_Votes frm = new Frm_Votes();
+                frm.Show();
+                //this.WindowState = FormWindowState.Minimized;
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return;
+            }
+        }
+
 
         private async void iconButton1_Click(object sender, EventArgs e)
         {
@@ -649,5 +673,7 @@ namespace Constituency.Desktop.Views
             //InstallUpdateSyncWithInfo();
 
         }
+
+       
     }
 }

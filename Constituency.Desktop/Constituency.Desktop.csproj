@@ -43,6 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Frm_Reports - Copy.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Frm_Voters2.cs">
       <SubType>Form</SubType>
     </Compile>

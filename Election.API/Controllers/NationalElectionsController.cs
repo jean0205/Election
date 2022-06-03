@@ -23,6 +23,13 @@ namespace Election.API.Controllers
         }
 
         // GET: api/NationalElections
+        [HttpGet("Open")]
+        public async Task<ActionResult<IEnumerable<NationalElection>>> GetNationalElectionsOpens()
+        {
+            return await _context.NationalElections
+                .Where(e=>e.Open)
+                .ToListAsync();
+        }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NationalElection>>> GetNationalElections()
         {
