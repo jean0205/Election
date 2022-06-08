@@ -54,7 +54,8 @@ namespace Election.API.Controllers
             return await _context.Voters.AsNoTracking()
                 .Include(v => v.PollingDivision)
                 .ThenInclude(v => v.Constituency)
-                .Include(v => v.ElectionVotes.Where(ev => ev.Election.Id == electionId))                
+                .Include(v => v.ElectionVotes.Where(ev => ev.Election.Id == electionId))     
+                .ThenInclude(v=>v.RecorderBy)
                 .Where(v => v.PollingDivision.Id == divisionId)
                 .ToListAsync();
         }

@@ -314,8 +314,7 @@ namespace Constituency.Desktop.Views
         private void timer1_Tick_1(object sender, EventArgs e)
         {
             lblDateTime.Text = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
-        }
-
+        }        
         private async void dgv1Interviews_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -349,9 +348,16 @@ namespace Constituency.Desktop.Views
                     }
                     else
                     {
+                        var vote = VoterList.FirstOrDefault(v => v.Reg == reg).ElectionVotes.LastOrDefault();
+
+                        if (!await ValidateAccess("Review_Modify_Votes") && vote.RecorderBy.Id != user.Id)
+                        {
+                            UtilRecurrent.InformationMessage("You have not access to modify others users entered votes.\r\n Please Contact your System Administrator to request the access", "User Access");
+                            return;
+                        }                       
                         if (UtilRecurrent.yesOrNot("Are you sure you want to delete this vote?", "Delete Vote"))
                         {
-                            var vote = VoterList.FirstOrDefault(v => v.Reg == reg).ElectionVotes.LastOrDefault();
+                          
                             if (await DeleteVote(vote.Id, reg))
                             {
                                 if (!filter)

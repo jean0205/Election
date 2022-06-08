@@ -16,8 +16,7 @@
         App_Configuration,
         Manage_Users,
         Export_Reports,
-        Save_Votes
-
-
+        Save_Votes,
+        Review_Modify_Votes
     }
 }

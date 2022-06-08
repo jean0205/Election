@@ -52,7 +52,7 @@ namespace Constituency.Desktop.Views
             //await LoadVoters();
             await LoadDivisionsBatch();
           
-            tabControl1.TabPages.Remove(tabPage2);
+           // tabControl1.TabPages.Remove(tabPage2);
 
         }
 
@@ -198,6 +198,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
+                UtilRecurrent.UnlockForm(waitForm, this);
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
@@ -904,7 +905,7 @@ namespace Constituency.Desktop.Views
             }
 
         }
-        private List<Voter> BuildVoterList()
+        private async List<Voter> BuildVoterList()
         {
             try
             {
@@ -932,6 +933,9 @@ namespace Constituency.Desktop.Views
                     voters.Add(voter);
 
                 }
+
+                await LoadVoters();
+
                 var newVoters = voters.Where(v => !VoterList.Select(c => c.Reg).ToList().Contains(v.Reg)).ToList();
                 
                 return newVoters;
@@ -1009,8 +1013,84 @@ namespace Constituency.Desktop.Views
             checkVoterList();
         }
 
+
         #endregion
 
+        private async  void iconButton4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var list = await LoadVoterToExport();
+                if (list == null)
+                {
+                    UtilRecurrent.ErrorMessage("No voters to export");
+                    return;
+                }
+                dgv3.DataSource = list.Select(v => new
+                {
+                    v.Reg,
+                    v.SurName,
+                    v.GivenNames,
+                    v.Sex,
+                    v.Address,
+                    v.Occupation,
+                    v.Mobile1,
+                    v.Mobile2,
+                    v.HomePhone,
+                    v.WorkPhone,
+                    PD = v.PollingDivision.Name,
+                }).OrderBy(v => v.PD).ThenBy(v => v.SurName).ThenBy(v=>v.GivenNames).ToList();
+                UtilRecurrent.UnlockForm(waitForm, this);
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                UtilRecurrent.ErrorMessage(ex.Message);               
+            }
+        }
+        private async Task<List<Voter>> LoadVoterToExport()
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                Response response = await ApiServices.GetListAsync<Voter>("Voters", token);
+               
+                if (!response.IsSuccess)
+                {
+                    UtilRecurrent.ErrorMessage(response.Message);
+                    return null;
+                }
+                return ((List<Voter>)response.Result).OrderBy(v => v.PollingDivision.Name).ThenBy(v => v.SurName).ThenBy(v => v.GivenNames).ToList();
+                
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                Crashes.TrackError(ex);
+                UtilRecurrent.ErrorMessage(ex.Message);
+                return null;
+            }
+        }
 
+        private void iconButton3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UtilRecurrent.LockForm(waitForm, this);
+                dgv3.MultiSelect = true;
+                UtilRecurrent.ExportToExcel(dgv3);
+                dgv3.MultiSelect = false;
+                dgv3.CurrentCell = null;
+                UtilRecurrent.UnlockForm(waitForm, this);
+
+            }
+            catch (Exception ex)
+            {
+                UtilRecurrent.UnlockForm(waitForm, this);
+                UtilRecurrent.ErrorMessage(ex.Message);
+            }
+            
+        }
+       
     }
 }
