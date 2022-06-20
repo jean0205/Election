@@ -2,6 +2,7 @@
 using Constituency.Desktop.Entities;
 using Constituency.Desktop.Helpers;
 using Constituency.Desktop.Models;
+using FontAwesome.Sharp;
 using Microsoft.AppCenter.Crashes;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -25,6 +26,7 @@ namespace Constituency.Desktop.Views
         User user { get; set; }
         ElectionVote ElectionVote { get; set; }
         Voter Voter { get; set; }
+        bool canDelete = false;
 
         private List<ConstituencyC> ConstituenciesList;
 
@@ -36,6 +38,7 @@ namespace Constituency.Desktop.Views
             InitializeComponent();
             token = Main.GetInstance().tokenResponse.Token;
             user = Main.GetInstance().tokenResponse.User;
+
         }
 
         private async void Frm_Reports_Load(object sender, EventArgs e)
@@ -44,6 +47,7 @@ namespace Constituency.Desktop.Views
             await LoadElections();
             await LoadUserVotes();
             await LoadConstituencies();
+            canDelete = await ValidateAccess("Review_Modify_Votes");
             UtilRecurrent.UnlockForm(waitForm, this);
             lblUser.Text = user.FullName + $" / Saved Votes: [{userVotes}]";
             DGVFormats();
@@ -97,9 +101,9 @@ namespace Constituency.Desktop.Views
         }
         private async Task<List<string>> LoadUsersRoles(User user)
         {
-            UtilRecurrent.LockForm(waitForm, this);
+            // UtilRecurrent.LockForm(waitForm, this);
             Response response = await ApiServices.GetUserRoles<IList<string>>("Users/Roles", user.UserName, token);
-            UtilRecurrent.UnlockForm(waitForm, this);
+            //UtilRecurrent.UnlockForm(waitForm, this);
             if (!response.IsSuccess)
             {
                 UtilRecurrent.ErrorMessage(response.Message);
@@ -269,13 +273,23 @@ namespace Constituency.Desktop.Views
             try
             {
                 var electionVote = BuildElectionVote(reg);
-                UtilRecurrent.LockForm(waitForm, this);
+                //UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.PostAsync("ElectionVotes", ElectionVote, token);
-                UtilRecurrent.UnlockForm(waitForm, this);
+                // UtilRecurrent.UnlockForm(waitForm, this);
 
                 if (!response.IsSuccess)
                 {
+                    UtilRecurrent.UnlockForm(waitForm, this);
                     UtilRecurrent.ErrorMessage(response.Message);
+                    int divisionId = (cmbDivision.SelectedItem as PollingDivision).Id;
+                    var result = await LoadVotersInDivision(divisionId);
+                    FillUpDGV1(result);
+
+                    //if(response.Message == "This voter already vote in this election.")
+                    //{
+                    //    VoterList.FirstOrDefault(v => v.Reg == reg).ElectionVotes.Add((ElectionVote)response.Result);
+                    //}
+
                     return response.IsSuccess;
                 }
                 userVotes++;
@@ -285,7 +299,7 @@ namespace Constituency.Desktop.Views
             }
             catch (Exception ex)
             {
-                UtilRecurrent.UnlockForm(waitForm, this);
+                //UtilRecurrent.UnlockForm(waitForm, this);
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
                 return false;
@@ -314,7 +328,7 @@ namespace Constituency.Desktop.Views
         private void timer1_Tick_1(object sender, EventArgs e)
         {
             lblDateTime.Text = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
-        }        
+        }
         private async void dgv1Interviews_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -324,7 +338,6 @@ namespace Constituency.Desktop.Views
                     return;
                 }
                 var senderGrid = (DataGridView)sender;
-                
                 string reg = senderGrid.Rows[e.RowIndex].Cells["Reg"].Value.ToString();
 
                 int cell = dgv1Interviews.FirstDisplayedScrollingRowIndex;
@@ -332,51 +345,42 @@ namespace Constituency.Desktop.Views
                 {
                     if ((bool)senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == false)
                     {
-                        if (await SaveVote(reg))
-                        {
-                            if (!filter)
-                            {
-                                FillUpDGV1(VoterList);
-                                senderGrid.FirstDisplayedScrollingRowIndex = cell;
-                                txtReg.Clear();
-                            }
-                            else
-                            {
-                                FillUpDGV1(VoterList.Where(v => v.Reg.Contains(txtReg.Text)).ToList());
-                            }
-                        }
+                        UtilRecurrent.LockForm(waitForm, this);
+                        //Cursor.Hide();
+                        await SaveVote(reg);
+                        FillUpDGV1(VoterList);
+                        senderGrid.FirstDisplayedScrollingRowIndex = cell;
+                        txtReg.Clear();
+                        UtilRecurrent.UnlockForm(waitForm, this);
+                        //Cursor.Show();
                     }
                     else
                     {
                         var vote = VoterList.FirstOrDefault(v => v.Reg == reg).ElectionVotes.LastOrDefault();
 
-                        if (!await ValidateAccess("Review_Modify_Votes") && vote.RecorderBy.Id != user.Id)
+                        if (!canDelete && vote.RecorderBy.Id != user.Id)
                         {
                             UtilRecurrent.InformationMessage("You have not access to modify others users entered votes.\r\n Please Contact your System Administrator to request the access", "User Access");
                             return;
-                        }                       
+                        }
                         if (UtilRecurrent.yesOrNot("Are you sure you want to delete this vote?", "Delete Vote"))
                         {
-                          
-                            if (await DeleteVote(vote.Id, reg))
-                            {
-                                if (!filter)
-                                {
-                                    FillUpDGV1(VoterList);
-                                    senderGrid.FirstDisplayedScrollingRowIndex = cell;
-                                    txtReg.Clear();
-                                }
-                                else
-                                {
-                                    FillUpDGV1(VoterList.Where(v => v.Reg.Contains(txtReg.Text)).ToList());
-                                }
-                            }
+                            UtilRecurrent.LockForm(waitForm, this);
+                            //Cursor.Hide();
+                            await DeleteVote(vote.Id, reg);
+                            FillUpDGV1(VoterList);
+                            senderGrid.FirstDisplayedScrollingRowIndex = cell;
+                            txtReg.Clear();
+                            UtilRecurrent.UnlockForm(waitForm, this);
+                            //Cursor.Show();
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
+                Cursor.Show();
+                UtilRecurrent.UnlockForm(waitForm, this);
                 Crashes.TrackError(ex);
                 UtilRecurrent.ErrorMessage(ex.Message);
             }
@@ -385,9 +389,9 @@ namespace Constituency.Desktop.Views
         {
             try
             {
-                UtilRecurrent.LockForm(waitForm, this);
+                // UtilRecurrent.LockForm(waitForm, this);
                 Response response = await ApiServices.DeleteAsync("ElectionVotes", id, token);
-                UtilRecurrent.UnlockForm(waitForm, this);
+                // UtilRecurrent.UnlockForm(waitForm, this);
                 if (!response.IsSuccess)
                 {
                     UtilRecurrent.ErrorMessage(response.Message);
@@ -402,7 +406,7 @@ namespace Constituency.Desktop.Views
             {
                 UtilRecurrent.UnlockForm(waitForm, this);
                 Crashes.TrackError(ex);
-                UtilRecurrent.ErrorMessage(ex.Message);
+                // UtilRecurrent.ErrorMessage(ex.Message);
                 return false;
             }
         }
@@ -410,7 +414,7 @@ namespace Constituency.Desktop.Views
         private void ibtnUpdate_Click(object sender, EventArgs e)
         {
             Frm_SaveVote frm = new Frm_SaveVote();
-            frm.ShowDialog();
+            frm.Show();
         }
         bool filter = false;
         private void txtReg_KeyUp(object sender, KeyEventArgs e)
@@ -428,5 +432,19 @@ namespace Constituency.Desktop.Views
                 txt.Clear();
             }
         }
+
+        private async  void iconButton1_Click(object sender, EventArgs e)
+        {
+            if (!await ValidateAccess(((IconButton)sender).Tag.ToString()))
+            {
+                UtilRecurrent.InformationMessage("You have not access to this feature in this Application.\r\n Please Contact your System Administrator to request the access", "User Access");
+                return;
+            }
+            dgv1Interviews.MultiSelect = true;
+            UtilRecurrent.ExportToExcel(dgv1Interviews);
+            dgv1Interviews.MultiSelect = false;
+            dgv1Interviews.CurrentCell = null;
+        }
+
     }
 }

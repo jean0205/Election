@@ -839,20 +839,17 @@ namespace Constituency.Desktop.Views
             try
             {
                 votersBatch = new();
-                votersBatch = BuildVoterList();
-
+                votersBatch = await BuildVoterList();
                 label16.Text = votersBatch.Count.ToString();
                 //count the repeted voters
                 label17.Text = votersBatch.GroupBy(v => v.Reg).Where(g => g.Count() > 1).Count().ToString();
                 var duplicatedVoters = votersBatch.GroupBy(v => v.Reg).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
                 var correctOnes = votersBatch.Where(v => !String.IsNullOrEmpty(v.Reg)).ToList();
-
                 var batches = BuildChunksWithLinq(correctOnes, 5000);
 
                 foreach (var batch in batches)
                 {
                     await UploadMasterFile((List<Voter>)batch);
-
                 }
             }
             catch (Exception ex)
@@ -905,7 +902,7 @@ namespace Constituency.Desktop.Views
             }
 
         }
-        private async List<Voter> BuildVoterList()
+        private async Task<List<Voter>> BuildVoterList()
         {
             try
             {
@@ -931,13 +928,10 @@ namespace Constituency.Desktop.Views
                     voter.WorkPhone = String.Empty;
                     voter.Dead = false;
                     voters.Add(voter);
-
                 }
 
                 await LoadVoters();
-
                 var newVoters = voters.Where(v => !VoterList.Select(c => c.Reg).ToList().Contains(v.Reg)).ToList();
-                
                 return newVoters;
 
             }

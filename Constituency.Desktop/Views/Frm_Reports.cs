@@ -641,6 +641,7 @@ namespace Constituency.Desktop.Views
                 v.Email,
                 Comment=v.Interviews.Last().Comment!=null? v.Interviews.Select(i=>i.Comment.Text).Last() : string.Empty,
                 Party = v.Interviews.Last().SupportedParty != null ? v.Interviews.Select(i => i.SupportedParty.Name).Last() : string.Empty,
+                Voted=v.ElectionVotes.Where(e=>e.Election.Open==true).Count()>0
 
             }).ToList();
             lblTotal2.Text = result.Count.ToString();

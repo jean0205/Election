@@ -36,14 +36,10 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.cmbConstituency = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.cmbDivision = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblTotal1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label18 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -52,10 +48,15 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lblElection = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.lblTotal1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ibtnUpdate = new FontAwesome.Sharp.IconButton();
+            this.txtReg = new System.Windows.Forms.TextBox();
             this.dgv1Interviews = new System.Windows.Forms.DataGridView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtReg = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -100,7 +101,7 @@
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 127F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 132F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1395, 769);
             this.tableLayoutPanel2.TabIndex = 0;
@@ -112,7 +113,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1389, 121);
+            this.groupBox1.Size = new System.Drawing.Size(1389, 126);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Votes By PD:";
@@ -142,43 +143,8 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1383, 93);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1383, 98);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // ibtnUpdate
-            // 
-            this.ibtnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ibtnUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ibtnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.ibtnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
-            this.ibtnUpdate.FlatAppearance.BorderSize = 2;
-            this.ibtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ibtnUpdate.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ibtnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.ibtnUpdate.IconChar = FontAwesome.Sharp.IconChar.Search;
-            this.ibtnUpdate.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
-            this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.ibtnUpdate.IconSize = 33;
-            this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ibtnUpdate.Location = new System.Drawing.Point(128, 51);
-            this.ibtnUpdate.Name = "ibtnUpdate";
-            this.ibtnUpdate.Size = new System.Drawing.Size(163, 38);
-            this.ibtnUpdate.TabIndex = 57;
-            this.ibtnUpdate.Text = "Find";
-            this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.ibtnUpdate.UseVisualStyleBackColor = false;
-            this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(25, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 42);
-            this.label1.TabIndex = 56;
-            this.label1.Text = "Find By Reg No.:";
             // 
             // label14
             // 
@@ -225,28 +191,6 @@
             this.cmbDivision.TabIndex = 38;
             this.cmbDivision.Tag = "1";
             this.cmbDivision.SelectionChangeCommitted += new System.EventHandler(this.cmbDivision_SelectionChangeCommitted);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(368, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 21);
-            this.label2.TabIndex = 51;
-            this.label2.Text = "Total:";
-            // 
-            // lblTotal1
-            // 
-            this.lblTotal1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblTotal1.AutoSize = true;
-            this.lblTotal1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTotal1.Location = new System.Drawing.Point(419, 8);
-            this.lblTotal1.Name = "lblTotal1";
-            this.lblTotal1.Size = new System.Drawing.Size(31, 21);
-            this.lblTotal1.TabIndex = 52;
-            this.lblTotal1.Text = "___";
             // 
             // tableLayoutPanel4
             // 
@@ -313,20 +257,23 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 4;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.31915F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.37766F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.840425F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.32979F));
+            this.tableLayoutPanel3.ColumnCount = 5;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.13285F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.56732F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.54399F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.75584F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 194F));
             this.tableLayoutPanel3.Controls.Add(this.lblElection, 3, 0);
             this.tableLayoutPanel3.Controls.Add(this.label19, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.lblTotal1, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.iconButton1, 4, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(627, 51);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(752, 38);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(752, 43);
             this.tableLayoutPanel3.TabIndex = 55;
             // 
             // lblElection
@@ -334,7 +281,7 @@
             this.lblElection.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblElection.AutoSize = true;
             this.lblElection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblElection.Location = new System.Drawing.Point(556, 8);
+            this.lblElection.Location = new System.Drawing.Point(294, 11);
             this.lblElection.Name = "lblElection";
             this.lblElection.Size = new System.Drawing.Size(73, 21);
             this.lblElection.TabIndex = 45;
@@ -345,20 +292,125 @@
             this.label19.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label19.Location = new System.Drawing.Point(483, 8);
+            this.label19.Location = new System.Drawing.Point(221, 11);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(67, 21);
             this.label19.TabIndex = 38;
             this.label19.Text = "Election:";
             // 
+            // lblTotal1
+            // 
+            this.lblTotal1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblTotal1.AutoSize = true;
+            this.lblTotal1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTotal1.Location = new System.Drawing.Point(104, 11);
+            this.lblTotal1.Name = "lblTotal1";
+            this.lblTotal1.Size = new System.Drawing.Size(31, 21);
+            this.lblTotal1.TabIndex = 52;
+            this.lblTotal1.Text = "___";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(53, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 21);
+            this.label2.TabIndex = 51;
+            this.label2.Text = "Total:";
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.iconButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(214)))), ((int)(((byte)(98)))));
+            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.iconButton1.FlatAppearance.BorderSize = 2;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
+            this.iconButton1.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 28;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(618, 5);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(131, 33);
+            this.iconButton1.TabIndex = 55;
+            this.iconButton1.Tag = "Export_Reports";
+            this.iconButton1.Text = "Export";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(25, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 42);
+            this.label1.TabIndex = 56;
+            this.label1.Text = "Find By Reg No.:";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(404, 51);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 42);
+            this.label3.TabIndex = 58;
+            this.label3.Text = "Filter By Reg:";
+            // 
+            // ibtnUpdate
+            // 
+            this.ibtnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ibtnUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ibtnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ibtnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(197)))));
+            this.ibtnUpdate.FlatAppearance.BorderSize = 2;
+            this.ibtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnUpdate.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ibtnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnUpdate.IconChar = FontAwesome.Sharp.IconChar.Search;
+            this.ibtnUpdate.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(33)))), ((int)(((byte)(53)))));
+            this.ibtnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnUpdate.IconSize = 33;
+            this.ibtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ibtnUpdate.Location = new System.Drawing.Point(128, 53);
+            this.ibtnUpdate.Name = "ibtnUpdate";
+            this.ibtnUpdate.Size = new System.Drawing.Size(163, 38);
+            this.ibtnUpdate.TabIndex = 57;
+            this.ibtnUpdate.Text = "Find";
+            this.ibtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ibtnUpdate.UseVisualStyleBackColor = false;
+            this.ibtnUpdate.Click += new System.EventHandler(this.ibtnUpdate_Click);
+            // 
+            // txtReg
+            // 
+            this.txtReg.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtReg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtReg.Location = new System.Drawing.Point(481, 58);
+            this.txtReg.Name = "txtReg";
+            this.txtReg.Size = new System.Drawing.Size(139, 29);
+            this.txtReg.TabIndex = 59;
+            this.txtReg.Tag = "1,2";
+            this.txtReg.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReg_KeyUp);
+            // 
             // dgv1Interviews
             // 
             this.dgv1Interviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv1Interviews.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv1Interviews.Location = new System.Drawing.Point(3, 130);
+            this.dgv1Interviews.Location = new System.Drawing.Point(3, 135);
             this.dgv1Interviews.Name = "dgv1Interviews";
             this.dgv1Interviews.RowTemplate.Height = 25;
-            this.dgv1Interviews.Size = new System.Drawing.Size(1389, 636);
+            this.dgv1Interviews.Size = new System.Drawing.Size(1389, 631);
             this.dgv1Interviews.TabIndex = 1;
             this.dgv1Interviews.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1Interviews_CellClick);
             // 
@@ -366,28 +418,6 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(404, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 42);
-            this.label3.TabIndex = 58;
-            this.label3.Text = "Filter By Reg:";
-            // 
-            // txtReg
-            // 
-            this.txtReg.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtReg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtReg.Location = new System.Drawing.Point(481, 55);
-            this.txtReg.Name = "txtReg";
-            this.txtReg.Size = new System.Drawing.Size(139, 29);
-            this.txtReg.TabIndex = 59;
-            this.txtReg.Tag = "1,2";
-            this.txtReg.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReg_KeyUp);
             // 
             // Frm_Votes
             // 
@@ -444,5 +474,6 @@
         private FontAwesome.Sharp.IconButton ibtnUpdate;
         private Label label3;
         private TextBox txtReg;
+        private FontAwesome.Sharp.IconButton iconButton1;
     }
 }

@@ -457,9 +457,9 @@
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage2.Controls.Add(this.tableLayoutPanel11);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1403, 783);
+            this.tabPage2.Size = new System.Drawing.Size(1403, 777);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "General Reports";
             // 
@@ -478,7 +478,7 @@
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 153F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(1403, 783);
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(1403, 777);
             this.tableLayoutPanel11.TabIndex = 3;
             // 
             // groupBox4
@@ -810,7 +810,7 @@
             this.dgv2.Location = new System.Drawing.Point(3, 156);
             this.dgv2.Name = "dgv2";
             this.dgv2.RowTemplate.Height = 25;
-            this.dgv2.Size = new System.Drawing.Size(1397, 576);
+            this.dgv2.Size = new System.Drawing.Size(1397, 570);
             this.dgv2.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -824,7 +824,7 @@
             this.tableLayoutPanel3.Controls.Add(this.lblTotal2, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.iconButton1, 3, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 738);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 732);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));

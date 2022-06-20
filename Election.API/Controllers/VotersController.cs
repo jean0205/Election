@@ -318,6 +318,7 @@ namespace Election.API.Controllers
         public async Task<ActionResult<IEnumerable<Voter>>> GetVotersByDivisionCanvasAndParty(int contituencyId, int divisionId, int canvasId, int partyId)
         {
             var openCanvas = await _context.Canvas.Where(c => c.Open).ToListAsync();
+            var openElections = await _context.NationalElections.Where(e => e.Open).ToListAsync();
             if (openCanvas == null)
             {
                 return NotFound();
@@ -331,6 +332,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v=>v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                 .Where(v => !v.Dead  && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId))
                 .ToListAsync();
             }
@@ -343,6 +346,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                 .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                 .Where(v => !v.Dead && v.PollingDivision.Constituency.Id == contituencyId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0)
                 .ToListAsync();
             }
@@ -355,6 +360,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                 .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                 .Where(v => !v.Dead && v.PollingDivision.Id == divisionId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0)
                 .ToListAsync();
             }
@@ -368,6 +375,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                 .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                 .Where(v => !v.Dead && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0)
                 .ToListAsync();
             }
@@ -380,6 +389,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                 .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                 .Where(v => !v.Dead && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0 && v.Interviews.Where(i => i.SupportedParty != null).Select(i => i.SupportedParty.Id).Contains(partyId))
                 .ToListAsync();
             }
@@ -393,6 +404,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                 .Where(v => !v.Dead && v.PollingDivision.Constituency.Id == contituencyId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0 && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
                 .ToListAsync();
             }
@@ -406,6 +419,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                 .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                 .Where(v => !v.Dead && v.PollingDivision.Id == divisionId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Where(i => openCanvas.Select(c => c.Id).ToList().Contains(i)).ToList().Count > 0 && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
                 .ToListAsync();
             }
@@ -421,6 +436,7 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                 .Include(v => v.ElectionVotes)
                 .Where(v => !v.Dead && v.PollingDivision.Id == divisionId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId) && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
                 .ToListAsync();
             }
@@ -447,7 +463,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
-                .AsSplitQuery()
+                 .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                .Where(v => !v.Dead && v.PollingDivision.Constituency.Id == contituencyId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId))
                .ToListAsync(); ;
             }
@@ -463,6 +480,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                 .Where(v => !v.Dead && v.PollingDivision.Constituency.Id == contituencyId && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId) && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
                 .ToListAsync();
             }
@@ -477,6 +496,8 @@ namespace Election.API.Controllers
                 .ThenInclude(v => v.Comment)
                 .Include(v => v.Interviews)
                 .ThenInclude(v => v.SupportedParty)
+                 .Include(v => v.ElectionVotes.Where(e => e.Election.Open))
+                 .ThenInclude(v => v.Election)
                 .Where(v => !v.Dead && v.Interviews.Any() && v.Interviews.Select(i => i.Canvas.Id).Contains(canvasId) && v.Interviews.Select(i => i.SupportedParty.Id).Contains(partyId))
                 .ToListAsync();
             }

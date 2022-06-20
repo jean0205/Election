@@ -289,7 +289,7 @@ namespace Constituency.Desktop.Views
                 List<TreeNode> treeNodes = new List<TreeNode>();
                 List<TreeNode> childNodes = new List<TreeNode>();
 
-                foreach (NationalElection election in ElectionVotes)
+                foreach (NationalElection election in ElectionVotes.OrderBy(e=>e.ElectionVotes.Select(s=>s.Voter.SurName).ToList()).ThenBy(e => e.ElectionVotes.Select(s => s.Voter.GivenNames).ToList()))
                 {
                     int cant2 = 0;
                     if (election.ElectionVotes != null && election.ElectionVotes.Any())
@@ -303,7 +303,7 @@ namespace Constituency.Desktop.Views
                             childNodes.Add(node);
                         }
                     }
-                    treeNodes.Add(new TreeNode(election.ElectionDate.ToString("MMMM-yyyy") + " [" + cant2 + "]", 0, 0, childNodes.ToArray()));
+                    treeNodes.Add(new TreeNode(election.ElectionDate.ToString("MMMM-yyyy") + " [" + cant2 + "]", 0, 0, childNodes.ToArray().OrderBy(n => n.Text).ToArray()));
                     treeNodes[treeNodes.Count - 1].Tag = election.Id;
                     childNodes = new List<TreeNode>();
                 }

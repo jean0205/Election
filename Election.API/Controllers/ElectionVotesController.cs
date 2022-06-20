@@ -145,8 +145,19 @@ namespace Election.API.Controllers
         {
             string userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             electionVote.Election = await _context.NationalElections.FindAsync(electionVote.Election.Id);
-            electionVote.Voter = await _context.Voters.FindAsync(electionVote.Voter.Id);
-            
+            var voter= await _context.Voters
+                .Include(v=>v.ElectionVotes)
+                .FirstOrDefaultAsync(v=>v.Id==electionVote.Voter.Id);
+
+            electionVote.Voter = voter;
+
+            if (voter.ElectionVotes.Count > 0 && voter.ElectionVotes.Any(e => e.Election.Id == electionVote.Election.Id))
+            {
+                ModelState.AddModelError("Error", "This voter already vote in this election.");
+                return BadRequest(ModelState) ;                
+               
+            }
+
             if (electionVote.SupportedParty!=null)
             {
                 electionVote.SupportedParty = await _context.Parties.FindAsync(electionVote.SupportedParty.Id);

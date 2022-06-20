@@ -48,7 +48,7 @@ namespace Constituency.Desktop.Views
             {
                 Analytics.TrackEvent("Frm_Votes " + tokenResponse.User.FullName);
                 Frm_Votes frm = new Frm_Votes();
-                frm.Show();
+                frm.ShowDialog();
                 //this.WindowState = FormWindowState.Minimized;
             }
             catch (Exception ex)

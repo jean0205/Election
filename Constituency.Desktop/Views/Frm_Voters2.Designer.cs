@@ -521,7 +521,7 @@
             this.cmbDivision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDivision.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbDivision.FormattingEnabled = true;
-            this.cmbDivision.Location = new System.Drawing.Point(565, 5);
+            this.cmbDivision.Location = new System.Drawing.Point(565, 8);
             this.cmbDivision.Name = "cmbDivision";
             this.cmbDivision.Size = new System.Drawing.Size(313, 29);
             this.cmbDivision.TabIndex = 34;
@@ -533,7 +533,7 @@
             this.cmbConstituency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConstituency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConstituency.FormattingEnabled = true;
-            this.cmbConstituency.Location = new System.Drawing.Point(126, 5);
+            this.cmbConstituency.Location = new System.Drawing.Point(126, 8);
             this.cmbConstituency.Name = "cmbConstituency";
             this.cmbConstituency.Size = new System.Drawing.Size(309, 29);
             this.cmbConstituency.TabIndex = 33;
@@ -759,7 +759,7 @@
             this.cmbSex.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cmbSex.Location = new System.Drawing.Point(105, 5);
+            this.cmbSex.Location = new System.Drawing.Point(105, 8);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(177, 29);
             this.cmbSex.TabIndex = 30;
@@ -1276,9 +1276,9 @@
             // 
             this.tabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(70)))), ((int)(((byte)(53)))));
             this.tabPage6.Controls.Add(this.tableLayoutPanel20);
-            this.tabPage6.Location = new System.Drawing.Point(4, 30);
+            this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1170, 735);
+            this.tabPage6.Size = new System.Drawing.Size(1170, 741);
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "Voter List";
             // 
@@ -1294,7 +1294,7 @@
             this.tableLayoutPanel20.RowCount = 2;
             this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.97279F));
             this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.027211F));
-            this.tableLayoutPanel20.Size = new System.Drawing.Size(1170, 735);
+            this.tableLayoutPanel20.Size = new System.Drawing.Size(1170, 741);
             this.tableLayoutPanel20.TabIndex = 7;
             // 
             // dgv3
@@ -1309,7 +1309,7 @@
             this.dgv3.Name = "dgv3";
             this.dgv3.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dgv3.RowTemplate.Height = 25;
-            this.dgv3.Size = new System.Drawing.Size(1164, 669);
+            this.dgv3.Size = new System.Drawing.Size(1164, 675);
             this.dgv3.TabIndex = 0;
             // 
             // tableLayoutPanel21
@@ -1324,7 +1324,7 @@
             this.tableLayoutPanel21.Controls.Add(this.iconButton4, 2, 0);
             this.tableLayoutPanel21.Controls.Add(this.iconButton3, 3, 0);
             this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel21.Location = new System.Drawing.Point(3, 678);
+            this.tableLayoutPanel21.Location = new System.Drawing.Point(3, 684);
             this.tableLayoutPanel21.Name = "tableLayoutPanel21";
             this.tableLayoutPanel21.RowCount = 1;
             this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
